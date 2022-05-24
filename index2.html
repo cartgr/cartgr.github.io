@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" type="image/x-icon" href="pixelhead.png">
+    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>Visualization of the Canadian Community Health Survey from 2015-2019</title>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="RadarChart.js"></script>
+  <script src="https://unpkg.com/d3-scale-cluster@1.1.7/dist/d3-scale-cluster.min.js"></script>
+
+  </head>
+
+  <body id="top">
+
+    <div class="nav">
+      <button> <a href="index.html">Home</a> </button>
+      <button> <a href="index.html">Links & What I've Been Reading</a> </button>
+    </div>
+    <hr>
+
+    <h1> Visualization of the Canadian Community Health Survey from 2015-2019 </h1>
+
+    <p class="abstract">
+      <b>The annual component of the Canadian Community Health Survey </b> is a vital source of information for policy makers to have access to. According to the Statistics Canada, part of the purpose of the survey is to
+      "provide more current, detailed and uniform health information in every province." The dataset is available to the public
+       as well which is what allowed for this visualization. However, the raw data set is a 187,183 x 18 table
+       which is too big to make sense without the help of statistical analysis or visualization. My hope is that these visualizations allow
+       policy makers, and the public to make sense of the dataset, and ultimately, make more informed public health decisions.
+    </p>
+
+    <nav role="navigation" class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#Age-Group">Health Indicators by Age Group</a></li>
+        <li><a href="#province">Health Indicators by Province</a></li>
+      </ol>
+    </nav>
+
+    <!--<h2> By: Carter Blair </h2>-->
+
+    <div class="row">
+      <div class="column">
+        <h3 id="Age-Group"> Health Indicators by Age Group</h3>
+        <p> This chart shows the proportion of respondents that agree with various claims regarding their health. Each colored polygon on the radar chart represents a
+          different age group. The axes of the chart correspond to the following claims: </p>
+        <ul>
+          <li><b> Life Satisfaction: </b>Satisfied or very satified</li>
+          <li><b> Sense of Belonging: </b>Sense of belonging to local community, somewhat strong or very strong</li>
+          <li><b> Body Mass Index: </b>Adjusted self-reported, overweight or obese</li>
+          <li><b> Perceived Life Stress: </b>Most days quite a bit or extremely stressful</li>
+          <li><b> Perceived Mental Health: </b>Very good or excellent</li>
+          <li><b> Perceived Health: </b>Very good or excellent</li>
+        </ul>
+
+        <p><b>Note: </b> The values presented are the result of averaging responses from 2015-2019.</p>
+
+        <p><b style="color:red">! Interaction: </b> Click the colored squares in the legend to toggle the given age group. Hover over the colored circles
+        to get a more percise value! </p>
+      </div>
+      <div class="column">
+        <div id="body">
+    	    <div id="chart"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <h3 id="province"> Health Indicators by Province</h3>
+        <p> This chart shows the results from various questions
+           on the Canadian Community Health Survey by province. In addition to the claims in the above visualization, the proportion of
+           respondents that partake in daily or occasional smoking was also included.</p>
+
+        <p><b>Note: </b>The values for each bar were scaled to heights between 0.2 and 1 of the maximum bar height.
+        </p>
+
+        <p><b style="color:red">! Interaction: </b>Hover over the bar to see a more precise measurement.</p>
+      </div>
+      <div class="column">
+        <div id="chart2"></div>
+      </div>
+
+    </div>
+
+    <button id="topButton"><a class="uparrow" href="index2.html#top"><b>&uarr;</b></a></button>
+
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="anotherscript.js"></script>
+    <script>
+  //Get the button
+    var mybutton = document.getElementById("topButton");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+  </script>
+
+  </body>
+
+</html>
