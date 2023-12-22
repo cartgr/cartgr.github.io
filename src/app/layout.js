@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
           {/* Name and icon */}
           <div className="flex items-center ml-2">
             {/* Replace with your actual icon */}
-            <img src="/icon.png" alt="Icon" className="h-9 w-9 mr-4" />
+            <img src="./icon.png" alt="Icon" className="h-9 w-9 mr-4" />
             <span className="text-3xl text-neutral-800">Carter Blair</span>
           </div>
 
