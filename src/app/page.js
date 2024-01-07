@@ -18,15 +18,36 @@ export default function Home() {
           </div>
 
           {/* Bio Section */}
-          <div className="md:col-span-2 text-gray-600 text-lg ">
+          <div className="md:col-span-2 text-gray-600 text-lg">
             <p className='mb-4 text-neutral-800'>
-              I am currently an MMath CS student at UWaterloo, supervised by Kate Larson and Edith Law. My research mainly focuses on the intersection between game theory, reinforcement learning, and human-AI interaction. Recently I have been working on reward design and augmenting RL with foundation models.
+              I'm currently doing a Master of Math in Computer Science at UWaterloo and I'm supervised by
+              <a
+                href="https://cs.uwaterloo.ca/~klarson/"
+                className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Kate Larson
+              </a>
+              and
+              <a
+                href="https://edithlaw.ca/"
+                className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out ml-1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Edith Law
+              </a>.
+              My research mainly focuses on the intersection between game theory, reinforcement learning, and human-AI interaction. Recently I've been working on reward design and augmenting RL with foundation models.
             </p>
             <hr className="border-gray-300 mb-4" />
-            <p className='text-neutral-800'>
+            <p className='text-neutral-800 mb-4'>
               You can reach me at cblair at uwaterloo dot ca.
             </p>
+
+
           </div>
+
         </div>
 
         {/* News Section */}
@@ -35,10 +56,10 @@ export default function Home() {
           <ul className="list-disc pl-5">
             {/* Example news item */}
             <li className="mb-2 text-neutral-800">
-              <span className="font-semibold">September 2023</span>: Started MMath CS at UWaterloo! Supervised by Kate Larson and Edith Law.
+              <span className="font-semibold">September 2023</span>: Started MMath CS at UWaterloo, supervised by Kate Larson and Edith Law.
             </li>
             <li className="mb-2 text-neutral-800">
-              <span className="font-semibold">April 2021</span>: Awarded NSERC Undergraduate Student Research Award (USRA) Grant to do research with Dr. Charles Perin for the summer!
+              <span className="font-semibold">April 2021</span>: Awarded NSERC Undergraduate Student Research Award (USRA) Grant to do research with Dr. Charles Perin for the summer.
             </li>
             {/* Add more news items here */}
           </ul>
