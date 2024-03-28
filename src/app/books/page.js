@@ -24,12 +24,12 @@ export default function Books() {
                     </div>
                     <hr className="my-2" />
                     <div>
-                        <p className="mb-2 mt-2 italic">A short review for each book I read in 2023. I definitely won't be entering these into any book review competitions, but writing some short reviews is something I've been wanting to do for a while. Also, I wrote all of these over the 2023 Christmas break, so the earlier reviews (closer to the bottom) are probably quite tinged by memory. <span className="text-green-600 cursor-pointer" onClick={() => toggleSection(1)}>See More</span></p>
+                        <p className="mb-2 mt-2 italic">A short review for each book I read in 2023. I definitely will not be entering these into any book review competitions, but writing some short reviews is something I have been wanting to do for a while. Also, I wrote all of these over the 2023 Christmas break, so the earlier reviews (closer to the bottom) are probably quite tinged by memory. <span className="text-green-600 cursor-pointer" onClick={() => toggleSection(1)}>See More</span></p>
                         {expandSection[1] &&
                             <div>
                                 <hr className="mb-2 mt-4" />
                                 <Wizardofearthsea />
-                                <p className='mt-4'></p>
+                                <p className="mt-4"></p>
                                 <GametheoryVSI />
 
                             </div>

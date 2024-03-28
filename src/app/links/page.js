@@ -27,7 +27,7 @@ export default function Links() {
             title: "Topic Discussion 3",
             description: () => (
                 <>
-                    <p>My thoughts on this discussion: It's very thought-provoking.</p>
+                    <p>My thoughts on this discussion: It&apos;s very thought-provoking.</p>
                     <p>Additional commentary or quotes can be added here.</p>
                 </>
             )

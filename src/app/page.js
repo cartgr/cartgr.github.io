@@ -20,7 +20,7 @@ export default function Home() {
           {/* Bio Section */}
           <div className="md:col-span-2 text-gray-600 text-lg">
             <p className='mb-4 text-neutral-800'>
-              I'm currently doing a Master of Math in Computer Science at UWaterloo where I'm supervised by
+              I am currently doing a Master of Math in Computer Science at UWaterloo where I&apos;m supervised by
               <a
                 href="https://cs.uwaterloo.ca/~klarson/"
                 className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
@@ -38,7 +38,7 @@ export default function Home() {
               >
                 Edith Law
               </a>.
-              My research mainly focuses on the intersection between game theory, reinforcement learning, and human-AI interaction. Recently I've been working on reward design and augmenting RL with foundation models.
+              My research mainly focuses on the intersection between game theory, reinforcement learning, and human-AI interaction. Recently I have been working on reward design and augmenting RL with foundation models.
             </p>
             <hr className="border-gray-300 mb-4" />
             <p className='text-neutral-800 mb-4'>
