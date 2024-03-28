@@ -5,8 +5,6 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 // use the next Link component to navigate between pages
 import Link from 'next/link';
 
-const basePath = process.env.PUBLIC_URL || '';
-
 const Menu = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showMenu, setShowMenu] = useState(false);

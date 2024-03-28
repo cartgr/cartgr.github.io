@@ -6,8 +6,8 @@ const nextConfig = {
 
 module.exports = nextConfig
 
-const isProd = process.env.NODE_ENV === 'production';
+// const isProd = process.env.NODE_ENV === 'production';
 
-module.exports = {
-    basePath: isProd ? '/website2.0' : '',
-};
+// module.exports = {
+//     basePath: isProd ? '/website2.0' : '',
+// };
