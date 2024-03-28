@@ -24,7 +24,7 @@ const Menu = () => {
     return (
         <>
             {/* Hamburger menu for smaller screens */}
-            <div className="sm:hidden">
+            <div className="md:hidden">
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     className="p-2 rounded-md focus:outline-none focus:ring"
@@ -35,7 +35,7 @@ const Menu = () => {
             </div>
 
             {/* Navigation links as buttons */}
-            <ul className={`absolute sm:relative bg-neutral-100 sm:bg-transparent w-full sm:w-auto transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-100' : 'opacity-0'} ${showMenu ? 'visible' : 'invisible'} sm:opacity-100 sm:visible ${showMenu ? 'top-16' : ''} left-0 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mr-8 py-4 sm:py-0 px-4 sm:px-0`}>
+            <ul className={`absolute md:relative bg-neutral-100 md:bg-transparent w-full md:w-auto transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-100' : 'opacity-0'} ${showMenu ? 'visible' : 'invisible'} md:opacity-100 md:visible ${showMenu ? 'top-16' : ''} left-0 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mr-8 py-4 md:py-0 px-4 md:px-0`}>
                 <li>
                     <Link href="/" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
                         Home
