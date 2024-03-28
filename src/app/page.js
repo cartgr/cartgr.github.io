@@ -20,7 +20,7 @@ export default function Home() {
           {/* Bio Section */}
           <div className="md:col-span-2 text-gray-600 text-lg">
             <p className='mb-4 text-neutral-800'>
-              I'm currently doing a Master of Math in Computer Science at UWaterloo and I'm supervised by
+              I'm currently doing a Master of Math in Computer Science at UWaterloo where I'm supervised by
               <a
                 href="https://cs.uwaterloo.ca/~klarson/"
                 className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
