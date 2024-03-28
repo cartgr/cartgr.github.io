@@ -35,22 +35,22 @@ const Menu = () => {
             {/* Navigation links as buttons */}
             <ul className={`absolute sm:relative bg-neutral-100 sm:bg-transparent w-full sm:w-auto transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-100' : 'opacity-0'} ${showMenu ? 'visible' : 'invisible'} sm:opacity-100 sm:visible ${showMenu ? 'top-16' : ''} left-0 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mr-8 py-4 sm:py-0 px-4 sm:px-0`}>
                 <li>
-                    <a href="/" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
+                    <a href="/website2.0" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="/research" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
+                    <a href="/website2.0/research" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
                         Research
                     </a>
                 </li>
                 <li>
-                    <a href="/books" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
+                    <a href="/website2.0/books" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
                         Books
                     </a>
                 </li>
                 <li>
-                    <a href="/links" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
+                    <a href="/website2.0/links" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
                         Links & Posts
                     </a>
                 </li>
