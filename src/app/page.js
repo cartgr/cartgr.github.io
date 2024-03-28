@@ -9,7 +9,7 @@ export default function Home() {
           {/* Profile Image */}
           <div className="md:col-span-1">
             <Image
-              src="/HEADSHOT.jpg" // Adjust the path to your image
+              src="public/HEADSHOT.jpg" // Adjust the path to your image
               alt="Picture of the author"
               width={250} // Adjusted width
               height={250} // Adjusted height to maintain aspect ratio
