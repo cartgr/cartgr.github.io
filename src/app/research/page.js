@@ -61,6 +61,7 @@ export default function Research() {
                         {expandSection[3] && <div><hr className="my-2" /><p>Content for section 3 goes here...</p></div>}
                     </div>
                 </section>
+                
             </main>
         </div>
     )

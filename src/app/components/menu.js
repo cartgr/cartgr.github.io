@@ -41,7 +41,7 @@ const Menu = () => {
                         Home
                     </Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link href="/research" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
                         Research
                     </Link>
@@ -55,7 +55,7 @@ const Menu = () => {
                     <Link href="/links" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
                         Links & Posts
                     </Link>
-                </li>
+                </li> */}
             </ul>
         </>
     );
