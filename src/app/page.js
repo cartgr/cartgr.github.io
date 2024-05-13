@@ -50,7 +50,7 @@ export default function Home() {
               >
                 Edith Law
               </a>.
-              My research mainly focuses on the intersection between social choice, reinforcement learning, and human-AI interaction. I'm currently working on increasing the granularity of alignment.
+              My research mainly focuses on the intersection between social choice, reinforcement learning, and human-AI interaction. I am currently working on increasing the granularity of alignment.
             </p>
             <hr className="border-gray-300 mb-4" />
             <p className='text-neutral-800 mb-4'>
