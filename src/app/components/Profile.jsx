@@ -52,7 +52,7 @@ function Biography() {
 
 function SocialLinks() {
   const links = [
-    { href: "https://scholar.google.com/", icon: "./googleScholar.svg", alt: "Google Scholar Logo" },
+    { href: "https://scholar.google.com/citations?user=aQ80XM8AAAAJ&hl=en", icon: "./googleScholar.svg", alt: "Google Scholar Logo" },
     { href: "https://www.linkedin.com/in/carter-blair-b70429200/", icon: "./linkedin.svg", alt: "LinkedIn Logo" },
     { href: "https://github.com/cartgr", icon: "./github.svg", alt: "GitHub Logo" },
     { href: "./cv.pdf", icon: "./cv.svg", alt: "CV Logo" },
