@@ -16,7 +16,7 @@ export default function Publications() {
         id: 3,
         title: "Democratizing Reward Design for Personal and Representative Value-Alignment",
         authors: ["Carter Blair", "Kate Larson", "Edith Law"],
-        venues: ["Under review for CHI 2025"],
+        venues: [],
         abstract: "Aligning AI agents with human values is challenging due to diverse and subjective notions of values. Standard alignment methods often aggregate crowd feedback, which can result in the suppression of unique or minority preferences. We introduce Interactive-Reflective Dialogue Alignment, a method that iteratively engages users in reflecting on and specifying their subjective value definitions. This system learns individual value definitions through language-model-based preference elicitation and constructs personalized reward models that can be used to align AI behaviour. We evaluated our system through two studies with 30 participants, one focusing on ``respect'' and the other on ethical decision-making in autonomous vehicles. Our findings demonstrate diverse definitions of value-aligned behaviour and show that our system can accurately capture each person's unique understanding. This approach enables personalized alignment and can inform more representative and interpretable collective alignment strategies.",
         paperLink: "./papers/democratizing_reward_design.pdf",
         arxivLink: "https://arxiv.org/abs/2410.22203",

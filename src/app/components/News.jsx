@@ -5,7 +5,7 @@ export default function News() {
         content: (
           <>
             Awarded the{" "}
-            <a href="https://www.cooperativeai.com/phd-fellowship/2025"
+            <a href="https://www.cooperativeai.com/post/announcing-the-2025-cooperative-ai-phd-scholars"
               className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
               target="_blank"
               rel="noopener noreferrer">
