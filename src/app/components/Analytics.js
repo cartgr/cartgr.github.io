@@ -46,7 +46,10 @@ export function GoogleAnalytics({ GA_MEASUREMENT_ID }) {
 
 // Event tracking functions
 export const trackEvent = (action, category, label, value) => {
-  if (typeof window !== 'undefined' && window.gtag) {
+  // Only track on client side
+  if (typeof window === 'undefined') return;
+  
+  if (window.gtag) {
     window.gtag('event', action, {
       event_category: category,
       event_label: label,

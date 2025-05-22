@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import debounce from 'lodash/debounce';
 import publicationsData from '../data/publications.json';
+import { trackEvent } from './Analytics';
 
 export default function Publications() {
   const [expandSection, setExpandSection] = useState({});
@@ -43,8 +44,14 @@ export default function Publications() {
     };
   }, []);
 
-  const toggleSection = (id) => {
+  const toggleSection = (id, title) => {
+    const wasExpanded = expandSection[id];
     setExpandSection((prev) => ({ ...prev, [id]: !prev[id] }));
+    
+    // Track abstract expansion
+    if (!wasExpanded) {
+      trackEvent('expand_abstract', 'publication', title);
+    }
   };
 
   return (
@@ -58,7 +65,7 @@ export default function Publications() {
                 key={paper.id}
                 {...paper}
                 expanded={expandSection[paper.id]}
-                onToggle={() => toggleSection(paper.id)}
+                onToggle={() => toggleSection(paper.id, paper.title)}
               />
             ))}
           </div>
@@ -96,7 +103,7 @@ export default function Publications() {
                   key={pub.id}
                   {...pub}
                   expanded={expandSection[pub.id]}
-                  onToggle={() => toggleSection(pub.id)}
+                  onToggle={() => toggleSection(pub.id, pub.title)}
                 />
               ))}
             </div>
@@ -117,6 +124,9 @@ function PublicationCard({
   arxivLink,
   notes,
 }) {
+  const handleLinkClick = (linkType, url) => {
+    trackEvent('click_paper_link', 'publication', `${title} - ${linkType}`);
+  };
   return (
     <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col w-full">
       <div className="flex items-center justify-between">
@@ -147,6 +157,7 @@ function PublicationCard({
                     className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => handleLinkClick('ArXiv', arxivLink)}
                   >
                     <img
                       src="./arxiv-logomark-small.svg"
@@ -163,6 +174,7 @@ function PublicationCard({
                     className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => handleLinkClick('PDF', paperLink)}
                   >
                     PDF
                   </a>
