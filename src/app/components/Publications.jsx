@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import debounce from 'lodash/debounce';
+import publicationsData from '../data/publications.json';
 
 export default function Publications() {
   const [expandSection, setExpandSection] = useState({});
@@ -10,54 +11,7 @@ export default function Publications() {
 
   const timelineRefs = useRef({});
 
-  const publicationsData = {
-    2024: [
-      {
-        id: 3,
-        title: "Democratizing Reward Design for Personal and Representative Value-Alignment",
-        authors: ["Carter Blair", "Kate Larson", "Edith Law"],
-        venues: [],
-        abstract: "Aligning AI agents with human values is challenging due to diverse and subjective notions of values. Standard alignment methods often aggregate crowd feedback, which can result in the suppression of unique or minority preferences. We introduce Interactive-Reflective Dialogue Alignment, a method that iteratively engages users in reflecting on and specifying their subjective value definitions. This system learns individual value definitions through language-model-based preference elicitation and constructs personalized reward models that can be used to align AI behaviour. We evaluated our system through two studies with 30 participants, one focusing on ``respect'' and the other on ethical decision-making in autonomous vehicles. Our findings demonstrate diverse definitions of value-aligned behaviour and show that our system can accurately capture each person's unique understanding. This approach enables personalized alignment and can inform more representative and interpretable collective alignment strategies.",
-        paperLink: "./papers/democratizing_reward_design.pdf",
-        arxivLink: "https://arxiv.org/abs/2410.22203",
-      },
-      {
-        id: 4,
-        title: "Altared Environments: The Role of Normative Infrastructure in AI Alignment",
-        authors: ["Rakshit Trivedi", "Nikhil Chandak", "Carter Blair", "Atrisha Sarkar", "Tehilla Weltman", "Dylan Hadfield-Menell", "Gillian K Hadfield"],
-        venues: ["Agentic Markets Workshop at ICML 2024"],
-        abstract: "Cooperation is central to human life, distinguishing humans as ultra-cooperative among mammals. We form stable groups that enhance welfare through mutual protection, knowledge sharing, and economic exchanges. As artificial intelligence gains autonomy in shared environments, ensuring AI agents can engage in cooperative behaviors is crucial. Research in AI views this as an alignment challenge and frames it in terms of embedding norms and values in AI systems. Such an approach, while promising, neglects how humans achieve stable cooperation through normative infrastructure. This infrastructure establishes shared norms enforced by agents who recognize and sanction norm violations. Using multi-agent reinforcement learning (MARL), we investigate the impact of normative infrastructure on agents' learning dynamics and their cooperative abilities in mixed-motive games. We introduce the concept of an altar, an environmental feature that encodes actions deemed sanctionable by a group of agents. Comparing the performance of simple, independent learning agents in environments with and without the altar, we assess the potential of normative infrastructure in facilitating AI agent alignment to foster stable cooperation.",
-        paperLink: "./papers/Altared_Environments.pdf",
-      },
-      {
-        id: 5,
-        title: "Normative Modules: A Generative Agent Architecture for Learning Norms that Supports Multi-Agent Cooperation",
-        authors: ["Atrisha Sarkar", "Andrei Ioan Muresanu", "Carter Blair", "Aaryam Sharma", "Rakshit S Trivedi", "Gillian K Hadfield"],
-        venues: ["Foundation Models and Game Theory Workshop at Economics and Computation 2024"],
-        abstract: "Generative agents, which implement behaviors using a large language model (LLM) to interpret and evaluate an environment, has demonstrated the capacity to solve complex tasks across many social and technological domains. However, when these agents interact with other agents and humans in presence of social structures such as existing norms, fostering cooperation between them is a fundamental challenge. In this paper, we develop the framework of a 'Normative Module': an architecture designed to enhance cooperation by enabling agents to recognize and adapt to the normative infrastructure of a given environment. We focus on the equilibrium selection aspect of the cooperation problem and inform our agent design based on the existence of classification institutions that implement correlated equilibrium to provide effective resolution of the equilibrium selection problem. Specifically, the normative module enables agents to learn through peer interactions which of multiple candidate institutions in the environment, does a group treat as authoritative. By enabling normative competence in this sense, agents gain ability to coordinate their sanctioning behaviour; coordinated sanctioning behaviour in turn shapes primary behaviour within a social environment, leading to higher average welfare. We design a new environment that supports institutions and evaluate the proposed framework based on two",
-        paperLink: "./papers/Normative_Modules.pdf",
-        arxivLink: "https://arxiv.org/abs/2405.19328",
-      },
-      {
-        id: 1,
-        title: "Liquid Ensemble Selection For Continual Learning",
-        authors: ["Carter Blair", "Ben Armstrong", "Kate Larson"],
-        venues: ["AAMAS SCaLA Workshop 2024", "Canadian AI 2024"],
-        abstract: "Continual learning aims to enable machine learning models to continually learn from a shifting data distribution without forgetting what has already been learned. Such shifting distributions can be broken into disjoint subsets of related examples; by training each member of an ensemble on a different subset it is possible for the ensemble as a whole to achieve much higher accuracy with less forgetting than a naive model. We address the problem of selecting which models within an ensemble should learn on any given data, and which should predict. By drawing on work from delegative voting we develop an algorithm for using delegation to dynamically select which models in an ensemble are active. We explore a variety of delegation methods and performance metrics, ultimately finding that delegation is able to provide a significant performance boost over naive learning in the face of distribution shifts.",
-        paperLink: "./papers/SCaLA_AAMAS_Liquid_Ensembles.pdf",
-        arxivLink: "https://arxiv.org/abs/2405.07327",
-      },
-      {
-        id: 2,
-        title: "Quantifying Emotional Responses to Immutable Data Characteristics and Designer Choices in Data Visualizations",
-        authors: ["Carter Blair", "Xiyao Wang", "Charles Perin"],
-        venues: ["IEEE VIS 2024"],
-        abstract: "Emotion is an important factor to consider when designing visualizations as it can impact the amount of trust viewers place in a visualization, how well they can retrieve information and understand the underlying data, and how much they engage with or connect to a visualization. We conducted five crowdsourced experiments to quantify the effects of color, chart type, data trend, data variability and data density on emotion (measured through self-reported arousal and valence). Results from our experiments show that there are multiple design elements which influence the emotion induced by a visualization and, more surprisingly, that certain data characteristics influence the emotion of viewers even when the data has no meaning. In light of these findings, we offer guidelines on how to use color, scale, and chart type to counterbalance and emphasize the emotional impact of immutable data characteristics.",
-        paperLink: "./papers/Quantifying_Emotional_Responses_to_Immutable_Data_Characteristics_and_Designer_Choices_in_Data_Visualizations.pdf",
-        arxivLink: "https://arxiv.org/abs/2407.18427",
-      }
-    ]
-  };
+  const { workingPapers, publications } = publicationsData;
 
   useEffect(() => {
     const updateYearPositions = () => {
@@ -94,19 +48,39 @@ export default function Publications() {
   };
 
   return (
-    <section className="mt-12">
-      <h2 className="text-2xl font-medium mb-4 text-neutral-800">Publications</h2>
-      {Object.keys(publicationsData)
+    <section>
+      {workingPapers.length > 0 && (
+        <div className="mb-16">
+          <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Gill Sans, sans-serif'}}>Working Papers</h2>
+          <div className="flex flex-col space-y-8">
+            {workingPapers.map((paper) => (
+              <PublicationCard
+                key={paper.id}
+                {...paper}
+                expanded={expandSection[paper.id]}
+                onToggle={() => toggleSection(paper.id)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+      
+      <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Gill Sans, sans-serif'}}>Publications</h2>
+      {Object.keys(publications)
         .sort((a, b) => b - a)
-        .map((year, index) => (
+        .map((year) => (
           <div key={year} className="flex mb-16">
             {/* Timeline column */}
             <div className="w-24 shrink-0 relative flex justify-center">
               {/* Vertical line */}
               <div
                 ref={(el) => (timelineRefs.current[year] = el)}
-                className="absolute w-[1px] top-0 bottom-8 bg-neutral-300"
+                className="absolute w-[1px] top-0 bottom-8 bg-neutral-300 left-1/2 transform -translate-x-1/2"
               />
+              {/* Top dot */}
+              <div className="absolute top-0 w-2 h-2 bg-neutral-400 rounded-full left-1/2 transform -translate-x-1/2" />
+              {/* Bottom dot */}
+              <div className="absolute bottom-8 w-2 h-2 bg-neutral-400 rounded-full left-1/2 transform -translate-x-1/2" />
               {/* Year label */}
               <div
                 className="absolute transition-all duration-300 ease-out"
@@ -117,7 +91,7 @@ export default function Publications() {
             </div>
             {/* Publications container */}
             <div className="flex flex-col flex-1">
-              {publicationsData[year].map((pub) => (
+              {publications[year].map((pub) => (
                 <PublicationCard
                   key={pub.id}
                   {...pub}
@@ -133,7 +107,6 @@ export default function Publications() {
 }
 
 function PublicationCard({
-  id,
   title,
   authors,
   venues,
@@ -142,6 +115,7 @@ function PublicationCard({
   onToggle,
   paperLink,
   arxivLink,
+  notes,
 }) {
   return (
     <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col w-full">
@@ -161,6 +135,11 @@ function PublicationCard({
                   </span>
                 ))}
               </div>
+              {notes && (
+                <p className="mt-3 text-sm text-neutral-700 italic">
+                  {notes}
+                </p>
+              )}
               <div className="mt-4 flex gap-2">
                 {arxivLink && (
                   <a

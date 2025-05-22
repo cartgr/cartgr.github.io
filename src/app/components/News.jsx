@@ -61,8 +61,8 @@ export default function News() {
   
     return (
       <section className="mt-12">
-        <h2 className="text-2xl font-medium mb-4 text-neutral-800">News</h2>
-        <ul className="list-disc pl-5 max-h-30 overflow-y-auto hide-scrollbar">
+        <h2 className="text-2xl font-medium mb-4 text-neutral-800 font-['Gill_Sans']">News</h2>
+        <ul className="list-disc pl-5 max-h-96 overflow-y-auto">
           {newsItems.map((item, index) => (
             <li key={index} className="mb-2 text-neutral-800">
               <span className="font-semibold news-font">{item.date}</span>: {item.content}

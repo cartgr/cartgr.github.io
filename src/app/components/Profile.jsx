@@ -5,14 +5,28 @@ import Image from 'next/image';
 export default function Profile() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-      <div className="md:col-span-1">
+      <div className="md:col-span-1 relative group w-fit">
         <Image
-          src="./newHead.JPG"
+          src="./headshot2025.png"
           alt="Picture of the author"
           width={250}
           height={250}
           className="rounded-sm"
         />
+        <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-sm">
+          <span className="text-white text-sm font-medium text-center">
+            Taken at{' '}
+            <a 
+              href="https://en.wikipedia.org/wiki/Devils_Tower" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 underline"
+            >
+              Bear Lodge
+            </a>
+            , Wyoming
+          </span>
+        </div>
       </div>
       <div className="md:col-span-2 text-gray-600 text-lg">
         <Biography />
@@ -37,7 +51,7 @@ function Biography() {
         <a href="https://edithlaw.ca/"
           className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out ml-1"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer">  
           Edith Law
         </a>.
         My research mainly focuses on the intersection between social choice, reinforcement learning, and human-AI interaction. I am currently excited about participatory and pluralistic approaches to AI alignment.
@@ -61,8 +75,11 @@ function SocialLinks() {
   return (
     <div className="mt-4 flex flex-row">
       {links.map((link, index) => (
-        <a key={index} href={link.href} target="_blank" rel="noopener noreferrer" className="mr-2">
+        <a key={index} href={link.href} target="_blank" rel="noopener noreferrer" className="mr-2 relative group p-1">
           <img src={link.icon} alt={link.alt} className="w-8 h-8" />
+          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-neutral-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+            {link.alt.replace(' Logo', '')}
+          </span>
         </a>
       ))}
     </div>
