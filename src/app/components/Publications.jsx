@@ -122,6 +122,8 @@ function PublicationCard({
   onToggle,
   paperLink,
   arxivLink,
+  slidesLink,
+  codeLink,
   notes,
 }) {
   const handleLinkClick = (linkType, url) => {
@@ -176,7 +178,47 @@ function PublicationCard({
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('PDF', paperLink)}
                   >
+                    <img
+                      src="./pdf_icon.png"
+                      alt="PDF Icon"
+                      className="mr-1"
+                      style={{ width: "20px", height: "20px" }}
+                    />
                     PDF
+                  </a>
+                )}
+                {slidesLink && (
+                  <a
+                    href={slidesLink}
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleLinkClick('Slides', slidesLink)}
+                  >
+                    <img
+                      src="./slides_icon.png"
+                      alt="Slides Icon"
+                      className="mr-1"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                    Slides
+                  </a>
+                )}
+                {codeLink && (
+                  <a
+                    href={codeLink}
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleLinkClick('Code', codeLink)}
+                  >
+                    <img
+                      src="./code_icon.png"
+                      alt="Code Icon"
+                      className="mr-1"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                    Code
                   </a>
                 )}
               </div>
