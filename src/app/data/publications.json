@@ -36,7 +36,7 @@
         "abstract": "Continual learning aims to enable machine learning models to continually learn from a shifting data distribution without forgetting what has already been learned. Such shifting distributions can be broken into disjoint subsets of related examples; by training each member of an ensemble on a different subset it is possible for the ensemble as a whole to achieve much higher accuracy with less forgetting than a naive model. We address the problem of selecting which models within an ensemble should learn on any given data, and which should predict. By drawing on work from delegative voting we develop an algorithm for using delegation to dynamically select which models in an ensemble are active. We explore a variety of delegation methods and performance metrics, ultimately finding that delegation is able to provide a significant performance boost over naive learning in the face of distribution shifts.",
         "paperLink": "./papers/SCaLA_AAMAS_Liquid_Ensembles.pdf",
         "arxivLink": "https://arxiv.org/abs/2405.07327",
-        "slidesLink": "./slides/LiquidEnsembleSelection_CarterBlair.pdf"
+        "presentationLink": "./slides/LiquidEnsembleSelection_CarterBlair.pdf"
       },
       {
         "id": 2,
@@ -45,7 +45,8 @@
         "venues": ["IEEE VIS 2024"],
         "abstract": "Emotion is an important factor to consider when designing visualizations as it can impact the amount of trust viewers place in a visualization, how well they can retrieve information and understand the underlying data, and how much they engage with or connect to a visualization. We conducted five crowdsourced experiments to quantify the effects of color, chart type, data trend, data variability and data density on emotion (measured through self-reported arousal and valence). Results from our experiments show that there are multiple design elements which influence the emotion induced by a visualization and, more surprisingly, that certain data characteristics influence the emotion of viewers even when the data has no meaning. In light of these findings, we offer guidelines on how to use color, scale, and chart type to counterbalance and emphasize the emotional impact of immutable data characteristics.",
         "paperLink": "./papers/Quantifying_Emotional_Responses_to_Immutable_Data_Characteristics_and_Designer_Choices_in_Data_Visualizations.pdf",
-        "arxivLink": "https://arxiv.org/abs/2407.18427"
+        "arxivLink": "https://arxiv.org/abs/2407.18427",
+        "presentationLink": "https://www.youtube.com/watch?v=gaAm2v-ENKA&t=1535s&ab_channel=IEEEVisualizationConference"
       }
     ]
   }

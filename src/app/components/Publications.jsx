@@ -122,7 +122,7 @@ function PublicationCard({
   onToggle,
   paperLink,
   arxivLink,
-  slidesLink,
+  presentationLink,
   codeLink,
   notes,
 }) {
@@ -187,21 +187,21 @@ function PublicationCard({
                     PDF
                   </a>
                 )}
-                {slidesLink && (
+                {presentationLink && (
                   <a
-                    href={slidesLink}
+                    href={presentationLink}
                     className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => handleLinkClick('Slides', slidesLink)}
+                    onClick={() => handleLinkClick('Presentation', presentationLink)}
                   >
                     <img
                       src="./slides_icon.png"
-                      alt="Slides Icon"
+                      alt="Presentation Icon"
                       className="mr-1"
                       style={{ width: "20px", height: "20px" }}
                     />
-                    Slides
+                    Presentation
                   </a>
                 )}
                 {codeLink && (
