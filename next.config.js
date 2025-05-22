@@ -2,12 +2,8 @@
 const nextConfig = {
     output: "export",
     images: { unoptimized: true },
+    basePath: process.env.NODE_ENV === 'production' ? '/website' : '',
+    assetPrefix: process.env.NODE_ENV === 'production' ? '/website/' : '',
 }
 
-module.exports = nextConfig
-
-// const isProd = process.env.NODE_ENV === 'production';
-
-// module.exports = {
-//     basePath: isProd ? '/website2.0' : '',
-// };
+module.exports = nextConfig;
