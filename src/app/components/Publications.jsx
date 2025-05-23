@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import debounce from 'lodash/debounce';
 import publicationsData from '../data/publications.json';
 import { trackEvent } from './Analytics';
@@ -131,7 +131,7 @@ function PublicationCard({
     trackEvent('click_paper_link', 'publication', `${title} - ${linkType}`);
   };
   return (
-    <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-lg p-5 flex flex-col w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+    <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-lg p-5 flex flex-col w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer" onClick={onToggle}>
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <div className="flex justify-start items-center w-full">
@@ -259,26 +259,20 @@ function PublicationCard({
                 )}
               </div>
             </div>
-            <div onClick={onToggle} className="shrink-0 cursor-pointer p-1 rounded-full hover:bg-neutral-200 transition-colors duration-150">
-              {expanded ? (
-                <ChevronDownIcon className="h-5 w-5 text-neutral-600" />
-              ) : (
-                <ChevronRightIcon className="h-5 w-5 text-neutral-600" />
-              )}
+            <div className="shrink-0 p-1 rounded-full hover:bg-neutral-200 transition-colors duration-150">
+              <ChevronRightIcon className={`h-5 w-5 text-neutral-600 transition-transform duration-300 ease-out ${expanded ? 'transform rotate-90' : 'transform rotate-0'}`} />
             </div>
           </div>
         </div>
       </div>
-      {expanded && (
-        <div className="animate-in slide-in-from-top-1 duration-200 ease-out">
-          <hr className="my-2" />
-          <div>
-            <p className="mt-2">
-              <span className="font-semibold news-font">Abstract</span>: {abstract}
-            </p>
-          </div>
+      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${expanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <hr className="my-2" />
+        <div>
+          <p className="mt-2">
+            <span className="font-semibold news-font">Abstract</span>: {abstract}
+          </p>
         </div>
-      )}
+      </div>
     </div>
   );
 }
