@@ -49,7 +49,7 @@
         "title": "Liquid Ensemble Selection For Continual Learning",
         "authors": ["Carter Blair", "Ben Armstrong", "Kate Larson"],
         "venues": ["AAMAS SCaLA Workshop 2024", "Canadian AI 2024"],
-        "tldr": "Uses delegative voting to dynamically select which models in an ensemble should learn vs. predict, enabling better continual learning with less catastrophic forgetting.",
+        "tldr": "Uses delegative voting (à la liquid democracy) to dynamically select which models in an ensemble should learn vs. predict, enabling better continual learning with less catastrophic forgetting.",
         "abstract": "Continual learning aims to enable machine learning models to continually learn from a shifting data distribution without forgetting what has already been learned. Such shifting distributions can be broken into disjoint subsets of related examples; by training each member of an ensemble on a different subset it is possible for the ensemble as a whole to achieve much higher accuracy with less forgetting than a naive model. We address the problem of selecting which models within an ensemble should learn on any given data, and which should predict. By drawing on work from delegative voting we develop an algorithm for using delegation to dynamically select which models in an ensemble are active. We explore a variety of delegation methods and performance metrics, ultimately finding that delegation is able to provide a significant performance boost over naive learning in the face of distribution shifts.",
         "paperLink": "./papers/SCaLA_AAMAS_Liquid_Ensembles.pdf",
         "arxivLink": "https://arxiv.org/abs/2405.07327",

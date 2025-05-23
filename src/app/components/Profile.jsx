@@ -88,7 +88,7 @@ function SocialLinks() {
     { href: "https://scholar.google.com/citations?user=aQ80XM8AAAAJ&hl=en", icon: "./googleScholar.svg", alt: "Google Scholar Logo", trackLabel: "Google Scholar" },
     { href: "https://www.linkedin.com/in/carter-blair-b70429200/", icon: "./linkedin.svg", alt: "LinkedIn Logo", trackLabel: "LinkedIn" },
     { href: "https://github.com/cartgr", icon: "./github.svg", alt: "GitHub Logo", trackLabel: "GitHub" },
-    { href: "./cv.pdf", icon: "./cv.svg", alt: "CV Logo", trackLabel: "CV" },
+    { href: "./cv.pdf", icon: "./cv_icon.png", alt: "CV Logo", trackLabel: "CV" },
   ];
 
   const handleLinkClick = (trackLabel, href) => {
@@ -107,13 +107,10 @@ function SocialLinks() {
           href={link.href} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="mr-2 relative group p-1"
+          className="mr-2 p-1"
           onClick={() => handleLinkClick(link.trackLabel, link.href)}
         >
-          <img src={link.icon} alt={link.alt} className="w-8 h-8" />
-          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-neutral-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
-            {link.alt.replace(' Logo', '')}
-          </span>
+          <img src={link.icon} alt={link.alt} className="w-8 h-8 hover:scale-110 transition-transform duration-200" />
         </a>
       ))}
     </div>

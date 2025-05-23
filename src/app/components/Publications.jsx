@@ -188,7 +188,7 @@ function PublicationCard({
                 {arxivLink && (
                   <a
                     href={arxivLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
                     style={{fontFamily: 'Gill Sans, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -206,7 +206,7 @@ function PublicationCard({
                 {paperLink && (
                   <a
                     href={paperLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
                     style={{fontFamily: 'Gill Sans, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -224,7 +224,7 @@ function PublicationCard({
                 {presentationLink && (
                   <a
                     href={presentationLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
                     style={{fontFamily: 'Gill Sans, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -242,7 +242,7 @@ function PublicationCard({
                 {codeLink && (
                   <a
                     href={codeLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
                     style={{fontFamily: 'Gill Sans, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
