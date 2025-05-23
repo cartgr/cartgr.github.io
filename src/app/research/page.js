@@ -11,14 +11,14 @@ export default function Research() {
     }
 
     return (
-        <div className="flex min-h-screen bg-neutral-50">
+        <div className="flex min-h-screen bg-neutral-50 overflow-x-hidden">
             {/* Main content area */}
-            <main className="flex-1 p-8">
+            <main className="flex-1 p-4 sm:p-8 max-w-full">
                 {/* Section 1 */}
-                <section className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col">
+                <section className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col overflow-hidden">
                     <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleSection(1)}>
                         <div>
-                            <h2 className="text-2xl font-medium">Language to Rewards for Value Alignment</h2>
+                            <h2 className="text-xl sm:text-2xl font-medium">Language to Rewards for Value Alignment</h2>
                             <p className="mt-1 text-gray-500">2023 - Present</p>
                         </div>
                         {expandSection[1] ? <ChevronDownIcon className="h-6 w-6" /> : <ChevronRightIcon className="h-6 w-6" />}
@@ -31,10 +31,10 @@ export default function Research() {
                 </section>
 
                 {/* Section 2 */}
-                <section className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col">
+                <section className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col overflow-hidden">
                     <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleSection(2)}>
                         <div>
-                            <h2 className="text-2xl font-medium">Game-Theoretic Multi-Objective RL</h2>
+                            <h2 className="text-xl sm:text-2xl font-medium">Game-Theoretic Multi-Objective RL</h2>
                             <p className="mt-1 text-gray-500">2023 - Present</p>
                         </div>
                         {expandSection[2] ? <ChevronDownIcon className="h-6 w-6" /> : <ChevronRightIcon className="h-6 w-6" />}
@@ -47,10 +47,10 @@ export default function Research() {
                 </section>
 
                 {/* Section 3 */}
-                <section className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col">
+                <section className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col overflow-hidden">
                     <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleSection(3)}>
                         <div>
-                            <h2 className="text-2xl font-medium">RL Mechanism Design, Social Planning & Social Choice</h2>
+                            <h2 className="text-xl sm:text-2xl font-medium break-words">RL Mechanism Design, Social Planning & Social Choice</h2>
                             <p className="mt-1 text-gray-500">2023 - Present</p>
                         </div>
                         {expandSection[3] ? <ChevronDownIcon className="h-6 w-6" /> : <ChevronRightIcon className="h-6 w-6" />}

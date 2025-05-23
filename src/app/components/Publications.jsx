@@ -130,7 +130,7 @@ function PublicationCard({
     trackEvent('click_paper_link', 'publication', `${title} - ${linkType}`);
   };
   return (
-    <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col w-full">
+    <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col w-full overflow-hidden">
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <div className="flex justify-start items-center w-full">
@@ -152,11 +152,11 @@ function PublicationCard({
                   {notes}
                 </p>
               )}
-              <div className="mt-4 flex gap-2">
+              <div className="mt-4 flex flex-wrap gap-2">
                 {arxivLink && (
                   <a
                     href={arxivLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300"
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('ArXiv', arxivLink)}
@@ -164,16 +164,16 @@ function PublicationCard({
                     <img
                       src="./arxiv-logomark-small.svg"
                       alt="ArXiv Logo"
-                      className="grayscale mr-1"
+                      className="grayscale flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
                     />
-                    ArXiv
+                    <span className="ml-1 hidden sm:inline">ArXiv</span>
                   </a>
                 )}
                 {paperLink && (
                   <a
                     href={paperLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300"
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('PDF', paperLink)}
@@ -181,16 +181,16 @@ function PublicationCard({
                     <img
                       src="./pdf_icon.png"
                       alt="PDF Icon"
-                      className="mr-1"
+                      className="flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
                     />
-                    PDF
+                    <span className="ml-1 hidden sm:inline">PDF</span>
                   </a>
                 )}
                 {presentationLink && (
                   <a
                     href={presentationLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300"
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('Presentation', presentationLink)}
@@ -198,16 +198,16 @@ function PublicationCard({
                     <img
                       src="./slides_icon.png"
                       alt="Presentation Icon"
-                      className="mr-1"
+                      className="flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
                     />
-                    Presentation
+                    <span className="ml-1 hidden sm:inline">Presentation</span>
                   </a>
                 )}
                 {codeLink && (
                   <a
                     href={codeLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300"
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('Code', codeLink)}
@@ -215,10 +215,10 @@ function PublicationCard({
                     <img
                       src="./code_icon.png"
                       alt="Code Icon"
-                      className="mr-1"
+                      className="flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
                     />
-                    Code
+                    <span className="ml-1 hidden sm:inline">Code</span>
                   </a>
                 )}
               </div>
