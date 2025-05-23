@@ -1,6 +1,18 @@
 {
   "workingPapers": [],
   "publications": {
+    "2025": [
+      {
+        "id": 6,
+        "title": "Reflective Verbal Reward Design for Pluralistic Alignment",
+        "authors": ["Carter Blair", "Kate Larson", "Edith Law"],
+        "venues": ["IJCAI 2025"],
+        "tldr": "A language model-guided approach that helps users reflect on their values through dialogue to create individualized LLM-based reward models, achieving 9-12% better accuracy than non-reflective methods while being more sample efficient than supervised learning.",
+        "abstract": "AI agents are commonly aligned with \"human values\" through reinforcement learning from human feedback (RLHF), where a single reward model is learned from aggregated human feedback and used to align an agent's behavior. However, human values are not homogeneous--different people hold distinct and sometimes conflicting values. Aggregating feedback into a single reward model risks disproportionately suppressing minority preferences and unique perspectives. To address this, we present a novel reward modeling approach for learning individualized reward models. Our approach uses a language model to guide users through reflective dialogues where they critique agent behavior and construct their preferences. This personalized dialogue history, containing the user's reflections and critiqued examples, is then used as context for another language model that serves as an individualized reward function for evaluating new trajectories. In studies with 30 participants, our method achieved a 9-12% improvement in accuracy over non-reflective language-based reward models while being vastly more sample efficient than traditional supervised learning methods.",
+        "information": ["This work supersedes \"Democratizing Reward Design for Personal and Representative Value-Alignment\"."],
+        "paperLink": "./papers/reflective_reward_design.pdf"
+      }
+    ],
     "2024": [
       {
         "id": 3,
@@ -9,6 +21,7 @@
         "venues": [],
         "tldr": "A conversational system that learns personalized value definitions from users through interactive dialogue and constructs language-based reward models, enabling AI alignment that respects individual perspectives rather than blindly aggregating crowd preferences.",
         "abstract": "Aligning AI agents with human values is challenging due to diverse and subjective notions of values. Standard alignment methods often aggregate crowd feedback, which can result in the suppression of unique or minority preferences. We introduce Interactive-Reflective Dialogue Alignment, a method that iteratively engages users in reflecting on and specifying their subjective value definitions. This system learns individual value definitions through language-model-based preference elicitation and constructs personalized reward models that can be used to align AI behaviour. We evaluated our system through two studies with 30 participants, one focusing on ``respect'' and the other on ethical decision-making in autonomous vehicles. Our findings demonstrate diverse definitions of value-aligned behaviour and show that our system can accurately capture each person's unique understanding. This approach enables personalized alignment and can inform more representative and interpretable collective alignment strategies.",
+        "information": ["This work has been superseded by \"Reflective Verbal Reward Design for Pluralistic Alignment\" (IJCAI 2025)."],
         "paperLink": "./papers/democratizing_reward_design.pdf",
         "arxivLink": "https://arxiv.org/abs/2410.22203"
       },

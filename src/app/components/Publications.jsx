@@ -79,15 +79,14 @@ export default function Publications() {
           <div key={year} className="flex mb-16">
             {/* Timeline column */}
             <div className="w-24 shrink-0 relative flex justify-center">
-              {/* Vertical line */}
+              {/* Vertical line with fade */}
               <div
                 ref={(el) => (timelineRefs.current[year] = el)}
-                className="absolute w-[1px] top-0 bottom-8 bg-neutral-300 left-1/2 transform -translate-x-1/2"
+                className="absolute w-[1px] top-0 bottom-8 left-1/2 transform -translate-x-1/2"
+                style={{
+                  background: 'linear-gradient(to bottom, transparent 0%, #d4d4d8 15%, #d4d4d8 85%, transparent 100%)'
+                }}
               />
-              {/* Top dot */}
-              <div className="absolute top-0 w-2 h-2 bg-neutral-400 rounded-full left-1/2 transform -translate-x-1/2" />
-              {/* Bottom dot */}
-              <div className="absolute bottom-8 w-2 h-2 bg-neutral-400 rounded-full left-1/2 transform -translate-x-1/2" />
               {/* Year label */}
               <div
                 className="absolute transition-all duration-300 ease-out"
@@ -125,7 +124,8 @@ function PublicationCard({
   arxivLink,
   presentationLink,
   codeLink,
-  notes,
+  awards,
+  information,
 }) {
   const handleLinkClick = (linkType) => {
     trackEvent('click_paper_link', 'publication', `${title} - ${linkType}`);
@@ -136,7 +136,7 @@ function PublicationCard({
         <div className="flex-1">
           <div className="flex justify-start items-center w-full">
             <div className="flex-1 min-w-0">
-              <h2 className="text-2xl font-medium text-neutral-800 leading-tight">{title}</h2>
+              <h2 className="text-xl font-normal text-neutral-800 leading-tight" style={{fontFamily: 'Gill Sans, sans-serif'}}>{title}</h2>
               <p className="text-neutral-600 mt-1 text-sm">{authors.join(", ")}</p>
               <div className="mt-2 flex gap-2">
                 {venues.map((venue, index) => (
@@ -148,6 +148,20 @@ function PublicationCard({
                   </span>
                 ))}
               </div>
+              {awards && awards.length > 0 && (
+                <div className="mt-3">
+                  {awards.map((award, index) => (
+                    <div key={index} className="flex items-center gap-2 mb-1">
+                      <img
+                        src="./star_icon.png"
+                        alt="Award"
+                        className="w-4 h-4 flex-shrink-0"
+                      />
+                      <span className="text-sm text-neutral-700 font-medium">{award}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
               {tldr && (
                 <div className="mt-3 mr-8 p-3 rounded-r-md" style={{backgroundColor: '#e6efe6', borderLeft: '4px solid #447e3b'}}>
                   <p className="text-sm font-medium" style={{color: '#2d5a26'}}>
@@ -156,16 +170,26 @@ function PublicationCard({
                   </p>
                 </div>
               )}
-              {notes && (
-                <p className="mt-3 text-sm text-neutral-700 italic">
-                  {notes}
-                </p>
+              {information && information.length > 0 && (
+                <div className="mt-3">
+                  {information.map((info, index) => (
+                    <div key={index} className="flex items-start gap-2 mb-2">
+                      <img
+                        src="./information_icon.png"
+                        alt="Information"
+                        className="w-4 h-4 flex-shrink-0 mt-0.5"
+                      />
+                      <span className="text-sm text-neutral-700">{info}</span>
+                    </div>
+                  ))}
+                </div>
               )}
               <div className="mt-4 flex flex-wrap gap-2">
                 {arxivLink && (
                   <a
                     href={arxivLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    style={{fontFamily: 'Gill Sans, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('ArXiv', arxivLink)}
@@ -182,7 +206,8 @@ function PublicationCard({
                 {paperLink && (
                   <a
                     href={paperLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    style={{fontFamily: 'Gill Sans, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('PDF', paperLink)}
@@ -199,7 +224,8 @@ function PublicationCard({
                 {presentationLink && (
                   <a
                     href={presentationLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    style={{fontFamily: 'Gill Sans, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('Presentation', presentationLink)}
@@ -216,7 +242,8 @@ function PublicationCard({
                 {codeLink && (
                   <a
                     href={codeLink}
-                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-medium flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    className="bg-neutral-50 hover:bg-neutral-200 text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit"
+                    style={{fontFamily: 'Gill Sans, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('Code', codeLink)}

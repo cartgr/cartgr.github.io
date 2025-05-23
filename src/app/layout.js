@@ -108,8 +108,8 @@ export default function RootLayout({ children }) {
         </div>
         
         {/* Footer */}
-        <footer className="bg-neutral-100 border-t-2 border-neutral-300 p-4 text-center text-neutral-600 mt-auto" style={{fontFamily: 'Gill Sans, sans-serif'}}>
-          <p>&copy; {new Date().getFullYear()} Carter Blair.&nbsp;&nbsp;All rights reserved.</p>
+        <footer className="bg-neutral-100 border-t-2 border-neutral-300 p-4 text-center text-neutral-600 mt-auto font-light" style={{fontFamily: 'Gill Sans, sans-serif'}}>
+          <p>&copy; {new Date().getFullYear()} Carter Blair</p>
         </footer>
         
         {/* Google Analytics */}
