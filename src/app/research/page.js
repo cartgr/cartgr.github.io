@@ -13,7 +13,17 @@ export default function Research() {
     return (
         <div className="flex min-h-screen bg-neutral-50 overflow-x-hidden">
             {/* Main content area */}
-            <main className="flex-1 p-4 sm:p-8 max-w-full">
+            <main className="flex-1 px-4 py-3 sm:px-8 sm:py-7 max-w-full">
+                <div className="text-center mb-12">
+                    <h1 className="text-5xl font-medium text-neutral-800 relative inline-block group" style={{fontFamily: 'Gill Sans, sans-serif'}}>
+                        Research
+                        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
+                    </h1>
+                    <p className="text-neutral-600 text-sm mt-4 font-light tracking-wide" style={{fontFamily: 'Gill Sans, sans-serif'}}>
+                        Exploring the intersection of social choice theory and artificial intelligence
+                    </p>
+                </div>
                 {/* Section 1 */}
                 <section className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col overflow-hidden">
                     <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleSection(1)}>

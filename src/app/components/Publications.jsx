@@ -118,6 +118,7 @@ function PublicationCard({
   authors,
   venues,
   abstract,
+  tldr,
   expanded,
   onToggle,
   paperLink,
@@ -126,16 +127,16 @@ function PublicationCard({
   codeLink,
   notes,
 }) {
-  const handleLinkClick = (linkType, url) => {
+  const handleLinkClick = (linkType) => {
     trackEvent('click_paper_link', 'publication', `${title} - ${linkType}`);
   };
   return (
-    <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-md p-4 flex flex-col w-full overflow-hidden">
+    <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-lg p-5 flex flex-col w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <div className="flex justify-start items-center w-full">
             <div className="flex-1 min-w-0">
-              <h2 className="text-2xl font-medium">{title}</h2>
+              <h2 className="text-2xl font-medium text-neutral-800 leading-tight">{title}</h2>
               <p className="text-neutral-600 mt-1 text-sm">{authors.join(", ")}</p>
               <div className="mt-2 flex gap-2">
                 {venues.map((venue, index) => (
@@ -147,6 +148,14 @@ function PublicationCard({
                   </span>
                 ))}
               </div>
+              {tldr && (
+                <div className="mt-3 mr-8 p-3 rounded-r-md" style={{backgroundColor: '#e6efe6', borderLeft: '4px solid #447e3b'}}>
+                  <p className="text-sm font-medium" style={{color: '#2d5a26'}}>
+                    <span className="font-semibold text-xs uppercase tracking-wider mr-2" style={{fontFamily: 'Gill Sans, sans-serif', color: '#447e3b'}}>TL;DR</span>
+                    {tldr}
+                  </p>
+                </div>
+              )}
               {notes && (
                 <p className="mt-3 text-sm text-neutral-700 italic">
                   {notes}
@@ -223,18 +232,18 @@ function PublicationCard({
                 )}
               </div>
             </div>
-            <div onClick={onToggle} className="shrink-0 cursor-pointer">
+            <div onClick={onToggle} className="shrink-0 cursor-pointer p-1 rounded-full hover:bg-neutral-200 transition-colors duration-150">
               {expanded ? (
-                <ChevronDownIcon className="h-6 w-6" />
+                <ChevronDownIcon className="h-5 w-5 text-neutral-600" />
               ) : (
-                <ChevronRightIcon className="h-6 w-6" />
+                <ChevronRightIcon className="h-5 w-5 text-neutral-600" />
               )}
             </div>
           </div>
         </div>
       </div>
       {expanded && (
-        <div>
+        <div className="animate-in slide-in-from-top-1 duration-200 ease-out">
           <hr className="my-2" />
           <div>
             <p className="mt-2">

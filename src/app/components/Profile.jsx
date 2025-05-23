@@ -43,19 +43,37 @@ function Biography() {
       <p className='mb-4 text-neutral-800'>
         I am currently doing a Master of Math in Computer Science at UWaterloo where I&apos;m supervised by
         <a href="https://cs.uwaterloo.ca/~klarson/"
-          className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+          style={{color: '#3a6b31'}}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#3a6b31';
+            e.target.style.color = '#f0f5f0';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#3a6b31';
+          }}
           target="_blank"
           rel="noopener noreferrer">
           Kate Larson
         </a>
         and
         <a href="https://edithlaw.ca/"
-          className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out ml-1"
+          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out ml-1"
+          style={{color: '#3a6b31'}}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#3a6b31';
+            e.target.style.color = '#f0f5f0';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#3a6b31';
+          }}
           target="_blank"
           rel="noopener noreferrer">  
           Edith Law
         </a>.
-        My research mainly focuses on the intersection between social choice, reinforcement learning, and human-AI interaction. I am currently excited about participatory and pluralistic approaches to AI alignment.
+        My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.
       </p>
       <hr className="border-gray-300 mb-4" />
       <p className='text-neutral-800 mb-4'>

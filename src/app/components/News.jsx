@@ -6,7 +6,16 @@ export default function News() {
           <>
             Awarded the{" "}
             <a href="https://www.cooperativeai.com/post/announcing-the-2025-cooperative-ai-phd-scholars"
-              className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+              style={{color: '#3a6b31'}}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#3a6b31';
+                e.target.style.color = '#f0f5f0';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#3a6b31';
+              }}
               target="_blank"
               rel="noopener noreferrer">
               Cooperative AI PhD Fellowship
@@ -21,13 +30,31 @@ export default function News() {
           <>
             I will be at AAMAS 2024 in Auckland, New Zealand presenting our paper{" "}
             <a href="https://drive.google.com/file/d/1v3IQ6gzELfhqocp9Wc4rcEMeNYHKEnEo/view"
-              className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+              style={{color: '#3a6b31'}}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#3a6b31';
+                e.target.style.color = '#f0f5f0';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#3a6b31';
+              }}
               target="_blank"
               rel="noopener noreferrer">
               Liquid Ensemble Selection for Continual Learning
             </a> at the
             <a href="https://sites.google.com/view/scala24/"
-              className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+              style={{color: '#3a6b31'}}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#3a6b31';
+                e.target.style.color = '#f0f5f0';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#3a6b31';
+              }}
               target="_blank"
               rel="noopener noreferrer">
               SCaLA workshop.
@@ -41,7 +68,16 @@ export default function News() {
           <>
             Our paper{" "}
             <a href="https://drive.google.com/file/d/1v3IQ6gzELfhqocp9Wc4rcEMeNYHKEnEo/view"
-              className="text-green-600 hover:bg-green-600 hover:text-neutral-100 hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+              style={{color: '#3a6b31'}}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#3a6b31';
+                e.target.style.color = '#f0f5f0';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#3a6b31';
+              }}
               target="_blank"
               rel="noopener noreferrer">
               Liquid Ensemble Selection for Continual Learning

@@ -91,7 +91,7 @@ export default function RootLayout({ children }) {
                 <img src="./icon.png" alt="Icon" className="h-9 w-9 mr-2" />
               </Link>
               <div className="absolute -bottom-10 left-0 bg-neutral-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-auto z-[60]">
-                The icon is <a href="https://fr.wikipedia.org/wiki/Disque_simultan%C3%A9" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-100 underline">Disque simultané</a> by Robert Delaunay
+                The icon is <a href="https://fr.wikipedia.org/wiki/Disque_simultan%C3%A9" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-100 underline">Disque simultané</a> by Robert Delaunay (my favourite painting)
               </div>
             </div>
             <Link href="/" className="no-underline text-neutral-800">
@@ -108,8 +108,8 @@ export default function RootLayout({ children }) {
         </div>
         
         {/* Footer */}
-        <footer className="bg-neutral-100 border-t-2 border-neutral-300 p-4 text-center text-neutral-600 mt-auto">
-          <p>&copy; {new Date().getFullYear()} Carter Blair. All rights reserved.</p>
+        <footer className="bg-neutral-100 border-t-2 border-neutral-300 p-4 text-center text-neutral-600 mt-auto" style={{fontFamily: 'Gill Sans, sans-serif'}}>
+          <p>&copy; {new Date().getFullYear()} Carter Blair.&nbsp;&nbsp;All rights reserved.</p>
         </footer>
         
         {/* Google Analytics */}
