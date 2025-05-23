@@ -78,7 +78,7 @@ export default function Publications() {
         .map((year) => (
           <div key={year} className="flex mb-16">
             {/* Timeline column */}
-            <div className="w-24 shrink-0 relative flex justify-center">
+            <div className="w-8 sm:w-20 shrink-0 relative flex justify-center">
               {/* Vertical line with fade */}
               <div
                 ref={(el) => (timelineRefs.current[year] = el)}
@@ -89,14 +89,14 @@ export default function Publications() {
               />
               {/* Year label */}
               <div
-                className="absolute transition-all duration-300 ease-out"
+                className="absolute transition-all duration-300 ease-out z-10 left-1/2 transform -translate-x-1/2"
                 style={{ top: yearPositions[year] || 0 }}
               >
                 <h3 className="text-xl font-medium text-neutral-600 bg-gray-50 px-3">{year}</h3>
               </div>
             </div>
             {/* Publications container */}
-            <div className="flex flex-col flex-1">
+            <div className="flex flex-col flex-1 ml-4">
               {publications[year].map((pub) => (
                 <PublicationCard
                   key={pub.id}
@@ -131,7 +131,11 @@ function PublicationCard({
     trackEvent('click_paper_link', 'publication', `${title} - ${linkType}`);
   };
   return (
-    <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-lg p-5 flex flex-col w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer" onClick={onToggle}>
+    <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-lg p-5 flex flex-col w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 sm:cursor-pointer relative z-20" onClick={() => {
+      if (window.innerWidth >= 640) {
+        onToggle();
+      }
+    }}>
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <div className="flex justify-start items-center w-full">
@@ -163,7 +167,7 @@ function PublicationCard({
                 </div>
               )}
               {tldr && (
-                <div className="mt-3 mr-8 p-3 rounded-r-md" style={{backgroundColor: '#e6efe6', borderLeft: '4px solid #447e3b'}}>
+                <div className="mt-3 mr-8 p-3 rounded-r-md hidden sm:block" style={{backgroundColor: '#e6efe6', borderLeft: '4px solid #447e3b'}}>
                   <p className="text-sm font-medium" style={{color: '#2d5a26'}}>
                     <span className="font-semibold text-xs uppercase tracking-wider mr-2" style={{fontFamily: 'Gill Sans, sans-serif', color: '#447e3b'}}>TL;DR</span>
                     {tldr}
@@ -259,13 +263,13 @@ function PublicationCard({
                 )}
               </div>
             </div>
-            <div className="shrink-0 p-1 rounded-full hover:bg-neutral-200 transition-colors duration-150">
+            <div className="shrink-0 p-1 rounded-full hover:bg-neutral-200 transition-colors duration-150 hidden sm:block">
               <ChevronRightIcon className={`h-5 w-5 text-neutral-600 transition-transform duration-300 ease-out ${expanded ? 'transform rotate-90' : 'transform rotate-0'}`} />
             </div>
           </div>
         </div>
       </div>
-      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${expanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div className={`overflow-hidden transition-all duration-500 ease-in-out hidden sm:block ${expanded ? 'sm:max-h-96 sm:opacity-100' : 'sm:max-h-0 sm:opacity-0'}`}>
         <hr className="my-2" />
         <div>
           <p className="mt-2">
