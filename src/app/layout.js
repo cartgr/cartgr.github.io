@@ -82,7 +82,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="bg-neutral-50 m-0 min-h-screen flex flex-col">
+      <body className="bg-neutral-50 m-0 min-h-screen">
         {/* Add z-50 to ensure top bar stays above everything */}
         <div className="fixed top-0 left-0 right-0 h-16 bg-neutral-100 p-4 flex items-center justify-between border-b-2 border-neutral-300 z-50">
           <div className="flex items-center ml-2 space-x-4">
@@ -103,14 +103,9 @@ export default function RootLayout({ children }) {
         </div>
 
         {/* Add relative positioning to create a new stacking context */}
-        <div className="pt-20 p-4 bg-neutral-50 relative flex-1">
+        <div className="pt-20 p-4 bg-neutral-50 relative">
           {children}
         </div>
-        
-        {/* Footer */}
-        <footer className="bg-neutral-100 border-t-2 border-neutral-300 p-4 text-center text-neutral-600 mt-auto font-light" style={{fontFamily: 'Gill Sans, sans-serif'}}>
-          <p>&copy; {new Date().getFullYear()} Carter Blair</p>
-        </footer>
         
         {/* Google Analytics */}
         <GoogleAnalytics GA_MEASUREMENT_ID="G-6YC2KGF5B2" />
