@@ -44,14 +44,14 @@ function Biography() {
         I am currently doing a Master of Math in Computer Science at UWaterloo where I&apos;m supervised by
         <a href="https://cs.uwaterloo.ca/~klarson/"
           className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
-          style={{color: '#3a6b31'}}
+          style={{color: '#16a34a'}}
           onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#3a6b31';
+            e.target.style.backgroundColor = '#16a34a';
             e.target.style.color = '#f0f5f0';
           }}
           onMouseLeave={(e) => {
             e.target.style.backgroundColor = 'transparent';
-            e.target.style.color = '#3a6b31';
+            e.target.style.color = '#16a34a';
           }}
           target="_blank"
           rel="noopener noreferrer">
@@ -60,14 +60,14 @@ function Biography() {
         and
         <a href="https://edithlaw.ca/"
           className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out ml-1"
-          style={{color: '#3a6b31'}}
+          style={{color: '#16a34a'}}
           onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#3a6b31';
+            e.target.style.backgroundColor = '#16a34a';
             e.target.style.color = '#f0f5f0';
           }}
           onMouseLeave={(e) => {
             e.target.style.backgroundColor = 'transparent';
-            e.target.style.color = '#3a6b31';
+            e.target.style.color = '#16a34a';
           }}
           target="_blank"
           rel="noopener noreferrer">  
