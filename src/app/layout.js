@@ -13,6 +13,11 @@ export const metadata = {
   creator: 'Carter Blair',
   publisher: 'Carter Blair',
   robots: 'index, follow',
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
