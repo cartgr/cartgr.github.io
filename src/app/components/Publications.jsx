@@ -92,7 +92,7 @@ export default function Publications() {
                 className="absolute transition-all duration-300 ease-out z-10 left-1/2 transform -translate-x-1/2"
                 style={{ top: yearPositions[year] || 0 }}
               >
-                <h3 className="text-xl font-medium text-neutral-600 bg-gray-50 px-3">{year}</h3>
+                <h3 className="text-xl font-medium text-neutral-600 px-3 py-3" style={{background: 'linear-gradient(to bottom, transparent, #f9fafb, #f9fafb, transparent)'}}>{year}</h3>
               </div>
             </div>
             {/* Publications container */}
