@@ -6,10 +6,9 @@ import debounce from 'lodash/debounce';
 import publicationsData from '../data/publications.json';
 import { trackEvent } from './Analytics';
 
-export default function Publications() {
+export default function Publications({ activeFilters = [], onToggleFilter }) {
   const [expandSection, setExpandSection] = useState({});
   const [yearPositions, setYearPositions] = useState({});
-  const [activeFilters, setActiveFilters] = useState([]);
   const [isFiltering, setIsFiltering] = useState(false);
 
   const timelineRefs = useRef({});
@@ -49,13 +48,9 @@ export default function Publications() {
     // Reset year positions immediately to prevent sliding from previous positions
     setYearPositions({});
     
-    setActiveFilters(prev => {
-      if (prev.includes(tag)) {
-        return prev.filter(f => f !== tag);
-      } else {
-        return [...prev, tag];
-      }
-    });
+    if (onToggleFilter) {
+      onToggleFilter(tag);
+    }
   };
 
   useEffect(() => {
