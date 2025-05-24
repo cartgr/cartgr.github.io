@@ -1,6 +1,29 @@
 export default function News() {
     const newsItems = [
       {
+        date: "August 2025",
+        content: (
+          <>
+            I will be at IJCAI 2025 in Montreal presenting our paper{" "}
+            <a href="https://cartgr.github.io/website/papers/reflective_reward_design.pdf"
+              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+              style={{color: '#16a34a'}}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#16a34a';
+                e.target.style.color = '#f0f5f0';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#16a34a';
+              }}
+              target="_blank"
+              rel="noopener noreferrer">
+              Reflective Verbal Reward Design for Pluralistic Alignment.
+            </a>
+          </>
+        )
+      },
+      {
         date: "December 2024",
         content: (
           <>
