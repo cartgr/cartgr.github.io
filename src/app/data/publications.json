@@ -1,5 +1,16 @@
 {
-  "workingPapers": [],
+  "workingPapers": [
+    {
+      "id": 7,
+      "title": "Generating Fair Consensus Statements with Social Choice on Token-Level MDPs",
+      "authors": ["Carter Blair", "Kate Larson"],
+      "venues": [],
+      "tldr": "A framework that models consensus statement generation as a multi-objective token-level MDP, using social choice theory to provide provable fairness guarantees when aggregating free-form verbal opinions, including a stochastic generation policy in the ex-ante core.",
+      "abstract": "Current frameworks for consensus statement generation with large language models lack the inherent structure needed to provide provable fairness guarantees when aggregating diverse free-form opinions. We model the task as a multi-objective, token-level Markov Decision Process (MDP), where each objective corresponds to an agent's preference. Token-level rewards for each agent are derived from their policy (e.g., a personalized language model). This approach utilizes the finding from Rafailov et al. (2024) that such policies implicitly define optimal Q-functions, providing a principled way to quantify rewards at each generation step without a value function. This MDP formulation creates a formal structure amenable to analysis using principles from social choice theory. We propose two approaches grounded in social choice theory. First, we propose a stochastic generation policy guaranteed to be in the ex-ante core, extending core stability concepts from cooperative game theory and voting theory to text generation. This policy is derived from an underlying distribution over complete statements that maximizes proportional fairness (Nash Welfare). Second, for generating a single statement, we target the maximization of egalitarian welfare using search algorithms within the MDP framework. Empirically, we find that search guided by the egalitarian objective generates consensus statements with improved worst-case agent alignment compared to baseline methods, including the Habermas Machine.",
+      "paperLink": "./papers/consensus_statements_via_tmdp.pdf",
+      "codeLink": "https://github.com/cartgr/Generating-Fair-Consensus-Statements-with-Social-Choice-on-Token-Level-MDPs"
+    }
+  ],
   "publications": {
     "2025": [
       {
