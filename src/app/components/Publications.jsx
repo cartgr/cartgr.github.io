@@ -66,6 +66,7 @@ export default function Publications() {
                 {...paper}
                 expanded={expandSection[paper.id]}
                 onToggle={() => toggleSection(paper.id, paper.title)}
+                isWorkingPaper={true}
               />
             ))}
           </div>
@@ -126,12 +127,13 @@ function PublicationCard({
   codeLink,
   awards,
   information,
+  isWorkingPaper = false,
 }) {
   const handleLinkClick = (linkType) => {
     trackEvent('click_paper_link', 'publication', `${title} - ${linkType}`);
   };
   return (
-    <div className="mb-8 bg-neutral-100 border-neutral-300 border-2 rounded-lg p-5 flex flex-col w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 sm:cursor-pointer relative z-20" onClick={() => {
+    <div className={`${!isWorkingPaper ? 'mb-8' : ''} bg-neutral-100 border-neutral-300 border-2 rounded-lg p-5 flex flex-col w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 sm:cursor-pointer relative z-20`} onClick={() => {
       if (window.innerWidth >= 640) {
         onToggle();
       }
