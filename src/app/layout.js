@@ -14,9 +14,9 @@ export const metadata = {
   publisher: 'Carter Blair',
   robots: 'index, follow',
   icons: {
-    icon: '/icon.png',
-    shortcut: '/icon.png',
-    apple: '/icon.png',
+    icon: './icon.png',
+    shortcut: './icon.png',
+    apple: './icon.png',
   },
   openGraph: {
     type: 'website',
@@ -27,7 +27,7 @@ export const metadata = {
     description: 'Carter Blair is a Computer Science Master\'s student at University of Waterloo researching AI alignment, reinforcement learning, and human-AI interaction.',
     images: [
       {
-        url: '/headshot2025.png',
+        url: '/headshot2025.jpg',
         width: 250,
         height: 250,
         alt: 'Carter Blair headshot',
@@ -38,7 +38,7 @@ export const metadata = {
     card: 'summary',
     title: 'Carter Blair - AI Research & Computer Science',
     description: 'Carter Blair is a Computer Science Master\'s student at University of Waterloo researching AI alignment, reinforcement learning, and human-AI interaction.',
-    images: ['/headshot2025.png'],
+    images: ['/headshot2025.jpg'],
   },
   verification: {
     google: 'your-google-verification-code', // Replace with actual verification code
@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
       "url": "https://uwaterloo.ca"
     },
     "url": "https://cartgr.github.io/website",
-    "image": "/headshot2025.png",
+    "image": "/headshot2025.jpg",
     "email": "cblair@uwaterloo.ca",
     "alumniOf": {
       "@type": "Organization",
@@ -108,7 +108,7 @@ export default function RootLayout({ children }) {
         </div>
 
         {/* Add relative positioning to create a new stacking context */}
-        <div className="pt-20 p-4 bg-neutral-50 relative">
+        <div className="pt-16 p-4 bg-neutral-50 relative">
           {children}
         </div>
         
