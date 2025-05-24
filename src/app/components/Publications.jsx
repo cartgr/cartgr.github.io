@@ -9,10 +9,54 @@ import { trackEvent } from './Analytics';
 export default function Publications() {
   const [expandSection, setExpandSection] = useState({});
   const [yearPositions, setYearPositions] = useState({});
+  const [activeFilters, setActiveFilters] = useState([]);
+  const [isFiltering, setIsFiltering] = useState(false);
 
   const timelineRefs = useRef({});
 
   const { workingPapers, publications } = publicationsData;
+
+
+  // Get all unique tags from all publications
+  const allTags = new Set();
+  workingPapers.forEach(paper => {
+    if (paper.tags) paper.tags.forEach(tag => allTags.add(tag));
+  });
+  Object.values(publications).flat().forEach(pub => {
+    if (pub.tags) pub.tags.forEach(tag => allTags.add(tag));
+  });
+  const sortedTags = Array.from(allTags).sort();
+
+  // Filter publications based on active filters
+  const filteredWorkingPapers = workingPapers.filter(paper => {
+    if (activeFilters.length === 0) return true;
+    return activeFilters.every(filter => paper.tags?.includes(filter));
+  });
+
+  const filteredPublications = {};
+  Object.keys(publications).forEach(year => {
+    const filteredPubs = publications[year].filter(pub => {
+      if (activeFilters.length === 0) return true;
+      return activeFilters.every(filter => pub.tags?.includes(filter));
+    });
+    if (filteredPubs.length > 0) {
+      filteredPublications[year] = filteredPubs;
+    }
+  });
+
+  const toggleFilter = (tag) => {
+    setIsFiltering(true);
+    // Reset year positions immediately to prevent sliding from previous positions
+    setYearPositions({});
+    
+    setActiveFilters(prev => {
+      if (prev.includes(tag)) {
+        return prev.filter(f => f !== tag);
+      } else {
+        return [...prev, tag];
+      }
+    });
+  };
 
   useEffect(() => {
     const updateYearPositions = () => {
@@ -44,6 +88,33 @@ export default function Publications() {
     };
   }, []);
 
+  // Refresh year positions when filters change
+  useEffect(() => {
+    const updateYearPositions = () => {
+      const newPositions = {};
+
+      Object.keys(timelineRefs.current).forEach((year) => {
+        const ref = timelineRefs.current[year];
+        if (!ref) return;
+
+        const rect = ref.getBoundingClientRect();
+        const visibleTop = Math.max(0, rect.top);
+        const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+        const visibleMiddle = (visibleTop + visibleBottom) / 2;
+        const relativePosition = visibleMiddle - rect.top;
+
+        newPositions[year] = relativePosition;
+      });
+
+      setYearPositions(newPositions);
+      setIsFiltering(false);
+    };
+
+    // Small delay to ensure DOM has updated after filtering
+    const timeoutId = setTimeout(updateYearPositions, 50);
+    return () => clearTimeout(timeoutId);
+  }, [filteredPublications]);
+
   const toggleSection = (id, title) => {
     const wasExpanded = expandSection[id];
     setExpandSection((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -55,60 +126,110 @@ export default function Publications() {
   };
 
   return (
-    <section>
-      {workingPapers.length > 0 && (
+    <section className="w-full min-w-0">
+      {/* Filter Interface */}
+      <div className="mb-8">
+        <h3 className="text-lg font-medium mb-4 text-neutral-800" style={{fontFamily: 'Gill Sans, sans-serif'}}>Filter by Topic</h3>
+        <div className="flex flex-wrap gap-2">
+          {sortedTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => toggleFilter(tag)}
+              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                activeFilters.includes(tag)
+                  ? 'bg-neutral-700 text-white shadow-md'
+                  : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300'
+              }`}
+              style={{fontFamily: 'Gill Sans, sans-serif'}}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {filteredWorkingPapers.length > 0 && (
         <div className="mb-16">
           <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Gill Sans, sans-serif'}}>Working Papers</h2>
           <div className="flex flex-col space-y-8">
-            {workingPapers.map((paper) => (
+            {filteredWorkingPapers.map((paper) => (
               <PublicationCard
                 key={paper.id}
                 {...paper}
                 expanded={expandSection[paper.id]}
                 onToggle={() => toggleSection(paper.id, paper.title)}
                 isWorkingPaper={true}
+                onTagClick={toggleFilter}
               />
             ))}
           </div>
         </div>
       )}
       
-      <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Gill Sans, sans-serif'}}>Publications</h2>
-      {Object.keys(publications)
-        .sort((a, b) => b - a)
-        .map((year) => (
-          <div key={year} className="flex mb-16">
-            {/* Timeline column */}
-            <div className="w-8 sm:w-20 shrink-0 relative flex justify-center">
-              {/* Vertical line with fade */}
-              <div
-                ref={(el) => (timelineRefs.current[year] = el)}
-                className="absolute w-[1px] top-0 bottom-8 left-1/2 transform -translate-x-1/2"
-                style={{
-                  background: 'linear-gradient(to bottom, transparent 0%, #d4d4d8 15%, #d4d4d8 85%, transparent 100%)'
-                }}
-              />
-              {/* Year label */}
-              <div
-                className="absolute transition-all duration-300 ease-out z-10 left-1/2 transform -translate-x-1/2"
-                style={{ top: yearPositions[year] || 0 }}
-              >
-                <h3 className="text-xl font-medium text-neutral-600 px-3 py-3" style={{background: 'linear-gradient(to bottom, transparent, #f9fafb, #f9fafb, transparent)'}}>{year}</h3>
+      {/* Only show Publications header if there are publications or no filters active */}
+      {(Object.keys(filteredPublications).length > 0 || activeFilters.length === 0) && (
+        <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Gill Sans, sans-serif'}}>Publications</h2>
+      )}
+      
+      {/* Always show at least one timeline row to maintain layout */}
+      {Object.keys(filteredPublications).length > 0 ? (
+        Object.keys(filteredPublications)
+          .sort((a, b) => b - a)
+          .map((year) => (
+            <div key={year} className="flex mb-16">
+              {/* Timeline column */}
+              <div className="w-8 sm:w-20 shrink-0 relative flex justify-center">
+                {/* Vertical line with fade */}
+                <div
+                  ref={(el) => (timelineRefs.current[year] = el)}
+                  className="absolute w-[1px] top-0 bottom-8 left-1/2 transform -translate-x-1/2"
+                  style={{
+                    background: 'linear-gradient(to bottom, transparent 0%, #d4d4d8 15%, #d4d4d8 85%, transparent 100%)'
+                  }}
+                />
+                {/* Year label */}
+                <div
+                  className={`absolute z-10 left-1/2 transform -translate-x-1/2 ${!isFiltering ? 'transition-all duration-300 ease-out' : ''}`}
+                  style={{ top: yearPositions[year] || 0 }}
+                >
+                  <h3 className="text-xl font-medium text-neutral-600 px-3 py-3" style={{background: 'linear-gradient(to bottom, transparent, #f9fafb, #f9fafb, transparent)'}}>{year}</h3>
+                </div>
+              </div>
+              {/* Publications container */}
+              <div className="flex flex-col flex-1 ml-4">
+                {filteredPublications[year].map((pub) => (
+                  <PublicationCard
+                    key={pub.id}
+                    {...pub}
+                    expanded={expandSection[pub.id]}
+                    onToggle={() => toggleSection(pub.id, pub.title)}
+                    onTagClick={toggleFilter}
+                  />
+                ))}
               </div>
             </div>
-            {/* Publications container */}
+          ))
+      ) : (
+        filteredWorkingPapers.length === 0 && activeFilters.length > 0 && (
+          <div className="flex mb-16">
+            {/* Timeline column - always maintain for layout consistency */}
+            <div className="w-8 sm:w-20 shrink-0 relative flex justify-center">
+              {/* Empty space to maintain layout */}
+            </div>
+            {/* Content area - maintain same width as when publications are present */}
             <div className="flex flex-col flex-1 ml-4">
-              {publications[year].map((pub) => (
-                <PublicationCard
-                  key={pub.id}
-                  {...pub}
-                  expanded={expandSection[pub.id]}
-                  onToggle={() => toggleSection(pub.id, pub.title)}
-                />
-              ))}
+              <div className="bg-neutral-100 border-neutral-300 border-2 rounded-lg p-8 text-center">
+                <p className="text-neutral-600 text-lg" style={{fontFamily: 'Gill Sans, sans-serif'}}>
+                  No publications found matching the selected filters.
+                </p>
+                <p className="text-neutral-500 text-sm mt-2">
+                  Try removing some filters or selecting different topics.
+                </p>
+              </div>
             </div>
           </div>
-        ))}
+        )
+      )}
     </section>
   );
 }
@@ -127,6 +248,8 @@ function PublicationCard({
   codeLink,
   awards,
   information,
+  tags,
+  onTagClick,
   isWorkingPaper = false,
 }) {
   const handleLinkClick = (linkType) => {
@@ -277,6 +400,26 @@ function PublicationCard({
           <p className="mt-2">
             <span className="font-semibold news-font">Abstract</span>: {abstract}
           </p>
+          {tags && tags.length > 0 && (
+            <div className="mt-4">
+              <span className="font-semibold news-font mr-2">Tags:</span>
+              <div className="flex flex-wrap gap-1 mt-1">
+                {tags.map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onTagClick(tag);
+                    }}
+                    className="px-2 py-1 bg-neutral-200 hover:bg-neutral-300 text-neutral-700 text-xs rounded-full transition-colors duration-150 cursor-pointer"
+                    style={{fontFamily: 'Gill Sans, sans-serif'}}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@ export default function PublicationsPage() {
           </p>
         </div>
       </div>
-      <main className="flex-1 max-w-5xl mx-auto p-4">
+      <main className="flex-1 max-w-5xl mx-auto p-4 min-w-0 w-full">
         <Publications />
       </main>
     </div>
