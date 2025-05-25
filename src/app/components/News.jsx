@@ -5,7 +5,7 @@ export default function News() {
         content: (
           <>
             I will be at IJCAI 2025 in Montreal presenting our paper{" "}
-            <a href="https://cartgr.github.io/website/papers/reflective_reward_design.pdf"
+            <a href="./papers/reflective_reward_design.pdf"
               className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
               style={{color: '#16a34a'}}
               onMouseEnter={(e) => {
