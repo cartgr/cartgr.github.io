@@ -124,7 +124,7 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
     <section className="w-full min-w-0">
       {/* Filter Interface */}
       <div className="mb-8">
-        <h3 className="text-lg font-medium mb-4 text-neutral-800" style={{fontFamily: 'Gill Sans, sans-serif'}}>Filter by Topic</h3>
+        <h3 className="text-lg font-medium mb-4 text-neutral-800" style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}>Filter by Topic</h3>
         <div className="flex flex-wrap gap-2">
           {sortedTags.map((tag) => (
             <button
@@ -135,7 +135,7 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
                   ? 'bg-neutral-700 text-white shadow-md'
                   : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300'
               }`}
-              style={{fontFamily: 'Gill Sans, sans-serif'}}
+              style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
             >
               {tag}
             </button>
@@ -145,7 +145,7 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
 
       {filteredWorkingPapers.length > 0 && (
         <div className="mb-16">
-          <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Gill Sans, sans-serif'}}>Working Papers</h2>
+          <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}>Working Papers</h2>
           <div className="flex flex-col space-y-8">
             {filteredWorkingPapers.map((paper) => (
               <PublicationCard
@@ -163,7 +163,7 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
       
       {/* Only show Publications header if there are publications or no filters active */}
       {(Object.keys(filteredPublications).length > 0 || activeFilters.length === 0) && (
-        <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Gill Sans, sans-serif'}}>Publications</h2>
+        <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}>Publications</h2>
       )}
       
       {/* Always show at least one timeline row to maintain layout */}
@@ -214,7 +214,7 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
             {/* Content area - maintain same width as when publications are present */}
             <div className="flex flex-col flex-1 ml-4">
               <div className="bg-neutral-100 border-neutral-300 border-2 rounded-lg p-8 text-center">
-                <p className="text-neutral-600 text-lg" style={{fontFamily: 'Gill Sans, sans-serif'}}>
+                <p className="text-neutral-600 text-lg" style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}>
                   No publications found matching the selected filters.
                 </p>
                 <p className="text-neutral-500 text-sm mt-2">
@@ -260,7 +260,7 @@ function PublicationCard({
         <div className="flex-1">
           <div className="flex justify-start items-center w-full">
             <div className="flex-1 min-w-0">
-              <h2 className="text-xl font-normal text-neutral-800 leading-tight" style={{fontFamily: 'Gill Sans, sans-serif'}}>{title}</h2>
+              <h2 className="text-xl font-normal text-neutral-800 leading-tight" style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}>{title}</h2>
               <p className="text-neutral-600 mt-1 text-sm">{authors.join(", ")}</p>
               <div className="mt-2 flex gap-2">
                 {venues.map((venue, index) => (
@@ -289,7 +289,7 @@ function PublicationCard({
               {tldr && (
                 <div className="mt-3 mr-8 p-3 rounded-r-md hidden sm:block" style={{backgroundColor: '#e6efe6', borderLeft: '4px solid #447e3b'}}>
                   <p className="text-sm font-medium" style={{color: '#2d5a26'}}>
-                    <span className="font-semibold text-xs uppercase tracking-wider mr-2" style={{fontFamily: 'Gill Sans, sans-serif', color: '#447e3b'}}>TL;DR</span>
+                    <span className="font-semibold text-xs uppercase tracking-wider mr-2" style={{fontFamily: 'Gill Sans, Raleway, sans-serif', color: '#447e3b'}}>TL;DR</span>
                     {tldr}
                   </p>
                 </div>
@@ -313,7 +313,7 @@ function PublicationCard({
                   <a
                     href={arxivLink}
                     className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
-                    style={{fontFamily: 'Gill Sans, sans-serif'}}
+                    style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('ArXiv', arxivLink)}
@@ -331,7 +331,7 @@ function PublicationCard({
                   <a
                     href={paperLink}
                     className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
-                    style={{fontFamily: 'Gill Sans, sans-serif'}}
+                    style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('PDF', paperLink)}
@@ -349,7 +349,7 @@ function PublicationCard({
                   <a
                     href={presentationLink}
                     className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
-                    style={{fontFamily: 'Gill Sans, sans-serif'}}
+                    style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('Presentation', presentationLink)}
@@ -367,7 +367,7 @@ function PublicationCard({
                   <a
                     href={codeLink}
                     className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
-                    style={{fontFamily: 'Gill Sans, sans-serif'}}
+                    style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleLinkClick('Code', codeLink)}
@@ -407,7 +407,7 @@ function PublicationCard({
                       onTagClick(tag);
                     }}
                     className="px-2 py-1 bg-neutral-200 hover:bg-neutral-300 text-neutral-700 text-xs rounded-full transition-colors duration-150 cursor-pointer"
-                    style={{fontFamily: 'Gill Sans, sans-serif'}}
+                    style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
                   >
                     {tag}
                   </button>

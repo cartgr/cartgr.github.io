@@ -100,7 +100,7 @@ export default function RootLayout({ children }) {
               </div>
             </div>
             <Link href="/" className="no-underline text-neutral-800">
-              <span className="text-3xl font-['Gill_Sans']">Carter Blair</span>
+              <span className="text-3xl" style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}>Carter Blair</span>
             </Link>
           </div>
 
