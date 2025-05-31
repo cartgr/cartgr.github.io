@@ -41,7 +41,7 @@ export const metadata = {
     images: ['/headshot2025.jpg'],
   },
   verification: {
-    google: 'your-google-verification-code', // Replace with actual verification code
+    google: 'B-gvfVPP-dA2uc76SGu7dCj2uzPynmVTzeRsofUCkoU',
   },
 }
 
