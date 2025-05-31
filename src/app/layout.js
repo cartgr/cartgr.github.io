@@ -14,9 +14,9 @@ export const metadata = {
   publisher: 'Carter Blair',
   robots: 'index, follow',
   icons: {
-    icon: './icon.png',
-    shortcut: './icon.png',
-    apple: './icon.png',
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   },
   openGraph: {
     type: 'website',
