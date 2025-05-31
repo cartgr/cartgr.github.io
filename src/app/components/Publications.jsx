@@ -277,7 +277,7 @@ function PublicationCard({
                   {awards.map((award, index) => (
                     <div key={index} className="flex items-center gap-2 mb-1">
                       <img
-                        src="./star_icon.png"
+                        src="/star_icon.png"
                         alt="Award"
                         className="w-4 h-4 flex-shrink-0"
                       />
@@ -299,7 +299,7 @@ function PublicationCard({
                   {information.map((info, index) => (
                     <div key={index} className="flex items-start gap-2 mb-2">
                       <img
-                        src="./information_icon.png"
+                        src="/information_icon.png"
                         alt="Information"
                         className="w-4 h-4 flex-shrink-0 mt-0.5"
                       />
@@ -319,7 +319,7 @@ function PublicationCard({
                     onClick={() => handleLinkClick('ArXiv', arxivLink)}
                   >
                     <img
-                      src="./arxiv-logomark-small.svg"
+                      src="/arxiv-logomark-small.svg"
                       alt="ArXiv Logo"
                       className="grayscale flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
@@ -337,7 +337,7 @@ function PublicationCard({
                     onClick={() => handleLinkClick('PDF', paperLink)}
                   >
                     <img
-                      src="./pdf_icon.png"
+                      src="/pdf_icon.png"
                       alt="PDF Icon"
                       className="flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
@@ -355,7 +355,7 @@ function PublicationCard({
                     onClick={() => handleLinkClick('Presentation', presentationLink)}
                   >
                     <img
-                      src="./slides_icon.png"
+                      src="/slides_icon.png"
                       alt="Presentation Icon"
                       className="flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
@@ -373,7 +373,7 @@ function PublicationCard({
                     onClick={() => handleLinkClick('Code', codeLink)}
                   >
                     <img
-                      src="./code_icon.png"
+                      src="/code_icon.png"
                       alt="Code Icon"
                       className="flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
