@@ -2,11 +2,10 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://cartgr.github.io/website/sitemap.xml
+Sitemap: https://cartgr.github.io/sitemap.xml
 
-# Disallow certain file types
-Disallow: /*.pdf$
-Disallow: /papers/
+# Allow academic papers for better discoverability
+Allow: /papers/
 
 # Allow Google and other search engines
 User-agent: Googlebot

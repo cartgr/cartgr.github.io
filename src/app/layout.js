@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { GoogleAnalytics } from './components/Analytics';
 
 export const metadata = {
-  metadataBase: new URL('https://cartgr.github.io/website'),
+  metadataBase: new URL('https://cartgr.github.io'),
   title: 'Carter Blair',
   description: 'Carter Blair is a Computer Science Master\'s student at University of Waterloo researching AI alignment, reinforcement learning, and human-AI interaction. Supervised by Kate Larson and Edith Law.',
   keywords: 'Carter Blair, AI research, reinforcement learning, human-AI interaction, AI alignment, University of Waterloo, computer science, machine learning, social choice',
@@ -21,7 +21,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://cartgr.github.io/website',
+    url: 'https://cartgr.github.io',
     siteName: 'Carter Blair',
     title: 'Carter Blair',
     description: 'Carter Blair is a Computer Science Master\'s student at University of Waterloo researching AI alignment, reinforcement learning, and human-AI interaction.',
@@ -56,7 +56,7 @@ export default function RootLayout({ children }) {
       "name": "University of Waterloo",
       "url": "https://uwaterloo.ca"
     },
-    "url": "https://cartgr.github.io/website",
+    "url": "https://cartgr.github.io",
     "image": "/headshot2025.jpg",
     "email": "cblair@uwaterloo.ca",
     "alumniOf": {

@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://cartgr.github.io/website';
+  const baseUrl = 'https://cartgr.github.io';
   
   return [
     {
