@@ -7,9 +7,9 @@
 } */
 
 body {
-    font-family: var(--font-cardo), 'Optima', serif;
+    font-family: 'Optima', var(--font-cardo), serif;
 }
 
 .news-font {
-    font-family: var(--font-raleway), 'Gill Sans', sans-serif;
+    font-family: 'Gill Sans', var(--font-raleway), sans-serif;
   }
