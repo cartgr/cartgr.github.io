@@ -2,8 +2,7 @@
 const nextConfig = {
     output: "export",
     images: { unoptimized: true },
-    basePath: process.env.NODE_ENV === 'production' ? '/website' : '',
-    assetPrefix: process.env.NODE_ENV === 'production' ? '/website/' : '',
+    // Remove basePath and assetPrefix since we're now using cartgr.github.io directly
 }
 
 module.exports = nextConfig;
