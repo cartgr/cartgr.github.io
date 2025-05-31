@@ -3,6 +3,20 @@ import './globals.css';
 import Menu from './components/menu';
 import Link from 'next/link';
 import { GoogleAnalytics } from './components/Analytics';
+import { Raleway, Cardo } from 'next/font/google';
+
+const raleway = Raleway({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-raleway',
+})
+
+const cardo = Cardo({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+  variable: '--font-cardo',
+})
 
 export const metadata = {
   metadataBase: new URL('https://cartgr.github.io'),
@@ -80,7 +94,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${raleway.variable} ${cardo.variable}`}>
       <head>
         <script
           type="application/ld+json"
