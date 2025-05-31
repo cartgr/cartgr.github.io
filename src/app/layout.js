@@ -87,7 +87,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="bg-neutral-50 m-0 min-h-screen">
+      <body className="bg-neutral-50 m-0 min-h-screen" suppressHydrationWarning={true}>
         {/* Add z-50 to ensure top bar stays above everything */}
         <div className="fixed top-0 left-0 right-0 h-16 bg-neutral-100 p-4 flex items-center justify-between border-b-2 border-neutral-300 z-50">
           <div className="flex items-center ml-2 space-x-4">
