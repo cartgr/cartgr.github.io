@@ -8,7 +8,7 @@
       "tags": ["Social Choice", "Generative Social Choice"],
       "tldr": "A framework that models consensus statement generation as a multi-objective token-level MDP, using social choice theory to provide provable fairness guarantees when aggregating free-form verbal opinions, including a stochastic generation policy in the ex-ante core.",
       "abstract": "Current frameworks for consensus statement generation with large language models lack the inherent structure needed to provide provable fairness guarantees when aggregating diverse free-form opinions. We model the task as a multi-objective, token-level Markov Decision Process (MDP), where each objective corresponds to an agent's preference. Token-level rewards for each agent are derived from their policy (e.g., a personalized language model). This approach utilizes the finding from Rafailov et al. (2024) that such policies implicitly define optimal Q-functions, providing a principled way to quantify rewards at each generation step without a value function. This MDP formulation creates a formal structure amenable to analysis using principles from social choice theory. We propose two approaches grounded in social choice theory. First, we propose a stochastic generation policy guaranteed to be in the ex-ante core, extending core stability concepts from cooperative game theory and voting theory to text generation. This policy is derived from an underlying distribution over complete statements that maximizes proportional fairness (Nash Welfare). Second, for generating a single statement, we target the maximization of egalitarian welfare using search algorithms within the MDP framework. Empirically, we find that search guided by the egalitarian objective generates consensus statements with improved worst-case agent alignment compared to baseline methods, including the Habermas Machine.",
-      "paperLink": "./papers/consensus_statements_via_tmdp.pdf",
+      "paperLink": "/papers/consensus_statements_via_tmdp.pdf",
       "codeLink": "https://github.com/cartgr/Generating-Fair-Consensus-Statements-with-Social-Choice-on-Token-Level-MDPs"
     },
     {
@@ -19,7 +19,7 @@
       "tags": ["Social Choice"],
       "tldr": "Models consensus as an interval in opinion space with PAC-learning guarantees, maximizing expected agreement over an underlying distribution of issues while accounting for their salience.",
       "abstract": "A primary goal of online deliberation platforms is to identify ideas that are broadly agreeable to a community of users through their expressed preferences. Yet, consensus elicitation should ideally extend beyond the specific statements provided by users and should incorporate the relative salience of particular topics. We address this issue by modelling consensus as an interval in a one-dimensional opinion space derived from potentially high-dimensional data via embedding and dimensionality reduction. We define an objective that maximizes expected agreement within a hypothesis interval where the expectation is over an underlying distribution of issues, implicitly taking into account their salience. We propose an efficient Empirical Risk Minimization (ERM) algorithm and establish PAC-learning guarantees. Our initial experiments demonstrate the performance of our algorithm and examine more efficient approaches to identifying optimal consensus regions. We find that through selectively querying users on an existing sample of statements, we can reduce the number of queries needed to a practical number.",
-      "paperLink": "./papers/prob_approx_consensus.pdf"
+      "paperLink": "/papers/prob_approx_consensus.pdf"
     }
   ],
   "publications": {
@@ -33,7 +33,7 @@
         "tldr": "A language model-guided approach that helps users reflect on their values through dialogue to create individualized LLM-based reward models, achieving 9-12% better accuracy than non-reflective methods while being more sample efficient than supervised learning.",
         "abstract": "AI agents are commonly aligned with \"human values\" through reinforcement learning from human feedback (RLHF), where a single reward model is learned from aggregated human feedback and used to align an agent's behavior. However, human values are not homogeneous--different people hold distinct and sometimes conflicting values. Aggregating feedback into a single reward model risks disproportionately suppressing minority preferences and unique perspectives. To address this, we present a novel reward modeling approach for learning individualized reward models. Our approach uses a language model to guide users through reflective dialogues where they critique agent behavior and construct their preferences. This personalized dialogue history, containing the user's reflections and critiqued examples, is then used as context for another language model that serves as an individualized reward function for evaluating new trajectories. In studies with 30 participants, our method achieved a 9-12% improvement in accuracy over non-reflective language-based reward models while being vastly more sample efficient than traditional supervised learning methods.",
         "information": ["This work supersedes \"Democratizing Reward Design for Personal and Representative Value-Alignment\"."],
-        "paperLink": "./papers/reflective_reward_design.pdf"
+        "paperLink": "/papers/reflective_reward_design.pdf"
       }
     ],
     "2024": [
@@ -46,7 +46,7 @@
         "tldr": "A conversational system that learns personalized value definitions from users through interactive dialogue and constructs language-based reward models, enabling AI alignment that respects individual perspectives rather than blindly aggregating crowd preferences.",
         "abstract": "Aligning AI agents with human values is challenging due to diverse and subjective notions of values. Standard alignment methods often aggregate crowd feedback, which can result in the suppression of unique or minority preferences. We introduce Interactive-Reflective Dialogue Alignment, a method that iteratively engages users in reflecting on and specifying their subjective value definitions. This system learns individual value definitions through language-model-based preference elicitation and constructs personalized reward models that can be used to align AI behaviour. We evaluated our system through two studies with 30 participants, one focusing on ``respect'' and the other on ethical decision-making in autonomous vehicles. Our findings demonstrate diverse definitions of value-aligned behaviour and show that our system can accurately capture each person's unique understanding. This approach enables personalized alignment and can inform more representative and interpretable collective alignment strategies.",
         "information": ["This work has been superseded by \"Reflective Verbal Reward Design for Pluralistic Alignment\" (IJCAI 2025)."],
-        "paperLink": "./papers/democratizing_reward_design.pdf",
+        "paperLink": "/papers/democratizing_reward_design.pdf",
         "arxivLink": "https://arxiv.org/abs/2410.22203"
       },
       {
@@ -57,7 +57,7 @@
         "tags": ["Alignment"],
         "tldr": "Introduces 'altars' - environmental features that help AI agents learn cooperation by encoding which actions are socially sanctionable, mimicking how humans use normative infrastructure.",
         "abstract": "Cooperation is central to human life, distinguishing humans as ultra-cooperative among mammals. We form stable groups that enhance welfare through mutual protection, knowledge sharing, and economic exchanges. As artificial intelligence gains autonomy in shared environments, ensuring AI agents can engage in cooperative behaviors is crucial. Research in AI views this as an alignment challenge and frames it in terms of embedding norms and values in AI systems. Such an approach, while promising, neglects how humans achieve stable cooperation through normative infrastructure. This infrastructure establishes shared norms enforced by agents who recognize and sanction norm violations. Using multi-agent reinforcement learning (MARL), we investigate the impact of normative infrastructure on agents' learning dynamics and their cooperative abilities in mixed-motive games. We introduce the concept of an altar, an environmental feature that encodes actions deemed sanctionable by a group of agents. Comparing the performance of simple, independent learning agents in environments with and without the altar, we assess the potential of normative infrastructure in facilitating AI agent alignment to foster stable cooperation.",
-        "paperLink": "./papers/Altared_Environments.pdf"
+        "paperLink": "/papers/Altared_Environments.pdf"
       },
       {
         "id": 5,
@@ -67,7 +67,7 @@
         "tags": ["Alignment"],
         "tldr": "An architecture that enables LLM-based agents to learn which social institutions are authoritative in their environment, allowing them to coordinate behavior and achieve better cooperation.",
         "abstract": "Generative agents, which implement behaviors using a large language model (LLM) to interpret and evaluate an environment, has demonstrated the capacity to solve complex tasks across many social and technological domains. However, when these agents interact with other agents and humans in presence of social structures such as existing norms, fostering cooperation between them is a fundamental challenge. In this paper, we develop the framework of a 'Normative Module': an architecture designed to enhance cooperation by enabling agents to recognize and adapt to the normative infrastructure of a given environment. We focus on the equilibrium selection aspect of the cooperation problem and inform our agent design based on the existence of classification institutions that implement correlated equilibrium to provide effective resolution of the equilibrium selection problem. Specifically, the normative module enables agents to learn through peer interactions which of multiple candidate institutions in the environment, does a group treat as authoritative. By enabling normative competence in this sense, agents gain ability to coordinate their sanctioning behaviour; coordinated sanctioning behaviour in turn shapes primary behaviour within a social environment, leading to higher average welfare. We design a new environment that supports institutions and evaluate the proposed framework based on two",
-        "paperLink": "./papers/normative_module.pdf",
+        "paperLink": "/papers/normative_module.pdf",
         "arxivLink": "https://arxiv.org/abs/2405.19328"
       },
       {
@@ -78,9 +78,9 @@
         "tags": ["Social Choice"],
         "tldr": "Uses delegative voting (à la liquid democracy) to dynamically select which models in an ensemble should learn vs. predict, enabling better continual learning with less catastrophic forgetting.",
         "abstract": "Continual learning aims to enable machine learning models to continually learn from a shifting data distribution without forgetting what has already been learned. Such shifting distributions can be broken into disjoint subsets of related examples; by training each member of an ensemble on a different subset it is possible for the ensemble as a whole to achieve much higher accuracy with less forgetting than a naive model. We address the problem of selecting which models within an ensemble should learn on any given data, and which should predict. By drawing on work from delegative voting we develop an algorithm for using delegation to dynamically select which models in an ensemble are active. We explore a variety of delegation methods and performance metrics, ultimately finding that delegation is able to provide a significant performance boost over naive learning in the face of distribution shifts.",
-        "paperLink": "./papers/SCaLA_AAMAS_Liquid_Ensembles.pdf",
+        "paperLink": "/papers/SCaLA_AAMAS_Liquid_Ensembles.pdf",
         "arxivLink": "https://arxiv.org/abs/2405.07327",
-        "presentationLink": "./slides/LiquidEnsembleSelection_CarterBlair.pdf"
+        "presentationLink": "/slides/LiquidEnsembleSelection_CarterBlair.pdf"
       },
       {
         "id": 2,
@@ -90,7 +90,7 @@
         "tags": [],
         "tldr": "Shows that data characteristics like trend and density trigger emotional responses even in meaningless data, and provides guidelines for designers to control these emotional effects.",
         "abstract": "Emotion is an important factor to consider when designing visualizations as it can impact the amount of trust viewers place in a visualization, how well they can retrieve information and understand the underlying data, and how much they engage with or connect to a visualization. We conducted five crowdsourced experiments to quantify the effects of color, chart type, data trend, data variability and data density on emotion (measured through self-reported arousal and valence). Results from our experiments show that there are multiple design elements which influence the emotion induced by a visualization and, more surprisingly, that certain data characteristics influence the emotion of viewers even when the data has no meaning. In light of these findings, we offer guidelines on how to use color, scale, and chart type to counterbalance and emphasize the emotional impact of immutable data characteristics.",
-        "paperLink": "./papers/Quantifying_Emotional_Responses_to_Immutable_Data_Characteristics_and_Designer_Choices_in_Data_Visualizations.pdf",
+        "paperLink": "/papers/Quantifying_Emotional_Responses_to_Immutable_Data_Characteristics_and_Designer_Choices_in_Data_Visualizations.pdf",
         "arxivLink": "https://arxiv.org/abs/2407.18427",
         "presentationLink": "https://www.youtube.com/watch?v=gaAm2v-ENKA&t=1535s&ab_channel=IEEEVisualizationConference"
       }
