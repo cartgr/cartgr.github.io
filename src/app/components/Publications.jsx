@@ -316,7 +316,10 @@ function PublicationCard({
                     style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => handleLinkClick('ArXiv', arxivLink)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLinkClick('ArXiv', arxivLink);
+                    }}
                   >
                     <img
                       src="/arxiv-logomark-small.svg"
@@ -334,7 +337,10 @@ function PublicationCard({
                     style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => handleLinkClick('PDF', paperLink)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLinkClick('PDF', paperLink);
+                    }}
                   >
                     <img
                       src="/pdf_icon.png"
@@ -352,7 +358,10 @@ function PublicationCard({
                     style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => handleLinkClick('Presentation', presentationLink)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLinkClick('Presentation', presentationLink);
+                    }}
                   >
                     <img
                       src="/slides_icon.png"
@@ -370,7 +379,10 @@ function PublicationCard({
                     style={{fontFamily: 'Gill Sans, Raleway, sans-serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => handleLinkClick('Code', codeLink)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLinkClick('Code', codeLink);
+                    }}
                   >
                     <img
                       src="/code_icon.png"

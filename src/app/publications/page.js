@@ -22,10 +22,10 @@ export default function PublicationsPage() {
     <div className="flex flex-col min-h-screen bg-gray-50">
       <div className="flex items-center justify-center py-8">
         <div className="text-center relative">
-          <h1 className="text-3xl font-medium text-neutral-800" style={{ fontFamily: 'Gill Sans, Raleway, sans-serif' }}>
+          <h1 className="text-3xl font-medium text-neutral-800" style={{ fontFamily: 'Gill Sans, var(--font-raleway), sans-serif' }}>
             Research
           </h1>
-          <div className="text-neutral-600 text-sm mt-6 font-light tracking-wide max-w-2xl mx-auto" style={{ fontFamily: 'Gill Sans, Raleway, sans-serif' }}>
+          <div className="text-neutral-600 text-sm mt-6 font-light tracking-wide max-w-2xl mx-auto" style={{ fontFamily: 'Gill Sans, var(--font-raleway), sans-serif' }}>
             <p>
               My research focuses on aligning AI with a plurality of human values and using AI to improve group decision-making.{' '}
               <button 

@@ -6,7 +6,7 @@ import { trackEvent } from './Analytics';
 export default function Profile() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-      <div className="md:col-span-1 relative group w-fit mx-auto md:mx-0">
+      <div className="md:col-span-1 relative group w-fit mx-auto md:mx-0 mb-2 md:mb-0">
         <Image
           src="/headshot2025.jpg"
           alt="Picture of the author"
