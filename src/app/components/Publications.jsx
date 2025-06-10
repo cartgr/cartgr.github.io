@@ -401,12 +401,13 @@ function PublicationCard({
           </div>
         </div>
       </div>
-      <div className={`overflow-hidden transition-all duration-500 ease-in-out hidden sm:block ${expanded ? 'sm:max-h-96 sm:opacity-100' : 'sm:max-h-0 sm:opacity-0'}`}>
+      <div className={`overflow-hidden transition-all duration-500 ease-in-out hidden sm:block ${expanded ? 'sm:opacity-100' : 'sm:max-h-0 sm:opacity-0'}`}>
         <hr className="my-2" />
         <div>
-          <p className="mt-2">
-            <span className="font-semibold news-font">Abstract</span>: {abstract}
-          </p>
+          <div className="mt-2">
+            <span className="font-semibold news-font">Abstract</span>: 
+            <div className="mt-1 whitespace-pre-line">{abstract}</div>
+          </div>
           {tags && tags.length > 0 && (
             <div className="mt-4">
               <span className="font-semibold news-font mr-2">Tags:</span>

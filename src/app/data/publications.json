@@ -25,6 +25,16 @@
   "publications": {
     "2025": [
       {
+        "id": 9,
+        "title": "Deliberative Machines: From Reflective Dialogue to Fair Consensus with Language Models and Social Choice",
+        "authors": ["Carter Blair"],
+        "venues": ["Master's Thesis"],
+        "tags": ["Social Choice", "Alignment"],
+        "abstract": "This thesis investigates the bidirectional relationship between artificial intelligence (AI), particularly large language models (LLMs), and social choice theory. Firstly, it explores how principles from social choice can address challenges in AI alignment, specifically the problem of aggregating diverse human preferences fairly when guiding AI behavior (SC → AI). Standard alignment methods often obscure value conflicts through implicit aggregation. Secondly, it examines how AI techniques can enhance collective decision-making processes traditionally studied in social choice (AI → SC), offering new ways to elicit and synthesize the complex, nuanced, and verbal preferences that conventional mechanisms struggle to handle.\n\nTo address these issues, this work presents computational methods operating at the interface of AI and social choice. First, it introduces Interactive-Reflective Dialogue Alignment (IRDA), a system using LLMs to guide users through reflective dialogues for preference elicitation. This process helps users construct and articulate their values concerning AI behavior, resulting in individualized reward models that capture preference diversity with improved accuracy and sample efficiency compared to non-reflective baselines, especially when values are heterogeneous.\n\nSecond, the thesis proposes a framework for generating fair consensus statements from multiple viewpoints by modeling text generation as a token-level Markov Decision Process (MDP). Within this MDP, agent preferences are represented by policies derived from their opinions. We develop mechanisms grounded in social choice: a stochastic policy maximizing proportional fairness (Nash Welfare) to achieve ex-ante fairness guarantees (1-core membership) for distributions over statements, and deterministic search algorithms (finite lookahead, beam search) maximizing egalitarian welfare for generating single statements. Experiments demonstrate that these search methods produce consensus statements with better worst-case agent alignment (lower Egalitarian Perplexity) than baseline approaches.\n\nTogether, these contributions offer principled methods for eliciting diverse, reflective preferences and synthesizing them into collective outputs fairly. The research provides tools and insights for developing AI systems and AI-assisted processes that are more sensitive to value pluralism.",
+        "information": ["Content based on \"Generating Fair Consensus Statements with Social Choice on Token-Level MDPs\" and \"Reflective Verbal Reward Design for Pluralistic Alignment\"."],
+        "paperLink": "/papers/masters_thesis.pdf"
+      },
+      {
         "id": 6,
         "title": "Reflective Verbal Reward Design for Pluralistic Alignment",
         "authors": ["Carter Blair", "Kate Larson", "Edith Law"],
