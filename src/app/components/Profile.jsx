@@ -41,7 +41,7 @@ function Biography() {
   return (
     <>
       <p className='mb-4 text-neutral-800'>
-        I am currently doing a Master of Math in Computer Science at UWaterloo where I&apos;m supervised by
+        I recently finished a Master of Math in Computer Science at UWaterloo where I was supervised by
         <a href="https://cs.uwaterloo.ca/~klarson/"
           className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
           style={{color: '#16a34a'}}
@@ -72,6 +72,54 @@ function Biography() {
           target="_blank"
           rel="noopener noreferrer">  
           Edith Law
+        </a>.
+        In the fall, I will be starting my PhD in Computer Science at Harvard University where I will be supervised by
+        <a href="https://procaccia.info/"
+          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+          style={{color: '#16a34a'}}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#16a34a';
+            e.target.style.color = '#f0f5f0';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#16a34a';
+          }}
+          target="_blank"
+          rel="noopener noreferrer">
+          Ariel Procaccia
+        </a>
+        and
+        <a href="https://teamcore.seas.harvard.edu/tambe/"
+          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out ml-1"
+          style={{color: '#16a34a'}}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#16a34a';
+            e.target.style.color = '#f0f5f0';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#16a34a';
+          }}
+          target="_blank"
+          rel="noopener noreferrer">  
+          Milind Tambe
+        </a>
+        in the
+        <a href="https://econcs.seas.harvard.edu/"
+          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+          style={{color: '#16a34a'}}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#16a34a';
+            e.target.style.color = '#f0f5f0';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#16a34a';
+          }}
+          target="_blank"
+          rel="noopener noreferrer">
+          EconCS group
         </a>.
         My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.
       </p>
