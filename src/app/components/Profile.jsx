@@ -123,7 +123,7 @@ function Biography() {
         </a>
       </p>
       <p className='mb-4 text-neutral-800 mt-2'>
-        My research addresses two questions at the intersection of collective decision-making and AI. The first concerns the governance of AI systems: how can a group collectively determine the behavior of an AI? The second addresses the application of AI to collective decision-making: how can AI be leveraged to improve collective decision-making?
+        My research addresses two questions at the intersection of collective decision-making and AI. The first concerns the governance of AI systems: how can a group collectively determine the behavior of an AI? The second explores how AI can be leveraged to improve collective decision-making processes.
       </p>
       <hr className="border-gray-300 mb-4" />
       <p className='text-neutral-800 mb-4'>
