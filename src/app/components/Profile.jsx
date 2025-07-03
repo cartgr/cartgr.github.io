@@ -102,10 +102,10 @@ function Biography() {
             e.target.style.color = '#16a34a';
           }}
           target="_blank"
-          rel="noopener noreferrer">  
+          rel="noopener noreferrer">
           Milind Tambe
         </a>
-        in the
+        {' '}in the
         <a href="https://econcs.seas.harvard.edu/"
           className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
           style={{color: '#16a34a'}}
@@ -119,9 +119,11 @@ function Biography() {
           }}
           target="_blank"
           rel="noopener noreferrer">
-          EconCS group
-        </a>.
-        My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.
+          EconCS group.
+        </a>
+      </p>
+      <p className='mb-4 text-neutral-800 mt-2'>
+        My research addresses two questions at the intersection of collective decision-making and AI. The first concerns the governance of AI systems: how can a group collectively determine the behavior of an AI? The second addresses the application of AI to collective decision-making: how can AI be leveraged to improve collective decision-making?
       </p>
       <hr className="border-gray-300 mb-4" />
       <p className='text-neutral-800 mb-4'>
