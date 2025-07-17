@@ -122,8 +122,22 @@ function Biography() {
           EconCS group.
         </a>
       </p>
-      <p className='mb-4 text-neutral-800 mt-2'>
-        My research addresses two questions at the intersection of collective decision-making and AI. The first concerns the governance of AI systems: how can a group collectively determine the behavior of an AI? The second explores how AI can be leveraged to improve collective decision-making processes.
+      <p className='mb-4 text-neutral-800 mt-0.5'>
+        At a high level, I am interested in the relationship between AI and collective decision making. See my 
+        <a href="/publications"
+          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+          style={{color: '#16a34a'}}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#16a34a';
+            e.target.style.color = '#f0f5f0';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#16a34a';
+          }}>
+          research page
+        </a>
+        for more details.
       </p>
       <hr className="border-gray-300 mb-4" />
       <p className='text-neutral-800 mb-4'>
