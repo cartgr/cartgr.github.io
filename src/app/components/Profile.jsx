@@ -40,40 +40,8 @@ export default function Profile() {
 function Biography() {
   return (
     <>
-      <p className='mb-4 text-neutral-800'>
-        I recently finished a Master of Math in Computer Science at UWaterloo where I was supervised by
-        <a href="https://cs.uwaterloo.ca/~klarson/"
-          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
-          style={{color: '#16a34a'}}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#16a34a';
-            e.target.style.color = '#f0f5f0';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = 'transparent';
-            e.target.style.color = '#16a34a';
-          }}
-          target="_blank"
-          rel="noopener noreferrer">
-          Kate Larson
-        </a>
-        and
-        <a href="https://edithlaw.ca/"
-          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out ml-1"
-          style={{color: '#16a34a'}}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#16a34a';
-            e.target.style.color = '#f0f5f0';
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = 'transparent';
-            e.target.style.color = '#16a34a';
-          }}
-          target="_blank"
-          rel="noopener noreferrer">  
-          Edith Law
-        </a>.
-        In the fall, I will be starting my PhD in Computer Science at Harvard University where I will be supervised by
+      <p className='mb-3 text-neutral-800'>
+        I am a first-year PhD student in Computer Science at Harvard University, supervised by
         <a href="https://procaccia.info/"
           className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
           style={{color: '#16a34a'}}
@@ -122,8 +90,8 @@ function Biography() {
           EconCS group.
         </a>
       </p>
-      <p className='mb-4 text-neutral-800 mt-0.5'>
-        At a high level, I am interested in the relationship between AI and collective decision making. See my 
+      <p className='mb-3 text-neutral-800 mt-0.5'>
+        I am interested in the intersection of collective decision making and AI. See my 
         <a href="/publications"
           className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
           style={{color: '#16a34a'}}
@@ -138,6 +106,40 @@ function Biography() {
           research page
         </a>
         for more details.
+      </p>
+      <p className='text-neutral-800 mb-3'>
+        Previously, I completed an M.Math in Computer Science at the University of Waterloo where I was supervised by
+        <a href="https://cs.uwaterloo.ca/~klarson/"
+          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+          style={{color: '#16a34a'}}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#16a34a';
+            e.target.style.color = '#f0f5f0';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#16a34a';
+          }}
+          target="_blank"
+          rel="noopener noreferrer">
+          Kate Larson
+        </a>
+        and
+        <a href="https://edithlaw.ca/"
+          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out ml-1"
+          style={{color: '#16a34a'}}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#16a34a';
+            e.target.style.color = '#f0f5f0';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#16a34a';
+          }}
+          target="_blank"
+          rel="noopener noreferrer">  
+          Edith Law
+        </a>.
       </p>
       <hr className="border-gray-300 mb-4" />
       <p className='text-neutral-800 mb-4'>

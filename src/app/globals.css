@@ -15,3 +15,13 @@ body {
 .news-font {
     font-family: 'Readex Pro', var(--font-raleway), sans-serif;
   }
+
+/* Global text selection styling */
+::selection {
+    background-color: #16a34a;
+    color: #f0f5f0;
+}
+::-moz-selection {
+    background-color: #16a34a;
+    color: #f0f5f0;
+}
