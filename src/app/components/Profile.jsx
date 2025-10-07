@@ -89,6 +89,22 @@ function Biography() {
           rel="noopener noreferrer">
           EconCS group.
         </a>
+        {' '}My work is supported by an NSERC CGS-D and the
+        <a href="https://www.cooperativeai.com/post/announcing-the-2025-cooperative-ai-phd-scholars"
+          className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
+          style={{color: '#16a34a'}}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#16a34a';
+            e.target.style.color = '#f0f5f0';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#16a34a';
+          }}
+          target="_blank"
+          rel="noopener noreferrer">
+          Cooperative AI PhD Fellowship.
+        </a>
       </p>
       <p className='mb-3 text-neutral-800 mt-0.5'>
         I am interested in the intersection of collective decision making and AI. See my 

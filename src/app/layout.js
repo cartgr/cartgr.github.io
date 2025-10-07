@@ -21,7 +21,7 @@ const cardo = Cardo({
 export const metadata = {
   metadataBase: new URL('https://cartgr.github.io'),
   title: 'Carter Blair',
-  description: 'I am currently doing a Master of Math in Computer Science at UWaterloo where I\'m supervised by Kate Larson and Edith Law. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
+  description: 'I am a PhD student in Computer Science at Harvard University, supervised by Ariel Procaccia and Milind Tambe in the EconCS group. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
   keywords: 'Carter Blair, AI research, reinforcement learning, human-AI interaction, AI alignment, University of Waterloo, computer science, machine learning, social choice',
   authors: [{ name: 'Carter Blair' }],
   creator: 'Carter Blair',
@@ -38,7 +38,7 @@ export const metadata = {
     url: 'https://cartgr.github.io',
     siteName: 'Carter Blair',
     title: 'Carter Blair',
-    description: 'I am currently doing a Master of Math in Computer Science at UWaterloo where I\'m supervised by Kate Larson and Edith Law. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
+    description: 'I am a PhD student in Computer Science at Harvard University, supervised by Ariel Procaccia and Milind Tambe in the EconCS group. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
     images: [
       {
         url: '/headshot2025.jpg',
@@ -51,7 +51,7 @@ export const metadata = {
   twitter: {
     card: 'summary',
     title: 'Carter Blair',
-    description: 'I am currently doing a Master of Math in Computer Science at UWaterloo where I\'m supervised by Kate Larson and Edith Law. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
+    description: 'I am a PhD student in Computer Science at Harvard University, supervised by Ariel Procaccia and Milind Tambe in the EconCS group. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
     images: ['/headshot2025.jpg'],
   },
   verification: {
@@ -64,11 +64,11 @@ export default function RootLayout({ children }) {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Carter Blair",
-    "jobTitle": "Master's Student in Computer Science",
+    "jobTitle": "PhD Student in Computer Science",
     "affiliation": {
       "@type": "Organization",
-      "name": "University of Waterloo",
-      "url": "https://uwaterloo.ca"
+      "name": "Harvard University",
+      "url": "https://harvard.edu"
     },
     "url": "https://cartgr.github.io",
     "image": "/headshot2025.jpg",
@@ -85,7 +85,7 @@ export default function RootLayout({ children }) {
       "AI Alignment",
       "Social Choice Theory"
     ],
-    "description": "Computer Science Master's student researching AI alignment, reinforcement learning, and human-AI interaction at University of Waterloo",
+    "description": "Computer Science PhD student researching collective decision making and AI at Harvard University",
     "sameAs": [
       "https://scholar.google.com/citations?user=aQ80XM8AAAAJ&hl=en",
       "https://www.linkedin.com/in/carter-blair-b70429200/",
