@@ -54,10 +54,8 @@ function Biography() {
             e.target.style.color = '#16a34a';
           }}
           target="_blank"
-          rel="noopener noreferrer">
-          Ariel Procaccia
-        </a>
-        and
+          rel="noopener noreferrer">Ariel Procaccia</a>
+        {' '}and{' '}
         <a href="https://teamcore.seas.harvard.edu/tambe/"
           className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out ml-1"
           style={{color: '#16a34a'}}
