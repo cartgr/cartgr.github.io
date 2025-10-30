@@ -41,7 +41,7 @@ function Biography() {
   return (
     <>
       <p className='mb-3 text-neutral-800'>
-        I am a first-year PhD student in Computer Science at Harvard University, supervised by
+        I am a first-year PhD student in Computer Science at Harvard University, supervised by{' '}
         <a href="https://procaccia.info/"
           className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
           style={{color: '#16a34a'}}
