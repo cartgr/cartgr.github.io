@@ -53,7 +53,7 @@ function Biography() {
         <a href="https://www.cooperativeai.com/post/announcing-the-2025-cooperative-ai-phd-scholars" className={linkClass} target="_blank" rel="noopener noreferrer">Cooperative AI PhD Fellowship</a>.
       </p>
       <p className='mb-3 text-neutral-800 mt-0.5'>
-        I am broadly interested in AI and collective decision making, with applications to AI for social good. For example, how AI can elicit rich verbal preferences, aggregate them fairly, and support deliberation that simultaneously accounts for the normative and epistemic aspects of collective decision making. See my{' '}
+        I am broadly interested in AI and collective decision making, with applications to AI for social good. For example, I am interested in how AI can elicit rich verbal preferences, aggregate them fairly, and support deliberation that simultaneously accounts for the normative and epistemic aspects of collective decision making. See my{' '}
         <a href="/publications" className={linkClass}>publications</a>.
       </p>
       <p className='text-neutral-800 mb-3'>
