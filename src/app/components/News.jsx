@@ -1,25 +1,26 @@
+const linkClass = "text-green-600 hover:underline";
+
 export default function News() {
     const newsItems = [
+      {
+        date: "May 2026",
+        content: (
+          <>
+            I will be at AAMAS 2026 in Cyprus presenting our paper{" "}
+            <a href="./papers/consensus_statements_via_tmdp.pdf" className={linkClass} target="_blank" rel="noopener noreferrer">
+              Generating Fair Consensus Statements with Social Choice on Token-Level MDPs
+            </a>.
+          </>
+        )
+      },
       {
         date: "August 2025",
         content: (
           <>
             I will be at IJCAI 2025 in Montreal presenting our paper{" "}
-            <a href="./papers/reflective_reward_design.pdf"
-              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
-              style={{color: '#16a34a'}}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#16a34a';
-                e.target.style.color = '#f0f5f0';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'transparent';
-                e.target.style.color = '#16a34a';
-              }}
-              target="_blank"
-              rel="noopener noreferrer">
-              Reflective Verbal Reward Design for Pluralistic Alignment.
-            </a>
+            <a href="./papers/reflective_reward_design.pdf" className={linkClass} target="_blank" rel="noopener noreferrer">
+              Reflective Verbal Reward Design for Pluralistic Alignment
+            </a>.
           </>
         )
       },
@@ -28,19 +29,7 @@ export default function News() {
         content: (
           <>
             Awarded the{" "}
-            <a href="https://www.cooperativeai.com/post/announcing-the-2025-cooperative-ai-phd-scholars"
-              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
-              style={{color: '#16a34a'}}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#16a34a';
-                e.target.style.color = '#f0f5f0';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'transparent';
-                e.target.style.color = '#16a34a';
-              }}
-              target="_blank"
-              rel="noopener noreferrer">
+            <a href="https://www.cooperativeai.com/post/announcing-the-2025-cooperative-ai-phd-scholars" className={linkClass} target="_blank" rel="noopener noreferrer">
               Cooperative AI PhD Fellowship
             </a>{" "}
             from the Cooperative AI Foundation.
@@ -52,36 +41,12 @@ export default function News() {
         content: (
           <>
             I will be at AAMAS 2024 in Auckland, New Zealand presenting our paper{" "}
-            <a href="https://drive.google.com/file/d/1v3IQ6gzELfhqocp9Wc4rcEMeNYHKEnEo/view"
-              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
-              style={{color: '#16a34a'}}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#16a34a';
-                e.target.style.color = '#f0f5f0';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'transparent';
-                e.target.style.color = '#16a34a';
-              }}
-              target="_blank"
-              rel="noopener noreferrer">
+            <a href="https://drive.google.com/file/d/1v3IQ6gzELfhqocp9Wc4rcEMeNYHKEnEo/view" className={linkClass} target="_blank" rel="noopener noreferrer">
               Liquid Ensemble Selection for Continual Learning
-            </a> at the
-            <a href="https://sites.google.com/view/scala24/"
-              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
-              style={{color: '#16a34a'}}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#16a34a';
-                e.target.style.color = '#f0f5f0';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'transparent';
-                e.target.style.color = '#16a34a';
-              }}
-              target="_blank"
-              rel="noopener noreferrer">
-              SCaLA workshop.
-            </a>
+            </a> at the{" "}
+            <a href="https://sites.google.com/view/scala24/" className={linkClass} target="_blank" rel="noopener noreferrer">
+              SCaLA workshop
+            </a>.
           </>
         )
       },
@@ -90,19 +55,7 @@ export default function News() {
         content: (
           <>
             Our paper{" "}
-            <a href="https://drive.google.com/file/d/1v3IQ6gzELfhqocp9Wc4rcEMeNYHKEnEo/view"
-              className="hover:shadow-sm transition-all hover:px-1 hover:py-1 hover:rounded duration-300 ease-in-out mx-1"
-              style={{color: '#16a34a'}}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#16a34a';
-                e.target.style.color = '#f0f5f0';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'transparent';
-                e.target.style.color = '#16a34a';
-              }}
-              target="_blank"
-              rel="noopener noreferrer">
+            <a href="https://drive.google.com/file/d/1v3IQ6gzELfhqocp9Wc4rcEMeNYHKEnEo/view" className={linkClass} target="_blank" rel="noopener noreferrer">
               Liquid Ensemble Selection for Continual Learning
             </a> (with Ben Armstrong and Kate Larson) was accepted to Canadian AI 2024.
           </>
@@ -117,7 +70,7 @@ export default function News() {
         content: "Awarded NSERC Undergraduate Student Research Award (USRA) Grant to do research with Dr. Charles Perin for the summer."
       }
     ];
-  
+
     return (
       <section className="mt-12">
         <h2 className="text-2xl font-medium mb-4 text-neutral-800 news-font">News</h2>

@@ -123,19 +123,19 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
   return (
     <section className="w-full min-w-0">
       {/* Filter Interface */}
-      <div className="mb-8">
-        <h3 className="text-lg font-medium mb-4 text-neutral-800" style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}>Filter by Topic</h3>
+      <div className="mb-6">
+        <h3 className="text-lg font-normal mb-4 text-neutral-800" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>Filter by Topic</h3>
         <div className="flex flex-wrap gap-2">
           {sortedTags.map((tag) => (
             <button
               key={tag}
               onClick={() => toggleFilter(tag)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-2 rounded-md text-sm font-normal transition-all duration-200 border ${
                 activeFilters.includes(tag)
-                  ? 'bg-neutral-700 text-white shadow-md'
-                  : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300'
+                  ? 'bg-neutral-700 text-white border-neutral-700'
+                  : 'bg-transparent text-neutral-600 border-neutral-300 hover:border-neutral-400 hover:text-neutral-800'
               }`}
-              style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}
+              style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
             >
               {tag}
             </button>
@@ -143,9 +143,11 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
         </div>
       </div>
 
+      <hr className="border-neutral-200 mb-6" />
+
       {filteredWorkingPapers.length > 0 && (
         <div className="mb-16">
-          <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}>Working Papers</h2>
+          <h2 className="text-2xl font-normal mb-6 text-neutral-800" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>Working Papers</h2>
           <div className="flex flex-col space-y-8">
             {filteredWorkingPapers.map((paper) => (
               <PublicationCard
@@ -163,7 +165,7 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
       
       {/* Only show Publications header if there are publications or no filters active */}
       {(Object.keys(filteredPublications).length > 0 || activeFilters.length === 0) && (
-        <h2 className="text-2xl font-medium mb-6 text-neutral-800" style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}>Publications</h2>
+        <h2 className="text-2xl font-normal mb-6 text-neutral-800" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>Publications</h2>
       )}
       
       {/* Always show at least one timeline row to maintain layout */}
@@ -213,8 +215,8 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
             </div>
             {/* Content area - maintain same width as when publications are present */}
             <div className="flex flex-col flex-1 ml-4">
-              <div className="bg-neutral-100 border-neutral-300 border-2 rounded-lg p-8 text-center">
-                <p className="text-neutral-600 text-lg" style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}>
+              <div className="bg-neutral-50 border-neutral-200 border rounded-lg p-8 text-center">
+                <p className="text-neutral-600 text-lg" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>
                   No publications found matching the selected filters.
                 </p>
                 <p className="text-neutral-500 text-sm mt-2">
@@ -251,7 +253,7 @@ function PublicationCard({
     trackEvent('click_paper_link', 'publication', `${title} - ${linkType}`);
   };
   return (
-    <div className={`${!isWorkingPaper ? 'mb-8' : ''} bg-neutral-100 border-neutral-300 border-2 rounded-lg p-5 flex flex-col w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 sm:cursor-pointer relative z-20`} onClick={() => {
+    <div className={`${!isWorkingPaper ? 'mb-8' : ''} bg-neutral-50 border-neutral-200 border rounded-lg p-5 flex flex-col w-full overflow-hidden hover:border-neutral-400 transition-all duration-200 sm:cursor-pointer relative z-20`} onClick={() => {
       if (window.innerWidth >= 640) {
         onToggle();
       }
@@ -260,13 +262,13 @@ function PublicationCard({
         <div className="flex-1">
           <div className="flex justify-start items-center w-full">
             <div className="flex-1 min-w-0">
-              <h2 className="text-xl font-normal text-neutral-800 leading-tight" style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}>{title}</h2>
+              <h2 className="text-xl font-normal text-neutral-800 leading-tight" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>{title}</h2>
               <p className="text-neutral-600 mt-1 text-sm">{authors.join(", ")}</p>
               <div className="mt-2 flex gap-2">
                 {venues.map((venue, index) => (
                   <span
                     key={index}
-                    className="bg-neutral-200 text-neutral-800 text-xs font-semibold px-2.5 py-0.5 rounded news-font"
+                    className="bg-neutral-200 text-neutral-800 text-xs font-normal px-2.5 py-0.5 rounded news-font"
                   >
                     {venue}
                   </span>
@@ -287,9 +289,9 @@ function PublicationCard({
                 </div>
               )}
               {tldr && (
-                <div className="mt-3 mr-8 p-3 rounded-r-md hidden sm:block" style={{backgroundColor: '#e6efe6', borderLeft: '4px solid #447e3b'}}>
-                  <p className="text-sm font-medium" style={{color: '#2d5a26'}}>
-                    <span className="font-semibold text-xs uppercase tracking-wider mr-2" style={{fontFamily: 'Readex Pro, Raleway, sans-serif', color: '#447e3b'}}>TL;DR</span>
+                <div className="mt-3 mr-8 p-3 rounded-r-md hidden sm:block" style={{backgroundColor: '#e6efe6', borderLeft: '2px solid #447e3b'}}>
+                  <p className="text-sm font-normal" style={{color: '#2d5a26'}}>
+                    <span className="font-normal text-xs uppercase tracking-wider mr-2" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif', color: '#447e3b'}}>TL;DR</span>
                     {tldr}
                   </p>
                 </div>
@@ -312,8 +314,8 @@ function PublicationCard({
                 {arxivLink && (
                   <a
                     href={arxivLink}
-                    className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
-                    style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}
+                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
+                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => {
@@ -333,8 +335,8 @@ function PublicationCard({
                 {paperLink && (
                   <a
                     href={paperLink}
-                    className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
-                    style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}
+                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
+                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => {
@@ -354,8 +356,8 @@ function PublicationCard({
                 {presentationLink && (
                   <a
                     href={presentationLink}
-                    className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
-                    style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}
+                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
+                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => {
@@ -375,8 +377,8 @@ function PublicationCard({
                 {codeLink && (
                   <a
                     href={codeLink}
-                    className="bg-neutral-50 hover:shadow-md text-neutral-800 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 sm:min-w-0 min-w-fit transition-shadow duration-200"
-                    style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}
+                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
+                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => {
@@ -404,26 +406,19 @@ function PublicationCard({
       <div className={`overflow-hidden transition-all duration-500 ease-in-out hidden sm:block ${expanded ? 'sm:opacity-100' : 'sm:max-h-0 sm:opacity-0'}`}>
         <hr className="my-2" />
         <div>
-          <div className="mt-2">
-            <span className="font-semibold news-font">Abstract</span>: 
-            <div className="mt-1 whitespace-pre-line">{abstract}</div>
-          </div>
+          <div className="mt-2 whitespace-pre-line">{abstract}</div>
           {tags && tags.length > 0 && (
             <div className="mt-4">
-              <span className="font-semibold news-font mr-2">Tags:</span>
+              <span className="font-normal news-font mr-2">Tags:</span>
               <div className="flex flex-wrap gap-1 mt-1">
                 {tags.map((tag) => (
-                  <button
+                  <span
                     key={tag}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onTagClick(tag);
-                    }}
-                    className="px-2 py-1 bg-neutral-200 hover:bg-neutral-300 text-neutral-700 text-xs rounded-full transition-colors duration-150 cursor-pointer"
-                    style={{fontFamily: 'Readex Pro, Raleway, sans-serif'}}
+                    className="px-3 py-1.5 bg-neutral-200 text-neutral-700 text-xs rounded-md"
+                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
                   >
                     {tag}
-                  </button>
+                  </span>
                 ))}
               </div>
             </div>

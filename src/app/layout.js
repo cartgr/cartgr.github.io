@@ -114,7 +114,7 @@ export default function RootLayout({ children }) {
               </div>
             </div>
             <Link href="/" className="no-underline text-neutral-800">
-              <span className="text-3xl" style={{fontFamily: 'Readex Pro, var(--font-raleway), sans-serif'}}>Carter Blair</span>
+              <span className="text-3xl" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>Carter Blair</span>
             </Link>
           </div>
 
