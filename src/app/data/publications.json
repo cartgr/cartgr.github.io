@@ -1,14 +1,15 @@
 {
   "workingPapers": [
     {
-      "id": 8,
-      "title": "Probably Approximately Consensus: On the Learning Theory of Finding Common Ground",
-      "authors": ["Carter Blair", "Ben Armstrong", "Shiri Alouf-Heffetz", "Nimrod Talmon", "Davide Grossi"],
+      "id": 10,
+      "title": "The Structure of Bridging",
+      "authors": ["Carter Blair", "Jakob de Raaij", "Ariel D. Procaccia", "Maxon Rubin-Toles", "Nisarg Shah", "Michelle Si", "Serena Wang"],
+      "alphabeticalOrder": true,
       "venues": [],
       "tags": ["Social Choice"],
-      "tldr": "Models consensus as an interval in opinion space with PAC-learning guarantees, maximizing expected agreement over an underlying distribution of issues while accounting for their salience.",
-      "abstract": "A primary goal of online deliberation platforms is to identify ideas that are broadly agreeable to a community of users through their expressed preferences. Yet, consensus elicitation should ideally extend beyond the specific statements provided by users and should incorporate the relative salience of particular topics. We address this issue by modelling consensus as an interval in a one-dimensional opinion space derived from potentially high-dimensional data via embedding and dimensionality reduction. We define an objective that maximizes expected agreement within a hypothesis interval where the expectation is over an underlying distribution of issues, implicitly taking into account their salience. We propose an efficient Empirical Risk Minimization (ERM) algorithm and establish PAC-learning guarantees. Our initial experiments demonstrate the performance of our algorithm and examine more efficient approaches to identifying optimal consensus regions. We find that through selectively querying users on an existing sample of statements, we can reduce the number of queries needed to a practical number.",
-      "paperLink": "/papers/prob_approx_consensus.pdf"
+      "tldr": "Formalizes the notion of bridging—the idea that something is bridging if people who otherwise disagree both find it agreeable. We develop two metrics with axiomatic characterizations, and show empirically that both perform well on real data, comparing favorably to the method used by Polis under sparse observations.",
+      "abstract": "Influential deliberation platforms such as Polis and Remesh employ metrics for identifying bridging statements, which are accepted by participants who otherwise hold opposing views. A shortcoming of these metrics, however, is that they only account for inter-group connections in a fixed partition of the participants into groups. We argue that better bridging metrics must account for a richer set of possible partitions. To reason about such metrics, we develop a mathematical framework for bridging. We use it to identify two compelling metrics, pairwise disagreement and p-mean bridging, which are supported by axiomatic characterizations. Experiments on real data show that our metrics are stable, interpretable, and practical, even under the sparse observations typical of deliberation platforms.",
+      "paperLink": "/papers/bridging.pdf"
     }
   ],
   "publications": {
@@ -27,6 +28,16 @@
       }
     ],
     "2025": [
+      {
+        "id": 8,
+        "title": "Probably Approximately Consensus: On the Learning Theory of Finding Common Ground",
+        "authors": ["Carter Blair", "Ben Armstrong", "Shiri Alouf-Heffetz", "Nimrod Talmon", "Davide Grossi"],
+        "venues": ["SCaLA Workshop at IJCAI 2025"],
+        "tags": ["Social Choice"],
+        "tldr": "Models consensus as an interval in opinion space with PAC-learning guarantees, maximizing expected agreement over an underlying distribution of issues while accounting for their salience.",
+        "abstract": "A primary goal of online deliberation platforms is to identify ideas that are broadly agreeable to a community of users through their expressed preferences. Yet, consensus elicitation should ideally extend beyond the specific statements provided by users and should incorporate the relative salience of particular topics. We address this issue by modelling consensus as an interval in a one-dimensional opinion space derived from potentially high-dimensional data via embedding and dimensionality reduction. We define an objective that maximizes expected agreement within a hypothesis interval where the expectation is over an underlying distribution of issues, implicitly taking into account their salience. We propose an efficient Empirical Risk Minimization (ERM) algorithm and establish PAC-learning guarantees. Our initial experiments demonstrate the performance of our algorithm and examine more efficient approaches to identifying optimal consensus regions. We find that through selectively querying users on an existing sample of statements, we can reduce the number of queries needed to a practical number.",
+        "paperLink": "/papers/prob_approx_consensus.pdf"
+      },
       {
         "id": 9,
         "title": "Deliberative Machines: From Reflective Dialogue to Fair Consensus with Language Models and Social Choice",

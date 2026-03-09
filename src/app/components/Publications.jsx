@@ -1,17 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import debounce from 'lodash/debounce';
 import publicationsData from '../data/publications.json';
 import { trackEvent } from './Analytics';
 
 export default function Publications({ activeFilters = [], onToggleFilter }) {
   const [expandSection, setExpandSection] = useState({});
-  const [yearPositions, setYearPositions] = useState({});
-  const [isFiltering, setIsFiltering] = useState(false);
-
-  const timelineRefs = useRef({});
 
   const { workingPapers, publications } = publicationsData;
 
@@ -44,71 +39,10 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
   });
 
   const toggleFilter = (tag) => {
-    setIsFiltering(true);
-    // Reset year positions immediately to prevent sliding from previous positions
-    setYearPositions({});
-    
     if (onToggleFilter) {
       onToggleFilter(tag);
     }
   };
-
-  useEffect(() => {
-    const updateYearPositions = () => {
-      const newPositions = {};
-
-      Object.keys(timelineRefs.current).forEach((year) => {
-        const ref = timelineRefs.current[year];
-        if (!ref) return;
-
-        const rect = ref.getBoundingClientRect();
-        const visibleTop = Math.max(0, rect.top);
-        const visibleBottom = Math.min(window.innerHeight, rect.bottom);
-        const visibleMiddle = (visibleTop + visibleBottom) / 2;
-        const relativePosition = visibleMiddle - rect.top;
-
-        newPositions[year] = relativePosition;
-      });
-
-      setYearPositions(newPositions);
-    };
-
-    const debouncedUpdate = debounce(updateYearPositions, 10);
-
-    updateYearPositions();
-    window.addEventListener('scroll', debouncedUpdate, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', debouncedUpdate);
-      debouncedUpdate.cancel();
-    };
-  }, []);
-
-  // Refresh year positions when filters change
-  useEffect(() => {
-    const updateYearPositions = () => {
-      const newPositions = {};
-
-      Object.keys(timelineRefs.current).forEach((year) => {
-        const ref = timelineRefs.current[year];
-        if (!ref) return;
-
-        const rect = ref.getBoundingClientRect();
-        const visibleTop = Math.max(0, rect.top);
-        const visibleBottom = Math.min(window.innerHeight, rect.bottom);
-        const visibleMiddle = (visibleTop + visibleBottom) / 2;
-        const relativePosition = visibleMiddle - rect.top;
-
-        newPositions[year] = relativePosition;
-      });
-
-      setYearPositions(newPositions);
-      setIsFiltering(false);
-    };
-
-    // Small delay to ensure DOM has updated after filtering
-    const timeoutId = setTimeout(updateYearPositions, 50);
-    return () => clearTimeout(timeoutId);
-  }, [filteredPublications]);
 
   const toggleSection = (id, title) => {
     const wasExpanded = expandSection[id];
@@ -178,18 +112,14 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
               <div className="w-8 sm:w-20 shrink-0 relative flex justify-center">
                 {/* Vertical line with fade */}
                 <div
-                  ref={(el) => (timelineRefs.current[year] = el)}
                   className="absolute w-[1px] top-0 bottom-8 left-1/2 transform -translate-x-1/2"
                   style={{
                     background: 'linear-gradient(to bottom, transparent 0%, #d4d4d8 15%, #d4d4d8 85%, transparent 100%)'
                   }}
                 />
-                {/* Year label */}
-                <div
-                  className={`absolute z-10 left-1/2 transform -translate-x-1/2 ${!isFiltering ? 'transition-all duration-300 ease-out' : ''}`}
-                  style={{ top: yearPositions[year] || 0 }}
-                >
-                  <h3 className="text-xl font-medium text-neutral-600 px-3 py-3" style={{background: 'linear-gradient(to bottom, transparent, #f9fafb, #f9fafb, transparent)'}}>{year}</h3>
+                {/* Year label - sticky positioning */}
+                <div className="sticky top-24 h-fit z-10">
+                  <h3 className="text-xl font-medium text-neutral-600 px-3 py-3" style={{background: 'linear-gradient(to bottom, transparent, #f9fafb 25%, #f9fafb 75%, transparent)'}}>{year}</h3>
                 </div>
               </div>
               {/* Publications container */}
@@ -234,6 +164,7 @@ export default function Publications({ activeFilters = [], onToggleFilter }) {
 function PublicationCard({
   title,
   authors,
+  alphabeticalOrder,
   venues,
   abstract,
   tldr,
@@ -263,7 +194,7 @@ function PublicationCard({
           <div className="flex justify-start items-center w-full">
             <div className="flex-1 min-w-0">
               <h2 className="text-xl font-normal text-neutral-800 leading-tight" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>{title}</h2>
-              <p className="text-neutral-600 mt-1 text-sm">{authors.join(", ")}</p>
+              <p className="text-neutral-600 mt-1 text-sm">{alphabeticalOrder && <span className="text-neutral-400 mr-1">(α)</span>}{authors.join(", ")}</p>
               <div className="mt-2 flex gap-2">
                 {venues.map((venue, index) => (
                   <span
