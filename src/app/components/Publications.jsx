@@ -174,6 +174,7 @@ function PublicationCard({
   arxivLink,
   presentationLink,
   codeLink,
+  modelLink,
   awards,
   information,
   tags,
@@ -324,6 +325,27 @@ function PublicationCard({
                       style={{ width: "20px", height: "20px" }}
                     />
                     <span className="ml-1 hidden sm:inline">Code</span>
+                  </a>
+                )}
+                {modelLink && (
+                  <a
+                    href={modelLink}
+                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
+                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLinkClick('Model', modelLink);
+                    }}
+                  >
+                    <img
+                      src="/hf-logo-monochrome.png"
+                      alt="Model Icon"
+                      className="flex-shrink-0"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                    <span className="ml-1 hidden sm:inline">Model</span>
                   </a>
                 )}
               </div>
