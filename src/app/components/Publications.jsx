@@ -172,7 +172,7 @@ function PublicationCard({
                       src="/arxiv-logomark-small.svg"
                       alt="ArXiv Logo"
                       className="grayscale flex-shrink-0"
-                      style={{ width: "20px", height: "20px" }}
+                      style={{ width: "17px", height: "17px" }}
                     />
                     <span className="ml-1 hidden sm:inline">ArXiv</span>
                   </a>
@@ -190,8 +190,8 @@ function PublicationCard({
                     }}
                   >
                     <img
-                      src="/pdf_icon.png"
-                      alt="PDF Icon"
+                      src="/pdf.svg"
+                      alt="PDF Logo"
                       className="flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
                     />
@@ -211,8 +211,8 @@ function PublicationCard({
                     }}
                   >
                     <img
-                      src="/slides_icon.png"
-                      alt="Presentation Icon"
+                      src="/slides.svg"
+                      alt="Presentation Logo"
                       className="flex-shrink-0"
                       style={{ width: "20px", height: "20px" }}
                     />
@@ -232,10 +232,10 @@ function PublicationCard({
                     }}
                   >
                     <img
-                      src="/code_icon.png"
-                      alt="Code Icon"
+                      src="/github.svg"
+                      alt="GitHub Logo"
                       className="flex-shrink-0"
-                      style={{ width: "20px", height: "20px" }}
+                      style={{ width: "18px", height: "18px" }}
                     />
                     <span className="ml-1 hidden sm:inline">Code</span>
                   </a>
