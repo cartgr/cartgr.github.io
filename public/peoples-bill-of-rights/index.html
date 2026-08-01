@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People's Bill of Rights — Topics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+body{font-family:system-ui,sans-serif;max-width:1050px;margin:48px auto;padding:0 24px;color:#1a1a1a;background:#fff}
+h1{font-family:'Archivo',system-ui,sans-serif;font-weight:900;font-size:2.1rem;letter-spacing:-.02em;line-height:1.05;margin:0 0 6px;border-top:5px solid #1a1a1a;padding-top:14px}
+p.sub{color:#666;margin:0 0 24px;font-size:.9rem}
+.label{font-size:.72rem;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.tab-btn{background:#fff;color:#1a1a1a;border:1px solid #1a1a1a;border-radius:0;padding:7px 16px;font-size:.85rem;cursor:pointer}
+.tab-btn:hover{background:#1a1a1a;color:#fff}
+.tab-btn.active{background:#1a1a1a;color:#fff}
+.view{display:none}.view.on{display:block}
+.group{background:#f5f5f5;border-radius:0;padding:16px 20px;margin-bottom:12px}
+.chip{background:#e8e8e8;border-radius:0;padding:8px 12px;display:inline-block;margin:0 8px 8px 0;font-size:.85rem}
+.chip strong{display:block;font-size:.95rem}
+.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.pcard{background:#fff;border-radius:0;padding:12px 14px;border:1px solid #1a1a1a}
+.pcard .label{margin-bottom:4px}
+.pcard .rate{font-weight:700;font-size:1.05rem;margin-bottom:6px}
+.pcard p{margin:0;font-size:.85rem;color:#333;line-height:1.45}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:baseline}
+input[type=text],select{font-family:inherit;font-size:.9rem;border:1px solid #1a1a1a;border-radius:0;padding:8px 12px;background:#fff;color:#1a1a1a}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eee}
+th{font-size:.72rem;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:.07em;cursor:pointer;position:sticky;top:0;background:#fff;border-bottom:1px solid #1a1a1a}
+tr:hover td{background:#fafafa}
+.mut{color:#888}
+.bk{font-size:.8rem;color:#888;margin-top:48px;border-top:1px solid #1a1a1a;padding-top:14px}
+</style></head><body>
+<h1>People's Bill of Rights</h1>
+<p class="sub" id="hdr"></p>
+<div class="label">Explore</div>
+<div class="tabs" id="tabs"></div>
+
+<div class="view" id="v-topics">
+  <div id="tmap" style="height:520px"></div>
+  <p class="sub" style="margin-top:6px">Click a topic to see what each party thinks · click a sub-group to read every comment (sorted &amp; coloured by approval) · use the path bar to go back.</p>
+  <div id="tdetail"></div>
+</div>
+
+<div class="view" id="v-landscape">
+  <div id="scatter" style="height:540px"></div>
+  <p class="sub">Each dot is a topic — right = more approved, higher = bigger Democrat&ndash;Republican gap, bigger = more votes. The lower-right corner is where broad support meets cross-party agreement. Click a topic for each party's view.</p>
+  <div id="ldetail" style="margin-top:36px"></div>
+</div>
+
+<div class="view" id="v-rank">
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+    <input type="text" id="q" placeholder="search proposals…" style="flex:1;min-width:220px">
+    <select id="tfil"></select>
+  </div>
+  <div style="max-height:65vh;overflow:auto"><table id="rtab"></table></div>
+</div>
+
+<div class="view" id="v-cross">
+  <p class="sub" style="margin-bottom:6px"><span class="dot" style="background:#4f86c6"></span>Democrats
+     <span class="dot" style="background:#7aa25c;margin-left:14px"></span>Independents
+     <span class="dot" style="background:#e07b54;margin-left:14px"></span>Republicans
+     — each line is one topic; dots mark the share of that party's votes that approve. Long lines = polarised topics (sorted to the top). Click any topic to see party summaries and the exact proposals that divide or unite. Only ~40 Republicans participated — read their dots as direction, not magnitude.</p>
+  <div id="cbars" style="height:460px"></div>
+  <div id="cdetail" style="margin-top:36px"></div>
+</div>
+
+<div class="bk">Built from 52,972 votes by 2,279 participants · topics constructed to balance deliberation data-supply and coherence · party summaries generated from each party's votes. &ldquo;Approval&rdquo; pools all pro/against votes on a topic's proposals (vote-weighted, not a per-proposal average).</div>
+
+<script src="final_data.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const pct=x=>x==null?'—':Math.round(x*100)+'%';
+const PAL=['#4f86c6','#e07b54','#7aa25c','#8e6bb5','#c9a227','#5aa9b8','#c65f7e','#6b7f99','#a3744f','#4fb08e','#b55d5d','#7d76c9','#87905a'];
+const T=DATA.topics, tcolor={}; T.forEach((t,i)=>tcolor[t.name]=PAL[i%PAL.length]);
+$('#hdr').textContent=`${DATA.ideas.length.toLocaleString()} citizen proposals organised into ${T.length} deliberation topics (${DATA.n_excluded} symbolic or off-topic entries set aside).`;
+
+const TABS=[['topics','Topics'],['landscape','Consensus map'],['cross','Party views'],['rank','All proposals']];
+TABS.forEach(([id,l])=>{const b=document.createElement('button');b.className='tab-btn';b.textContent=l;b.id='tb-'+id;
+  b.onclick=()=>show(id);$('#tabs').appendChild(b);});
+function show(id){TABS.forEach(([t])=>{$('#v-'+t).classList.toggle('on',t===id);$('#tb-'+t).classList.toggle('active',t===id);});
+  if(id==='topics')drawMap();if(id==='landscape')drawScatter();if(id==='rank')drawRank();if(id==='cross')drawCross();}
+
+// ---------- topics treemap ----------
+let nodeById={}, st={focus:null, level:null};
+function wrap(s,w=42){const out=[];let cur='';for(const word of s.split(' ')){
+  if(cur&&(cur+' '+word).length>w){out.push(cur);cur=word;}else cur=cur?cur+' '+word:word;}
+  if(cur)out.push(cur);return out.join('<br>');}
+function drawMap(){
+  nodeById={};const ids=['root'],labels=['All topics'],parents=[''],values=[0],colors=[0.8],text=['<b>All topics</b><br>click any topic to explore'];
+  T.forEach((t,ti)=>{
+    const tid='t'+ti;nodeById[tid]=t;
+    ids.push(tid);labels.push(t.name);parents.push('root');values.push(0);
+    colors.push(t.approval==null?.6:t.approval);
+    text.push(`<b>${t.name}</b><br>${t.n_ideas} proposals · ${pct(t.approval)} of votes approve · D ${pct(t.party.dem.support)} / R ${pct(t.party.rep.support)} / I ${pct(t.party.ind.support)}`);
+    t.subclusters.forEach((s,si)=>{
+      const sid=tid+'/s'+si;nodeById[sid]={...s,__topic:t};
+      ids.push(sid);labels.push(s.name);parents.push(tid);values.push(st.focus===sid?0:s.n_ideas);
+      colors.push(s.approval==null?.6:s.approval);
+      text.push(`<b>${s.name}</b><br>${s.n_ideas} proposals · ${pct(s.approval)} of votes approve · click to read all`);
+      if(st.focus===sid){
+        [...s.comments].sort((a,b)=>(b.approval??-1)-(a.approval??-1)).forEach((c,ci)=>{
+          const cid=sid+'/c'+ci;nodeById[cid]={isComment:true,parentId:sid,...c};
+          ids.push(cid);labels.push(wrap(c.text));parents.push(sid);values.push(1);
+          colors.push(c.approval==null?.6:c.approval);
+          text.push(wrap(c.text,60)+`<br><i>${pct(c.approval)} approve · ${c.pro}▲ ${c.against}▼ · D ${pct(c.dem)} R ${pct(c.rep)} I ${pct(c.ind)}</i>`);
+        });}
+    });});
+  const tr={type:'treemap',ids,labels,parents,values,text,branchvalues:'remainder',
+    textinfo:'label',hovertemplate:'%{text}<extra></extra>',textfont:{size:11,color:'#1a1a1a'},
+    marker:{colors,colorscale:[[0,'#e07b54'],[0.5,'#e8d27c'],[1,'#7aa25c']],cmin:.35,cmid:.65,cmax:1,
+      showscale:true,colorbar:{title:{text:'approval'},tickformat:'.0%',len:.55,thickness:12,outlinewidth:0}},
+    pathbar:{visible:true,thickness:24},sort:false,
+    tiling:{packing:st.focus?'binary':'squarify'},maxdepth:2};
+  if(st.level)tr.level=st.level;
+  Plotly.purge('tmap');
+  Plotly.newPlot('tmap',[tr],{margin:{t:30,l:2,r:2,b:2},paper_bgcolor:'#fff',
+    font:{family:'system-ui',color:'#1a1a1a'}},{responsive:true,displayModeBar:false}).then(gd=>{
+    gd.on('plotly_click',ev=>{
+      const p=ev.points[0],n=nodeById[p.id];
+      if(!n){if(p.id==='root'){st={focus:null,level:null};drawMap();detailHTML(null);}return;}
+      if(n.isComment){st.level=n.parentId;drawMap();return;}
+      if(n.comments){st={focus:p.id,level:p.id};drawMap();detailSub(n);}
+      else{st={focus:null,level:p.id};drawMap();detailTopic(n);}
+    });});
+}
+function pcard(label,color,pd){
+  return `<div class="pcard"><div class="label"><span class="dot" style="background:${color}"></span>${label}</div>
+    <div class="rate">${pct(pd.support)} <span class="mut" style="font-weight:400;font-size:.78rem">approve · ${pd.n_voters} voters, ${pd.n_votes} votes</span></div>
+    <p>${pd.summary||''}</p></div>`;
+}
+function detailTopic(t){
+  $('#tdetail').innerHTML=`<div class="group">
+    <div class="label">${t.name}</div>
+    <p style="margin:0 0 8px;font-size:.9rem">${t.desc||''}</p>
+    <span class="chip"><strong>${t.n_ideas}</strong>proposals</span>
+    <span class="chip"><strong>${t.votes.toLocaleString()}</strong>votes</span>
+    <span class="chip" title="Pooled vote approval: every pro/against vote on this topic's proposals, counted together — a vote-weighted average, so heavily-voted proposals count more."><strong>${pct(t.approval)}</strong>vote approval</span>
+    <div class="pcards">
+      ${pcard('Democrats','#4f86c6',t.party.dem)}
+      ${pcard('Independents','#7aa25c',t.party.ind)}
+      ${pcard('Republicans','#e07b54',t.party.rep)}
+    </div></div>`;
+}
+function detailSub(s){
+  let h=`<div class="group"><div class="label">${s.__topic.name} — ${s.name} · ${s.n_ideas} proposals</div><table><tr><th>Proposal</th><th>Approval</th><th>▲/▼</th><th>D</th><th>R</th><th>I</th></tr>`;
+  [...s.comments].sort((a,b)=>(b.approval??-1)-(a.approval??-1)).forEach(c=>{
+    h+=`<tr><td>${c.text}</td><td>${pct(c.approval)}</td><td style="white-space:nowrap">${c.pro}▲ ${c.against}▼</td>
+      <td>${pct(c.dem)}</td><td>${pct(c.rep)}</td><td>${pct(c.ind)}</td></tr>`;});
+  $('#tdetail').innerHTML=h+'</table></div>';
+}
+function detailHTML(_){$('#tdetail').innerHTML='';}
+
+// ---------- big picture: topics by approval x partisan gap ----------
+// greedy label placement: per-dot textposition that avoids overlaps
+function placeLabels(pts,xs,ys){
+  const xmin=Math.min(...xs)-.02,xmax=Math.max(...xs)+.02,ymin=Math.min(...ys)-.035,ymax=Math.max(...ys)+.035;
+  const W=940,H=470,g=11;
+  const P=pts.map((p,i)=>({i,px:(xs[i]-xmin)/(xmax-xmin)*W,py:(1-(ys[i]-ymin)/(ymax-ymin))*H,w:p.t.name.length*5.6,h:12}));
+  const CAND=['top center','bottom center','middle right','middle left','top right','top left','bottom right','bottom left'];
+  const box=(q,pos)=>{switch(pos){
+    case 'top center':return{x:q.px-q.w/2,y:q.py-g-q.h,w:q.w,h:q.h};
+    case 'bottom center':return{x:q.px-q.w/2,y:q.py+g,w:q.w,h:q.h};
+    case 'middle right':return{x:q.px+g,y:q.py-q.h/2,w:q.w,h:q.h};
+    case 'middle left':return{x:q.px-g-q.w,y:q.py-q.h/2,w:q.w,h:q.h};
+    case 'top right':return{x:q.px+g*.7,y:q.py-g-q.h,w:q.w,h:q.h};
+    case 'top left':return{x:q.px-g*.7-q.w,y:q.py-g-q.h,w:q.w,h:q.h};
+    case 'bottom right':return{x:q.px+g*.7,y:q.py+g,w:q.w,h:q.h};
+    default:return{x:q.px-g*.7-q.w,y:q.py+g,w:q.w,h:q.h};}};
+  const hit=(a,b)=>!(a.x+a.w<b.x||b.x+b.w<a.x||a.y+a.h<b.y||b.y+b.h<a.y);
+  const placed=[],out=new Array(P.length);
+  [...P].sort((a,b)=>a.py-b.py).forEach(q=>{
+    let done=false;
+    for(const c of CAND){const b=box(q,c);
+      if(b.x>=-4&&b.x+b.w<=W+4&&b.y>=-4&&b.y+b.h<=H+4&&!placed.some(r=>hit(b,r))){
+        out[q.i]=c;placed.push(b);done=true;break;}}
+    if(!done){out[q.i]='top center';placed.push(box(q,'top center'));}});
+  return out;
+}
+function drawScatter(){
+  const pts=T.map(t=>({t,x:t.approval,y:(t.party.dem.support!=null&&t.party.rep.support!=null)?t.party.dem.support-t.party.rep.support:null}))
+    .filter(p=>p.x!=null&&p.y!=null);
+  const xs=pts.map(p=>p.x), ys=pts.map(p=>p.y);
+  const xmid=xs.slice().sort((a,b)=>a-b)[Math.floor(xs.length/2)];
+  const ymid=ys.slice().sort((a,b)=>a-b)[Math.floor(ys.length/2)];
+  const tr={x:xs,y:ys,mode:'markers+text',type:'scatter',
+    text:pts.map(p=>p.t.name),textposition:placeLabels(pts,xs,ys),textfont:{size:10,color:'#1a1a1a'},
+    customdata:pts.map((_,i)=>i),
+    hovertext:pts.map(p=>`<b>${p.t.name}</b><br>${pct(p.x)} of votes approve · D&minus;R gap ${Math.round(p.y*100)} pts · ${p.t.votes.toLocaleString()} votes`),
+    hovertemplate:'%{hovertext}<extra></extra>',
+    marker:{size:pts.map(p=>10+Math.sqrt(p.t.votes)/4),color:pts.map(p=>tcolor[p.t.name]),
+      opacity:.9,line:{color:'#fff',width:1.5}}};
+  const corner=(x,y,txt,anch)=>({x,y,xref:'paper',yref:'paper',text:txt,showarrow:false,
+    font:{size:9,color:'#bbb'},xanchor:anch,align:anch});
+  Plotly.purge('scatter');
+  Plotly.newPlot('scatter',[tr],{margin:{t:24,l:56,r:24,b:46},paper_bgcolor:'#fff',plot_bgcolor:'#fff',
+    font:{family:'system-ui',color:'#1a1a1a',size:11},
+    xaxis:{title:{text:'share of votes approving',font:{size:11}},tickformat:'.0%',gridcolor:'#f0f0f0',zeroline:false,range:[Math.min(...xs)-.02,Math.max(...xs)+.02]},
+    yaxis:{title:{text:'partisan gap (Democrat − Republican approval)',font:{size:11}},tickformat:'+.0%',gridcolor:'#f0f0f0',zeroline:false,range:[Math.min(...ys)-.035,Math.max(...ys)+.035]},
+    annotations:[corner(0.99,0.99,'POPULAR, PARTIES SPLIT','right'),
+                 corner(0.99,0.01,'POPULAR, CROSS-PARTY','right'),
+                 corner(0.01,0.99,'CONTESTED, PARTIES SPLIT','left'),
+                 corner(0.01,0.01,'CONTESTED, PARTIES ALIGNED','left')],
+    showlegend:false},{responsive:true,displayModeBar:false}).then(gd=>{
+    gd.on('plotly_click',ev=>{
+      const p=pts[ev.points[0].customdata];if(!p)return;const t=p.t;
+      $('#ldetail').innerHTML=`<div class="group"><div class="label">${t.name}</div>
+        <p style="margin:0 0 8px;font-size:.9rem">${t.desc||''}</p>
+        <span class="chip"><strong>${t.n_ideas}</strong>proposals</span>
+        <span class="chip"><strong>${t.votes.toLocaleString()}</strong>votes</span>
+        <span class="chip" title="Pooled vote approval: every pro/against vote on this topic's proposals, counted together."><strong>${pct(t.approval)}</strong>vote approval</span>
+        <div class="pcards">${pcard('Democrats','#4f86c6',t.party.dem)}${pcard('Independents','#7aa25c',t.party.ind)}${pcard('Republicans','#e07b54',t.party.rep)}</div></div>`;});
+  });
+}
+
+// ---------- rankings ----------
+let sk='votes',sd=-1,rankInit=false;
+function drawRank(){
+  if(!rankInit){rankInit=true;
+    $('#tfil').innerHTML='<option value="">All topics</option>'+T.map(t=>`<option>${t.name}</option>`).join('');
+    $('#q').oninput=drawRank;$('#tfil').onchange=drawRank;}
+  const q=$('#q').value.toLowerCase(),tf=$('#tfil').value;
+  let rows=DATA.ideas.filter(d=>(!q||d.text.toLowerCase().includes(q))&&(!tf||d.topic===tf));
+  rows.sort((a,b)=>((a[sk]??-1)-(b[sk]??-1))*sd);
+  const cols=[['text','Proposal'],['topic','Topic'],['votes','Votes'],['approval','Approval'],['dem','Dem'],['rep','Rep'],['ind','Ind']];
+  let h='<tr>'+cols.map(([k,l])=>`<th data-k="${k}">${l}</th>`).join('')+'</tr>';
+  rows.slice(0,400).forEach(d=>{h+=`<tr><td>${d.text}</td>
+    <td style="white-space:nowrap"><span class="dot" style="background:${tcolor[d.topic]}"></span><span class="mut" style="font-size:.78rem">${d.topic}</span></td>
+    <td>${d.votes}</td><td>${pct(d.approval)}</td><td>${pct(d.dem)}</td><td>${pct(d.rep)}</td><td>${pct(d.ind)}</td></tr>`;});
+  $('#rtab').innerHTML=h;
+  $('#rtab').querySelectorAll('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;sd=(sk===k)?-sd:-1;sk=k;drawRank();});
+}
+
+// ---------- party views ----------
+let crossDrawn=false;
+function gapOf(t){const d=t.party.dem.support,r=t.party.rep.support;return(d==null||r==null)?0:Math.abs(d-r);}
+function drawCross(){if(crossDrawn)return;crossDrawn=true;
+  const rows=[...T].sort((a,b)=>gapOf(a)-gapOf(b));      // biggest gap renders at top
+  const y=rows.map(t=>t.name);
+  const seg={x:[],y:[],mode:'lines',type:'scatter',line:{color:'#ccc',width:2},hoverinfo:'skip',showlegend:false};
+  rows.forEach(t=>{const v=[t.party.dem.support,t.party.ind.support,t.party.rep.support].filter(x=>x!=null);
+    if(v.length>1){seg.x.push(Math.min(...v),Math.max(...v),null);seg.y.push(t.name,t.name,null);}});
+  const mk=(p,c,nm)=>({x:rows.map(t=>t.party[p].support),y,name:nm,mode:'markers',type:'scatter',
+    marker:{color:c,size:11,line:{color:'#fff',width:1}},
+    text:rows.map(t=>`${nm}: ${pct(t.party[p].support)} of ${t.party[p].n_votes} votes (${t.party[p].n_voters} voters)`),
+    hovertemplate:'%{text}<extra></extra>'});
+  Plotly.newPlot('cbars',[seg,mk('dem','#4f86c6','Democrats'),mk('ind','#7aa25c','Independents'),mk('rep','#e07b54','Republicans')],
+    {margin:{l:265,t:6,r:16,b:36},paper_bgcolor:'#fff',plot_bgcolor:'#fff',
+     font:{family:'system-ui',color:'#1a1a1a',size:11},
+     xaxis:{tickformat:'.0%',range:[0,1.02],gridcolor:'#eee',title:{text:'share of party votes approving',font:{size:11}}},
+     showlegend:false},{responsive:true,displayModeBar:false}).then(gd=>{
+      gd.on('plotly_click',ev=>crossDetail(ev.points[0].y));});
+  crossDetail(null);                                      // default: cross-topic view
+}
+function crossDetail(name){
+  const t=name?T.find(x=>x.name===name):null;
+  const pool=t?DATA.ideas.filter(d=>d.topic===name):DATA.ideas;
+  const both=pool.filter(d=>d.dem!=null&&d.rep!=null);
+  const div=[...both].sort((a,b)=>(Math.abs(b.dem-b.rep)-Math.abs(a.dem-a.rep))||(b.votes-a.votes)).slice(0,t?5:8);
+  const all3=pool.filter(d=>d.dem!=null&&d.rep!=null&&d.ind!=null&&Math.min(d.dem,d.ind,d.rep)>=.5)
+    .sort((a,b)=>(Math.min(b.dem,b.ind,b.rep)-Math.min(a.dem,a.ind,a.rep))||(b.votes-a.votes)).slice(0,t?5:8);
+  const pn=(v,n)=>v==null?'—':`${pct(v)} of ${n}`;
+  const li=d=>`<li style="margin-bottom:9px">${d.text}<br><span class="mut" style="font-size:.78rem"><span class="dot" style="background:${tcolor[d.topic]};width:8px;height:8px"></span>${d.topic} &mdash; D ${pn(d.dem,d.dem_n)} · I ${pn(d.ind,d.ind_n)} · R ${pn(d.rep,d.rep_n)}</span></li>`;
+  const head=t?`<div class="label">${t.name} <a href="#" onclick="crossDetail(null);return false" style="color:#888;font-weight:400;text-transform:none;letter-spacing:0;margin-left:10px">&larr; all topics</a></div>
+    <div class="pcards">${pcard('Democrats','#4f86c6',t.party.dem)}${pcard('Independents','#7aa25c',t.party.ind)}${pcard('Republicans','#e07b54',t.party.rep)}</div>`
+    :`<div class="label">Across all topics</div>
+    <p class="sub" style="margin:0">The proposals that most divide Democrats and Republicans &mdash; and those a majority of all three groups approve. &ldquo;96% of 24&rdquo; = 96% approval among that party's 24 pro/against votes on the proposal. Click a topic in the chart to zoom in.</p>`;
+  $('#cdetail').innerHTML=`<div class="group">${head}
+    <div class="pcards" style="margin-top:12px">
+      <div class="pcard"><div class="label">Where they split</div><ol style="margin:6px 0 0;padding-left:18px;font-size:.85rem;line-height:1.4">${div.map(li).join('')||'<span class="mut">Too few Republican votes on individual proposals here.</span>'}</ol></div>
+      <div class="pcard"><div class="label">Common ground</div><ol style="margin:6px 0 0;padding-left:18px;font-size:.85rem;line-height:1.4">${all3.map(li).join('')||'<span class="mut">No proposal here has majority approval from all three groups (with enough votes to tell).</span>'}</ol></div>
+    </div></div>`;
+}
+
+show('topics');
+</script></body></html>
