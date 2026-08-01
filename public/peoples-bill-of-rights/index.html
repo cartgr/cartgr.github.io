@@ -67,8 +67,9 @@ tr:hover td{background:#fafafa}
 
 <div class="bk">Built from 52,972 votes by 2,279 participants · topics constructed to balance deliberation data-supply and coherence · party summaries generated from each party's votes. &ldquo;Approval&rdquo; pools all pro/against votes on a topic's proposals (vote-weighted, not a per-proposal average).</div>
 
-<script src="final_data.js"></script>
+<script src="enc_data.js"></script>
 <script>
+function initApp(){
 const $=s=>document.querySelector(s);
 const pct=x=>x==null?'—':Math.round(x*100)+'%';
 const PAL=['#4f86c6','#e07b54','#7aa25c','#8e6bb5','#c9a227','#5aa9b8','#c65f7e','#6b7f99','#a3744f','#4fb08e','#b55d5d','#7d76c9','#87905a'];
@@ -273,4 +274,55 @@ function crossDetail(name){
 }
 
 show('topics');
-</script></body></html>
+window.crossDetail=crossDetail;   // inline onclick handlers
+}
+</script>
+<div id="gate" style="position:fixed;inset:0;background:#fff;z-index:1000;display:flex;align-items:center;justify-content:center;transition:opacity .35s">
+  <div style="width:min(420px,86vw)">
+    <div style="border-top:5px solid #1a1a1a;padding-top:16px">
+      <div style="font-family:'Archivo',system-ui,sans-serif;font-weight:900;font-size:1.9rem;letter-spacing:-.02em;line-height:1.05;color:#1a1a1a">People's Bill of Rights</div>
+      <div style="font-size:.72rem;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:.09em;margin:26px 0 10px">Enter password</div>
+      <form id="gform" style="display:flex;gap:0">
+        <input id="gpw" type="password" autocomplete="off" autofocus
+          style="flex:1;font-family:system-ui;font-size:1rem;padding:10px 12px;border:1px solid #1a1a1a;border-right:none;border-radius:0;outline:none;background:#fff;color:#1a1a1a">
+        <button type="submit"
+          style="font-family:system-ui;font-size:.9rem;padding:10px 20px;border:1px solid #1a1a1a;border-radius:0;background:#1a1a1a;color:#fff;cursor:pointer">Enter</button>
+      </form>
+      <div id="gerr" style="font-size:.8rem;color:#c00;margin-top:10px;min-height:1.1em"></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+  async function tryUnlock(pw){
+    const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+    const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(ENC.salt),iterations:ENC.iter,hash:'SHA-256'},
+      km,{name:'AES-GCM',length:256},false,['decrypt']);
+    const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(ENC.iv)},key,b64(ENC.ct));
+    return JSON.parse(new TextDecoder().decode(pt));
+  }
+  async function attempt(pw,remember){
+    try{
+      window.DATA=await tryUnlock(pw);
+      if(remember)sessionStorage.setItem('pbor_k',pw);
+      const g=document.getElementById('gate');
+      g.style.opacity='0';setTimeout(()=>g.remove(),380);
+      initApp();
+    }catch(e){
+      sessionStorage.removeItem('pbor_k');
+      const err=document.getElementById('gerr');
+      if(remember!=='auto'){err.textContent='Incorrect password.';}
+      const inp=document.getElementById('gpw');inp.value='';inp.focus();
+    }
+  }
+  document.getElementById('gform').addEventListener('submit',ev=>{
+    ev.preventDefault();
+    document.getElementById('gerr').textContent='';
+    attempt(document.getElementById('gpw').value,true);
+  });
+  const saved=sessionStorage.getItem('pbor_k');
+  if(saved)attempt(saved,'auto');
+})();
+</script>
+</body></html>
