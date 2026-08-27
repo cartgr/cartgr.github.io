@@ -2,13 +2,14 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>People's Bill of Rights — Topics</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%231a1a1a%22/><rect x=%220%22 y=%2242%22 width=%22100%22 height=%2216%22 fill=%22%23fff%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <style>
 body{font-family:system-ui,sans-serif;max-width:1050px;margin:48px auto;padding:0 24px;color:#1a1a1a;background:#fff}
 h1{font-family:'Archivo',system-ui,sans-serif;font-weight:900;font-size:2.1rem;letter-spacing:-.02em;line-height:1.05;margin:0 0 6px;border-top:5px solid #1a1a1a;padding-top:14px}
 p.sub{color:#666;margin:0 0 24px;font-size:.9rem}
-.label{font-size:.72rem;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px}
+.label{font-family:'Archivo',system-ui,sans-serif;font-size:.72rem;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px}
 .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
 .tab-btn{background:#fff;color:#1a1a1a;border:1px solid #1a1a1a;border-radius:0;padding:7px 16px;font-size:.85rem;cursor:pointer}
 .tab-btn:hover{background:#1a1a1a;color:#fff}
@@ -24,11 +25,78 @@ p.sub{color:#666;margin:0 0 24px;font-size:.9rem}
 .pcard p{margin:0;font-size:.85rem;color:#333;line-height:1.45}
 .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:baseline}
 input[type=text],select{font-family:inherit;font-size:.9rem;border:1px solid #1a1a1a;border-radius:0;padding:8px 12px;background:#fff;color:#1a1a1a}
+.score{display:inline-flex;align-items:center;border:1px solid #1a1a1a;position:relative;
+  cursor:help;white-space:nowrap;line-height:1.6}
+.score-k{font-family:'IBM Plex Mono',ui-monospace,monospace;padding:1px 7px;font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;color:#555}
+.score-v{font-family:'IBM Plex Mono',ui-monospace,monospace;padding:1px 8px;background:#1a1a1a;color:#fff;font-weight:700;font-size:.76rem}
+.score::after{font-family:system-ui,sans-serif;content:attr(data-tip);position:absolute;right:0;top:calc(100% + 7px);width:290px;
+  background:#1a1a1a;color:#fff;padding:10px 12px;font-size:.74rem;line-height:1.5;text-align:left;
+  white-space:normal;opacity:0;pointer-events:none;transition:opacity .15s ease;z-index:70}
+.score:hover::after{opacity:1}
+.rcloud{columns:280px;column-gap:10px}
+.rchip{break-inside:avoid;box-sizing:border-box;border-width:1.5px;border-style:solid;
+  background:#fff;cursor:pointer;display:flex;flex-direction:column;
+  padding:0;margin:0 0 10px;position:relative}
+.rchip:hover{z-index:5}
+.rchip:hover .tx{background:#fafafa}
+.rchip .bar{font-family:'IBM Plex Mono',ui-monospace,monospace;color:#fff;font-size:.62rem;letter-spacing:.03em;padding:4px 9px;
+  display:flex;gap:10px;justify-content:space-between;white-space:nowrap;flex:none}
+.rchip .tx{padding:9px 11px;font-weight:700;font-size:.8rem;line-height:1.4}
+.rchip.open{outline:2px solid #1a1a1a;outline-offset:2px}
+.barscore{position:relative;cursor:help;text-transform:uppercase;font-weight:700}
+.barscore::after{font-family:system-ui,sans-serif;content:attr(data-tip);position:absolute;left:0;top:calc(100% + 8px);width:270px;
+  background:#1a1a1a;color:#fff;padding:10px 12px;font-size:.72rem;line-height:1.5;font-weight:400;
+  text-transform:none;letter-spacing:0;white-space:normal;opacity:0;pointer-events:none;
+  transition:opacity .15s ease;z-index:70}
+.barscore:hover::after{opacity:1}
+.rdetail{border-width:1.5px;border-style:solid;background:#fff;padding:0;display:none;margin-top:14px}
+.rdetail .dbar{font-family:'IBM Plex Mono',ui-monospace,monospace;color:#fff;font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;
+  padding:6px 14px;display:flex;justify-content:space-between;align-items:center}
+.rdetail .dbar button{background:none;border:none;color:#fff;font:inherit;cursor:pointer;
+  text-transform:uppercase;letter-spacing:.05em;padding:0}
+.rdetail .dbody{padding:16px 18px}
+.rdetail h3{font-family:'Archivo',system-ui,sans-serif;font-weight:900;font-size:1.15rem;
+  line-height:1.3;margin:0 0 4px;letter-spacing:-.01em}
+.rdetail .meta{font-size:.8rem;color:#666;margin:0 0 14px}
+.rdetail .meta b{color:#1a1a1a;font-weight:500}
+.rdetail.on{display:block}
+.prov{border-left:5px solid #1a1a1a;background:#f5f5f5;padding:12px 16px;margin:0 0 14px}
+.dd{position:relative;display:inline-block}
+.dd select{display:none}
+.dd-btn{font-family:inherit;font-size:.9rem;border:1px solid #1a1a1a;background:#fff;color:#1a1a1a;
+  padding:8px 40px 8px 12px;cursor:pointer;text-align:left;position:relative;width:100%;
+  border-radius:0;white-space:nowrap}
+.dd-btn::after{content:'';position:absolute;right:13px;top:calc(50% - 3px);
+  border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid currentColor}
+.dd-btn:hover{background:#f5f5f5}
+.dd[data-open] .dd-btn{background:#1a1a1a;color:#fff}
+.dd-btn:focus-visible{outline:2px solid #1a1a1a;outline-offset:2px}
+.dd-list{position:absolute;z-index:60;top:0;left:0;min-width:100%;background:#fff;
+  border:1px solid #1a1a1a;max-height:270px;overflow:auto;box-shadow:0 8px 22px rgba(0,0,0,.16)}
+.dd-list.flip{left:auto;right:0}
+.dd-opt{padding:8px 12px;font-size:.85rem;white-space:nowrap;cursor:pointer;border-bottom:1px solid #f0f0f0}
+.dd-opt:last-child{border-bottom:none}
+.dd-opt:hover,.dd-opt.cur{background:#f0f0f0}
+.dd-opt.on{background:#1a1a1a;color:#fff}
+.dd-opt.on:hover{background:#333}
 table{width:100%;border-collapse:collapse;font-size:.85rem}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eee}
 th{font-size:.72rem;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:.07em;cursor:pointer;position:sticky;top:0;background:#fff;border-bottom:1px solid #1a1a1a}
 tr:hover td{background:#fafafa}
 .mut{color:#888}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.tile{background:#f5f5f5;padding:12px 14px}
+.tnum{font-family:'Archivo',system-ui,sans-serif;font-weight:900;font-size:1.55rem;letter-spacing:-.01em}
+.tlab{font-size:.74rem;color:#666;line-height:1.35;margin-top:3px}
+.rrow{background:#fff;border:1px solid #1a1a1a;border-left-width:4px;padding:12px 16px;margin-bottom:10px;cursor:pointer}
+.rrow:hover{background:#fafafa}
+.track{display:inline-block;width:150px;height:10px;background:#ececec;vertical-align:middle}
+.fill{display:block;height:100%;background:#1a1a1a;border-radius:0 4px 4px 0}
+.badge{font-size:.66rem;border:1px solid #1a1a1a;padding:1px 7px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.badge-d{border-style:dashed;color:#666}
+.expander{font-family:inherit;font-size:.8rem;background:none;border:none;
+  border-bottom:1px dashed #888;color:#666;padding:0;cursor:pointer;margin-left:4px}
+.expander:hover{color:#1a1a1a;border-color:#1a1a1a}
 .bk{font-size:.8rem;color:#888;margin-top:48px;border-top:1px solid #1a1a1a;padding-top:14px}
 </style></head><body>
 <h1>People's Bill of Rights</h1>
@@ -37,14 +105,81 @@ tr:hover td{background:#fafafa}
 <div class="tabs" id="tabs"></div>
 
 <div class="view" id="v-topics">
+  <p class="sub" style="margin-bottom:12px">Every proposal the public submitted, organised into
+  13 deliberation topics. Each rectangle is a group of proposals that share a subject, an LLM
+  grouped and named them, and a rectangle&rsquo;s size shows how many proposals it holds. Colour
+  shows the share of votes approving, from orange (opposed) through yellow (split) to green
+  (approved), using the scale below the chart.</p>
   <div id="tmap" style="height:520px"></div>
-  <p class="sub" style="margin-top:6px">Click a topic to see what each party thinks · click a sub-group to read every comment (sorted &amp; coloured by approval) · use the path bar to go back.</p>
+  <p class="sub" style="margin-top:6px">Click a topic to zoom in and see how each party voted on
+  it. Click a sub-group to read every proposal inside, sorted and coloured by approval. Use the
+  bar across the top of the chart to step back out.</p>
   <div id="tdetail"></div>
+</div>
+
+<div class="view" id="v-rights">
+  <div class="prov">
+    <div class="label" style="margin-bottom:5px">Where these rights come from</div>
+    <p style="margin:0;font-size:.88rem;line-height:1.5">Every right on this page was built from
+    proposals written by the public in the <strong>maxipublic</strong>, the open online round run
+    on <strong>Change.org</strong>. Nothing here was authored by us or by a model working on its
+    own. Each right generalizes a group of real proposals, and its support is counted from the
+    votes those proposals actually received.</p>
+  </div>
+  <p class="sub" style="margin-bottom:12px">Rights built by grouping proposals that ask for the
+  same thing, worded in participants&rsquo; own sentences where possible, and ranked by how the
+  <strong>least supportive party</strong> voted.
+  <button class="expander" id="rmorebtn" onclick="toggleRightsNote()">+ how this works</button></p>
+
+  <div id="rnote" style="display:none">
+    <div class="group" style="margin-bottom:14px">
+      <div class="label">How the rights were made</div>
+      <p style="margin:0 0 14px;font-size:.86rem;line-height:1.5">An LLM grouped the proposals in each topic by what they ask for. Each group
+      became one right, worded with a participant&rsquo;s own sentence wherever one states the
+      demand as a general rule, verified word for word against their proposal. Where no proposal
+      stated a general rule, the wording was drafted and is marked as such. Support is counted
+      from the votes actually cast on each group&rsquo;s proposals, with nothing predicted.</p>
+      <div class="label">The cross-party score</div>
+      <p style="margin:0;font-size:.86rem;line-height:1.5">Each right is scored by its
+      worst-off party, which is the lowest of the Democrat, Republican
+      and independent shares voting in favour, so a right cannot rank highly by pleasing the
+      majority alone. Because only 40 Republicans took part, each share is first shrunk toward 50%
+      in proportion to how few votes that party cast, so 3 of 3 Republicans does not outrank 11 of
+      14. A party with fewer than 10 votes is marked with an asterisk. Every topic contributes its
+      best right before any contributes a second.</p>
+    </div>
+  </div>
+
+  <div class="tiles" id="rtiles"></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 8px">
+    <select id="rmode">
+      <option value="short">Shortlist, best per topic</option>
+      <option value="all">All rights</option>
+    </select>
+    <input type="text" id="rq" placeholder="search rights&hellip;" style="flex:1;min-width:180px">
+    <select id="rtopic"></select>
+    <select id="rsort">
+      <option value="support">Sort: cross-party score</option>
+      <option value="gap">Sort: biggest Dem&ndash;Rep gap</option>
+      <option value="rep">Sort: Republican support</option>
+      <option value="dem">Sort: Democrat support</option>
+      <option value="ind">Sort: Independent support</option>
+      <option value="props">Sort: most proposals</option>
+      <option value="votes">Sort: most votes</option>
+    </select>
+  </div>
+  <p class="sub" style="margin-bottom:12px" id="rcount"></p>
+  <div id="rlist"></div>
+</div>
+
+<div class="view" id="v-walk">
+  <p class="sub" style="margin-bottom:10px">A scroll-through simulation of one deliberation session &mdash; one table, one right, 82 minutes. Scroll inside the frame; the mock interface on the right follows the procedure.</p>
+  <iframe id="walkframe" data-src="walkthrough.html" style="width:100%;height:calc(100vh - 230px);min-height:520px;border:1px solid #1a1a1a;background:#fff"></iframe>
 </div>
 
 <div class="view" id="v-landscape">
   <div id="scatter" style="height:540px"></div>
-  <p class="sub">Each dot is a topic — right = more approved, higher = bigger Democrat&ndash;Republican gap, bigger = more votes. The lower-right corner is where broad support meets cross-party agreement. Click a topic for each party's view.</p>
+  <p class="sub" style="margin-top:22px">Each dot is a topic — right = more approved, higher = bigger Democrat&ndash;Republican gap, bigger = more votes. The lower-right corner is where broad support meets cross-party agreement. Click a topic for each party's view.</p>
   <div id="ldetail" style="margin-top:36px"></div>
 </div>
 
@@ -70,17 +205,201 @@ tr:hover td{background:#fafafa}
 <script src="enc_data.js"></script>
 <script>
 function initApp(){
+function enhanceSelect(sel){
+  if(sel.dataset.dd)return; sel.dataset.dd=1;
+  const wrap=document.createElement('span'); wrap.className='dd';
+  sel.parentNode.insertBefore(wrap,sel); wrap.appendChild(sel);
+  const btn=document.createElement('button'); btn.type='button'; btn.className='dd-btn';
+  btn.setAttribute('aria-haspopup','listbox'); btn.setAttribute('aria-expanded','false');
+  const list=document.createElement('div'); list.className='dd-list';
+  list.setAttribute('role','listbox'); list.hidden=true;
+  wrap.append(btn,list);
+  const label=()=>{btn.textContent=(sel.options[sel.selectedIndex]||{}).text||'';};
+  label();
+  new MutationObserver(label).observe(sel,{childList:true});   // options fill in later
+  let cur=0;
+  const opts=()=>[...list.querySelectorAll('.dd-opt')];
+  function build(){
+    cur=sel.selectedIndex<0?0:sel.selectedIndex;
+    list.innerHTML='';
+    [...sel.options].forEach((o,i)=>{
+      const it=document.createElement('div');
+      it.className='dd-opt'+(i===sel.selectedIndex?' on':'')+(i===cur?' cur':'');
+      it.setAttribute('role','option'); it.setAttribute('aria-selected',i===sel.selectedIndex);
+      it.textContent=o.text; it.onclick=()=>choose(i);
+      list.appendChild(it);
+    });
+  }
+  function mark(i){cur=i;opts().forEach((o,k)=>o.classList.toggle('cur',k===i));
+    opts()[i]&&opts()[i].scrollIntoView({block:'nearest'});}
+  function open(){build();list.hidden=false;wrap.dataset.open='1';
+    btn.setAttribute('aria-expanded','true');
+    list.classList.remove('flip');                              // keep it inside the window
+    const r=list.getBoundingClientRect();
+    if(r.right>document.documentElement.clientWidth-8)list.classList.add('flip');
+    opts()[cur]&&opts()[cur].scrollIntoView({block:'nearest'});
+    document.addEventListener('mousedown',outside,true);}
+  function close(){list.hidden=true;delete wrap.dataset.open;
+    btn.setAttribute('aria-expanded','false');
+    document.removeEventListener('mousedown',outside,true);}
+  function outside(e){if(!wrap.contains(e.target))close();}
+  function choose(i){sel.selectedIndex=i;label();close();btn.focus();
+    sel.dispatchEvent(new Event('change',{bubbles:true}));}
+  btn.onclick=()=>list.hidden?open():close();
+  wrap.addEventListener('keydown',e=>{
+    if(list.hidden){
+      if(['ArrowDown','ArrowUp','Enter',' '].includes(e.key)){e.preventDefault();open();}
+      return;
+    }
+    if(e.key==='ArrowDown'){e.preventDefault();mark(Math.min(opts().length-1,cur+1));}
+    else if(e.key==='ArrowUp'){e.preventDefault();mark(Math.max(0,cur-1));}
+    else if(e.key==='Home'){e.preventDefault();mark(0);}
+    else if(e.key==='End'){e.preventDefault();mark(opts().length-1);}
+    else if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(cur);}
+    else if(e.key==='Escape'){e.preventDefault();close();btn.focus();}
+    else if(e.key.length===1){                                  // type-ahead
+      const k=e.key.toLowerCase();
+      const i=[...sel.options].findIndex((o,n)=>n>cur&&o.text.toLowerCase().startsWith(k));
+      const j=i>=0?i:[...sel.options].findIndex(o=>o.text.toLowerCase().startsWith(k));
+      if(j>=0)mark(j);
+    }
+  });
+}
+const FONT='"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace';
 const $=s=>document.querySelector(s);
 const pct=x=>x==null?'—':Math.round(x*100)+'%';
 const PAL=['#4f86c6','#e07b54','#7aa25c','#8e6bb5','#c9a227','#5aa9b8','#c65f7e','#6b7f99','#a3744f','#4fb08e','#b55d5d','#7d76c9','#87905a'];
 const T=DATA.topics, tcolor={}; T.forEach((t,i)=>tcolor[t.name]=PAL[i%PAL.length]);
-$('#hdr').textContent=`${DATA.ideas.length.toLocaleString()} citizen proposals organised into ${T.length} deliberation topics (${DATA.n_excluded} symbolic or off-topic entries set aside).`;
+$('#hdr').textContent=`${DATA.ideas.length.toLocaleString()} citizen proposals organised into ${T.length} deliberation topics.`;
 
-const TABS=[['topics','Topics'],['landscape','Consensus map'],['cross','Party views'],['rank','All proposals']];
+const TABS=[['walk','The Deliberation'],['rights','Rights'],['topics','Topics'],['landscape','Consensus Map'],['cross','Party Views'],['rank','All Proposals']];
+if(!T.some(t=>t.rights))TABS.splice(1,1);
+document.querySelectorAll('select').forEach(enhanceSelect);
 TABS.forEach(([id,l])=>{const b=document.createElement('button');b.className='tab-btn';b.textContent=l;b.id='tb-'+id;
   b.onclick=()=>show(id);$('#tabs').appendChild(b);});
 function show(id){TABS.forEach(([t])=>{$('#v-'+t).classList.toggle('on',t===id);$('#tb-'+t).classList.toggle('active',t===id);});
-  if(id==='topics')drawMap();if(id==='landscape')drawScatter();if(id==='rank')drawRank();if(id==='cross')drawCross();}
+  if(id==='topics')drawMap();if(id==='rights')drawRights();if(id==='walk'){const f=$('#walkframe');if(!f.src)f.src=f.dataset.src;}if(id==='landscape')drawScatter();if(id==='rank')drawRank();if(id==='cross')drawCross();}
+
+// ---------- rights explorer ----------
+let rightsDrawn=false, RIGHTS=[], RVIEW=[];
+const PARTY={dem:['D','#4f86c6','Democrats'],rep:['R','#e07b54','Republicans'],ind:['I','#7aa25c','Independents']};
+function drawRights(){
+  if(!rightsDrawn){rightsDrawn=true;
+    T.forEach(t=>{if(t.rights)t.rights.groups.forEach(g=>RIGHTS.push(Object.assign({topic:t.name},g)));});
+    const nP=RIGHTS.filter(r=>r.source==='participant').length;
+    const totProp=T.reduce((s,t)=>s+(t.rights?t.rights.n_proposals:0),0);
+    const grouped=RIGHTS.reduce((s,r)=>s+r.n,0);
+    const sups=RIGHTS.map(r=>r.votes.all.support).filter(x=>x!=null).sort((a,b)=>a-b);
+    $('#rtiles').innerHTML=[
+      [RIGHTS.length,'rights &mdash; each one a group of proposals asking for the same thing'],
+      [Math.round(100*nP/Math.max(1,RIGHTS.length))+'%','worded in a participant&rsquo;s own words, verified verbatim'],
+      [Math.round(100*grouped/Math.max(1,totProp))+'%','of proposals grouped into a right ('+grouped+' of '+totProp+')'],
+      [pct(sups[Math.floor(sups.length/2)]),'median support, counted from real votes']
+    ].map(x=>`<div class="tile"><div class="tnum">${x[0]}</div><div class="tlab">${x[1]}</div></div>`).join('');
+    const sel=$('#rtopic');sel.innerHTML='<option value="">All topics</option>'+T.filter(t=>t.rights).map(t=>`<option>${t.name}</option>`).join('');
+    sel.onchange=renderR;$('#rsort').onchange=renderR;$('#rq').oninput=renderR;
+    $('#rmode').onchange=renderR;}
+  renderR();}
+function toggleRightsNote(){
+  const n=$('#rnote'),b=$('#rmorebtn');const open=n.style.display!=='block';
+  n.style.display=open?'block':'none';b.textContent=open?'– hide':'+ how this works';}
+function renderR(){
+  const topic=$('#rtopic').value,q=$('#rq').value.toLowerCase(),sort=$('#rsort').value;
+  const mode=$('#rmode').value;
+  RVIEW=RIGHTS.filter(r=>(mode==='all'||r.short)&&(!topic||r.topic===topic)
+    &&(!q||(r.text+' '+r.demand+' '+r.topic).toLowerCase().includes(q)));
+  const val={support:r=>(mode==='short'?(r.mm??-1):(r.votes.all.support??-1)),dem:r=>r.votes.dem.support??-1,
+    rep:r=>r.votes.rep.support??-1,ind:r=>r.votes.ind.support??-1,
+    props:r=>r.n,votes:r=>r.votes.all.n,
+    gap:r=>{const d=r.votes.dem.support,p=r.votes.rep.support;return(d==null||p==null)?-1:Math.abs(d-p);}}[sort];
+  RVIEW.sort((a,b)=>val(b)-val(a));
+  const n=RVIEW.length;
+  const hide=mode==='short'?'none':'';
+  [$('#rtopic'),$('#rsort')].forEach(el=>{const w=el.closest('.dd')||el;w.style.display=hide;});
+  $('#rcount').textContent = mode==='short'
+    ? n+' shortlisted rights of '+RIGHTS.length+', every topic represented'
+    : n+' of '+RIGHTS.length+' rights';
+  if(mode==='short'){
+    const order={};T.forEach((t,i)=>order[t.name]=i);
+    const rs=[...RVIEW].sort((a,b)=>(order[a.topic]-order[b.topic])||((b.mm||0)-(a.mm||0)));
+    const vals=rs.map(r=>r.mm||0),lo=Math.min(...vals),hi=Math.max(...vals);
+    $('#rlist').innerHTML='<div class="rcloud">'
+      +rs.map(r=>chipR(r,RIGHTS.indexOf(r))).join('')+'</div>'
+      +'<div class="rdetail" id="rclouddet" onclick="event.stopPropagation()"></div>';
+    return;
+  }
+  $('#rlist').innerHTML=RVIEW.map(r=>rowR(r,RIGHTS.indexOf(r))).join('');}
+function pcell(r,k){
+  const c=r.votes[k],L=PARTY[k][0],col=PARTY[k][1];
+  if(!c.n)return `<span class="mut" style="white-space:nowrap">${L} &ndash;</span>`;
+  const thin=c.n<10;
+  return `<span style="white-space:nowrap"${thin?' title="fewer than 10 votes — too thin to interpret"':''}><span class="dot" style="background:${col}"></span>${L} ${Math.round(c.support*100)}%${thin?'*':''} <span class="mut">(${c.n})</span></span>`;}
+function hexA(h,a){const n=parseInt(h.slice(1),16);
+  return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;}
+function chipR(r,i){
+  const c=tcolor[r.topic];
+  const tip="Cross-party score. The share of the LEAST supportive party voting in favour of "
+    +"this right's proposals, after shrinking thin samples toward 50%. A right cannot score well "
+    +"by pleasing the majority alone, so higher means no party is left far behind.";
+  return `<div class="rchip" id="rt-${i}" onclick="toggleT(${i})" title="${r.topic}"
+    style="border-color:${c}">
+    <span class="bar" style="background:${c}"><span class="barscore" data-tip="${tip}">cross-party ${(r.mm??0).toFixed(2)}</span>
+      <span style="overflow:hidden;text-overflow:ellipsis">${r.topic}</span></span>
+    <span class="tx">${r.text}</span></div>`;}
+function toggleT(i){
+  const t=$('#rt-'+i),d=$('#rclouddet');
+  const was=d.dataset.i===String(i)&&d.classList.contains('on');
+  document.querySelectorAll('.rchip.open').forEach(x=>x.classList.remove('open'));
+  if(was){d.classList.remove('on');d.dataset.i='';return;}
+  const r=RIGHTS[i];
+  d.innerHTML=detailR(r,i);
+  d.style.borderColor=tcolor[r.topic];
+  d.classList.add('on');d.dataset.i=i;t.classList.add('open');
+  d.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+function rowR(r,i){
+  const s=r.votes.all.support;
+  const tip="Cross-party score. The share of the LEAST supportive party voting in favour of "
+    +"this right's proposals, after shrinking thin samples toward 50%. A right cannot score well "
+    +"by pleasing the majority alone, so higher means no party is left far behind.";
+  const score=r.mm!=null?`<span class="score" data-tip="${tip}"><span class="score-k">cross-party</span><span class="score-v">${r.mm.toFixed(2)}</span></span>`:'';
+  return `<div class="rrow" style="border-left-color:${tcolor[r.topic]}" onclick="toggleR(${i})">
+    <div style="display:flex;gap:10px;align-items:baseline">
+      <span id="rr-${i}-c" style="color:#888">&#9656;</span>
+      <span style="font-weight:700;flex:1">${r.text}</span>${score}</div>
+    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:.8rem">
+      <span class="mut" style="min-width:170px">${r.topic}</span>
+      <span class="track"><span class="fill" style="width:${s==null?0:s*100}%"></span></span>
+      <span>${s==null?'&ndash;':Math.round(s*100)+'%'} <span class="mut">overall</span></span>
+      ${pcell(r,'dem')} ${pcell(r,'rep')} ${pcell(r,'ind')}</div>
+    <div id="rr-${i}" class="rdetail" style="margin-top:12px;border-color:${tcolor[r.topic]}" onclick="event.stopPropagation()">${detailR(r,i,`toggleR(${i})`)}</div></div>`;}
+function detailR(r,i,closer){
+  closer=closer||('toggleT('+i+')');
+  const c=tcolor[r.topic];
+  const cell=(k,nm,col)=>{const v=r.votes[k];
+    return `<div class="tile"><div class="tnum">${v.n?Math.round(v.support*100)+'%':'–'}${v.n&&v.n<10?'<span style="font-size:1rem">*</span>':''}</div>
+      <div class="tlab">${col?`<span class="dot" style="background:${col}"></span>`:''}${nm} · ${v.pro}&#9650; ${v.against}&#9660;${k==='all'?` · ${v.voters} voters`:''}</div></div>`;};
+  let h=`<div class="dbar" style="background:${c}"><span>${r.topic}</span>
+    <span style="display:flex;gap:16px;align-items:center">
+      <span class="barscore" data-tip="Cross-party score. The share of the LEAST supportive party voting in favour of this right's proposals, after shrinking thin samples toward 50%.">cross-party ${(r.mm??0).toFixed(2)}</span>
+      <button onclick="${closer}">✕ close</button></span></div>`;
+  h+=`<div class="dbody">`;
+  h+=`<h3>${r.text}</h3>`;
+  h+=`<p class="meta">Groups <b>${r.n} proposals</b> asking for: <b>${r.demand}</b> ·
+    wording ${r.source==='participant'?'is a <b>participant&rsquo;s own sentence</b>, verified verbatim':'was <b>drafted</b>, as no proposal states the demand as a general rule'}</p>`;
+  h+=`<div class="tiles" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px">`
+    +cell('all','Everyone')+cell('dem','Democrats',PARTY.dem[1])
+    +cell('rep','Republicans',PARTY.rep[1])+cell('ind','Independents',PARTY.ind[1])+`</div>`;
+  h+=`<div class="label">The ${r.members.length} proposals behind this right <span class="mut" style="font-weight:400;text-transform:none;letter-spacing:0">&middot; written by the public on Change.org</span></div>`;
+  h+=`<p class="sub" style="margin:4px 0 6px;font-size:.75rem">Party columns show that party&rsquo;s &#9650;pro/&#9660;against votes on each proposal &mdash; they sum to the totals above.</p>`;
+  h+=`<div style="max-height:320px;overflow-y:auto"><table><tr><th>Proposal</th><th>Approval</th><th>&#9650;/&#9660;</th><th>D &#9650;/&#9660;</th><th>R &#9650;/&#9660;</th><th>I &#9650;/&#9660;</th></tr>`;
+  const cnt=(p,a)=>(p||a)?`${p}/${a}`:'&ndash;';
+  for(const m of r.members)h+=`<tr><td>${m.text}</td><td>${pct(m.approval)}</td><td class="mut">${m.pro}/${m.against}</td><td>${cnt(m.dp,m.da)}</td><td>${cnt(m.rp,m.ra)}</td><td>${cnt(m.ip,m.ia)}</td></tr>`;
+  h+=`</table></div><p class="mut" style="font-size:.75rem;margin:8px 0 0">* fewer than 10 votes from that party &mdash; too thin to interpret.</p>`;
+  h+=`</div>`;
+  return h;}
+function toggleR(i){const d=$('#rr-'+i),c=$('#rr-'+i+'-c');const on=getComputedStyle(d).display==='none';
+  d.style.display=on?'block':'none';c.innerHTML=on?'&#9662;':'&#9656;';}
 
 // ---------- topics treemap ----------
 let nodeById={}, st={focus:null, level:null};
@@ -91,7 +410,7 @@ function drawMap(){
   nodeById={};const ids=['root'],labels=['All topics'],parents=[''],values=[0],colors=[0.8],text=['<b>All topics</b><br>click any topic to explore'];
   T.forEach((t,ti)=>{
     const tid='t'+ti;nodeById[tid]=t;
-    ids.push(tid);labels.push(t.name);parents.push('root');values.push(0);
+    ids.push(tid);labels.push(t.name);parents.push('root');values.push(0);  // remainder: children carry the size
     colors.push(t.approval==null?.6:t.approval);
     text.push(`<b>${t.name}</b><br>${t.n_ideas} proposals · ${pct(t.approval)} of votes approve · D ${pct(t.party.dem.support)} / R ${pct(t.party.rep.support)} / I ${pct(t.party.ind.support)}`);
     t.subclusters.forEach((s,si)=>{
@@ -108,15 +427,18 @@ function drawMap(){
         });}
     });});
   const tr={type:'treemap',ids,labels,parents,values,text,branchvalues:'remainder',
-    textinfo:'label',hovertemplate:'%{text}<extra></extra>',textfont:{size:11,color:'#1a1a1a'},
+    textinfo:'label',hovertemplate:'%{text}<extra></extra>',textfont:{size:11,color:'#1a1a1a',family:FONT},
     marker:{colors,colorscale:[[0,'#e07b54'],[0.5,'#e8d27c'],[1,'#7aa25c']],cmin:.35,cmid:.65,cmax:1,
-      showscale:true,colorbar:{title:{text:'approval'},tickformat:'.0%',len:.55,thickness:12,outlinewidth:0}},
+      showscale:true,colorbar:{orientation:'h',x:.5,xanchor:'center',y:-.02,yanchor:'top',
+        len:.42,thickness:11,outlinewidth:0,tickformat:'.0%',ticks:'outside',ticklen:3,
+        title:{text:'Share of Votes Approving',side:'bottom'}}},
     pathbar:{visible:true,thickness:24},sort:false,
     tiling:{packing:st.focus?'binary':'squarify'},maxdepth:2};
   if(st.level)tr.level=st.level;
   Plotly.purge('tmap');
-  Plotly.newPlot('tmap',[tr],{margin:{t:30,l:2,r:2,b:2},paper_bgcolor:'#fff',
-    font:{family:'system-ui',color:'#1a1a1a'}},{responsive:true,displayModeBar:false}).then(gd=>{
+  Plotly.newPlot('tmap',[tr],{margin:{t:30,l:2,r:2,b:46},paper_bgcolor:'#fff',
+    font:{family:FONT,color:'#1a1a1a'},
+    hoverlabel:{font:{family:FONT,size:12}}},{responsive:true,displayModeBar:false}).then(gd=>{
     gd.on('plotly_click',ev=>{
       const p=ev.points[0],n=nodeById[p.id];
       if(!n){if(p.id==='root'){st={focus:null,level:null};drawMap();detailHTML(null);}return;}
@@ -185,19 +507,19 @@ function drawScatter(){
   const xmid=xs.slice().sort((a,b)=>a-b)[Math.floor(xs.length/2)];
   const ymid=ys.slice().sort((a,b)=>a-b)[Math.floor(ys.length/2)];
   const tr={x:xs,y:ys,mode:'markers+text',type:'scatter',
-    text:pts.map(p=>p.t.name),textposition:placeLabels(pts,xs,ys),textfont:{size:10,color:'#1a1a1a'},
+    text:pts.map(p=>p.t.name),textposition:placeLabels(pts,xs,ys),textfont:{size:10,color:'#1a1a1a',family:FONT},
     customdata:pts.map((_,i)=>i),
     hovertext:pts.map(p=>`<b>${p.t.name}</b><br>${pct(p.x)} of votes approve · D&minus;R gap ${Math.round(p.y*100)} pts · ${p.t.votes.toLocaleString()} votes`),
     hovertemplate:'%{hovertext}<extra></extra>',
     marker:{size:pts.map(p=>10+Math.sqrt(p.t.votes)/4),color:pts.map(p=>tcolor[p.t.name]),
       opacity:.9,line:{color:'#fff',width:1.5}}};
   const corner=(x,y,txt,anch)=>({x,y,xref:'paper',yref:'paper',text:txt,showarrow:false,
-    font:{size:9,color:'#bbb'},xanchor:anch,align:anch});
+    font:{size:9,color:'#bbb',family:FONT},xanchor:anch,align:anch});
   Plotly.purge('scatter');
   Plotly.newPlot('scatter',[tr],{margin:{t:24,l:56,r:24,b:46},paper_bgcolor:'#fff',plot_bgcolor:'#fff',
-    font:{family:'system-ui',color:'#1a1a1a',size:11},
-    xaxis:{title:{text:'share of votes approving',font:{size:11}},tickformat:'.0%',gridcolor:'#f0f0f0',zeroline:false,range:[Math.min(...xs)-.02,Math.max(...xs)+.02]},
-    yaxis:{title:{text:'partisan gap (Democrat − Republican approval)',font:{size:11}},tickformat:'+.0%',gridcolor:'#f0f0f0',zeroline:false,range:[Math.min(...ys)-.035,Math.max(...ys)+.035]},
+    font:{family:FONT,color:'#1a1a1a',size:11},hoverlabel:{font:{family:FONT,size:12}},
+    xaxis:{title:{text:'Share of Votes Approving',font:{size:11}},tickformat:'.0%',gridcolor:'#f0f0f0',zeroline:false,range:[Math.min(...xs)-.02,Math.max(...xs)+.02]},
+    yaxis:{title:{text:'Partisan Gap (Democrat − Republican Approval)',font:{size:11}},tickformat:'+.0%',gridcolor:'#f0f0f0',zeroline:false,range:[Math.min(...ys)-.035,Math.max(...ys)+.035]},
     annotations:[corner(0.99,0.99,'POPULAR, PARTIES SPLIT','right'),
                  corner(0.99,0.01,'POPULAR, CROSS-PARTY','right'),
                  corner(0.01,0.99,'CONTESTED, PARTIES SPLIT','left'),
@@ -247,8 +569,9 @@ function drawCross(){if(crossDrawn)return;crossDrawn=true;
     hovertemplate:'%{text}<extra></extra>'});
   Plotly.newPlot('cbars',[seg,mk('dem','#4f86c6','Democrats'),mk('ind','#7aa25c','Independents'),mk('rep','#e07b54','Republicans')],
     {margin:{l:265,t:6,r:16,b:36},paper_bgcolor:'#fff',plot_bgcolor:'#fff',
-     font:{family:'system-ui',color:'#1a1a1a',size:11},
-     xaxis:{tickformat:'.0%',range:[0,1.02],gridcolor:'#eee',title:{text:'share of party votes approving',font:{size:11}}},
+     font:{family:FONT,color:'#1a1a1a',size:11},hoverlabel:{font:{family:FONT,size:12}},
+     xaxis:{tickformat:'.0%',range:[0,1.02],gridcolor:'#eee',title:{text:'Share of Party Votes Approving',font:{size:11}}},
+     yaxis:{ticklen:10,tickcolor:'rgba(0,0,0,0)',automargin:true},
      showlegend:false},{responsive:true,displayModeBar:false}).then(gd=>{
       gd.on('plotly_click',ev=>crossDetail(ev.points[0].y));});
   crossDetail(null);                                      // default: cross-topic view
@@ -273,7 +596,7 @@ function crossDetail(name){
     </div></div>`;
 }
 
-show('topics');
+show('walk');
 window.crossDetail=crossDetail;   // inline onclick handlers
 }
 </script>

@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How the Deliberation Works — People's Bill of Rights</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%231a1a1a%22/><rect x=%220%22 y=%2242%22 width=%22100%22 height=%2216%22 fill=%22%23fff%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1a1a; --paper:#fff; --card:#f5f5f5; --mut:#767676; --line:#e6e2da;
+  --group:#4f86c6; --public:#e07b54; --ok:#4fb08e;
+  --serif:'Newsreader',Georgia,serif; --disp:'Archivo',system-ui,sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-snap-type:y mandatory}
+body{font-family:var(--serif);color:var(--ink);background:var(--paper);font-size:1rem;line-height:1.48}
+::selection{background:var(--ink);color:#fff}
+
+/* ---------- fixed session meter ---------- */
+#meter{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--ink);color:#fff;
+  display:flex;align-items:center;gap:14px;padding:9px 18px;font-family:var(--mono);font-size:.72rem}
+#meter .bar{flex:1;height:8px;background:#3a3a3a;position:relative}
+#meter .bar i{position:absolute;left:0;top:0;bottom:0;width:0%;background:#fff;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+#meter .step{white-space:nowrap;letter-spacing:.04em;text-transform:uppercase}
+#meter .clock{white-space:nowrap;color:#bbb}
+#dots{position:fixed;left:10px;top:50%;transform:translateY(-50%);z-index:49;display:flex;flex-direction:column;gap:7px}
+#dots i{width:7px;height:7px;background:#d8d8d8;cursor:pointer}
+#dots i.on{background:var(--ink)}
+
+/* ---------- layout ---------- */
+#wrap{display:grid;grid-template-columns:minmax(340px,1fr) minmax(430px,560px);max-width:1240px;margin:0 auto}
+#story,#stagecol{min-width:0}                          /* let the tracks shrink; no overflow here or snapping breaks */
+#story{padding:0 44px 12vh 44px;background:
+  repeating-linear-gradient(0deg, rgba(26,26,26,.014) 0 1px, transparent 1px 3px)}
+#stagecol{position:relative}
+#stage{position:sticky;top:52px;height:calc(100vh - 76px);margin:0 20px 0 0;
+  border:1px solid var(--ink);background:var(--paper);display:flex;flex-direction:column;overflow:hidden}
+#stage .chrome{background:var(--ink);color:#fff;font-family:var(--mono);font-size:.7rem;
+  padding:8px 12px;display:flex;justify-content:space-between;letter-spacing:.05em;flex:none}
+#stage .chrome .live{color:#8fd0ae}
+#stage .body{position:relative;flex:1;min-height:0}
+.screen{position:absolute;inset:0;padding:18px;opacity:0;transform:translateY(14px);
+  pointer-events:none;transition:opacity .5s ease,transform .5s ease;
+  overflow-y:auto;overflow-x:hidden;background:var(--paper)}
+.screen.on{opacity:1;transform:none;pointer-events:auto}
+
+/* ---------- narrative ---------- */
+.kick{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(2rem,4vw,2.8rem);line-height:.98;
+  letter-spacing:-.02em;border-top:6px solid var(--ink);padding-top:16px;margin:10px 0 16px}
+h2{overflow-wrap:break-word;font-family:var(--disp);font-weight:900;font-size:1.55rem;letter-spacing:-.01em;line-height:1.05;margin:6px 0 12px}
+.scene{min-height:calc(100vh - 42px);scroll-snap-align:start;scroll-snap-stop:always;
+  padding:62px 0 2vh;max-width:520px;display:flex;flex-direction:column;justify-content:flex-start}
+.scene p{margin:0 0 10px;color:#2c2c2c;overflow-wrap:break-word}
+.scene .why{font-family:var(--mono);font-size:.76rem;line-height:1.55;color:var(--ink);border-left:3px solid var(--ink);padding:3px 0 3px 14px}
+.stepno{display:flex;align-items:baseline;gap:12px;border-top:4px solid var(--ink);padding-top:10px;margin-bottom:8px}
+.stepno .n{font-family:var(--disp);font-weight:900;font-size:2.3rem;line-height:1}
+.stepno .meta{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.redact{background:var(--ink);color:#fff;padding:0 7px;white-space:nowrap}
+mark{background:#f4e9c8;padding:0 3px}
+.next{margin-top:auto;padding-top:12px;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#b3b3b3}
+
+/* ---------- shared mock-UI ---------- */
+.mlabel{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+.mcard{background:var(--card);padding:13px 15px;margin-bottom:11px}
+.tag{display:inline-block;font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid currentColor;padding:1px 7px}
+.timer{font-family:var(--mono);font-size:.68rem;color:var(--mut)}
+.caret{display:none;width:9px;height:1.05em;background:var(--ink);vertical-align:text-bottom}
+.caret.on{display:inline-block;animation:blink 1.05s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* participant tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.tile{background:var(--ink);color:#fff;aspect-ratio:1/.78;position:relative;display:flex;
+  align-items:center;justify-content:center;overflow:hidden}
+.tile .av{font-family:var(--disp);font-weight:900;font-size:1.4rem}
+.tile .nm{position:absolute;left:6px;bottom:5px;font-family:var(--mono);font-size:.55rem;letter-spacing:.05em;color:#ddd}
+.tile .mic{position:absolute;right:6px;top:6px;width:7px;height:7px;border-radius:50%;background:#555}
+.tile.speaking{outline:3px solid var(--group);outline-offset:-3px}
+.tile.speaking .mic{background:var(--ok)}
+.tile.t1 .av{color:#9ec1e8}.tile.t2 .av{color:#f0b9a2}.tile.t3 .av{color:#a9d3b1}.tile.t4 .av{color:#d8c69a}
+
+/* chat */
+.chat{display:flex;flex-direction:column;gap:8px}
+.msg{max-width:94%;opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
+.msg.on{opacity:1;transform:none}
+.msg .who{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:3px}
+.msg .bub{background:#fff;border:1px solid var(--ink);border-left:3px solid var(--group);padding:8px 11px;font-size:.86rem;line-height:1.48}
+.msg.sys .bub{background:#fff;border:1px dashed #999;border-left:1px dashed #999;font-family:var(--mono);font-size:.68rem;color:#3a3a3a}
+.msg.pub .bub{border:1px solid var(--public);border-left:3px solid var(--public);background:#faf1ec}
+.msg.pub .who{color:var(--public)}
+
+.scale{display:inline-flex;gap:3px;vertical-align:middle;margin:0 0 0 6px}
+.scale i{width:11px;height:11px;border:1px solid var(--ink);display:inline-block}
+.scale i.sel{background:var(--ink)}
+
+/* recommendation card */
+.rcard{border:1px solid var(--ink);background:#fff}
+.rcard .rhead{background:var(--ink);color:#fff;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;display:flex;justify-content:space-between}
+.rcard section{padding:9px 11px;border-bottom:1px solid #eee}
+.rcard h4{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:5px}
+.rcard li{font-size:.83rem;line-height:1.42;margin:0 0 6px 15px}
+.rcard li em{color:var(--mut);font-size:.77rem}
+.fill{opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
+.fill.on{opacity:1;transform:none}
+.diffchange{background:#faf1ec;outline:2px solid var(--public);outline-offset:2px}
+.difftag{color:var(--public);font-family:var(--mono);font-size:.6rem}
+.stamp{position:absolute;right:24px;top:80px;transform:rotate(-9deg) scale(1.6);opacity:0;
+  border:3px solid var(--ok);color:var(--ok);font-family:var(--disp);font-weight:900;
+  padding:4px 14px;font-size:1.05rem;letter-spacing:.08em;transition:all .35s cubic-bezier(.2,2,.4,1)}
+.stamp.on{opacity:1;transform:rotate(-9deg) scale(1)}
+
+.expander{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;
+  background:none;border:none;border-bottom:1px dashed var(--mut);color:var(--mut);
+  padding:0 0 1px;cursor:pointer}
+.expander:hover{color:var(--ink);border-color:var(--ink)}
+#surveymore{display:none;margin-top:9px;border:1px solid var(--ink);background:#fff}
+#surveymore .item{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:7px 10px;
+  border-bottom:1px solid #ececec;align-items:baseline}
+#surveymore .item:last-child{border-bottom:none}
+#surveymore .tg{font-family:var(--mono);font-size:.53rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--group);border:1px solid var(--group);text-align:center;padding:1px 0;line-height:1.5}
+#surveymore .t{font-size:.75rem;line-height:1.45;color:#4a4a4a}
+#surveymore .t b{display:block;font-weight:500;color:var(--ink);margin-bottom:1px}
+
+/* survey mock */
+.q{margin-bottom:14px}
+.q .qt{font-size:.9rem;font-weight:500;margin-bottom:7px}
+.opt{display:flex;align-items:center;gap:8px;font-size:.83rem;padding:3px 0;color:#333}
+.opt i{width:13px;height:13px;border:1.5px solid var(--ink);border-radius:50%;flex:none;display:inline-block}
+.opt.sel i{background:var(--ink);box-shadow:inset 0 0 0 2.5px #fff}
+.likert{display:grid;grid-template-columns:1fr repeat(5,24px);gap:4px;align-items:center;font-size:.74rem;margin-bottom:5px}
+.likert i{width:12px;height:12px;border:1.5px solid var(--ink);border-radius:50%;justify-self:center}
+.likert i.sel{background:var(--ink)}
+.ans{position:relative;background:#fff;border:1px solid var(--ink);padding:9px 11px;font-size:.86rem;min-height:52px}
+.ans .ghost{visibility:hidden}
+.ans .typed{position:absolute;left:11px;right:11px;top:9px}
+.ans{transition:border-color .5s ease}
+.ans.sending{border-color:var(--group)}
+
+/* the written answer travelling into the embedding */
+.crush{position:absolute;z-index:8;pointer-events:none}
+.crush .txt{position:absolute;inset:0;padding:9px 11px;font-size:.86rem;line-height:1.4;
+  color:var(--ink);z-index:2;animation:crushTxt 1.1s ease forwards}
+@keyframes crushTxt{0%{opacity:1}40%{opacity:0}100%{opacity:0}}
+.crush .ring{position:absolute;left:0;top:0;width:100%;height:100%;box-sizing:border-box;
+  background:#fff;border:1.5px solid var(--group);border-radius:2px;z-index:1;
+  animation:ring 1.1s cubic-bezier(.55,.05,.3,1) forwards}
+@keyframes ring{
+  0%  {left:0;top:0;width:100%;height:100%;border-radius:2px;
+       background:#fff;border-color:var(--group)}
+  52% {left:calc(50% - var(--bh)/2);top:0;width:var(--bh);height:100%;border-radius:3px;
+       background:#fff;border-color:var(--group)}
+  80% {background:#fff;border-color:var(--group)}
+  100%{left:calc(50% - 6.5px);top:calc(50% - 6.5px);width:13px;height:13px;
+       border-radius:50%;background:var(--group);border-color:var(--ink)}}
+.flyer{position:absolute;z-index:8;width:13px;height:13px;border-radius:50%;
+  background:var(--group);border:1.5px solid var(--ink);pointer-events:none;
+  will-change:transform}
+.flyer.go{animation:flyDot 1.9s cubic-bezier(.5,.05,.16,1) forwards}
+@keyframes flyDot{to{transform:translate(var(--tx),var(--ty))}}
+#minicloud .land{position:absolute;width:13px;height:13px;border-radius:50%;
+  border:2px solid var(--group);z-index:4;opacity:0}
+#minicloud .land.on{animation:land .8s ease-out forwards}
+@keyframes land{0%{opacity:.55;transform:scale(.6)}100%{opacity:0;transform:scale(2.6)}}
+
+/* mini opinion space (scene 01) */
+#minicloud{position:relative;height:94px;border:1px dashed #ccc;margin-top:2px;overflow:hidden}
+#minicloud .mc{position:absolute;width:5px;height:5px;border-radius:50%;background:#dcdcdc}
+#minicloud .me{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--group);
+  border:1.5px solid var(--ink);z-index:3;transform:scale(0);transition:transform .55s cubic-bezier(.2,1.7,.4,1)}
+#minicloud .me.instant{transition:none}
+#minicloud .me.on{transform:scale(1)}
+#minicloud .halo{position:absolute;width:13px;height:13px;border-radius:50%;border:2px solid var(--group);
+  z-index:2;opacity:0}
+#minicloud .halo.on{animation:pulse 1.25s ease-out .1s 1}
+@keyframes pulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(3.4)}}
+#minicloud .melab{position:absolute;font-family:var(--mono);font-size:.55rem;letter-spacing:.06em;
+  color:var(--group);opacity:0;transition:opacity .4s ease .5s;white-space:nowrap}
+#minicloud .melab.on{opacity:1}
+#minicloud .mclab{position:absolute;left:6px;top:5px;font-family:var(--mono);font-size:.55rem;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--mut)}
+
+.chrome .replay{float:none;background:none;border:1px solid #6b6b6b;color:#ddd;padding:1px 8px;font-size:.58rem}
+.chrome .replay:hover{background:#fff;color:var(--ink);border-color:#fff}
+.replay{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--ink);background:#fff;color:var(--ink);padding:2px 9px;cursor:pointer;float:right;
+  margin-top:-2px}
+.replay:hover{background:var(--ink);color:#fff}
+.replay:active{transform:translateY(1px)}
+
+/* clustering viz */
+#clusterbox{position:relative;height:62%;border:1px dashed #ccc;margin-bottom:12px;overflow:hidden}
+#clusterbox .divider{position:absolute;left:52%;top:6%;bottom:6%;width:1px;background:#e2e2e2}
+#clusterbox .cloudlab{position:absolute;right:2%;top:2%;width:44%;text-align:center;
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.09em;text-transform:uppercase;color:var(--mut)}
+#clusterbox .dot{position:absolute;width:12px;height:12px;border-radius:50%;background:#fff;
+  border:1.5px solid #8d8d8d;z-index:2;
+  transition:transform 1.15s cubic-bezier(.3,.7,.2,1),background-color .35s ease,
+             border-color .35s ease,box-shadow .3s ease}
+#clusterbox .dot.pick{border-color:var(--tc);background:var(--tc);box-shadow:0 0 0 4px var(--tcf);z-index:3}
+#clusterbox .dot.go{border-color:var(--tc);background:var(--tc);transform:translate(var(--tx),var(--ty))}
+#clusterbox .shead{position:absolute;font-family:var(--mono);font-size:.55rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .5s ease}
+#clusterbox .shead.on{opacity:1}
+#clusterbox .tbox{position:absolute;pointer-events:none}
+#clusterbox .tbox svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#clusterbox .tbox rect{fill:none;stroke:currentColor;stroke-width:2.5;vector-effect:non-scaling-stroke;
+  stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset .75s ease}
+#clusterbox .tbox.drawn rect{stroke-dashoffset:0}
+#clusterbox .tlab{position:absolute;left:5px;top:2px;font-family:var(--mono);font-size:.52rem;
+  letter-spacing:.06em;opacity:0;transition:opacity .4s ease .5s}
+#clusterbox .tbox.drawn .tlab{opacity:1}
+
+/* info slide */
+.slide{background:var(--ink);color:#fff;padding:20px;height:58%;display:flex;flex-direction:column;justify-content:center}
+.slide .big{font-family:var(--disp);font-weight:900;font-size:1.4rem;line-height:1.15;margin-bottom:11px}
+.slide p{font-size:.88rem;color:#cfcfcf;line-height:1.5}
+.slide .a4{color:#fff;border-left:4px solid var(--group);padding-left:12px;margin-top:10px;font-size:.88rem}
+
+/* flow diagram */
+.flow{display:flex;flex-direction:column;margin-top:8px}
+.fnode{border:1px solid var(--ink);padding:9px 13px;font-size:.83rem;background:#fff}
+.fnode b{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;display:block;color:var(--mut);margin-bottom:3px}
+.farr{align-self:center;font-family:var(--mono);color:var(--mut);padding:3px 0;font-size:.8rem}
+
+@media (max-width:980px){
+  #wrap{grid-template-columns:1fr}
+  #stagecol{display:none}
+  .scene{height:auto;min-height:calc(100vh - 42px)}
+  #story{padding:0 20px 12vh}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-snap-type:none}
+}
+</style></head><body data-scene="-1">
+
+<div id="meter">
+  <span class="step" id="mstep">The People's Bill of Rights · Session walkthrough</span>
+  <div class="bar"><i id="mbar"></i></div>
+  <span class="clock" id="mclock">0 / 82 MIN</span>
+</div>
+<div id="dots"></div>
+
+<div id="wrap">
+<div id="story">
+
+  <!-- ============ HERO ============ -->
+  <section class="scene" data-scene="0">
+    <h1>How a deliberation session works</h1>
+    <p>A walkthrough of one deliberation session. The panel on the right simulates the
+    participant's interface, and changes as you scroll.</p>
+    <p>Each session is organized around one high-level right, which sounds reasonable in
+    the abstract but involves real trade-offs once participants decide what it should
+    protect. This table was assigned the right below.</p>
+    <p style="font-family:var(--disp);font-weight:700;font-size:1.1rem;line-height:1.3">
+      &ldquo;People should have the right to <span class="redact">privacy of their own data</span>.&rdquo;</p>
+    <div class="next">Scroll to move through the steps ↓</div>
+  </section>
+
+  <!-- ============ STEP 1 SURVEY ============ -->
+  <section class="scene" data-scene="1">
+    <div class="stepno"><span class="n">01</span><span class="meta">Opening survey · 10 min</span></div>
+    <h2>The opening survey</h2>
+    <p>Participants complete a survey privately before the discussion begins. The first
+    question records the participant's own proposal on the topic, and it also places them in
+    an opinion space built from the public's comments on that right, which is the position
+    the table assignments are based on.</p>
+    <p>The participant shown here is Ray, a retired Army veteran from Texas.</p>
+    <p class="why">The survey also records how strongly the participant feels about the
+    topic, their agreement with a set of statements spanning the political spectrum,
+    demographic information, and a baseline measure of polarization.</p>
+    <div class="next">Continue to the briefing ↓</div>
+  </section>
+
+  <!-- ============ STEP 2 INFO ============ -->
+  <section class="scene" data-scene="2">
+    <div class="stepno"><span class="n">02</span><span class="meta">Information session · 7 min</span></div>
+    <h2>The information session</h2>
+    <p>All participants receive the same briefing while the tables are being formed. The
+    main point of the briefing is that a right in the Bill of Rights is a legal constraint
+    rather than a statement of values. The Fourth Amendment does not say that privacy is
+    important, it requires that searches be authorized by a warrant. Groups are asked to
+    write at that level of specificity.</p>
+    <p>The briefing also tells participants that the cards their groups produce will be
+    reviewed by the wider public.</p>
+    <div class="next">Continue to the table assignments ↓</div>
+  </section>
+
+  <!-- ============ STEP 2B TABLES ============ -->
+  <section class="scene" data-scene="3">
+    <div class="stepno"><span class="n">02·b</span><span class="meta">Table assignment · concurrent</span></div>
+    <h2>Assigning participants to tables</h2>
+    <p>While participants are watching the information session, they are being sorted into
+    tables. Each dot is one participant's survey answer, placed in the opinion space produced
+    by the embedding. Dots that sit close together are participants who wrote similar
+    answers.</p>
+    <p>Table composition is itself part of the experiment. Tables are assigned low, medium
+    or high viewpoint diversity, which is visible in the shape each selection makes within
+    the cloud. The table followed here, T5, draws its members from across the space.</p>
+    <p class="why">Randomizing the diversity of tables allows its effects on deliberation
+    to be measured.</p>
+    <div class="next">Continue to the table itself ↓</div>
+  </section>
+
+  <!-- ============ STEP 3 ICEBREAKER ============ -->
+  <section class="scene" data-scene="4">
+    <div class="stepno"><span class="n">03</span><span class="meta">Icebreaker &amp; guidelines · 5 min</span></div>
+    <h2>Icebreaker and discussion guidelines</h2>
+    <p>Each participant takes 30 to 45 seconds to give their name, where they are from, and
+    what they do. They also name one discussion guideline that they consider important and
+    explain briefly why they chose it. Asking participants to state a guideline in their own
+    words is intended to produce more commitment to it than reading them a list of rules
+    would.</p>
+    <p class="why">The guidelines are adapted from the Citizens' Assembly on Brexit and
+    from National Issues Forums materials.</p>
+    <div class="next">Continue to the situations ↓</div>
+  </section>
+
+  <!-- ============ STEP 4a SITUATIONS ============ -->
+  <section class="scene" data-scene="5">
+    <div class="stepno"><span class="n">04·a</span><span class="meta">Situations · 7 min</span></div>
+    <h2>Sharing situations</h2>
+    <p>Participants spend two minutes thinking privately about one situation, real or
+    hypothetical, that makes this right feel important, difficult, or uncertain to them.
+    Each person then has one uninterrupted minute to describe that situation, in clockwise
+    order. Participants are asked to listen at this stage rather than respond to each
+    other.</p>
+    <p class="why">Beginning with personal experience rather than with stated opinions
+    follows National Issues Forums and Citizens' Assembly practice, and it gives the group
+    concrete cases that the recommendation card can refer back to.</p>
+    <div class="next">Continue to the brainstorm ↓</div>
+  </section>
+
+  <!-- ============ STEP 4b BRAINSTORM ============ -->
+  <section class="scene" data-scene="6">
+    <div class="stepno"><span class="n">04·b</span><span class="meta">Brainstorm · 10 min</span></div>
+    <h2>Brainstorming under three headings</h2>
+    <p>A scribe records the discussion under three headings, which are what good the right
+    would do, who people need protection from, and what the right could cost or where it
+    could go wrong. Participants are asked to record specific points rather than general
+    themes, and to record disagreements as well as areas of agreement.</p>
+    <p class="why">The three headings correspond directly to the sections of the
+    recommendation card, so the group is already drafting the card while it brainstorms.</p>
+    <div class="next">Continue to the card ↓</div>
+  </section>
+
+  <!-- ============ STEP 4c CARD ============ -->
+  <section class="scene" data-scene="7">
+    <div class="stepno"><span class="n">04·c</span><span class="meta">Draft the card · 11 min</span></div>
+    <h2>Drafting the recommendation card</h2>
+    <p>The group records which protections should be given, which should not be given, and
+    which ones it remains uncertain about. Each entry carries a brief justification, which
+    where possible refers back to a situation a participant described earlier.</p>
+    <p>Because the card requires the group to decline some protections, and provides a place
+    for unresolved disagreement, full consensus is not required.</p>
+    <p class="why">Recording a recommendation together with its rationale and its
+    trade-offs follows the practice of Climate Assembly UK and of the Gdańsk citizens'
+    assembly.</p>
+    <div class="next">Continue to the public comments ↓</div>
+  </section>
+
+  <!-- ============ STEP 5 DIFFUSION ============ -->
+  <section class="scene" data-scene="8">
+    <div class="stepno"><span class="n">05</span><span class="meta">Diffusion stress-test · 20 min</span></div>
+    <h2>The diffusion stress test</h2>
+    <p>The group is shown two comments from the public, one that bridges positions and one
+    from the position furthest from this group. For each comment the group reads it silently,
+    goes around once to say whether it reveals a gap, records a decision, writes a
+    justification addressed to the commenter, and rates how useful the comment was.</p>
+    <p>Any change to the card is tagged with the comment that prompted it.</p>
+    <p class="why">Tagging changes in this way distinguishes revisions that public input
+    caused from revisions the group made on its own.</p>
+    <div class="next">Continue to the exit survey ↓</div>
+  </section>
+
+  <!-- ============ STEP 6+7 WRAPUP ============ -->
+  <section class="scene" data-scene="9">
+    <div class="stepno"><span class="n">06·07</span><span class="meta">Reconvene · exit survey · 12 min</span></div>
+    <h2>Reconvening and the exit survey</h2>
+    <p>The group submits its card, participants reconvene, and everyone completes a short
+    exit survey. It repeats the polarization measure from the opening survey and asks how
+    participants feel about their group's recommendation. One available answer is that the
+    participant does not fully agree with it but accepts it because the group arrived at it
+    democratically.</p>
+    <div class="next">Continue to what happens afterwards ↓</div>
+  </section>
+
+  <!-- ============ EPILOGUE ============ -->
+  <section class="scene" data-scene="10">
+    <div class="stepno"><span class="n" style="display:flex;align-items:center"><svg width="37" height="37" viewBox="0 0 30 30" aria-hidden="true"><path d="M0 9h12V2l18 13-18 13v-7H0z" fill="#1a1a1a"/></svg></span><span class="meta">After the session</span></div>
+    <h2>What happens to the cards</h2>
+    <p>Each card becomes a portable deliberation object containing the recommendation, the
+    lived experiences behind it, the record of what the diffusion step changed, and where
+    each part came from.</p>
+    <p>The five cards for each right are consolidated and returned to the wider public,
+    which is asked which protections bridge disagreement, which polarize, and which should
+    be prioritized. The public writes the comments, small groups deliberate over them, and
+    the public reads what the deliberation produced.</p>
+    <p style="margin-top:18px" class="kick">People's Bill of Rights · session design v1 · from the Moonshot collab doc</p>
+  </section>
+
+</div>
+
+<!-- ================= STAGE ================= -->
+<div id="stagecol"><div id="stage">
+  <div class="chrome"><span>PBOR · SESSION 12 · TABLE 5 · DATA PRIVACY</span>
+    <span style="display:flex;gap:10px;align-items:center">
+      <button class="replay" id="replaybtn" onclick="replayCurrent()">↻ replay</button>
+      <span class="live">● LIVE</span></span></div>
+  <div class="body">
+
+    <!-- S0 lobby -->
+    <div class="screen on" data-for="0">
+      <div class="mlabel">Waiting room</div>
+      <div class="mcard" style="padding:20px">
+        <div class="kick" style="margin-bottom:6px">Your table's right</div>
+        <div style="font-family:var(--disp);font-weight:900;font-size:1.2rem;line-height:1.2">
+          &ldquo;People should have the right to privacy of their own data.&rdquo;</div>
+      </div>
+      <div class="mcard" style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:.84rem">Session begins shortly</span><span class="timer">82:00</span></div>
+      <div class="mlabel" style="margin-top:14px">Today</div>
+      <div style="font-family:var(--mono);font-size:.7rem;line-height:1.95">
+        01 Opening survey, 10 min<br>02 Information and tables, 7 min<br>03 Icebreaker, 5 min<br>
+        04 Discuss and draft card, 28 min<br>05 Public-comment stress test, 20 min<br>06 Reconvene, 5 min<br>07 Exit survey, 7 min</div>
+    </div>
+
+    <!-- S1 survey -->
+    <div class="screen" data-for="1">
+      <div class="mlabel" style="display:flex;align-items:center;gap:10px">
+        <span>Opening survey · private</span>
+        <span style="margin-left:auto">RAY · 1 OF 4 ANSWERING</span></div>
+      <div class="q"><div class="qt">On the claim that <em>&ldquo;people should have the right to
+        privacy of their own data&rdquo;</em>, what would you like to see in a People's Bill of Rights?</div>
+        <div class="ans"><span class="ghost">Companies selling my information without asking is theft. But I don't want rules that stop police catching predators either.</span><span class="typed"><span class="fill seq" id="a1"></span><span class="caret" id="a1caret"></span></span></div></div>
+      <div class="fill seq" id="a4" style="margin-top:10px">
+        <div class="mlabel" style="margin-bottom:5px">What happens to that answer</div>
+        <div id="minicloud"><div class="mclab">public comments on this right</div></div>
+        <div style="font-family:var(--mono);font-size:.58rem;color:var(--mut);margin-top:3px">
+          The sentence itself is projected into this space. Participants who are near
+          each other wrote similar answers.</div>
+      </div>
+      <div class="fill seq" id="a3" style="margin-top:2px">
+        <button class="expander" id="surveybtn" onclick="toggleSurvey()">+ what else the survey asks</button>
+        <div id="surveymore">
+          <div class="item"><span class="tg">same q</span><span class="t"><b>How strongly you feel</b>
+            Not at all → extremely strongly, or &ldquo;I don't know enough to say.&rdquo;</span></div>
+          <div class="item"><span class="tg">ruler</span><span class="t"><b>Spectrum statements</b>
+            Agreement with fixed statements spanning US politics on this right, used to judge whether
+            a table is diverse relative to the <em>public</em> rather than only relative to this
+            room.</span></div>
+          <div class="item"><span class="tg">context</span><span class="t"><b>Feeling about US politics</b>
+            Very positively → very negatively.</span></div>
+          <div class="item"><span class="tg">baseline</span><span class="t"><b>Affective polarization</b>
+            Asked again in the exit survey, so that any change over the session can be
+            measured.</span></div>
+          <div class="item"><span class="tg">who</span><span class="t"><b>Demographics</b>
+            Age, education, state, urban/suburban/rural, political leaning, party.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2 info slide -->
+    <div class="screen" data-for="2">
+      <div class="mlabel">Information session · all participants <span style="float:right" class="timer">7:00</span></div>
+      <div class="slide">
+        <div class="kick" style="color:#9a9a9a">What is a right?</div>
+        <div class="big">A right is a legal constraint,<br>not a value statement.</div>
+        <p>The Fourth Amendment doesn't say privacy matters.</p>
+        <div class="a4">It requires that searches be authorized by a <b>warrant</b>, which
+        is a specific protection against a specific actor. Your group will write at that
+        level today.</div>
+      </div>
+      <div class="mcard fill seq" id="inf1" style="margin-top:12px;font-size:.84rem">The card your
+        group produces will be reviewed by the wider public, including the people whose
+        comments you will respond to.</div>
+    </div>
+
+    <!-- S2b clustering -->
+    <div class="screen" data-for="3" id="scr2b">
+      <div class="mlabel">Backstage · composing tables from survey answers</div>
+      <div id="clusterbox"><div class="divider"></div><div class="cloudlab">opinion space, where nearness means similar answers</div></div>
+      <div class="mcard fill seq" id="cl1" style="border-left:3px solid var(--group)">
+        <b style="font-family:var(--mono);font-size:.68rem">ONE POOL · THREE TABLE TYPES</b>
+        <div style="font-size:.81rem;margin-top:4px;color:#444">On the right, every
+        participant is placed in the opinion space. On the left, tables are filled one at a
+        time. Low diversity tables take participants who are near each other, and high
+        diversity tables take participants from across the space. The table followed here is
+        <b style="color:var(--group)">T5</b>, whose members are Maya, Ray, Priya and Tom.</div>
+      </div>
+    </div>
+
+    <!-- S4..S8 table -->
+    <div class="screen" data-for="4 5 6 7 8" id="tableview">
+      <div class="tiles">
+        <div class="tile t1" id="tile1"><span class="av">M</span><span class="nm">MAYA · OH</span><span class="mic"></span></div>
+        <div class="tile t2" id="tile2"><span class="av">R</span><span class="nm">RAY · TX</span><span class="mic"></span></div>
+        <div class="tile t3" id="tile3"><span class="av">P</span><span class="nm">PRIYA · NC</span><span class="mic"></span></div>
+        <div class="tile t4" id="tile4"><span class="av">T</span><span class="nm">TOM · WI</span><span class="mic"></span></div>
+      </div>
+
+      <!-- icebreaker chat -->
+      <div class="chat cf" data-for="4">
+        <div class="msg sys on"><div class="bub">STEP 03 · Introduce yourself + one guideline you care about</div></div>
+        <div class="msg seq" id="i1" data-sp="tile1"><div class="who">Maya, ICU nurse, Columbus OH</div><div class="bub">I'll take
+          &ldquo;speak up about discomfort.&rdquo; In my job the quietest person in the room usually
+          knows something the loud ones don't.</div></div>
+        <div class="msg seq" id="i2" data-sp="tile2"><div class="who">Ray, retired Army, Lubbock TX</div><div class="bub">&ldquo;Respect
+          people, even when you strongly disagree.&rdquo; Y'all are going to disagree with me by
+          about minute six, so let's lock that one in early. <span style="opacity:.6">🙂</span></div></div>
+        <div class="msg seq" id="i3" data-sp="tile3"><div class="who">Priya, software engineer, Raleigh NC</div><div class="bub">&ldquo;Speak
+          for yourself.&rdquo; I build ad-tech systems, but I'm not here as the industry's lawyer —
+          just someone who's seen the inside.</div></div>
+        <div class="msg seq" id="i4" data-sp="tile4"><div class="who">Tom, dairy farmer, Eau Claire WI</div><div class="bub">&ldquo;Make room
+          for people who've spoken less.&rdquo; That'll be me. I mostly want us to actually finish
+          the card.</div></div>
+      </div>
+
+      <!-- situations chat -->
+      <div class="chat cf" data-for="5" style="display:none">
+        <div class="msg sys on"><div class="bub">STEP 04 · One minute each: a situation that makes this right feel important, difficult, or uncertain</div></div>
+        <div class="msg seq" id="s1" data-sp="tile1"><div class="who">Maya</div><div class="bub">A patient found out her
+          hospital had shared her records with a data broker — perfectly legally. She asked me,
+          &ldquo;who else knows?&rdquo; and I had no answer. There's no way to even find out.</div></div>
+        <div class="msg seq" id="s2" data-sp="tile2"><div class="who">Ray</div><div class="bub">Our town put up license-plate
+          cameras on every road in. My neighbor loves them — burglaries went down. I drive past
+          eight a day and something in me says: I'm not a suspect, stop logging me.</div></div>
+        <div class="msg seq" id="s3" data-sp="tile3"><div class="who">Priya</div><div class="bub">I watched a product meeting
+          where &ldquo;consent&rdquo; meant page 40 of the terms of service. We knew nobody read it.
+          The uncertain part: half of what people love only works because of that data.</div></div>
+        <div class="msg seq" id="s4" data-sp="tile4"><div class="who">Tom</div><div class="bub">My milk co-op's software
+          knows my whole operation — yields, debts, everything. Contract says they can sell
+          &ldquo;aggregated insights.&rdquo; To the processors I negotiate against, probably.
+          That's my livelihood, not just my privacy.</div></div>
+      </div>
+
+      <!-- brainstorm -->
+      <div class="cf" data-for="6" style="display:none">
+        <div class="mlabel">Scribe notes, taken by Priya <span style="float:right" class="timer">10:00</span></div>
+        <div class="mcard fill seq" id="b1"><b style="font-size:.76rem;font-family:var(--mono)">1 · WHAT GOOD WOULD IT DO?</b>
+          <div style="font-size:.81rem;margin-top:5px">Maya's patient could <u>find out who holds her
+          records</u>. Tom could stop his own business data being sold against him. A floor under
+          everyone, not just people who read page 40.</div></div>
+        <div class="mcard fill seq" id="b2"><b style="font-size:.76rem;font-family:var(--mono)">2 · PROTECTION FROM WHOM?</b>
+          <div style="font-size:.81rem;margin-top:5px">Data brokers. Employers, in hiring and
+          insurance (Maya). Platforms that bury consent in the terms of service. Ray adds
+          <u>government collection as well</u>, not only corporations. Priya disagrees, and does
+          not want useful services made unworkable.</div></div>
+        <div class="mcard fill seq" id="b3"><b style="font-size:.76rem;font-family:var(--mono)">3 · COSTS / WHERE IT GOES WRONG?</b>
+          <div style="font-size:.81rem;margin-top:5px">Ray thinks it could shield predators, so an
+          exception with a warrant is needed. Priya notes that the compliance burden falls on
+          small builders. Tom expects "aggregate" loopholes to be abused. <u>The group disagrees
+          about ad-funded services.</u></div></div>
+      </div>
+
+      <!-- card draft + diffusion -->
+      <div class="cf" data-for="7 8" style="display:none">
+        <div class="mlabel" data-for7>Recommendation card, being drafted <span style="float:right" class="timer">11:00</span></div>
+        <div class="chat" data-for8 style="display:none;margin-bottom:10px">
+          <div class="msg sys seq" id="d1"><div class="bub">COMMENT 1 OF 2 · READ SILENTLY, 1 MIN.
+            Each person decides privately whether it raises something the card does not cover.</div></div>
+          <div class="msg pub seq" id="d1b"><div class="who">From the maxipublic</div>
+            <div class="bub">&ldquo;flock cameras gotta go. im more than a number on my chest.&rdquo;</div></div>
+          <div class="msg sys seq" id="d1c"><div class="bub">GO AROUND ONCE, 3.5 MIN.
+            Each person says in one sentence whether the comment reveals a gap.</div></div>
+          <div class="msg seq" id="d2" data-sp="tile2"><div class="who">Ray</div><div class="bub">He is talking about the
+            same cameras I drive past every day, and he said it better than I did. But I still
+            do not want the burglaries back. Our warrant line answers him halfway.</div></div>
+          <div class="msg seq" id="d3" data-sp="tile1"><div class="who">Maya</div><div class="bub">Halfway. The card stops
+            <em>searches</em> without a warrant. It does not stop the government from
+            <em>buying</em> the same plate data from a broker. That is a gap.</div></div>
+          <div class="msg seq" id="d3b" data-sp="tile3"><div class="who">Priya</div><div class="bub">Then we should close
+            that gap rather than ban the cameras. Agencies cannot buy what they would need a
+            warrant to collect.</div></div>
+          <div class="msg sys seq" id="d3c"><div class="bub">RECORD THE DECISION, 1.5 MIN.
+            Scribe records a change to the card, tagged to comment 1.</div></div>
+          <div class="msg sys seq" id="d5"><div class="bub">JUSTIFICATION TO THE COMMENTER, 2 MIN.
+            &ldquo;We did not ban the cameras, because two of us think targeted use with a warrant
+            is legitimate. Your comment showed that the government could buy its way around our
+            warrant rule, so we closed that.&rdquo;</div></div>
+          <div class="msg sys seq" id="d6"><div class="bub">RATE THE COMMENT, 0.5 MIN.
+            How useful was this comment to your discussion?
+            <span class="scale"><i></i><i></i><i></i><i class="sel"></i><i></i></span><br>
+            Comment 2 of 2 then runs through the same steps.</div></div>
+        </div>
+        <div class="rcard">
+          <div class="rhead"><span>Recommendation card · Table 5</span><span>Data privacy</span></div>
+          <section><h4>Protections that should be given</h4><ul>
+            <li class="fill seq7" id="c1">Right to see who holds and receives your personal data
+              <em>(from Maya's patient, who had no way to ask)</em></li>
+            <li class="fill seq7" id="c2">Consent to sale or sharing must be explicit and
+              separate, rather than buried in the terms of service
+              <em>(from Priya's product meeting)</em></li>
+            <li class="fill seq8 diffchange" id="d4">Government agencies may not purchase personal data
+              they would otherwise need a warrant to collect
+              <span class="difftag">← added in response to public comment 1</span></li>
+          </ul></section>
+          <section><h4>Protections that should <u>not</u> be given</h4><ul>
+            <li class="fill seq7" id="c3">No absolute shield against lawful, warrant-backed
+              investigation <em>(Ray's exception, agreed 4 to 0)</em></li>
+          </ul></section>
+          <section><h4>Uncertain / couldn't agree</h4><ul>
+            <li class="fill seq7" id="c4">Whether ad-funded services can count as "payment with data"
+              if disclosed <em>(split 2 to 2, with both views recorded)</em></li>
+          </ul></section>
+        </div>
+        <div class="stamp" id="stamp">SUBMITTED</div>
+      </div>
+    </div>
+
+    <!-- S9 exit -->
+    <div class="screen" data-for="9">
+      <div class="mlabel">Exit survey · private <span style="float:right" class="timer">7:00</span></div>
+      <div class="q fill seq" id="e1"><div class="qt">How do you feel about the recommendations made by your group?</div>
+        <div class="opt"><i></i>I agree, and the process was fair</div>
+        <div class="opt sel"><i></i>I don't completely agree, but we came to it democratically, so I can accept it</div>
+        <div class="opt"><i></i>I agree, but the process wasn't fair</div>
+        <div class="opt"><i></i>I don't agree, and I don't accept it</div></div>
+      <div class="q fill seq" id="e2"><div class="qt" style="margin-bottom:9px">From today's discussion…</div>
+        <div class="likert"><span>People listened to one another respectfully</span><i></i><i></i><i></i><i class="sel"></i><i></i></div>
+        <div class="likert"><span>Others heard and understood my views</span><i></i><i></i><i></i><i></i><i class="sel"></i></div>
+        <div class="likert"><span>Even in disagreement, people made serious arguments</span><i></i><i></i><i></i><i class="sel"></i><i></i></div>
+        <div class="likert"><span>No particular view was favored</span><i></i><i></i><i></i><i class="sel"></i><i></i></div>
+        <div class="likert"><span>My group was ideologically diverse</span><i></i><i></i><i></i><i></i><i class="sel"></i></div>
+        <div style="font-family:var(--mono);font-size:.58rem;color:var(--mut);text-align:right;margin-top:2px">← strongly disagree · strongly agree →</div></div>
+      <div class="mcard fill seq" id="e3" style="font-size:.84rem;font-style:italic">"If your perspective
+        changed during this deliberation, how did it change and why?"</div>
+    </div>
+
+    <!-- S10 epilogue flow -->
+    <div class="screen" data-for="10">
+      <div class="mlabel">After the session · the deliberation object</div>
+      <div class="flow">
+        <div class="fnode fill seq" id="f1"><b>Recommendation card</b>The protections given, withheld and left uncertain, with reasons that refer to the situations participants described</div>
+        <div class="farr fill seq" id="f2">↓ + transcript</div>
+        <div class="fnode fill seq" id="f3"><b>Lived experience</b>The situations participants shared, taken from the transcript</div>
+        <div class="farr fill seq" id="f4">↓ + tagged changes</div>
+        <div class="fnode fill seq" id="f5" style="border-color:var(--public)"><b style="color:var(--public)">Diffusion record</b>What the public comments changed, together with the justifications the group wrote in response</div>
+        <div class="farr fill seq" id="f6">↓ × 5 tables per right</div>
+        <div class="fnode fill seq" id="f7" style="background:var(--ink);color:#fff"><b style="color:#aaa">Back to the maxipublic</b>The consolidated protections, reviewed for which ones bridge, which polarize, and which to prioritize</div>
+      </div>
+    </div>
+
+  </div>
+</div></div>
+</div>
+
+<script>
+const MIN = {0:0,1:10,2:17,3:17,4:22,5:35,6:44,7:50,8:70,9:82,10:82};
+const STEP = {0:'Session walkthrough',1:'Step 01 · Opening survey',2:'Step 02 · Information',
+  3:'Step 02b · Table assignment',4:'Step 03 · Icebreaker',5:'Step 04a · Situations',
+  6:'Step 04b · Brainstorm',7:'Step 04c · Recommendation card',8:'Step 05 · Diffusion stress-test',
+  9:'Steps 06–07 · Wrap-up & exit survey',10:'After the session'};
+// what plays, in order, when each scene locks in  [id, delay-ms-after-previous]
+const SEQ = {
+  1:[['a1',700],['a4',2500],['a3',3500]],
+  2:[['inf1',1800]],
+  3:[['cl1',1900]],
+  4:[['i1',900],['i2',2300],['i3',2300],['i4',2300]],
+  5:[['s1',900],['s2',2800],['s3',2800],['s4',2800]],
+  6:[['b1',800],['b2',2200],['b3',2200]],
+  7:[['c1',800],['c2',1700],['c3',1700],['c4',1700]],
+  8:[['d1',700],['d1b',1500],['d1c',2200],['d2',1500],['d3',2600],['d3b',2600],['d3c',2200],['d5',2100],['d6',2500],['d4',1600]],
+  9:[['e1',700],['e2',1600],['e3',1600]],
+  10:[['f1',500],['f2',700],['f3',700],['f4',700],['f5',700],['f6',700],['f7',700]],
+};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+let timers=[];
+
+// mini opinion space (scene 01) — same 2D idea as 02b, one answer landing in it
+window._RAY=[62,34];                                   // shared with the full cloud below
+(function(){
+  const box=document.getElementById('minicloud'); if(!box)return;
+  const rnd=(a,b)=>a+Math.random()*(b-a);
+  for(let k=0;k<46;k++){                                // faint dots = public comments
+    const d=document.createElement('div'); d.className='mc';
+    d.style.left=rnd(6,95)+'%'; d.style.top=rnd(14,86)+'%';
+    box.appendChild(d);
+  }
+  const [x,y]=window._RAY;
+  const land=document.createElement('div'); land.className='land';
+  land.style.cssText=`left:${x}%;top:${y}%`; box.appendChild(land);
+  const halo=document.createElement('div'); halo.className='halo';
+  halo.style.cssText=`left:${x}%;top:${y}%`; box.appendChild(halo);
+  const me=document.createElement('div'); me.className='me';
+  me.style.cssText=`left:${x}%;top:${y}%`; box.appendChild(me);
+  const lab=document.createElement('div'); lab.className='melab';
+  lab.style.cssText=`left:${x+4.5}%;top:${y-13}%`; lab.textContent="RAY'S ANSWER";
+  box.appendChild(lab);
+  window._miniLand=function(){                           // the flight delivered the dot
+    me.classList.add('instant'); me.classList.add('on');
+    requestAnimationFrame(()=>me.classList.remove('instant'));
+    lab.classList.add('on');
+  };
+  window._miniPlay=function(){
+    [me,halo,lab].forEach(e=>e.classList.remove('on'));
+    void me.offsetWidth;                                // restart the animation
+    setTimeout(()=>[me,halo,lab].forEach(e=>e.classList.add('on')),40);
+  };
+  window._miniReset=function(){[me,halo,lab].forEach(e=>e.classList.remove('on'));};
+})();
+
+// build cluster viz: 2D opinion cloud (right) -> tables by diversity level (left)
+(function(){
+  const box=document.getElementById('clusterbox'); if(!box)return;
+  const rnd=(a,b)=>a+Math.random()*(b-a);
+  // four loose neighbourhoods in the cloud, so "near" and "far" picks are real
+  const CLUMPS=[[66,29],[88,37],[64,65],[87,73]];
+  const pts=[];
+  CLUMPS.forEach((c,ci)=>{ for(let k=0;k<6;k++)
+    pts.push({ci,x:c[0]+rnd(-6.5,6.5),y:c[1]+rnd(-8.5,8.5)}); });
+  const of=(ci,k)=>ci*6+k;
+  // low = 4 from one neighbourhood · medium = 2+2 from two adjacent · high = 1 from each
+  const TABLES=[
+    {sec:0,col:0,color:'#c9a227',label:'T1',members:[0,1,2,3]},
+    {sec:0,col:1,color:'#8e6bb5',label:'T2',members:[6,7,8,9]},
+    {sec:1,col:0,color:'#7aa25c',label:'T3',members:[12,13,18,19]},
+    {sec:1,col:1,color:'#c65f7e',label:'T4',members:[14,15,20,21]},
+    {sec:2,col:0,color:'#4f86c6',label:'T5',members:[4,10,16,22]},
+    {sec:2,col:1,color:'#5aa9b8',label:'T6',members:[5,11,17,23]},
+  ];
+  const SECT=[[0,'Low diversity'],[1,'Medium'],[2,'High diversity']];
+  const ROW=[8,40.5,73], TH=19, COLX=[4,27.5], TW=21;
+  SECT.forEach(([r,name])=>{
+    const h=document.createElement('div'); h.className='shead';
+    h.style.cssText=`left:4%;top:${ROW[r]-6.5}%`;
+    h.textContent=name;
+    box.appendChild(h);
+  });
+  const dots=pts.map(pt=>{
+    const d=document.createElement('div'); d.className='dot';
+    d.style.left=pt.x+'%'; d.style.top=pt.y+'%';
+    box.appendChild(d); return d;
+  });
+  const seat=[[30,38],[70,38],[30,74],[70,74]];
+  TABLES.forEach(t=>{
+    const l=COLX[t.col], top=ROW[t.sec];
+    const el=document.createElement('div'); el.className='tbox';
+    el.style.cssText=`left:${l}%;top:${top}%;width:${TW}%;height:${TH}%;color:${t.color}`;
+    el.innerHTML='<svg viewBox="0 0 100 100" preserveAspectRatio="none">'+
+      '<rect x="1" y="1.5" width="98" height="97" pathLength="100"/></svg>'+
+      `<span class="tlab" style="color:${t.color}">${t.label}</span>`;
+    box.appendChild(el);
+    t.members.forEach((m,i)=>{
+      dots[m].dataset.color=t.color;
+      dots[m].dataset.seat=JSON.stringify([l+TW*seat[i][0]/100, top+TH*seat[i][1]/100]);
+    });
+  });
+  window._clusterArm=function(){
+    if(box.dataset.armed)return; box.dataset.armed=1;
+    const W=box.clientWidth,H=box.clientHeight;
+    const R=dots[0].offsetWidth/2||6;          // dot is positioned by its corner
+    dots.forEach(d=>{
+      const [sx,sy]=JSON.parse(d.dataset.seat);
+      d.style.setProperty('--tx',(sx-parseFloat(d.style.left))*W/100-R+'px');
+      d.style.setProperty('--ty',(sy-parseFloat(d.style.top))*H/100-R+'px');
+      d.style.setProperty('--tc',d.dataset.color);
+      d.style.setProperty('--tcf',d.dataset.color+'55');
+    });
+  };
+  let ctimers=[];
+  window._clusterReset=function(){
+    ctimers.forEach(clearTimeout); ctimers=[];
+    dots.forEach(d=>d.classList.remove('pick','go'));
+    box.querySelectorAll('.tbox').forEach(b=>b.classList.remove('drawn'));
+    box.querySelectorAll('.shead').forEach(x=>x.classList.remove('on'));
+  };
+  window._clusterPlay=function(){
+    window._clusterArm(); window._clusterReset();
+    const tboxes=box.querySelectorAll('.tbox'), sheads=box.querySelectorAll('.shead');
+    let t=600;
+    TABLES.forEach((tb,k)=>{
+      ctimers.push(setTimeout(()=>{                    // light the picked four in the cloud
+        sheads[tb.sec].classList.add('on');
+        tb.members.forEach(m=>dots[m].classList.add('pick'));
+      },t));
+      ctimers.push(setTimeout(()=>{                    // they cross to their seats
+        tb.members.forEach(m=>{dots[m].classList.remove('pick');dots[m].classList.add('go');});
+      },t+850));
+      ctimers.push(setTimeout(()=>tboxes[k].classList.add('drawn'),t+1800));  // frame draws
+      t+=1700;
+    });
+  };
+})();
+
+// nav dots
+const scenes=$$('.scene');
+scenes.forEach((s,i)=>{const d=document.createElement('i');
+  d.onclick=()=>s.scrollIntoView({behavior:'smooth'});$('#dots').appendChild(d);});
+
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let typeTimer=null;
+(function(){const el=document.getElementById('a1'),g=document.querySelector('.ans .ghost');
+  if(el&&g)el.dataset.full=g.textContent.replace(/\s+/g,' ').trim();})();
+function typeOut(el,base){
+  clearTimeout(typeTimer);
+  const full=el.dataset.full||el.textContent, caret=document.getElementById('a1caret');
+  if(REDUCE){el.textContent=full;return;}
+  el.textContent=''; caret&&caret.classList.add('on');
+  let i=0;
+  (function step(){
+    el.textContent=full.slice(0,++i);
+    if(i>=full.length){caret&&caret.classList.remove('on');return;}
+    const c=full[i-1];                                  // pause a beat at punctuation
+    typeTimer=setTimeout(step, base + (/[.,]/.test(c)?95:0) + Math.random()*14);
+  })();
+}
+function flyAnswer(){
+  const screen=document.querySelector('.screen[data-for="1"]');
+  const src=document.getElementById('a1')?.closest('.ans');
+  const box=document.getElementById('minicloud');
+  const me=box?.querySelector('.me');
+  if(!screen||!src||!box||!me){window._miniPlay&&window._miniPlay();return;}
+  screen.querySelectorAll('.flyer,.crush').forEach(n=>n.remove());
+  const br=screen.getBoundingClientRect(), sr=src.getBoundingClientRect(),
+        mr=box.getBoundingClientRect();
+  const x0=sr.left-br.left+screen.scrollLeft+sr.width/2-6.5;   // box centre
+  const y0=sr.top-br.top+screen.scrollTop+sr.height/2-6.5;
+  const x1=mr.left-br.left+screen.scrollLeft+me.offsetLeft;
+  const y1=mr.top-br.top+screen.scrollTop+me.offsetTop;
+  flying=true;
+
+  // 1 · the box's border contracts to its centre and becomes the dot
+  const c=document.createElement('div'); c.className='crush';
+  c.style.cssText=`left:${sr.left-br.left+screen.scrollLeft}px;`+
+    `top:${sr.top-br.top+screen.scrollTop}px;width:${sr.width}px;height:${sr.height}px;`+
+    `--bh:${sr.height}px`;
+  c.innerHTML='<div class="ring"></div><div class="txt">'+
+    (document.getElementById('a1')?.dataset.full||'')+'</div>';
+  screen.appendChild(c);
+  src.style.visibility='hidden';
+
+  // 2 · the dot that formed there departs
+  setTimeout(()=>{
+    c.remove();
+    const f=document.createElement('div'); f.className='flyer';
+    f.style.cssText=`left:${x0}px;top:${y0}px;--tx:${x1-x0}px;--ty:${y1-y0}px`;
+    screen.appendChild(f);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>f.classList.add('go')));
+    setTimeout(()=>{                                     // the answer itself remains behind
+      src.style.visibility='';
+      src.animate([{opacity:0},{opacity:1}],{duration:450,easing:'ease'});
+    },550);
+    setTimeout(()=>{                                     // 3 · arrived
+      window._miniLand&&window._miniLand();
+      f.remove(); flying=false;
+    },1950);
+  },1100);
+}
+let flying=false;
+function replayCurrent(){
+  const n=+document.body.dataset.scene||0;
+  if(n===1)window._miniReset&&window._miniReset();        // clear the landed dot first
+  if(n===3&&window._clusterPlay)window._clusterPlay();    // dots return to the cloud
+  play(n);
+}
+function toggleSurvey(){
+  const m=document.getElementById('surveymore'),b=document.getElementById('surveybtn');
+  const open=m.style.display!=='block';
+  m.style.display=open?'block':'none';
+  b.textContent=open?'– hide':'+ what else the survey asks';
+  if(open)setTimeout(()=>follow(m),60);
+}
+function follow(el){
+  if(flying&&el.closest('.screen[data-for="1"]'))return; // don't move while the card is in the air
+  const sc=el.closest('.screen');
+  if(!sc||sc.scrollHeight<=sc.clientHeight+2)return;      // nothing overflows — stay put
+  let top=0,node=el;                                      // layout offset, ignores reveal transform
+  while(node&&node!==sc){top+=node.offsetTop;node=node.offsetParent;}
+  const need=top+el.offsetHeight+20-(sc.scrollTop+sc.clientHeight);
+  if(need>6)sc.scrollTo({top:sc.scrollTop+need,behavior:'smooth'});
+}
+function play(n){
+  timers.forEach(clearTimeout); timers=[]; clearTimeout(typeTimer);
+  document.querySelectorAll('.flyer,.crush').forEach(f=>f.remove());
+  const ans=document.querySelector('.screen[data-for=\"1\"] .ans');
+  if(ans)ans.style.visibility='';
+  document.getElementById('a1caret')?.classList.remove('on');
+  const sm=document.getElementById('surveymore'),sb=document.getElementById('surveybtn');
+  if(sm){sm.style.display='none';sb.textContent='+ what else the survey asks';}
+  // reset all seq elements in screens belonging to this scene, then play
+  const screens=$$('.screen').filter(sc=>(sc.dataset.for||'').split(' ').includes(String(n)));
+  screens.forEach(sc=>$$('.seq,.seq7,.seq8',0).length); // noop guard
+  const cls = n===7?'.seq7' : n===8?'.seq8,.seq' : '.seq';
+  screens.forEach(sc=>{
+    [...sc.querySelectorAll('.seq,.seq7,.seq8')].forEach(el=>{
+      // keep prior-scene progress on the shared table screen: only reset what this scene plays
+      const mine=(SEQ[n]||[]).some(([id])=>id===el.id);
+      if(mine)el.classList.remove('on');
+      // scene 8 keeps scene-7 card lines visible
+      if(n===7&&el.classList.contains('seq8'))el.classList.remove('on');
+    });
+  });
+  let t=0;
+  (SEQ[n]||[]).forEach(([id,gap])=>{
+    t+=gap;
+    timers.push(setTimeout(()=>{
+      const el=document.getElementById(id); if(!el)return;
+      el.classList.add('on');
+      if(id==='a1')typeOut(el,13);
+      if(id==='a4')setTimeout(flyAnswer,420);   // let the cloud settle, then send it in
+      follow(el);                                    // scroll only if it fell below the fold
+      if(el.dataset.sp){$$('.tile').forEach(x=>x.classList.toggle('speaking',x.id===el.dataset.sp));}
+    },t));
+  });
+  if(n===9)timers.push(setTimeout(()=>$('#stamp')?.classList.add('on'),300));
+}
+
+function setScene(n){
+  if(document.body.dataset.scene===String(n))return;
+  document.body.dataset.scene=n;
+  $$('.screen').forEach(sc=>{
+    const on=(sc.dataset.for||'').split(' ').includes(String(n));
+    sc.classList.toggle('on',on);
+    if(on)sc.scrollTop=0;                                // shared screen: start each scene at the top
+  });
+  $$('#tableview .cf').forEach(el=>{
+    el.style.display=(el.dataset.for||'').split(' ').includes(String(n))?'':'none';
+  });
+  const l7=$('[data-for7]'),c8=$('[data-for8]');
+  if(l7)l7.style.display=(n===7)?'':'none';
+  if(c8)c8.style.display=(n===8)?'':'none';
+  if(n===3){window._clusterArm&&window._clusterArm();setTimeout(()=>$('#scr2b').classList.add('on2'),300);window._clusterPlay&&window._clusterPlay();} else {$('#scr2b')?.classList.remove('on2');window._clusterReset&&window._clusterReset();}
+  $$('.tile').forEach(t=>t.classList.remove('speaking'));
+  if(n!==9)$('#stamp')?.classList.remove('on');
+  if(n!==1)window._miniReset&&window._miniReset();
+  $('#mstep').textContent=STEP[n]||''; $('#mclock').textContent=(MIN[n]||0)+' / 82 MIN';
+  $('#mbar').style.width=(100*(MIN[n]||0)/82)+'%';
+  $$('#dots i').forEach((d,i)=>d.classList.toggle('on',i===n));
+  const rb=$('#replaybtn'); if(rb)rb.style.visibility=(n===0?'hidden':'visible');
+  play(n);
+}
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting)setScene(+e.target.dataset.scene);});
+},{threshold:0.55});
+scenes.forEach(s=>obs.observe(s));
+setScene(0);
+</script>
+</body></html>
