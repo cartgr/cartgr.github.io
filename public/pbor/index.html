@@ -378,7 +378,7 @@ function detailR(r,i,closer){
   const c=tcolor[r.topic];
   const cell=(k,nm,col)=>{const v=r.votes[k];
     return `<div class="tile"><div class="tnum">${v.n?Math.round(v.support*100)+'%':'–'}${v.n&&v.n<10?'<span style="font-size:1rem">*</span>':''}</div>
-      <div class="tlab">${col?`<span class="dot" style="background:${col}"></span>`:''}${nm} · ${v.pro}&#9650; ${v.against}&#9660;${k==='all'?` · ${v.voters} voters`:''}</div></div>`;};
+      <div class="tlab">${col?`<span class="dot" style="background:${col}"></span>`:''}${nm} · <span style="white-space:nowrap">${v.pro}&#9650;&nbsp;${v.against}&#9660;</span>${k==='all'?` · <span style="white-space:nowrap">${v.voters} voters</span>`:''}</div></div>`;};
   let h=`<div class="dbar" style="background:${c}"><span>${r.topic}</span>
     <span style="display:flex;gap:16px;align-items:center">
       <span class="barscore" data-tip="Cross-party score. The share of the LEAST supportive party voting in favour of this right's proposals, after shrinking thin samples toward 50%.">cross-party ${(r.mm??0).toFixed(2)}</span>
