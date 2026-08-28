@@ -277,7 +277,9 @@ if(!T.some(t=>t.rights))TABS.splice(1,1);
 document.querySelectorAll('select').forEach(enhanceSelect);
 TABS.forEach(([id,l])=>{const b=document.createElement('button');b.className='tab-btn';b.textContent=l;b.id='tb-'+id;
   b.onclick=()=>show(id);$('#tabs').appendChild(b);});
-function show(id){TABS.forEach(([t])=>{$('#v-'+t).classList.toggle('on',t===id);$('#tb-'+t).classList.toggle('active',t===id);});
+function show(id){if(!TABS.some(([t])=>t===id))id='walk';
+  history.replaceState(null,'','#'+id);
+  TABS.forEach(([t])=>{$('#v-'+t).classList.toggle('on',t===id);$('#tb-'+t).classList.toggle('active',t===id);});
   if(id==='topics')drawMap();if(id==='rights')drawRights();if(id==='walk'){const f=$('#walkframe');if(!f.src)f.src=f.dataset.src;}if(id==='landscape')drawScatter();if(id==='rank')drawRank();if(id==='cross')drawCross();}
 
 // ---------- rights explorer ----------
@@ -597,7 +599,11 @@ function crossDetail(name){
     </div></div>`;
 }
 
-show('walk');
+history.scrollRestoration='manual';
+addEventListener('scroll',()=>sessionStorage.setItem('pbor_y',scrollY),{passive:true});
+show(location.hash.slice(1)||'walk');
+const _y=+sessionStorage.getItem('pbor_y')||0;
+if(_y)setTimeout(()=>scrollTo(0,_y),150);
 // inline onclick handlers need globals once wrapped
 Object.assign(window,{crossDetail,toggleT,toggleR,toggleRightsNote});
 }

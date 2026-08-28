@@ -939,5 +939,8 @@ const obs=new IntersectionObserver(es=>{
 },{threshold:0.55});
 scenes.forEach(s=>obs.observe(s));
 setScene(0);
+addEventListener('scroll',()=>sessionStorage.setItem('walk_y',scrollY),{passive:true});
+const _wy=+sessionStorage.getItem('walk_y')||0;
+if(_wy)requestAnimationFrame(()=>scrollTo(0,_wy));
 </script>
 </body></html>
