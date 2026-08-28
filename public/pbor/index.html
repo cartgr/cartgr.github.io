@@ -392,7 +392,7 @@ function detailR(r,i,closer){
     +cell('rep','Republicans',PARTY.rep[1])+cell('ind','Independents',PARTY.ind[1])+`</div>`;
   h+=`<div class="label">The ${r.members.length} proposals behind this right <span class="mut" style="font-weight:400;text-transform:none;letter-spacing:0">&middot; written by the public on Change.org</span></div>`;
   h+=`<p class="sub" style="margin:4px 0 6px;font-size:.75rem">Party columns show that party&rsquo;s &#9650;pro/&#9660;against votes on each proposal &mdash; they sum to the totals above.</p>`;
-  h+=`<div style="max-height:320px;overflow-y:auto"><table><tr><th>Proposal</th><th>Approval</th><th>&#9650;/&#9660;</th><th>D &#9650;/&#9660;</th><th>R &#9650;/&#9660;</th><th>I &#9650;/&#9660;</th></tr>`;
+  h+=`<div style="max-height:320px;overflow-y:auto"><table><tr><th>Proposal</th><th>Approval</th><th style="white-space:nowrap">&#9650;/&#9660;</th><th style="white-space:nowrap">D&nbsp;&#9650;/&#9660;</th><th style="white-space:nowrap">R&nbsp;&#9650;/&#9660;</th><th style="white-space:nowrap">I&nbsp;&#9650;/&#9660;</th></tr>`;
   const cnt=(p,a)=>(p||a)?`${p}/${a}`:'&ndash;';
   for(const m of r.members)h+=`<tr><td>${m.text}</td><td>${pct(m.approval)}</td><td class="mut">${m.pro}/${m.against}</td><td>${cnt(m.dp,m.da)}</td><td>${cnt(m.rp,m.ra)}</td><td>${cnt(m.ip,m.ia)}</td></tr>`;
   h+=`</table></div><p class="mut" style="font-size:.75rem;margin:8px 0 0">* fewer than 10 votes from that party &mdash; too thin to interpret.</p>`;
