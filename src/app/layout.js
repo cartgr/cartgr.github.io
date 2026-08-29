@@ -21,7 +21,7 @@ const cardo = Cardo({
 export const metadata = {
   metadataBase: new URL('https://cartgr.github.io'),
   title: 'Carter Blair',
-  description: 'I am a first-year PhD student in Computer Science at Harvard University, supervised by Ariel Procaccia and Milind Tambe in the EconCS group. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
+  description: 'I am a second-year PhD student in Computer Science at Harvard University, supervised by Ariel Procaccia and Milind Tambe in the EconCS group. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
   keywords: 'Carter Blair, AI research, reinforcement learning, human-AI interaction, AI alignment, University of Waterloo, computer science, machine learning, social choice',
   authors: [{ name: 'Carter Blair' }],
   creator: 'Carter Blair',
@@ -38,7 +38,7 @@ export const metadata = {
     url: 'https://cartgr.github.io',
     siteName: 'Carter Blair',
     title: 'Carter Blair',
-    description: 'I am a first-year PhD student in Computer Science at Harvard University, supervised by Ariel Procaccia and Milind Tambe in the EconCS group. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
+    description: 'I am a second-year PhD student in Computer Science at Harvard University, supervised by Ariel Procaccia and Milind Tambe in the EconCS group. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
     images: [
       {
         url: '/headshot2025.jpg',
@@ -51,7 +51,7 @@ export const metadata = {
   twitter: {
     card: 'summary',
     title: 'Carter Blair',
-    description: 'I am a first-year PhD student in Computer Science at Harvard University, supervised by Ariel Procaccia and Milind Tambe in the EconCS group. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
+    description: 'I am a second-year PhD student in Computer Science at Harvard University, supervised by Ariel Procaccia and Milind Tambe in the EconCS group. My research explores the bidirectional relationship between social choice theory and AI: applying social choice principles to pluralistic AI alignment, and leveraging AI (particularly LLMs) to improve collective decision-making by enabling nuanced preference elicitation and aggregation from open-ended verbal input.',
     images: ['/headshot2025.jpg'],
   },
   verification: {

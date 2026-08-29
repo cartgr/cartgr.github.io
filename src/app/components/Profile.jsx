@@ -43,7 +43,7 @@ function Biography() {
   return (
     <>
       <p className='mb-3 text-neutral-800'>
-        I am a first-year PhD student in Computer Science at Harvard University. I am fortunate to be supervised by{' '}
+        I am a second-year PhD student in Computer Science at Harvard University. I am fortunate to be supervised by{' '}
         <a href="https://procaccia.info/" className={linkClass} target="_blank" rel="noopener noreferrer">Ariel Procaccia</a>
         {' '}and{' '}
         <a href="https://teamcore.seas.harvard.edu/tambe/" className={linkClass} target="_blank" rel="noopener noreferrer">Milind Tambe</a>
