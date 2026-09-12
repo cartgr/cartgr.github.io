@@ -6,6 +6,13 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+const serif = { fontFamily: 'EB Garamond, var(--font-cardo), serif' };
+
+const NAV = [
+    { href: '/', label: 'Home', isActive: (p) => p === '/' },
+    { href: '/publications', label: 'Publications', isActive: (p) => p.startsWith('/publications') },
+];
+
 const Menu = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
@@ -23,46 +30,60 @@ const Menu = () => {
         }
     }, [isMenuOpen]);
 
+    // The masthead scrolls away, so an open sheet should close rather than drift off-screen
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        const close = () => setIsMenuOpen(false);
+        window.addEventListener('scroll', close, { passive: true });
+        return () => window.removeEventListener('scroll', close);
+    }, [isMenuOpen]);
+
+    const fade = `transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-100' : 'opacity-0'} ${showMenu ? 'visible' : 'invisible'}`;
+
     return (
         <>
             {/* Hamburger menu for smaller screens */}
             <div className="md:hidden">
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="p-2 rounded-md focus:outline-none focus:ring"
+                    className="p-2 text-stone-500 hover:text-stone-900 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-stone-400"
                     aria-label="Open menu"
                 >
-                    <Bars3Icon className="h-6 w-6 text-neutral-800" />
+                    <Bars3Icon className="h-6 w-6" />
                 </button>
             </div>
 
-            {/* Navigation links as buttons */}
-            <ul className={`absolute md:relative bg-neutral-100 md:bg-transparent w-full md:w-auto transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-100' : 'opacity-0'} ${showMenu ? 'visible' : 'invisible'} md:opacity-100 md:visible ${showMenu ? 'top-16' : ''} left-0 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mr-8 py-4 md:py-0 px-4 md:px-0`}>
-                <li>
-                    <Link href="/" onClick={() => setIsMenuOpen(false)} className={`flex items-center px-4 py-2 rounded-md border transition duration-200 ease-in-out ${pathname === '/' ? 'bg-neutral-200 text-neutral-800 border-neutral-400 cursor-default' : 'bg-transparent text-neutral-600 border-neutral-300 hover:border-neutral-400 hover:text-neutral-800'}`} style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>
-                        Home
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/publications" onClick={() => setIsMenuOpen(false)} className={`flex items-center px-4 py-2 rounded-md border transition duration-200 ease-in-out ${pathname.startsWith('/publications') ? 'bg-neutral-200 text-neutral-800 border-neutral-400 cursor-default' : 'bg-transparent text-neutral-600 border-neutral-300 hover:border-neutral-400 hover:text-neutral-800'}`} style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>
-                        Publications
-                    </Link>
-                </li>
-                {/* <li>
-                    <Link href="/research" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
-                        Research
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/books" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
-                        Books
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/links" className="flex items-center px-4 py-2 bg-neutral-50 text-neutral-800 rounded-md shadow hover:shadow-lg transition duration-300 ease-in-out">
-                        Links & Posts
-                    </Link>
-                </li> */}
+            {/* Scrim: sits the open sheet above the page instead of appearing to clip it */}
+            <div
+                onClick={() => setIsMenuOpen(false)}
+                aria-hidden="true"
+                className={`md:hidden fixed inset-x-0 top-[100px] bottom-0 bg-stone-900/10 ${fade} ${isMenuOpen ? '' : 'pointer-events-none'}`}
+            />
+
+            {/* Navigation links */}
+            <ul
+                className={`absolute md:relative z-10 bg-paper md:bg-transparent border-b border-stone-200 md:border-0 shadow-[0_12px_24px_-14px_rgba(0,0,0,0.5)] md:shadow-none w-full md:w-auto ${fade} md:opacity-100 md:visible ${showMenu ? 'top-full' : ''} left-0 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 py-4 md:py-0 px-4 md:px-0`}
+                style={serif}
+            >
+                {NAV.map(({ href, label, isActive }) => {
+                    const active = isActive(pathname);
+                    return (
+                        <li key={href}>
+                            <Link
+                                href={href}
+                                onClick={() => setIsMenuOpen(false)}
+                                aria-current={active ? 'page' : undefined}
+                                className={`text-[1.05rem] transition-colors duration-200 ${
+                                    active
+                                        ? 'text-stone-900 underline decoration-1 decoration-stone-400 underline-offset-[7px] cursor-default'
+                                        : 'text-stone-500 hover:text-stone-900'
+                                }`}
+                            >
+                                {label}
+                            </Link>
+                        </li>
+                    );
+                })}
             </ul>
         </>
     );

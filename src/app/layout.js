@@ -72,7 +72,6 @@ export default function RootLayout({ children }) {
     },
     "url": "https://cartgr.github.io",
     "image": "/headshot2025.jpg",
-    "email": "cblair@uwaterloo.ca",
     "alumniOf": {
       "@type": "Organization",
       "name": "University of Victoria"
@@ -101,28 +100,35 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="bg-neutral-50 m-0 min-h-screen" suppressHydrationWarning={true}>
-        {/* Add z-50 to ensure top bar stays above everything */}
-        <div className="fixed top-0 left-0 right-0 h-16 bg-neutral-100 p-4 flex items-center justify-between border-b-2 border-neutral-300 z-50">
-          <div className="flex items-center ml-2 space-x-4">
+      <body className="bg-paper m-0 min-h-screen" suppressHydrationWarning={true}>
+        {/* Scrolls away with the page, so nothing ever passes underneath it */}
+        <div className="relative h-[100px] bg-paper flex items-center z-50">
+          <div className="max-w-[52rem] mx-auto w-full px-4 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
             <div className="relative group">
-              <Link href="/" className="no-underline text-neutral-800">
+              <Link href="/" className="no-underline text-stone-800">
                 <img src="/icon.png" alt="Icon" className="h-9 w-9 mr-2" />
               </Link>
-              <div className="absolute -bottom-10 left-0 bg-neutral-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-auto z-[60]">
-                The icon is <a href="https://fr.wikipedia.org/wiki/Disque_simultan%C3%A9" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-100 underline">Disque simultané</a> by Robert Delaunay (my favourite painting)
+              {/* pointer-events-none while hidden, so the transparent box can't capture
+                  hover or swallow clicks on the content beneath it. pt-2 is a hoverable
+                  bridge from the icon to the tooltip, so travelling to the link can't flicker. */}
+              <div className="absolute left-0 top-full pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-[60]">
+                <div className="bg-stone-800 text-stone-100 text-[0.8rem] px-3 py-1.5 whitespace-nowrap">
+                  The icon is <a href="https://fr.wikipedia.org/wiki/Disque_simultan%C3%A9" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white underline underline-offset-2 decoration-stone-400">Disque simultané</a> by Robert Delaunay (one of my favourite paintings)
+                </div>
               </div>
             </div>
-            <Link href="/" className="no-underline text-neutral-800">
+            <Link href="/" className="no-underline text-stone-800">
               <span className="text-3xl" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>Carter Blair</span>
             </Link>
           </div>
 
           <Menu />
+          </div>
         </div>
 
         {/* Add relative positioning to create a new stacking context */}
-        <div className="pt-16 p-4 bg-neutral-50 relative">
+        <div className="p-4 bg-paper relative">
           {children}
         </div>
         

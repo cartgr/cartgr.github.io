@@ -1,280 +1,211 @@
 "use client";
 
 import { useState } from 'react';
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import publicationsData from '../data/publications.json';
 import { trackEvent } from './Analytics';
 
+const serif = { fontFamily: 'EB Garamond, var(--font-cardo), serif' };
+const oldstyle = { ...serif, fontFeatureSettings: '"onum" 1' };
+
 export default function Publications() {
-  const [expandSection, setExpandSection] = useState({});
-
   const { workingPapers, publications } = publicationsData;
-
-  const toggleSection = (id, title) => {
-    const wasExpanded = expandSection[id];
-    setExpandSection((prev) => ({ ...prev, [id]: !prev[id] }));
-
-    // Track abstract expansion
-    if (!wasExpanded) {
-      trackEvent('expand_abstract', 'publication', title);
-    }
-  };
+  const years = Object.keys(publications).sort((a, b) => b - a);
 
   return (
     <section className="w-full min-w-0">
+      <h1 className="sr-only">Publications</h1>
+
       {workingPapers.length > 0 && (
-        <div className="mb-16">
-          <h2 className="text-2xl font-normal mb-6 text-neutral-800" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>Working Papers</h2>
-          <div className="flex flex-col space-y-8">
+        <div className="mb-20">
+          <SectionLabel>Working Papers</SectionLabel>
+          <div className="space-y-12">
             {workingPapers.map((paper) => (
-              <PublicationCard
-                key={paper.id}
-                {...paper}
-                expanded={expandSection[paper.id]}
-                onToggle={() => toggleSection(paper.id, paper.title)}
-                isWorkingPaper={true}
-              />
+              <Publication key={paper.id} {...paper} />
             ))}
           </div>
         </div>
       )}
 
-      <h2 className="text-2xl font-normal mb-6 text-neutral-800" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>Publications</h2>
-
-      {Object.keys(publications)
-        .sort((a, b) => b - a)
-        .map((year) => (
-          <div key={year} className="flex mb-16">
-            {/* Timeline column */}
-            <div className="w-8 sm:w-20 shrink-0 relative flex justify-center">
-              {/* Vertical line with fade */}
-              <div
-                className="absolute w-[1px] top-0 bottom-8 left-1/2 transform -translate-x-1/2"
-                style={{
-                  background: 'linear-gradient(to bottom, transparent 0%, #d4d4d8 15%, #d4d4d8 85%, transparent 100%)'
-                }}
-              />
-              {/* Year label - sticky positioning */}
-              <div className="sticky top-24 h-fit z-10">
-                <h3 className="text-xl font-medium text-neutral-600 px-3 py-3" style={{background: 'linear-gradient(to bottom, transparent, #f9fafb 25%, #f9fafb 75%, transparent)'}}>{year}</h3>
-              </div>
-            </div>
-            {/* Publications container */}
-            <div className="flex flex-col flex-1 ml-4">
-              {publications[year].map((pub) => (
-                <PublicationCard
-                  key={pub.id}
-                  {...pub}
-                  expanded={expandSection[pub.id]}
-                  onToggle={() => toggleSection(pub.id, pub.title)}
-                />
-              ))}
-            </div>
+      {years.map((year) => (
+        <div key={year} className="mb-20">
+          <SectionLabel>{year}</SectionLabel>
+          <div className="space-y-12">
+            {publications[year].map((pub) => (
+              <Publication key={pub.id} {...pub} />
+            ))}
           </div>
-        ))}
+        </div>
+      ))}
     </section>
   );
 }
 
-function PublicationCard({
-  title,
-  authors,
-  alphabeticalOrder,
-  venues,
-  abstract,
-  tldr,
-  expanded,
-  onToggle,
-  paperLink,
-  arxivLink,
-  presentationLink,
-  codeLink,
-  modelLink,
-  awards,
-  information,
-  isWorkingPaper = false,
-}) {
-  const handleLinkClick = (linkType) => {
-    trackEvent('click_paper_link', 'publication', `${title} - ${linkType}`);
-  };
+/* Section heading: small tracked label with a hairline running to the margin */
+function SectionLabel({ children }) {
   return (
-    <div className={`${!isWorkingPaper ? 'mb-8' : ''} bg-neutral-50 border-neutral-200 border rounded-lg p-5 flex flex-col w-full overflow-hidden hover:border-neutral-400 transition-all duration-200 sm:cursor-pointer relative z-20`} onClick={() => {
-      if (window.innerWidth >= 640) {
-        onToggle();
-      }
-    }}>
-      <div className="flex items-center justify-between">
-        <div className="flex-1">
-          <div className="flex justify-start items-center w-full">
-            <div className="flex-1 min-w-0">
-              <h2 className="text-xl font-normal text-neutral-800 leading-tight" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}>{title}</h2>
-              <p className="text-neutral-600 mt-1 text-sm">{alphabeticalOrder && <span className="text-neutral-400 mr-1">(α)</span>}{authors.join(", ")}</p>
-              <div className="mt-2 flex gap-2">
-                {venues.map((venue, index) => (
-                  <span
-                    key={index}
-                    className="bg-neutral-200 text-neutral-800 text-xs font-normal px-2.5 py-0.5 rounded news-font"
-                  >
-                    {venue}
-                  </span>
-                ))}
-              </div>
-              {awards && awards.length > 0 && (
-                <div className="mt-3">
-                  {awards.map((award, index) => (
-                    <div key={index} className="flex items-center gap-2 mb-1">
-                      <img
-                        src="/star_icon.png"
-                        alt="Award"
-                        className="w-4 h-4 flex-shrink-0"
-                      />
-                      <span className="text-sm text-neutral-700 font-medium">{award}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {tldr && (
-                <div className="mt-3 mr-8 p-3 rounded-r-md hidden sm:block" style={{backgroundColor: '#e6efe6', borderLeft: '2px solid #447e3b'}}>
-                  <p className="text-sm font-normal" style={{color: '#2d5a26'}}>
-                    <span className="font-normal text-xs uppercase tracking-wider mr-2" style={{fontFamily: 'EB Garamond, var(--font-cardo), serif', color: '#447e3b'}}>TL;DR</span>
-                    {tldr}
-                  </p>
-                </div>
-              )}
-              {information && information.length > 0 && (
-                <div className="mt-3">
-                  {information.map((info, index) => (
-                    <div key={index} className="flex items-start gap-2 mb-2">
-                      <img
-                        src="/information_icon.png"
-                        alt="Information"
-                        className="w-4 h-4 flex-shrink-0 mt-0.5"
-                      />
-                      <span className="text-sm text-neutral-700">{info}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              <div className="mt-4 flex flex-wrap gap-2">
-                {arxivLink && (
-                  <a
-                    href={arxivLink}
-                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
-                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLinkClick('ArXiv', arxivLink);
-                    }}
-                  >
-                    <img
-                      src="/arxiv-logomark-small.svg"
-                      alt="ArXiv Logo"
-                      className="grayscale flex-shrink-0"
-                      style={{ width: "17px", height: "17px" }}
-                    />
-                    <span className="ml-1 hidden sm:inline">ArXiv</span>
-                  </a>
-                )}
-                {paperLink && (
-                  <a
-                    href={paperLink}
-                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
-                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLinkClick('PDF', paperLink);
-                    }}
-                  >
-                    <img
-                      src="/pdf.svg"
-                      alt="PDF Logo"
-                      className="flex-shrink-0"
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                    <span className="ml-1 hidden sm:inline">PDF</span>
-                  </a>
-                )}
-                {presentationLink && (
-                  <a
-                    href={presentationLink}
-                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
-                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLinkClick('Presentation', presentationLink);
-                    }}
-                  >
-                    <img
-                      src="/slides.svg"
-                      alt="Presentation Logo"
-                      className="flex-shrink-0"
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                    <span className="ml-1 hidden sm:inline">Presentation</span>
-                  </a>
-                )}
-                {codeLink && (
-                  <a
-                    href={codeLink}
-                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
-                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLinkClick('Code', codeLink);
-                    }}
-                  >
-                    <img
-                      src="/github.svg"
-                      alt="GitHub Logo"
-                      className="flex-shrink-0"
-                      style={{ width: "18px", height: "18px" }}
-                    />
-                    <span className="ml-1 hidden sm:inline">Code</span>
-                  </a>
-                )}
-                {modelLink && (
-                  <a
-                    href={modelLink}
-                    className="bg-transparent text-neutral-600 px-3 py-2 rounded-md text-sm font-normal flex items-center border border-neutral-300 hover:border-neutral-400 hover:text-neutral-800 sm:min-w-0 min-w-fit transition-all duration-200"
-                    style={{fontFamily: 'EB Garamond, var(--font-cardo), serif'}}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLinkClick('Model', modelLink);
-                    }}
-                  >
-                    <img
-                      src="/hf-logo-monochrome.png"
-                      alt="Model Icon"
-                      className="flex-shrink-0"
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                    <span className="ml-1 hidden sm:inline">Model</span>
-                  </a>
-                )}
-              </div>
-            </div>
-            <div className="shrink-0 p-1 rounded-full hover:bg-neutral-200 transition-colors duration-150 hidden sm:block">
-              <ChevronRightIcon className={`h-5 w-5 text-neutral-600 transition-transform duration-300 ease-out ${expanded ? 'transform rotate-90' : 'transform rotate-0'}`} />
-            </div>
+    <div className="flex items-center gap-4 mb-6">
+      <h2
+        className="text-[1.05rem] text-stone-500 shrink-0"
+        style={oldstyle}
+      >
+        {children}
+      </h2>
+      <div className="h-px flex-1 bg-stone-200" />
+    </div>
+  );
+}
+
+const LINKS = [
+  ['paperLink', 'PDF'],
+  ['arxivLink', 'arXiv'],
+  ['codeLink', 'Code'],
+  ['presentationLink', 'Slides'],
+  ['modelLink', 'Model'],
+];
+
+function Publication(pub) {
+  const {
+    title,
+    authors,
+    alphabeticalOrder,
+    venues,
+    abstract,
+    tldr,
+    awards,
+    information,
+  } = pub;
+
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleAbstract = () => {
+    if (!expanded) trackEvent('expand_abstract', 'publication', title);
+    setExpanded((v) => !v);
+  };
+
+  const links = LINKS.filter(([key]) => pub[key]);
+
+  return (
+    <article>
+      <h3 className="text-[1.3rem] text-stone-900 leading-snug" style={serif}>
+        {title}
+      </h3>
+
+      <p className="text-[0.9rem] text-stone-500 mt-2 leading-snug" style={serif}>
+        {alphabeticalOrder && (
+          <span className="relative group inline-block mr-1">
+            <span className="text-stone-400 cursor-help">(α-β)</span>
+            <span
+              className="absolute left-0 top-full pt-1.5 opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 z-50"
+              aria-hidden="true"
+            >
+              <span className="block bg-stone-800 text-stone-100 text-[0.8rem] px-3 py-1.5 whitespace-nowrap">
+                alphabetical author order
+              </span>
+            </span>
+          </span>
+        )}
+        {authors.map((author, i) => (
+          <span key={author}>
+            <span className={author === 'Carter Blair' ? 'text-stone-800' : undefined}>
+              {author}
+            </span>
+            {i < authors.length - 1 && <span className="text-stone-400">, </span>}
+          </span>
+        ))}
+      </p>
+
+      {venues && venues.length > 0 && (
+        <p className="text-[0.85rem] text-stone-600 mt-2" style={serif}>
+          {venues.join(' · ')}
+        </p>
+      )}
+
+      {awards && awards.length > 0 && (
+        <div className="mt-2">
+          {awards.map((award) => (
+            <p
+              key={award}
+              className="text-[0.8rem] uppercase tracking-[0.12em] text-stone-600"
+              style={serif}
+            >
+              {award}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {tldr && (
+        <p
+          className="mt-4 text-[0.95rem] text-stone-600 leading-relaxed"
+          style={serif}
+        >
+          {tldr}
+        </p>
+      )}
+
+      {information && information.length > 0 && (
+        <div className="mt-4">
+          {information.map((info) => (
+            <p key={info} className="text-[0.85rem] text-stone-400 leading-snug" style={serif}>
+              {info}
+            </p>
+          ))}
+        </div>
+      )}
+
+      <div
+        className="mt-4 flex items-center flex-wrap text-[0.85rem] text-stone-500"
+        style={serif}
+      >
+        {links.map(([key, label], i) => (
+          <span key={key} className="flex items-center">
+            {i > 0 && <span className="text-stone-300 mx-2">·</span>}
+            <a
+              href={pub[key]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-stone-900 hover:underline underline-offset-[3px] decoration-stone-300"
+              onClick={() => trackEvent('click_paper_link', 'publication', `${title} - ${label}`)}
+            >
+              {label}
+            </a>
+          </span>
+        ))}
+        {abstract && (
+          <span className="flex items-center">
+            {links.length > 0 && <span className="text-stone-300 mx-2">·</span>}
+            <button
+              onClick={toggleAbstract}
+              aria-expanded={expanded}
+              className="hover:text-stone-900 hover:underline underline-offset-[3px] decoration-stone-300 flex items-center gap-1"
+            >
+              Abstract
+              <span
+                className="text-[0.7rem] text-stone-400 transition-transform duration-200 inline-block"
+                style={{ transform: expanded ? 'rotate(90deg)' : 'none' }}
+              >
+                ›
+              </span>
+            </button>
+          </span>
+        )}
+      </div>
+
+      {abstract && (
+        <div
+          className="grid transition-all duration-300 ease-out"
+          style={{ gridTemplateRows: expanded ? '1fr' : '0fr', opacity: expanded ? 1 : 0 }}
+        >
+          <div className="overflow-hidden">
+            <p
+              className="mt-4 pl-4 border-l border-stone-200 text-[0.925rem] text-stone-600 leading-relaxed whitespace-pre-line"
+              style={serif}
+            >
+              {abstract}
+            </p>
           </div>
         </div>
-      </div>
-      <div className={`overflow-hidden transition-all duration-500 ease-in-out hidden sm:block ${expanded ? 'sm:opacity-100' : 'sm:max-h-0 sm:opacity-0'}`}>
-        <hr className="my-2" />
-        <div>
-          <div className="mt-2 whitespace-pre-line">{abstract}</div>
-        </div>
-      </div>
-    </div>
+      )}
+    </article>
   );
 }

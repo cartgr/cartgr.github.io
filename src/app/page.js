@@ -5,8 +5,8 @@ import News from './components/News'
 
 export default function Home() {
   return (
-    <div className="pt-2 md:pt-4 bg-gray-50">
-      <main className="max-w-5xl mx-auto px-4 md:p-6">
+    <div className="bg-paper">
+      <main className="max-w-[52rem] mx-auto p-4 pb-24">
         <Profile />
         <News />
       </main>

@@ -16,12 +16,14 @@ body {
     font-family: 'EB Garamond', var(--font-cardo), serif;
   }
 
-/* Global text selection styling */
+/* Selection reads as a soft wash on paper rather than an inversion.
+   The ground is stone-200, the same tone as the page's hairline rules, so it
+   stays on-palette; text keeps its own colour and simply darkens. */
 ::selection {
-    background-color: #16a34a;
-    color: #f0f5f0;
+    background-color: #e7e5e4;
+    color: #1c1917;
 }
 ::-moz-selection {
-    background-color: #16a34a;
-    color: #f0f5f0;
+    background-color: #e7e5e4;
+    color: #1c1917;
 }

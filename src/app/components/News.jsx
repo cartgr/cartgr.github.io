@@ -72,11 +72,11 @@ export default function News() {
     ];
 
     return (
-      <section className="mt-12">
-        <h2 className="text-2xl font-medium mb-4 text-neutral-800 news-font">News</h2>
+      <section className="mt-[43.5px]">
+        <h2 className="text-2xl font-medium mb-4 text-stone-700 news-font">News</h2>
         <ul className="list-disc pl-5 max-h-96 overflow-y-auto">
           {newsItems.map((item, index) => (
-            <li key={index} className="mb-2 text-neutral-800">
+            <li key={index} className="mb-2 text-stone-700">
               <span className="news-font">{item.date}</span>: {item.content}
             </li>
           ))}
