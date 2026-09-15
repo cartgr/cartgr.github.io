@@ -16,7 +16,7 @@ export default function Publications() {
       <h1 className="sr-only">Publications</h1>
 
       {workingPapers.length > 0 && (
-        <div className="mb-20">
+        <div className="mb-20 last:mb-0">
           <SectionLabel>Working Papers</SectionLabel>
           <div className="space-y-12">
             {workingPapers.map((paper) => (
@@ -27,7 +27,7 @@ export default function Publications() {
       )}
 
       {years.map((year) => (
-        <div key={year} className="mb-20">
+        <div key={year} className="mb-20 last:mb-0">
           <SectionLabel>{year}</SectionLabel>
           <div className="space-y-12">
             {publications[year].map((pub) => (

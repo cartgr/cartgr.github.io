@@ -6,7 +6,7 @@ import News from './components/News'
 export default function Home() {
   return (
     <div className="bg-paper">
-      <main className="max-w-[52rem] mx-auto p-4 pb-24">
+      <main className="max-w-[52rem] mx-auto p-4 pb-12">
         <Profile />
         <News />
       </main>
