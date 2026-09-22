@@ -89,8 +89,9 @@ export default function BaselineCatalogue({ rows }) {
           models must pass a size-aware convergence test: the largest gradient component must fall below
           max(10⁻⁴, 10⁻⁸ × the number of visible responses), which is never looser than a fixed 10⁻⁴ below 10,000
           responses. A fit that fails it, even after warm restarts, is recorded as missing rather than scored. No method
-          uses demographic information. Methods marked as needing a sentence encoder use fixed vectors from one pinned
-          encoder, recorded with their results; no other method uses a pretrained model.
+          uses demographic information. Methods marked as needing a sentence encoder all use the same fixed vectors
+          from Google’s multilingual Universal Sentence Encoder (v3), the encoder family STUMP’s authors report; no
+          other method uses a pretrained model.
         </p>
       </div>
       <nav aria-label="Baseline families" className="mt-5 flex flex-wrap gap-x-4 gap-y-1 text-[13px] text-ink2">

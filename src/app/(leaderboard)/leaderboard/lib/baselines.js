@@ -179,8 +179,8 @@ export const BASELINES = {
   // ---- STUMP ------------------------------------------------------------------------------------------------------
   stump_native_categorical_v2: {
     family: 'stump', evidence: 'Votes + statement text', tasks: BOTH, encoder: true, cite: [REF.konya],
-    what: 'A reimplementation of STUMP, the Semantic Transfer Utility Model of Participants (Konya et al., 2022, whose first author co-founded Remesh). Each statement’s text is embedded by a frozen sentence encoder and projected through a question-specific tanh layer, and each person has a latent vector; here the original agree/disagree likelihood is extended to a softmax over every native response class.',
-    fit: 'Rank 50; embedding dropout 0.3; Adam at learning rate 0.001 for 1,000 updates of 256 responses; squared projection penalty 0.01 and participant penalty 0.01. These are declared reimplementation choices, not the authors’ recovered settings.',
+    what: 'A reimplementation of STUMP, the Semantic Transfer Utility Model of Participants (Konya et al., 2022, whose first author co-founded Remesh). Each statement’s text is embedded by a frozen sentence encoder and projected through a question-specific tanh layer, and each person has a latent vector. Because a statement needs only its text, STUMP predicts responses to statements nobody has rated yet. The original agree/disagree likelihood is extended here to a softmax over every native response class, so this is an adaptation rather than an exact reproduction.',
+    fit: 'Multilingual Universal Sentence Encoder (v3, CNN), the encoder family the paper reports; the paper does not name its exact checkpoint. Rank 50, embedding dropout 0.3, projection penalty 0.01 and Adam at learning rate 0.001 follow the paper. The schedule (1,000 updates of 256 responses) and the participant penalty of 0.01 are our choices, since the paper does not report them.',
   },
   stump_native_ordinal_v2: {
     family: 'stump', evidence: 'Votes + statement text', tasks: `${BOTH}; ${ORD.toLowerCase()}`, encoder: true, cite: [REF.konya],
