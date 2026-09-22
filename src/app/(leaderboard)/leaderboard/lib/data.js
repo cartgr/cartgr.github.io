@@ -9,7 +9,7 @@ export const NAME = 'VoteBench';
 export const SLUG = NAME.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 export const DOWNLOADS = { json: `${SLUG}-leaderboard.json`, csv: `${SLUG}-leaderboard.csv` };
 export const VERSION = 'v0.1';
-export const DESCRIPTOR = 'Predicting how real people respond in public deliberations';
+export const DESCRIPTOR = 'Predicting how real people vote in public deliberations';
 
 export const TASKS = [
   { id: 'matrix_completion', label: 'Matrix completion', short: 'Completion' },
