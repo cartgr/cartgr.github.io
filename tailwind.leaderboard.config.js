@@ -1,4 +1,4 @@
-/** Tailwind config for the PrefBench leaderboard only. Loaded by src/app/(leaderboard)/leaderboard.css via @config,
+/** Tailwind config for the benchmark leaderboard only. Loaded by src/app/(leaderboard)/leaderboard.css via @config,
  * so none of it reaches the personal site, whose styles come from tailwind.config.js. Colours are CSS variables so the
  * light and dark palettes (defined in leaderboard.css) switch with one class on <html>. */
 module.exports = {

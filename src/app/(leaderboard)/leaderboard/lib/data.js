@@ -1,8 +1,13 @@
-// Pure data helpers for the PrefBench leaderboard, shared by server and client components.
+// Pure data helpers for the benchmark leaderboard, shared by server and client components.
 // Every number shown on the page comes from data/leaderboard.json, which is exported from the frozen score
 // artifacts by scripts/whole_study/export_leaderboard_v1.py in the benchmark repository.
 
-export const NAME = 'PrefBench'; // Working name; change here to rename the benchmark everywhere.
+import { BASELINES, FAMILIES } from './baselines';
+
+// The benchmark's name. Every visible use of it, and the download filenames, derive from this one constant.
+export const NAME = 'Absentee';
+export const SLUG = NAME.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+export const DOWNLOADS = { json: `${SLUG}-leaderboard.json`, csv: `${SLUG}-leaderboard.csv` };
 export const VERSION = 'v0.1';
 export const DESCRIPTOR = 'Predicting how real people respond in public deliberations';
 
@@ -34,23 +39,18 @@ export const SERIES = [
   { family: 'Llama 4', kind: 'open', points: [['llama-4-scout', 'Scout'], ['llama-4-maverick', 'Maverick']] },
 ];
 
-// Short category for a baseline's second line. Unknown methods fall back to "classical".
-const BASELINE_CATEGORY = {
-  categorical_mf: 'factorization', categorical_bias: 'bias model', feature_factorization_machine: 'factorization',
-  shared_profile_bilinear_v2: 'factorization', shared_profile_tanh_v2: 'factorization', ordinal_factor: 'factorization',
-  user_neighborhood: 'neighbourhood', item_neighborhood: 'neighbourhood',
-  selected_prior: 'prior', row_prior_reference: 'prior', row_prior: 'prior', item_prior: 'prior', global_prior: 'prior',
-  context_prior: 'prior', matched_input_prior: 'prior',
-  text_ideal_point: 'text', ordinal_text_ideal_point: 'text', lexical_history: 'text', lexical_weighted_history: 'text',
-  semantic_weighted_history: 'text', tfidf_conditional_logistic: 'text', embedding_conditional_logistic: 'text',
-  histogram_gbdt_lexical: 'gradient boosting', histogram_gbdt_embedding: 'gradient boosting',
-  ordinal_cumulative_regression: 'ordinal regression', stump_native_categorical_v2: 'STUMP', stump_native_ordinal_v2: 'STUMP',
+const FAMILY_SHORT = {
+  prior: 'prior', neighbourhood: 'neighbourhood', factorization: 'factor model', 'text-similarity': 'text similarity',
+  'ideal-point': 'text ideal point', learned: 'learned classifier', trees: 'tree ensemble', 'two-tower': 'two-tower model',
+  stump: 'STUMP',
 };
+export const familyOf = (id) => (BASELINES[id] ? BASELINES[id].family : null);
+export const familyLabel = (family) => (FAMILIES.find((f) => f.id === family) || {}).label || 'Other methods';
 
 export function subtitle(row) {
   if (row.kind === 'closed') return `${row.org} · API`;
   if (row.kind === 'open') return `${row.org} · open weights${row.params ? ` · ${row.params}` : ''}`;
-  return `Baseline · ${BASELINE_CATEGORY[row.id] || 'classical'}`;
+  return `Baseline · ${FAMILY_SHORT[familyOf(row.id)] || 'classical'}`;
 }
 
 /** Normalize the exported JSON into one list of rows with per-task results and coverage. */
@@ -137,26 +137,37 @@ export function seriesFor(rows, task) {
   })).filter((s) => s.points.length > 0);
 }
 
-/** The one-sentence claim, derived from the data so it cannot drift from the table. */
-export function headline(rows, data) {
-  const mc = 'matrix_completion';
-  const gpt = seriesFor(rows, mc).find((s) => s.family === 'GPT');
-  const parts = [];
-  const monotone = (task) => {
-    const s = seriesFor(rows, task).find((x) => x.family === 'GPT');
-    return s && s.points.length > 1 && s.points.every((p, i) => i === 0 || p.y < s.points[i - 1].y);
+const monotone = (s) => s.points.length > 1 && s.points.every((p, i) => i === 0 || p.y < s.points[i - 1].y);
+
+/**
+ * The two-sentence blurb, derived from the data so it can never outrun the table. No numbers: they live in the table.
+ * Sentence 2 claims only what holds: scaling within every family with two or more scored models, and a model that beats
+ * every full-coverage classical baseline on both tasks.
+ */
+export function blurb(rows) {
+  // The page title already says what is predicted; this sentence says what the benchmark tests.
+  const first = `${NAME} tests how well a system can predict a real participant’s response from everything else recorded in the same deliberation.`;
+  const scored = rows.filter((r) => r.status === 'complete');
+  const families = TASKS.map((t) => seriesFor(scored, t.id).filter((s) => s.points.length > 1));
+  const everyFamily = families.every((list) => list.length > 0 && list.every(monotone));
+  const gptOnly = families.every((list) => list.some((s) => s.family === 'GPT' && monotone(s)));
+  const scaling = everyFamily ? 'larger language models predict better' : gptOnly ? 'larger GPT models predict better' : null;
+  const baselines = scored.filter((r) => r.kind === 'baseline');
+  const models = scored.filter((r) => r.kind !== 'baseline');
+  const beatsAll = (m, task) => {
+    const mv = value(m, task, 'log_loss');
+    const bs = baselines.map((b) => value(b, task, 'log_loss')).filter((v) => v !== null);
+    return mv !== null && bs.length > 0 && bs.every((v) => mv < v);
   };
-  if (gpt && monotone(mc) && monotone('new_statement_prediction')) {
-    parts.push('each larger GPT model predicts held-out responses better on both tasks');
-  }
-  const ref = referenceRow(rows, data, mc);
-  const rk = ranks(complete(rows), mc);
-  const top = complete(rows).find((r) => rk[r.id] === 1);
-  let beat = null;
-  if (top && ref && top.kind !== 'baseline' && top.id !== ref.id) {
-    beat = { top, ref, x: value(top, mc, 'log_loss'), y: value(ref, mc, 'log_loss'), won: top.results[mc].wins_log_loss };
-  }
-  return { parts, beat };
+  const both = models.some((m) => TASKS.every((t) => beatsAll(m, t.id)));
+  const one = TASKS.find((t) => models.some((m) => beatsAll(m, t.id)));
+  let second;
+  if (scaling && both) second = `In preliminary results, ${scaling}, and the strongest now outperforms classical methods fitted to every other recorded vote.`;
+  else if (scaling && one) second = `In preliminary results, ${scaling}, and the strongest outperforms classical methods on ${one.label.toLowerCase()}.`;
+  else if (scaling) second = `In preliminary results, ${scaling}, though classical methods fitted to every other recorded vote still lead.`;
+  else if (both) second = 'In preliminary results, the strongest language model outperforms classical methods fitted to every other recorded vote.';
+  else second = 'Preliminary results compare language models with classical methods fitted to every other recorded vote.';
+  return [first, second];
 }
 
 /** Per-row floored ranks, for the rank change under the declared probability floor. */

@@ -2,6 +2,7 @@
 // the table uses, and each figure is backed by Table 1.
 import { markerShape } from './Marker';
 import { TASKS, value, seriesFor, referenceRow, fmt3 } from '../lib/data';
+import { anchorFor } from '../lib/baselines';
 
 const niceTicks = (lo, hi, step) => {
   const out = [];
@@ -150,18 +151,23 @@ export function DotPlot({ rows, data }) {
                 const isRef = ref && p.r.id === ref.id;
                 return (
                   <g key={p.r.id}>
-                    <text
-                      x={m.l - 10}
-                      y={cy}
-                      dy="0.32em"
-                      textAnchor="end"
-                      fontSize="12"
-                      className={p.r.kind === 'baseline' ? 'fill-ink2' : 'fill-ink'}
-                      fontWeight={p.r.kind === 'baseline' ? 400 : 600}
-                    >
-                      {p.r.name}
-                      {isRef ? ' (ref.)' : ''}
-                    </text>
+                    {(() => {
+                      const label = (
+                        <text
+                          x={m.l - 10}
+                          y={cy}
+                          dy="0.32em"
+                          textAnchor="end"
+                          fontSize="12"
+                          className={p.r.kind === 'baseline' ? 'fill-ink2' : 'fill-ink'}
+                          fontWeight={p.r.kind === 'baseline' ? 400 : 600}
+                        >
+                          {p.r.name}
+                          {isRef ? ' (ref.)' : ''}
+                        </text>
+                      );
+                      return p.r.kind === 'baseline' ? <a href={`#${anchorFor(p.r.id)}`}>{label}</a> : label;
+                    })()}
                     <line x1={m.l} x2={x(p.v)} y1={cy} y2={cy} className="stroke-rule" strokeWidth="1" />
                     {markerShape(p.r.kind, x(p.v), cy, 4.5)}
                     <text x={x(p.v) + 9} y={cy} dy="0.32em" className="halo fill-ink3 num" fontSize="11">

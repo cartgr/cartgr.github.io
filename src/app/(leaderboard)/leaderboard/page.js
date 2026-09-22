@@ -1,4 +1,4 @@
-// PrefBench leaderboard. A server component: every number is read from data/leaderboard.json at build time and
+// Benchmark leaderboard page. A server component: every number is read from data/leaderboard.json at build time and
 // rendered into the static HTML. Only the table (sorting, mobile task switch), the theme toggle and the copy button
 // run on the client.
 import data from './data/leaderboard.json';
@@ -6,12 +6,13 @@ import LeaderboardTable from './components/LeaderboardTable';
 import { ScalingFigure, DotPlot } from './components/Figures';
 import Wordmark from './components/Wordmark';
 import ThemeToggle from './components/ThemeToggle';
-import CopyButton from './components/CopyButton';
 import Marker from './components/Marker';
+import BaselineCatalogue from './components/BaselineCatalogue';
 import {
-  NAME, VERSION, DESCRIPTOR, TASKS, SOURCE_LABELS, buildRows, complete, running, value, ranks, floorRanks,
-  referenceRow, headline, fmt3, fmtPct, fmtSigned,
+  NAME, VERSION, DESCRIPTOR, DOWNLOADS, TASKS, SOURCE_LABELS, buildRows, complete, running, value, ranks, floorRanks,
+  referenceRow, blurb, fmt3, fmtPct, fmtSigned,
 } from './lib/data';
+import { anchorFor } from './lib/baselines';
 
 const rows = buildRows(data);
 const done = complete(rows);
@@ -31,14 +32,6 @@ const PLATFORMS = [
   { id: 'makeorg', classes: 'agree · disagree · neutral' },
 ];
 
-const BIBTEX = `@misc{prefbench2026,
-  title  = {${NAME}: ${DESCRIPTOR}},
-  author = {TODO},
-  year   = {2026},
-  note   = {Preliminary leaderboard, ${VERSION}},
-  url    = {https://cartgr.github.io/leaderboard/}
-}`;
-
 function studiesPerSource() {
   const astra = done.find((r) => r.kind !== 'baseline' && r.results.matrix_completion);
   const out = {};
@@ -56,36 +49,13 @@ function Section({ id, title, children, lead }) {
   );
 }
 
-function Claim() {
-  const { parts, beat } = headline(rows, data);
-  const ns = ranked('new_statement_prediction');
-  const nsTop = ns[0];
-  const nsRef = referenceRow(rows, data, 'new_statement_prediction');
-  const sentences = [];
-  if (parts.length) sentences.push(<>In preliminary results, {parts[0]}.</>);
-  if (beat) {
-    sentences.push(
-      <>
-        {' '}{beat.top.name} ranks first on matrix completion, ahead of a {beat.ref.name.toLowerCase()} fitted on the entire
-        visible vote matrix: log loss <span className="num">{fmt3(beat.x)}</span> against <span className="num">{fmt3(beat.y)}</span>,
-        lower in <span className="num">{beat.won}</span> of 32 studies.
-      </>,
-    );
-  }
-  if (nsTop && nsRef && nsTop.kind !== 'baseline') {
-    const w = nsTop.results.new_statement_prediction.wins_log_loss;
-    // Only claim the prior is the best classical method while the data still shows it.
-    const bestBaseline = ns.find((r) => r.kind === 'baseline');
-    const priorLeads = bestBaseline && bestBaseline.id === nsRef.id && /prior/.test(nsRef.id);
-    const who = beat && beat.top.id === nsTop.id ? 'it' : nsTop.name;
-    sentences.push(
-      <>
-        {' '}On new statements{priorLeads ? ', where no classical method beats a response-frequency prior,' : ''} {who} beats
-        the reference in <span className="num">{w}</span> of 32 studies.
-      </>,
-    );
-  }
-  return <p className="max-w-[46rem] font-serif text-[19px] leading-[28px] text-ink md:text-[22px] md:leading-[31px]">{sentences}</p>;
+function Blurb() {
+  const [first, second] = blurb(rows);
+  return (
+    <p className="max-w-[44rem] font-serif text-[19px] leading-[29px] text-ink md:text-[22px] md:leading-[32px]">
+      {first} {second}
+    </p>
+  );
 }
 
 function Facts() {
@@ -142,7 +112,7 @@ function SourceTable({ task }) {
               <th scope="row" className={`px-3 py-2 text-left font-normal ${r.kind === 'baseline' ? 'text-ink2' : 'text-ink'}`}>
                 <span className="inline-flex items-center gap-2">
                   <Marker kind={r.kind} />
-                  {r.name}
+                  {r.kind === 'baseline' ? <a href={`#${anchorFor(r.id)}`} className="hover:underline">{r.name}</a> : r.name}
                   {r.reference[task.id] && <span className="text-[11px] uppercase tracking-[0.04em] text-ink3">reference</span>}
                 </span>
               </th>
@@ -191,7 +161,7 @@ function FloorTable({ task }) {
             return (
               <tr key={r.id} className={`border-b border-rule ${r.reference[task.id] ? 'bg-tint' : ''}`}>
                 <th scope="row" className={`px-3 py-2 text-left font-normal ${r.kind === 'baseline' ? 'text-ink2' : 'text-ink'}`}>
-                  <span className="inline-flex items-center gap-2"><Marker kind={r.kind} />{r.name}</span>
+                  <span className="inline-flex items-center gap-2"><Marker kind={r.kind} />{r.kind === 'baseline' ? <a href={`#${anchorFor(r.id)}`} className="hover:underline">{r.name}</a> : r.name}</span>
                 </th>
                 <td className="num px-3 py-2 text-right text-ink2">{fmt3(res.ece)}</td>
                 <td className="num px-3 py-2 text-right text-ink">{fmt3(res.log_loss)}</td>
@@ -256,7 +226,7 @@ function ConditionTable() {
   );
 }
 
-const NAV = [['#results', 'Results'], ['#method', 'Method'], ['#limitations', 'Limitations'], ['#data', 'Data'], ['#cite', 'Cite']];
+const NAV = [['#results', 'Results'], ['#method', 'Method'], ['#baselines', 'Baselines'], ['#limitations', 'Limitations'], ['#data', 'Data']];
 
 export default function LeaderboardPage() {
   const refMC = referenceRow(rows, data, 'matrix_completion');
@@ -293,7 +263,7 @@ export default function LeaderboardPage() {
             <a href="#changelog" className="focus-ring rounded-sm underline decoration-rule underline-offset-2 hover:text-ink">Changelog</a>
           </p>
           <div className="mt-8">
-            <Claim />
+            <Blurb />
             <Facts />
           </div>
         </div>
@@ -310,7 +280,7 @@ export default function LeaderboardPage() {
             </p>
             <p>
               The reference for each task is fixed in advance as the classical baseline with the lowest log loss on that
-              task: {refMC ? refMC.name.toLowerCase() : 'TODO'} for matrix completion and {refNS ? refNS.name.toLowerCase() : 'TODO'} for
+              task: {refMC ? refMC.name.toLowerCase() : 'the fixed reference'} for matrix completion and {refNS ? refNS.name.toLowerCase() : 'the fixed reference'} for
               new-statement prediction. A reference row shows “—” under Won.
             </p>
             <p>
@@ -452,9 +422,18 @@ export default function LeaderboardPage() {
             <p>
               Classical methods are fitted separately to each study, on every visible response in it. They range from
               response-frequency priors through neighbourhood methods to a low-rank categorical matrix factorization.
-              Fits that fail a size-aware convergence test are reported as missing rather than scored.
+              Fits that fail a size-aware convergence test are reported as missing rather than scored. Every method is
+              described under <a href="#baselines" className="text-ink">Baselines</a>.
             </p>
           </div>
+        </Section>
+
+        <Section
+          id="baselines"
+          title="Baselines"
+          lead="Every classical method in the suite, grouped by family. Each is fitted separately to each study, using only that study’s visible responses."
+        >
+          <BaselineCatalogue rows={rows} />
         </Section>
 
         <Section id="limitations" title="Limitations">
@@ -488,21 +467,10 @@ export default function LeaderboardPage() {
           <div className="prose-lb max-w-prose space-y-3 text-[16px] leading-[26px] text-ink2">
             <p>
               Every number on this page is generated from the benchmark’s frozen score files. The same results can be
-              downloaded as <a href="/data/prefbench-leaderboard.json" className="text-ink">JSON</a> or{' '}
-              <a href="/data/prefbench-leaderboard.csv" className="text-ink">CSV</a>, including per-platform means and
+              downloaded as <a href={`/data/${DOWNLOADS.json}`} className="text-ink">JSON</a> or{' '}
+              <a href={`/data/${DOWNLOADS.csv}`} className="text-ink">CSV</a>, including per-platform means and
               floored scores.
             </p>
-            <p className="text-[14px] text-ink3">Licence: TODO. Code and paper: TODO.</p>
-          </div>
-        </Section>
-
-        <Section id="cite" title="Cite">
-          <div className="max-w-[40rem]">
-            <div className="flex items-center justify-between border-b border-rule pb-2">
-              <span className="text-[13px] text-ink3">BibTeX (authors to be confirmed)</span>
-              <CopyButton text={BIBTEX} />
-            </div>
-            <pre className="mt-3 overflow-x-auto font-mono text-[13px] leading-[20px] text-ink2">{BIBTEX}</pre>
           </div>
         </Section>
 

@@ -1,4 +1,4 @@
-// Root layout for the PrefBench leaderboard. It is a separate root from the personal site's app/(site)/layout.js,
+// Root layout for the benchmark leaderboard. It is a separate root from the personal site's app/(site)/layout.js,
 // so the two share no fonts, stylesheet or navigation; moving between them is a full page load.
 import { Source_Serif_4, Source_Sans_3, Source_Code_Pro } from 'next/font/google';
 import './leaderboard.css';
@@ -20,7 +20,9 @@ export const metadata = {
     url: '/leaderboard/',
     type: 'website',
   },
-  robots: { index: true, follow: true },
+  // The page is meant to exist at its URL without being found: it is unlinked from the site, absent from the
+  // sitemap, and asks crawlers not to index it or follow its links. This applies to the leaderboard only.
+  robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
 };
 
 export const viewport = {

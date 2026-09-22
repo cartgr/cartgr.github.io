@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import Marker, { KIND_LABEL } from './Marker';
 import { TASKS, METRICS, value, ranks, bests, formatMetric, fmtCost } from '../lib/data';
+import { anchorFor } from '../lib/baselines';
 
 const DIR = Object.fromEntries(METRICS.map((m) => [m.key, m.better]));
 DIR.cost = 'lower';
@@ -59,7 +60,13 @@ function ModelCell({ row, sticky, rowBg, activeTask }) {
         </span>
         <div className="min-w-0">
           <div className={`leading-snug ${row.kind === 'baseline' ? 'text-ink2' : 'font-semibold text-ink'}`}>
-            {row.name}
+            {row.kind === 'baseline' ? (
+              <a href={`#${anchorFor(row.id)}`} className="focus-ring rounded-sm hover:text-ink hover:underline">
+                {row.name}
+              </a>
+            ) : (
+              row.name
+            )}
             {refTasks.map((t) => (
               <span
                 key={t.id}

@@ -1,4 +1,4 @@
-/* PrefBench leaderboard: its own visual system, independent of the personal site's globals.css. */
+/* Benchmark leaderboard: its own visual system, independent of the personal site's globals.css. */
 @config "../../../tailwind.leaderboard.config.js";
 @tailwind base;
 @tailwind components;
