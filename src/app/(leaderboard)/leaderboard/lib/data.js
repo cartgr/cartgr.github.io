@@ -137,37 +137,12 @@ export function seriesFor(rows, task) {
   })).filter((s) => s.points.length > 0);
 }
 
-const monotone = (s) => s.points.length > 1 && s.points.every((p, i) => i === 0 || p.y < s.points[i - 1].y);
-
-/**
- * The two-sentence blurb, derived from the data so it can never outrun the table. No numbers: they live in the table.
- * Sentence 2 claims only what holds: scaling within every family with two or more scored models, and a model that beats
- * every full-coverage classical baseline on both tasks.
- */
-export function blurb(rows) {
-  // The page title already says what is predicted; this sentence says what the benchmark tests.
-  const first = `${NAME} tests how well a system can predict a real participant’s response from everything else recorded in the same deliberation.`;
-  const scored = rows.filter((r) => r.status === 'complete');
-  const families = TASKS.map((t) => seriesFor(scored, t.id).filter((s) => s.points.length > 1));
-  const everyFamily = families.every((list) => list.length > 0 && list.every(monotone));
-  const gptOnly = families.every((list) => list.some((s) => s.family === 'GPT' && monotone(s)));
-  const scaling = everyFamily ? 'larger language models predict better' : gptOnly ? 'larger GPT models predict better' : null;
-  const baselines = scored.filter((r) => r.kind === 'baseline');
-  const models = scored.filter((r) => r.kind !== 'baseline');
-  const beatsAll = (m, task) => {
-    const mv = value(m, task, 'log_loss');
-    const bs = baselines.map((b) => value(b, task, 'log_loss')).filter((v) => v !== null);
-    return mv !== null && bs.length > 0 && bs.every((v) => mv < v);
-  };
-  const both = models.some((m) => TASKS.every((t) => beatsAll(m, t.id)));
-  const one = TASKS.find((t) => models.some((m) => beatsAll(m, t.id)));
-  let second;
-  if (scaling && both) second = `In preliminary results, ${scaling}, and the strongest now outperforms classical methods fitted to every other recorded vote.`;
-  else if (scaling && one) second = `In preliminary results, ${scaling}, and the strongest outperforms classical methods on ${one.label.toLowerCase()}.`;
-  else if (scaling) second = `In preliminary results, ${scaling}, though classical methods fitted to every other recorded vote still lead.`;
-  else if (both) second = 'In preliminary results, the strongest language model outperforms classical methods fitted to every other recorded vote.';
-  else second = 'Preliminary results compare language models with classical methods fitted to every other recorded vote.';
-  return [first, second];
+/** The headline blurb. Static by design: it states what the benchmark tests, and the table carries the results. */
+export function blurb() {
+  return [
+    'Language models are increasingly asked to stand in for people.',
+    `${NAME} tests that claim against the record: real participants in real public deliberations, scored on how well a system predicts their actual votes, alongside the classical methods built for the same job.`,
+  ];
 }
 
 /** Per-row floored ranks, for the rank change under the declared probability floor. */

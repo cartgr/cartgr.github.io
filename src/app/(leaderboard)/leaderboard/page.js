@@ -50,7 +50,7 @@ function Section({ id, title, children, lead }) {
 }
 
 function Blurb() {
-  const [first, second] = blurb(rows);
+  const [first, second] = blurb();
   return (
     <p className="max-w-[44rem] font-serif text-[19px] leading-[29px] text-ink md:text-[22px] md:leading-[32px]">
       {first} {second}
