@@ -382,6 +382,22 @@ export default function LeaderboardPage() {
               The split, the sampling seed and every hidden response were fixed before any model was run.
             </p>
 
+            <h3 className="pt-2 text-[15px] font-semibold text-ink">Splits</h3>
+            <p>
+              Each study’s recorded responses are divided once, with a fixed seed, into a <strong>test pool</strong> (20%)
+              and a <strong>visible set</strong> (80%). The held-out responses above are sampled from the test pool. For
+              new-statement prediction, whole statements are removed from the visible set instead, so no one’s response
+              to them is visible. Within the visible set, one tenth is reserved as a <strong>validation split</strong>.
+            </p>
+            <p>
+              Language models receive the visible set as context and predict the test responses directly; there is no
+              fitting, so the validation split is simply part of what they see. Classical baselines fit each candidate
+              setting on the other nine tenths, choose the setting with the lowest log loss on the validation split, refit
+              it on the whole visible set, freeze it, and only then predict the test responses. Both kinds of system
+              therefore predict the same hidden responses from the same visible evidence; no test response is used for
+              fitting, selection or convergence checks.
+            </p>
+
             <h3 className="pt-2 text-[15px] font-semibold text-ink">Scoring</h3>
             <p>
               Each prediction is scored against the recorded response by <span className="text-ink">log loss</span>{' '}
