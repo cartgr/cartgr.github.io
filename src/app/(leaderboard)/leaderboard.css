@@ -1,0 +1,71 @@
+/* PrefBench leaderboard: its own visual system, independent of the personal site's globals.css. */
+@config "../../../tailwind.leaderboard.config.js";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Colour tokens. Model colours are darkened Okabe-Ito blue and vermillion, distinct under deuteranopia and
+   protanopia; marker shape (filled circle, hollow circle, square) carries the same information without colour. */
+:root {
+  --lb-paper: #fbfaf7;
+  --lb-tint: #f3f1eb;
+  --lb-ink: #15171a;
+  --lb-ink-2: #4b5058;
+  --lb-ink-3: #62676f;
+  --lb-rule: #e3e1db;
+  --lb-api: #1f5fa8;
+  --lb-open: #b5500f;
+  color-scheme: light;
+}
+.dark {
+  --lb-paper: #111315;
+  --lb-tint: #1a1d21;
+  --lb-ink: #ecedee;
+  --lb-ink-2: #b3b8bf;
+  --lb-ink-3: #8e949d;
+  --lb-rule: #2e3238;
+  --lb-api: #6fa8ea;
+  --lb-open: #f0915c;
+  color-scheme: dark;
+}
+
+html {
+  background-color: var(--lb-paper);
+  color: var(--lb-ink);
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+::selection {
+  background-color: color-mix(in srgb, var(--lb-api) 22%, transparent);
+}
+
+@layer components {
+  /* Figures are always tabular and lining so digits align down a column. */
+  .num {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--lb-ink);
+    outline-offset: 2px;
+  }
+  .prose-lb a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .prose-lb a:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

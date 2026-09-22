@@ -1,0 +1,1114 @@
+{
+  "schema": "deliberation-benchmark-leaderboard-v1",
+  "generated_at_utc": "2026-09-22T15:31:29+00:00",
+  "status": "preliminary",
+  "benchmark": {
+    "studies": 32,
+    "scopes": 64,
+    "people": 2259,
+    "cells": 9421,
+    "sources": [
+      "polis",
+      "global_dialogues",
+      "remesh",
+      "gsc",
+      "makeorg"
+    ],
+    "tasks": [
+      "matrix_completion",
+      "new_statement_prediction"
+    ],
+    "reference": {
+      "matrix_completion": "categorical_mf",
+      "new_statement_prediction": "selected_prior"
+    },
+    "condition": "calibrated-v1",
+    "partition": "native partition 0, evaluation stage, within-session"
+  },
+  "models": [
+    {
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "org": "OpenAI",
+      "kind": "closed",
+      "condition": "calibrated-v1",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.6729,
+          "accuracy": 0.7219,
+          "brier": 0.3827,
+          "ece": 0.0788,
+          "studies": 32,
+          "log_loss_floor": 0.6731,
+          "wins_log_loss": 23,
+          "wins_accuracy": 21,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.665,
+              "accuracy": 0.7258,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.3832,
+              "accuracy": 0.8733,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.4274,
+              "accuracy": 0.8116,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.3615,
+              "accuracy": 0.4007,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7696,
+              "accuracy": 0.682,
+              "studies": 4
+            }
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.6932,
+          "accuracy": 0.7097,
+          "brier": 0.3913,
+          "ece": 0.071,
+          "studies": 32,
+          "log_loss_floor": 0.6932,
+          "wins_log_loss": 32,
+          "wins_accuracy": 30,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.6891,
+              "accuracy": 0.7124,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4875,
+              "accuracy": 0.8142,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.369,
+              "accuracy": 0.8264,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.4381,
+              "accuracy": 0.375,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7382,
+              "accuracy": 0.6976,
+              "studies": 4
+            }
+          }
+        }
+      },
+      "requests": 2259,
+      "cost_usd": 307.53,
+      "price_per_million": {
+        "input": 10,
+        "output": 50
+      },
+      "reasoning_tokens_per_request": 87
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "name": "GPT-5.6 Sol",
+      "org": "OpenAI",
+      "kind": "closed",
+      "condition": "calibrated-v1",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8565,
+          "accuracy": 0.7064,
+          "brier": 0.4128,
+          "ece": 0.0862,
+          "studies": 32,
+          "log_loss_floor": 0.7343,
+          "wins_log_loss": 10,
+          "wins_accuracy": 17,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.859,
+              "accuracy": 0.716,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4802,
+              "accuracy": 0.8299,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.817,
+              "accuracy": 0.8125,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.4127,
+              "accuracy": 0.3644,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8781,
+              "accuracy": 0.6571,
+              "studies": 4
+            }
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.7436,
+          "accuracy": 0.7026,
+          "brier": 0.4136,
+          "ece": 0.0849,
+          "studies": 32,
+          "log_loss_floor": 0.7424,
+          "wins_log_loss": 24,
+          "wins_accuracy": 27,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.7173,
+              "accuracy": 0.7054,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.5935,
+              "accuracy": 0.8385,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.4612,
+              "accuracy": 0.7743,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6153,
+              "accuracy": 0.36,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7635,
+              "accuracy": 0.704,
+              "studies": 4
+            }
+          }
+        }
+      },
+      "requests": 2259,
+      "cost_usd": 141.58,
+      "price_per_million": {
+        "input": 4,
+        "output": 20
+      },
+      "reasoning_tokens_per_request": 513
+    },
+    {
+      "id": "gpt-5.6-terra",
+      "name": "GPT-5.6 Terra",
+      "org": "OpenAI",
+      "kind": "closed",
+      "condition": "calibrated-v1",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8755,
+          "accuracy": 0.6946,
+          "brier": 0.428,
+          "ece": 0.0834,
+          "studies": 32,
+          "log_loss_floor": 0.7615,
+          "wins_log_loss": 7,
+          "wins_accuracy": 13,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8581,
+              "accuracy": 0.7056,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.5183,
+              "accuracy": 0.809,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.4547,
+              "accuracy": 0.8038,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 2.2967,
+              "accuracy": 0.3682,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8353,
+              "accuracy": 0.6348,
+              "studies": 4
+            }
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.7988,
+          "accuracy": 0.6884,
+          "brier": 0.4274,
+          "ece": 0.0813,
+          "studies": 32,
+          "log_loss_floor": 0.7642,
+          "wins_log_loss": 21,
+          "wins_accuracy": 25,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.7729,
+              "accuracy": 0.6893,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6418,
+              "accuracy": 0.7917,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.4762,
+              "accuracy": 0.7899,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7007,
+              "accuracy": 0.34,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8373,
+              "accuracy": 0.705,
+              "studies": 4
+            }
+          }
+        }
+      },
+      "requests": 2259,
+      "cost_usd": 72.91,
+      "price_per_million": {
+        "input": 2,
+        "output": 12
+      },
+      "reasoning_tokens_per_request": 482
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "org": "OpenAI",
+      "kind": "closed",
+      "condition": "calibrated-v1",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 1.1352,
+          "accuracy": 0.6581,
+          "brier": 0.486,
+          "ece": 0.1033,
+          "studies": 32,
+          "log_loss_floor": 0.873,
+          "wins_log_loss": 1,
+          "wins_accuracy": 9,
+          "by_source": {
+            "polis": {
+              "log_loss": 1.1916,
+              "accuracy": 0.6612,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.7335,
+              "accuracy": 0.783,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.6052,
+              "accuracy": 0.7448,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 2.4858,
+              "accuracy": 0.3698,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.877,
+              "accuracy": 0.6278,
+              "studies": 4
+            }
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8655,
+          "accuracy": 0.6555,
+          "brier": 0.472,
+          "ece": 0.0954,
+          "studies": 32,
+          "log_loss_floor": 0.8348,
+          "wins_log_loss": 16,
+          "wins_accuracy": 22,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8384,
+              "accuracy": 0.6615,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.7663,
+              "accuracy": 0.7344,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.545,
+              "accuracy": 0.7292,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.8837,
+              "accuracy": 0.3,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8064,
+              "accuracy": 0.689,
+              "studies": 4
+            }
+          }
+        }
+      },
+      "requests": 2259,
+      "cost_usd": 7.04,
+      "price_per_million": {
+        "input": 0.2,
+        "output": 1.2
+      },
+      "reasoning_tokens_per_request": 383
+    },
+    {
+      "id": "qwen3-235b-a22b",
+      "name": "Qwen3-235B-A22B",
+      "org": "Alibaba",
+      "kind": "open",
+      "params": "235B (22B active)",
+      "condition": "calibrated-v1",
+      "status": "running"
+    },
+    {
+      "id": "qwen3-next-80b-a3b",
+      "name": "Qwen3-Next-80B-A3B",
+      "org": "Alibaba",
+      "kind": "open",
+      "params": "80B (3B active)",
+      "condition": "calibrated-v1",
+      "status": "running"
+    },
+    {
+      "id": "qwen3-30b-a3b",
+      "name": "Qwen3-30B-A3B",
+      "org": "Alibaba",
+      "kind": "open",
+      "params": "30B (3B active)",
+      "condition": "calibrated-v1",
+      "status": "running"
+    },
+    {
+      "id": "llama-4-maverick",
+      "name": "Llama 4 Maverick",
+      "org": "Meta",
+      "kind": "open",
+      "params": "400B (17B active)",
+      "condition": "calibrated-v1",
+      "status": "running"
+    },
+    {
+      "id": "llama-4-scout",
+      "name": "Llama 4 Scout",
+      "org": "Meta",
+      "kind": "open",
+      "params": "109B (17B active)",
+      "condition": "calibrated-v1",
+      "status": "running"
+    }
+  ],
+  "ablations": [
+    {
+      "id": "gpt-5.6-luna-base",
+      "name": "GPT-5.6 Luna",
+      "org": "OpenAI",
+      "kind": "closed",
+      "condition": "base",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 1.4883,
+          "accuracy": 0.667,
+          "brier": 0.4878,
+          "ece": 0.1071,
+          "studies": 32,
+          "log_loss_floor": 0.8861,
+          "wins_log_loss": 4,
+          "wins_accuracy": 11,
+          "by_source": {
+            "polis": {
+              "log_loss": 1.5755,
+              "accuracy": 0.6592,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6236,
+              "accuracy": 0.8142,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5406,
+              "accuracy": 0.7613,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 3.7893,
+              "accuracy": 0.3758,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 1.2607,
+              "accuracy": 0.6704,
+              "studies": 4
+            }
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.9513,
+          "accuracy": 0.6625,
+          "brier": 0.4802,
+          "ece": 0.0998,
+          "studies": 32,
+          "log_loss_floor": 0.8669,
+          "wins_log_loss": 16,
+          "wins_accuracy": 23,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9083,
+              "accuracy": 0.6736,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.9102,
+              "accuracy": 0.7205,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5697,
+              "accuracy": 0.7257,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 2.3071,
+              "accuracy": 0.2975,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8059,
+              "accuracy": 0.6987,
+              "studies": 4
+            }
+          }
+        }
+      },
+      "requests": 2259,
+      "cost_usd": 6.94,
+      "price_per_million": {
+        "input": 0.2,
+        "output": 1.2
+      },
+      "reasoning_tokens_per_request": 366
+    }
+  ],
+  "baselines": [
+    {
+      "id": "categorical_mf",
+      "name": "Matrix factorization",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Low-rank categorical factor model fitted on the full visible matrix",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.7164,
+          "accuracy": 0.6997,
+          "brier": 0.4104,
+          "ece": 0.0762,
+          "studies": 32,
+          "log_loss_floor": 0.7175,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.6816,
+              "accuracy": 0.7139,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4753,
+              "accuracy": 0.7899,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5198,
+              "accuracy": 0.7682,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6011,
+              "accuracy": 0.3504,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7763,
+              "accuracy": 0.6841,
+              "studies": 4
+            }
+          },
+          "is_reference": true
+        }
+      }
+    },
+    {
+      "id": "categorical_bias",
+      "name": "Bias model",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Participant and statement effects, no interaction",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.7545,
+          "accuracy": 0.6733,
+          "brier": 0.4365,
+          "ece": 0.0734,
+          "studies": 32,
+          "log_loss_floor": 0.7555,
+          "wins_log_loss": 10,
+          "wins_accuracy": 8,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.7409,
+              "accuracy": 0.683,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4234,
+              "accuracy": 0.8021,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5336,
+              "accuracy": 0.7578,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.691,
+              "accuracy": 0.2761,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7686,
+              "accuracy": 0.6631,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      }
+    },
+    {
+      "id": "user_neighborhood",
+      "name": "User k-NN",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Neighbouring participants by response agreement",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.77,
+          "accuracy": 0.6802,
+          "brier": 0.436,
+          "ece": 0.0775,
+          "studies": 32,
+          "log_loss_floor": 0.765,
+          "wins_log_loss": 8,
+          "wins_accuracy": 11,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.7554,
+              "accuracy": 0.6971,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4563,
+              "accuracy": 0.7847,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.544,
+              "accuracy": 0.7205,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.593,
+              "accuracy": 0.3291,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8363,
+              "accuracy": 0.663,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      }
+    },
+    {
+      "id": "item_neighborhood",
+      "name": "Statement k-NN",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Neighbouring statements by response agreement",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.7807,
+          "accuracy": 0.6588,
+          "brier": 0.4507,
+          "ece": 0.0816,
+          "studies": 32,
+          "log_loss_floor": 0.7812,
+          "wins_log_loss": 6,
+          "wins_accuracy": 8,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.7743,
+              "accuracy": 0.6641,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4682,
+              "accuracy": 0.7847,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5264,
+              "accuracy": 0.7552,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.5791,
+              "accuracy": 0.3304,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8386,
+              "accuracy": 0.6301,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      }
+    },
+    {
+      "id": "selected_prior",
+      "name": "Response prior",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Response-class frequencies for the question",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8066,
+          "accuracy": 0.6485,
+          "brier": 0.4634,
+          "ece": 0.0724,
+          "studies": 32,
+          "log_loss_floor": 0.8075,
+          "wins_log_loss": 6,
+          "wins_accuracy": 8,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8011,
+              "accuracy": 0.6599,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4659,
+              "accuracy": 0.7847,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5299,
+              "accuracy": 0.75,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7563,
+              "accuracy": 0.2205,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8225,
+              "accuracy": 0.6269,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8608,
+          "accuracy": 0.602,
+          "brier": 0.5088,
+          "ece": 0.0734,
+          "studies": 32,
+          "log_loss_floor": 0.8617,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8705,
+              "accuracy": 0.5905,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.62,
+              "accuracy": 0.7049,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5497,
+              "accuracy": 0.7066,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7404,
+              "accuracy": 0.2525,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7863,
+              "accuracy": 0.6789,
+              "studies": 4
+            }
+          },
+          "is_reference": true
+        }
+      }
+    },
+    {
+      "id": "text_ideal_point",
+      "name": "Text ideal point",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Ideal-point model over statement text",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8125,
+          "accuracy": 0.6353,
+          "brier": 0.4732,
+          "ece": 0.0889,
+          "studies": 32,
+          "log_loss_floor": 0.8104,
+          "wins_log_loss": 4,
+          "wins_accuracy": 4,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.7916,
+              "accuracy": 0.6412,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.5085,
+              "accuracy": 0.7674,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5999,
+              "accuracy": 0.697,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.724,
+              "accuracy": 0.2836,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8486,
+              "accuracy": 0.6366,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.9119,
+          "accuracy": 0.6035,
+          "brier": 0.5234,
+          "ece": 0.1108,
+          "studies": 32,
+          "log_loss_floor": 0.9017,
+          "wins_log_loss": 11,
+          "wins_accuracy": 16,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8947,
+              "accuracy": 0.5993,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6508,
+              "accuracy": 0.724,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5752,
+              "accuracy": 0.7257,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.8417,
+              "accuracy": 0.2375,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.9817,
+              "accuracy": 0.6255,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      }
+    },
+    {
+      "id": "lexical_history",
+      "name": "Lexical history",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Lexical similarity to the participant's past responses",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8332,
+          "accuracy": 0.6272,
+          "brier": 0.4849,
+          "ece": 0.0748,
+          "studies": 32,
+          "log_loss_floor": 0.8341,
+          "wins_log_loss": 4,
+          "wins_accuracy": 4,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8455,
+              "accuracy": 0.6198,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4597,
+              "accuracy": 0.7951,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5264,
+              "accuracy": 0.7604,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6531,
+              "accuracy": 0.2969,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8721,
+              "accuracy": 0.6036,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.9155,
+          "accuracy": 0.582,
+          "brier": 0.5383,
+          "ece": 0.0796,
+          "studies": 32,
+          "log_loss_floor": 0.9142,
+          "wins_log_loss": 9,
+          "wins_accuracy": 12,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9351,
+              "accuracy": 0.5634,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6508,
+              "accuracy": 0.7153,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5631,
+              "accuracy": 0.7205,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7317,
+              "accuracy": 0.2475,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8719,
+              "accuracy": 0.6385,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      }
+    },
+    {
+      "id": "item_prior",
+      "name": "Statement prior",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Response-class frequencies for the statement",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8464,
+          "accuracy": 0.6251,
+          "brier": 0.4888,
+          "ece": 0.0726,
+          "studies": 32,
+          "log_loss_floor": 0.8473,
+          "wins_log_loss": 4,
+          "wins_accuracy": 5,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8626,
+              "accuracy": 0.6248,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4659,
+              "accuracy": 0.7847,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5299,
+              "accuracy": 0.75,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6573,
+              "accuracy": 0.2719,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8832,
+              "accuracy": 0.5904,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      }
+    },
+    {
+      "id": "row_prior_reference",
+      "name": "Participant prior",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "The participant's own response-class frequencies",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8508,
+          "accuracy": 0.6091,
+          "brier": 0.5022,
+          "ece": 0.0717,
+          "studies": 32,
+          "log_loss_floor": 0.8517,
+          "wins_log_loss": 5,
+          "wins_accuracy": 4,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8621,
+              "accuracy": 0.5967,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4816,
+              "accuracy": 0.783,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5639,
+              "accuracy": 0.7318,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.818,
+              "accuracy": 0.2242,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.803,
+              "accuracy": 0.6413,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8617,
+          "accuracy": 0.6003,
+          "brier": 0.5084,
+          "ece": 0.0746,
+          "studies": 32,
+          "log_loss_floor": 0.8626,
+          "wins_log_loss": 2,
+          "wins_accuracy": 0,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.872,
+              "accuracy": 0.5878,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.605,
+              "accuracy": 0.7049,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5356,
+              "accuracy": 0.7066,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7837,
+              "accuracy": 0.2525,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7863,
+              "accuracy": 0.6789,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      }
+    }
+  ]
+}

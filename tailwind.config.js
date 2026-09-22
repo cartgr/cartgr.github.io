@@ -1,9 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  // The personal site only. The leaderboard in src/app/(leaderboard)/ has its own config
+  // (tailwind.leaderboard.config.js), so neither stylesheet carries the other's classes.
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/(site)/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
