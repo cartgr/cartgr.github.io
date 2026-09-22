@@ -47,6 +47,13 @@ body {
   .num {
     font-variant-numeric: tabular-nums lining-nums;
   }
+  /* A paper-coloured halo behind chart text, so labels stay legible where they cross a gridline or the reference. */
+  .halo {
+    paint-order: stroke;
+    stroke: var(--lb-paper);
+    stroke-width: 3.5px;
+    stroke-linejoin: round;
+  }
   .focus-ring:focus-visible {
     outline: 2px solid var(--lb-ink);
     outline-offset: 2px;

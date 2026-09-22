@@ -24,7 +24,7 @@ export function ScalingFigure({ rows, data }) {
   const m = { l: 44, r: 16, t: 14, b: 40 };
   const maxPts = Math.max(...panels.flatMap((p) => p.series.map((s) => s.points.length)), 2);
   const x = (i) => m.l + (i * (W - m.l - m.r)) / (maxPts - 1);
-  const y = (v) => m.t + ((v - lo) * (H - m.t - m.b)) / (hi - lo);
+  const y = (v) => H - m.b - ((v - lo) * (H - m.t - m.b)) / (hi - lo); // conventional: lower values sit lower
   const ticks = niceTicks(lo, hi, hi - lo > 0.6 ? 0.2 : 0.1);
 
   return (
@@ -37,7 +37,10 @@ export function ScalingFigure({ rows, data }) {
           : p.task.label;
         return (
           <figure key={p.task.id} className="m-0">
-            <figcaption className="mb-2 text-[13px] font-semibold text-ink">{p.task.label}</figcaption>
+            <figcaption className="mb-2 text-[13px] text-ink">
+              <span className="font-semibold">{p.task.label}</span>
+              <span className="text-ink3"> · log loss ↓</span>
+            </figcaption>
             <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full max-w-[420px]" role="img" aria-label={`Log loss by model tier. ${summary}`}>
               {ticks.map((tk) => (
                 <g key={tk}>
@@ -47,16 +50,8 @@ export function ScalingFigure({ rows, data }) {
                   </text>
                 </g>
               ))}
-              <text x={10} y={m.t + (H - m.t - m.b) / 2} transform={`rotate(-90 10 ${m.t + (H - m.t - m.b) / 2})`} textAnchor="middle" className="fill-ink3" fontSize="11">
-                Log loss ↓
-              </text>
               {refV !== null && (
-                <g>
-                  <line x1={m.l} x2={W - m.r} y1={y(refV)} y2={y(refV)} className="stroke-ink2" strokeWidth="1" strokeDasharray="4 3" />
-                  <text x={W - m.r} y={y(refV) - 5} textAnchor="end" className="fill-ink2" fontSize="11">
-                    {p.ref.name} · {fmt3(refV)}
-                  </text>
-                </g>
+                <line x1={m.l} x2={W - m.r} y1={y(refV)} y2={y(refV)} className="stroke-ink2" strokeWidth="1" strokeDasharray="4 3" />
               )}
               {p.series.map((s) => (
                 <g key={s.family}>
@@ -71,9 +66,9 @@ export function ScalingFigure({ rows, data }) {
                       {markerShape(s.kind, x(i), y(pt.y), 4)}
                       <text
                         x={x(i)}
-                        y={y(pt.y) + (i === s.points.length - 1 ? -9 : 15)}
+                        y={y(pt.y) + (refV !== null && pt.y < refV ? 16 : -9)}
                         textAnchor={i === 0 ? 'start' : i === s.points.length - 1 ? 'end' : 'middle'}
-                        className="fill-ink2"
+                        className="halo fill-ink2"
                         fontSize="10.5"
                       >
                         {pt.label}
@@ -89,6 +84,16 @@ export function ScalingFigure({ rows, data }) {
                 larger model →
               </text>
             </svg>
+            {p.ref && refV !== null && (
+              <p className="mt-1 flex items-center gap-2 text-[12px] text-ink2">
+                <svg width="22" height="6" aria-hidden="true">
+                  <line x1="0" x2="22" y1="3" y2="3" className="stroke-ink2" strokeWidth="1" strokeDasharray="4 3" />
+                </svg>
+                <span>
+                  Reference: {p.ref.name.toLowerCase()}, <span className="num">{fmt3(refV)}</span>
+                </span>
+              </p>
+            )}
           </figure>
         );
       })}
@@ -159,7 +164,7 @@ export function DotPlot({ rows, data }) {
                     </text>
                     <line x1={m.l} x2={x(p.v)} y1={cy} y2={cy} className="stroke-rule" strokeWidth="1" />
                     {markerShape(p.r.kind, x(p.v), cy, 4.5)}
-                    <text x={x(p.v) + 9} y={cy} dy="0.32em" className="fill-ink3 num" fontSize="11">
+                    <text x={x(p.v) + 9} y={cy} dy="0.32em" className="halo fill-ink3 num" fontSize="11">
                       {fmt3(p.v)}
                     </text>
                   </g>

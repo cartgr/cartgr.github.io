@@ -70,7 +70,7 @@ export function buildRows(data) {
       id: entry.id, name: entry.name, kind: entry.kind, org: entry.org, params: entry.params || null,
       description: entry.description || null, status: entry.status, condition: entry.condition || null,
       cost: typeof entry.cost_usd === 'number' ? entry.cost_usd : null,
-      subtitle: subtitle(entry), results, coverage, reference,
+      subtitle: subtitle(entry), subtitleShort: subtitle({ ...entry, params: null }), results, coverage, reference,
     };
   };
   return [...data.models, ...data.baselines].map(normalize);

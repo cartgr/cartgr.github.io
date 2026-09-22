@@ -4,8 +4,8 @@ import { NAME } from '../lib/data';
 const HOLLOW = [1, 2];
 
 export default function Wordmark({ size = 'md' }) {
-  const cell = 5;
-  const gap = 1;
+  const cell = 6;
+  const gap = 1.5;
   const squares = [];
   for (let r = 0; r < 3; r += 1) {
     for (let c = 0; c < 3; c += 1) {
@@ -14,7 +14,7 @@ export default function Wordmark({ size = 'md' }) {
       const hollow = r === HOLLOW[0] && c === HOLLOW[1];
       squares.push(
         hollow ? (
-          <rect key={`${r}${c}`} x={x + 0.5} y={y + 0.5} width={cell - 1} height={cell - 1} className="fill-none stroke-ink" strokeWidth="1" />
+          <rect key={`${r}${c}`} x={x + 0.625} y={y + 0.625} width={cell - 1.25} height={cell - 1.25} className="fill-none stroke-ink" strokeWidth="1.25" />
         ) : (
           <rect key={`${r}${c}`} x={x} y={y} width={cell} height={cell} className="fill-ink" />
         ),

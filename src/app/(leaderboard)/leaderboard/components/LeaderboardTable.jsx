@@ -35,9 +35,10 @@ function MetricCell({ row, task, metric, best, hideOnMobile, first }) {
   const v = r[metric.key];
   const text = formatMetric(metric.key, v);
   const isBest = cov === 'full' && best !== undefined && v === best;
-  const tone = metric.primary ? 'text-ink' : 'text-ink2';
+  // A best value is bold and full ink even in a secondary column; otherwise primary metrics are ink, the rest ink-2.
+  const tone = isBest ? 'font-semibold text-ink' : metric.primary ? 'text-ink' : 'text-ink2';
   return (
-    <td className={`${base} ${tone} ${isBest ? 'font-semibold text-ink' : ''}`}>
+    <td className={`${base} ${tone}`}>
       {text}
       {cov === 'partial' && (
         <span className="ml-1 text-[11px] text-ink3" title={`Evaluated on ${r.studies} of 32 studies`}>
@@ -48,10 +49,10 @@ function MetricCell({ row, task, metric, best, hideOnMobile, first }) {
   );
 }
 
-function ModelCell({ row, sticky, rowBg }) {
+function ModelCell({ row, sticky, rowBg, activeTask }) {
   const refTasks = TASKS.filter((t) => row.reference[t.id]);
   return (
-    <td className={`px-3 py-2.5 align-top ${sticky} ${rowBg}`}>
+    <td className={`min-w-[10.5rem] px-3 py-2.5 align-top md:min-w-0 ${sticky} ${rowBg}`}>
       <div className="flex items-start gap-2">
         <span className="mt-[7px]" title={KIND_LABEL[row.kind]}>
           <Marker kind={row.kind} />
@@ -62,15 +63,18 @@ function ModelCell({ row, sticky, rowBg }) {
             {refTasks.map((t) => (
               <span
                 key={t.id}
-                className="ml-2 inline-block rounded-sm border border-rule px-1.5 align-[1px] text-[11px] font-normal uppercase tracking-[0.04em] text-ink3"
+                className={`ml-2 rounded-sm border border-rule px-1.5 align-[1px] text-[11px] font-normal uppercase tracking-[0.04em] text-ink3 ${
+                  t.id === activeTask ? 'inline-block' : 'hidden md:inline-block'
+                }`}
               >
-                reference · {t.short.toLowerCase()}
+                reference<span className="hidden md:inline"> · {t.short.toLowerCase()}</span>
               </span>
             ))}
           </div>
           <div className="text-[12px] leading-snug text-ink3">
             <span className="sr-only">{KIND_LABEL[row.kind]}. </span>
-            {row.subtitle}
+            <span className="md:hidden">{row.subtitleShort}</span>
+            <span className="hidden md:inline">{row.subtitle}</span>
           </div>
         </div>
       </div>
@@ -105,6 +109,7 @@ export default function LeaderboardTable({ rows }) {
     return ascending ? 'ascending' : 'descending';
   };
   const hideTask = (task) => task !== rankTask;
+  const captionText = `Equal-study mean over the 32 studies of each task. ↓ lower is better, ↑ higher is better. Won counts studies where a system’s log loss is below the task’s reference. Rank orders systems by log loss on ${TASKS.find((t) => t.id === rankTask).label.toLowerCase()}; select any header to sort.`;
   const colCount = 3 + TASKS.length * METRICS.length;
 
   const header = (task, m, i) => (
@@ -138,7 +143,7 @@ export default function LeaderboardTable({ rows }) {
         <td className={`num sticky left-0 w-12 px-3 py-2.5 text-right align-top text-ink3 md:static ${rowBg}`}>
           {rk || '—'}
         </td>
-        <ModelCell row={r} sticky="sticky left-12 md:static" rowBg={rowBg} />
+        <ModelCell row={r} sticky="sticky left-12 md:static" rowBg={rowBg} activeTask={rankTask} />
         {group === 'pending' ? (
           <td colSpan={colCount - 3} className="px-3 py-2.5 align-top text-[14px] text-ink3">
             Running · results pending
@@ -189,14 +194,12 @@ export default function LeaderboardTable({ rows }) {
           </button>
         ))}
       </div>
+      <p className="pb-3 text-[13px] leading-relaxed text-ink2" aria-hidden="true">
+        <span className="font-semibold text-ink">Table 1.</span> {captionText}
+      </p>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse border-y-[1.5px] border-ink text-left">
-          <caption className="caption-top pb-3 text-left text-[13px] leading-relaxed text-ink2">
-            <span className="font-semibold text-ink">Table 1.</span> Equal-study mean over the 32 studies of each task.
-            {' '}↓ lower is better, ↑ higher is better. <span className="font-semibold">Won</span> counts studies where a
-            system&apos;s log loss is below the task&apos;s reference. Rank orders systems by log loss on{' '}
-            {TASKS.find((t) => t.id === rankTask).label.toLowerCase()}; select any header to sort.
-          </caption>
+          <caption className="sr-only">Table 1. {captionText}</caption>
           <thead>
             <tr>
               <th scope="col" rowSpan={2} className="sticky left-0 w-12 bg-paper px-3 pb-2 pt-3 text-right align-bottom text-[13px] font-semibold md:static">
@@ -206,7 +209,12 @@ export default function LeaderboardTable({ rows }) {
                 System
               </th>
               {TASKS.map((t) => (
-                <th key={t.id} scope="colgroup" colSpan={METRICS.length} className="hidden px-3 pt-3 md:table-cell md:pl-8">
+                <th
+                  key={t.id}
+                  scope="colgroup"
+                  colSpan={METRICS.length}
+                  className={`px-3 pl-6 pt-3 md:pl-8 ${hideTask(t.id) ? 'hidden md:table-cell' : ''}`}
+                >
                   <span className="block border-b border-ink pb-1 text-left text-[13px] font-semibold text-ink">{t.label}</span>
                 </th>
               ))}
