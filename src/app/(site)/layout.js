@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
-import './globals.css';
-import Menu from './components/menu';
+import '../globals.css';
+import Menu from '../components/menu';
 import Link from 'next/link';
-import { GoogleAnalytics } from './components/Analytics';
+import { GoogleAnalytics } from '../components/Analytics';
 import { Raleway, Cardo } from 'next/font/google';
 
 const raleway = Raleway({

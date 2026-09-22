@@ -1,7 +1,7 @@
 "use client";
 
-import Profile from './components/Profile'
-import News from './components/News'
+import Profile from '../components/Profile'
+import News from '../components/News'
 
 export default function Home() {
   return (
