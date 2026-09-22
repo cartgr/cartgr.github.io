@@ -8,6 +8,7 @@ import Wordmark from './components/Wordmark';
 import ThemeToggle from './components/ThemeToggle';
 import Marker from './components/Marker';
 import BaselineCatalogue from './components/BaselineCatalogue';
+import SourceTable from './components/SourceTable';
 import {
   NAME, VERSION, DESCRIPTOR, DOWNLOADS, TASKS, SOURCE_LABELS, buildRows, complete, running, value, ranks, floorRanks,
   referenceRow, blurb, fmt3, fmtPct, fmtSigned,
@@ -38,6 +39,8 @@ function studiesPerSource() {
   if (astra) for (const [s, v] of Object.entries(astra.results.matrix_completion.by_source || {})) out[s] = v.studies;
   return out;
 }
+
+const sourcesFor = (task) => Object.keys(SOURCE_LABELS).filter((s) => ranked(task).some((r) => r.results[task].by_source?.[s]));
 
 function Section({ id, title, children, lead }) {
   return (
@@ -79,56 +82,6 @@ function Facts() {
         </span>
       ))}
     </p>
-  );
-}
-
-function SourceTable({ task }) {
-  const list = ranked(task.id);
-  const counts = studiesPerSource();
-  const sources = Object.keys(SOURCE_LABELS).filter((s) => list.some((r) => r.results[task.id].by_source[s]));
-  const best = Object.fromEntries(
-    sources.map((s) => [s, Math.min(...list.map((r) => r.results[task.id].by_source[s]?.log_loss ?? Infinity))]),
-  );
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[640px] border-collapse border-y-[1.5px] border-ink text-[14px]">
-        <caption className="caption-top pb-2 text-left text-[13px] text-ink2">
-          <span className="font-semibold text-ink">{task.label}.</span> Mean log loss ↓ within each platform.
-        </caption>
-        <thead>
-          <tr className="border-b border-ink">
-            <th scope="col" className="px-3 py-2 text-left font-semibold">System</th>
-            {sources.map((s) => (
-              <th key={s} scope="col" className="px-3 py-2 text-right font-semibold">
-                <span className="block whitespace-nowrap">{SOURCE_LABELS[s]}</span>
-                <span className="num block text-[12px] font-normal text-ink3">{counts[s]} {counts[s] === 1 ? 'study' : 'studies'}</span>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {list.map((r) => (
-            <tr key={r.id} className={`border-b border-rule ${r.reference[task.id] ? 'bg-tint' : ''}`}>
-              <th scope="row" className={`px-3 py-2 text-left font-normal ${r.kind === 'baseline' ? 'text-ink2' : 'text-ink'}`}>
-                <span className="inline-flex items-center gap-2">
-                  <Marker kind={r.kind} />
-                  {r.kind === 'baseline' ? <a href={`#${anchorFor(r.id)}`} className="hover:underline">{r.name}</a> : r.name}
-                  {r.reference[task.id] && <span className="text-[11px] uppercase tracking-[0.04em] text-ink3">reference</span>}
-                </span>
-              </th>
-              {sources.map((s) => {
-                const v = r.results[task.id].by_source[s]?.log_loss;
-                return (
-                  <td key={s} className={`num px-3 py-2 text-right ${v === best[s] ? 'font-semibold text-ink' : 'text-ink2'}`}>
-                    {fmt3(v ?? null)}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
   );
 }
 
@@ -314,7 +267,9 @@ export default function LeaderboardPage() {
             Platforms differ in their response scales, so their log losses are not comparable with each other; compare
             systems within a column.
           </p>
-          <div className="mt-4 space-y-8">{TASKS.map((t) => <SourceTable key={t.id} task={t} />)}</div>
+          <div className="mt-4 space-y-8">{TASKS.map((t) => (
+              <SourceTable key={t.id} task={t} rows={ranked(t.id)} sources={sourcesFor(t.id)} counts={studiesPerSource()} />
+            ))}</div>
 
           <h3 className="mt-12 text-[15px] font-semibold text-ink">Calibration and the probability floor</h3>
           <p className="mt-1 max-w-prose text-[14px] leading-[22px] text-ink2">
