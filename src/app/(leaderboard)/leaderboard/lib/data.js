@@ -5,7 +5,7 @@
 import { BASELINES, FAMILIES } from './baselines';
 
 // The benchmark's name. Every visible use of it, and the download filenames, derive from this one constant.
-export const NAME = 'Absentee';
+export const NAME = 'VoteBench';
 export const SLUG = NAME.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 export const DOWNLOADS = { json: `${SLUG}-leaderboard.json`, csv: `${SLUG}-leaderboard.csv` };
 export const VERSION = 'v0.1';
