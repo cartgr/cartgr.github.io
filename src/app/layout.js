@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './globals.css';
 import Menu from './components/menu';
 import Link from 'next/link';
@@ -132,8 +132,11 @@ export default function RootLayout({ children }) {
           {children}
         </div>
         
-        {/* Google Analytics */}
-        <GoogleAnalytics GA_MEASUREMENT_ID="G-6YC2KGF5B2" />
+        {/* Google Analytics. It reads useSearchParams(), so it needs a Suspense boundary: without one Next 13.5
+            deopts every page into client-side rendering and ships an empty body. */}
+        <Suspense fallback={null}>
+          <GoogleAnalytics GA_MEASUREMENT_ID="G-6YC2KGF5B2" />
+        </Suspense>
       </body>
     </html>
   )
