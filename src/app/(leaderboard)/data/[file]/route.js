@@ -1,7 +1,7 @@
 // Static downloads of the leaderboard data, emitted at build time from the same file the page renders. The
 // filenames derive from the benchmark name (lib/data.js DOWNLOADS), so renaming the benchmark renames them too.
-import data from '../../leaderboard/data/leaderboard.json';
-import { DOWNLOADS } from '../../leaderboard/lib/data';
+import data from '../../votebench/data/leaderboard.json';
+import { DOWNLOADS } from '../../votebench/lib/data';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -15,6 +15,8 @@ const COLUMNS = [
   'system_id', 'system', 'kind', 'organization', 'status', 'condition', 'task', 'studies', 'is_reference',
   'log_loss', 'brier', 'accuracy', 'ece', 'log_loss_floor', 'wins_log_loss', 'wins_accuracy', 'cost_usd',
   ...SOURCES.map((s) => `log_loss_${s}`),
+  'coverage', 'missing_reasons', 'reference_log_loss_same_studies',
+  'reference_accuracy_same_studies', 'reference_brier_same_studies',
 ];
 
 const cell = (v) => {
@@ -27,11 +29,16 @@ function csv() {
   const lines = [COLUMNS.join(',')];
   for (const e of [...data.models, ...(data.ablations || []), ...data.baselines]) {
     for (const task of data.benchmark.tasks) {
-      const r = e.results ? e.results[task] : null;
+      const r = e.results?.[task] || e.partial?.[task] || null;
       if (!r && e.status === 'complete') continue;
       const row = {
         system_id: e.id, system: e.name, kind: e.kind, organization: e.org, status: e.status,
         condition: e.condition || (e.kind === 'baseline' ? '' : data.benchmark.condition), task,
+        coverage: !r ? 'none' : r.studies >= data.benchmark.studies ? 'full' : 'partial',
+        missing_reasons: e.coverage?.[task]?.missing_reasons ? JSON.stringify(e.coverage[task].missing_reasons) : '',
+        reference_log_loss_same_studies: r?.reference_on_same_studies?.log_loss,
+        reference_accuracy_same_studies: r?.reference_on_same_studies?.accuracy,
+        reference_brier_same_studies: r?.reference_on_same_studies?.brier,
         studies: r ? r.studies : '', is_reference: data.benchmark.reference[task] === e.id, cost_usd: e.cost_usd ?? '',
       };
       if (r) {

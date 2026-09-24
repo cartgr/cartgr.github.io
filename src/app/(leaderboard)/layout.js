@@ -2,7 +2,7 @@
 // so the two share no fonts, stylesheet or navigation; moving between them is a full page load.
 import { Source_Serif_4, Source_Sans_3, Source_Code_Pro } from 'next/font/google';
 import './leaderboard.css';
-import { NAME, DESCRIPTOR } from './leaderboard/lib/data';
+import { NAME, DESCRIPTOR } from './votebench/lib/data';
 
 const serif = Source_Serif_4({ subsets: ['latin'], weight: ['400', '600'], variable: '--font-lb-serif', display: 'swap' });
 const sans = Source_Sans_3({ subsets: ['latin'], weight: ['400', '600'], variable: '--font-lb-sans', display: 'swap' });
@@ -13,11 +13,11 @@ export const metadata = {
   title: `${NAME} leaderboard · ${DESCRIPTOR}`,
   description:
     'A benchmark for predicting how real participants respond in public deliberations: 32 studies from Polis, Global Dialogues, Remesh, Generative Social Choice and Make.org. Preliminary results.',
-  alternates: { canonical: '/leaderboard/' },
+  alternates: { canonical: '/votebench/' },
   openGraph: {
     title: `${NAME} leaderboard`,
     description: DESCRIPTOR,
-    url: '/leaderboard/',
+    url: '/votebench/',
     type: 'website',
   },
   // The page is meant to exist at its URL without being found: it is unlinked from the site, absent from the

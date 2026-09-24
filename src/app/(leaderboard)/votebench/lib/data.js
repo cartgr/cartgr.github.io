@@ -61,7 +61,7 @@ export function buildRows(data) {
     const coverage = {};
     const reference = {};
     for (const task of TASKS) {
-      const r = entry.results ? entry.results[task.id] : null;
+      const r = entry.results?.[task.id] || entry.partial?.[task.id] || null;
       results[task.id] = r || null;
       coverage[task.id] = !r ? 'none' : r.studies >= studies ? 'full' : 'partial';
       reference[task.id] = data.benchmark.reference[task.id] === entry.id;
