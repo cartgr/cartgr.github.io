@@ -17,6 +17,7 @@ const COLUMNS = [
   ...SOURCES.map((s) => `log_loss_${s}`),
   'coverage', 'missing_reasons', 'reference_log_loss_same_studies',
   'reference_accuracy_same_studies', 'reference_brier_same_studies',
+  'output_validation_amendment', 'syntax_repaired_requests', 'original_strict_failed_requests',
 ];
 
 const cell = (v) => {
@@ -39,6 +40,9 @@ function csv() {
         reference_log_loss_same_studies: r?.reference_on_same_studies?.log_loss,
         reference_accuracy_same_studies: r?.reference_on_same_studies?.accuracy,
         reference_brier_same_studies: r?.reference_on_same_studies?.brier,
+        output_validation_amendment: e.output_validation_amendment?.policy,
+        syntax_repaired_requests: e.output_validation_amendment?.syntax_repaired_requests,
+        original_strict_failed_requests: e.output_validation_amendment?.original_strict_failed_requests,
         studies: r ? r.studies : '', is_reference: data.benchmark.reference[task] === e.id, cost_usd: e.cost_usd ?? '',
       };
       if (r) {

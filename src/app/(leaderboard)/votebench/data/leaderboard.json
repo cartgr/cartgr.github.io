@@ -1,6 +1,6 @@
 {
   "schema": "deliberation-benchmark-leaderboard-v1",
-  "generated_at_utc": "2026-09-22T15:31:29+00:00",
+  "generated_at_utc": "2026-09-25T02:20:09+00:00",
   "status": "preliminary",
   "benchmark": {
     "studies": 32,
@@ -406,7 +406,111 @@
       "kind": "open",
       "params": "80B (3B active)",
       "condition": "calibrated-v1",
-      "status": "running"
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 1.2197,
+          "accuracy": 0.53,
+          "brier": 0.6597,
+          "ece": 0.1711,
+          "studies": 32,
+          "log_loss_floor": 1.1586,
+          "brier_floor": 0.6596,
+          "accuracy_floor": 0.53,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 1,
+          "wins_accuracy": 2,
+          "wins_brier": 1,
+          "by_source": {
+            "polis": {
+              "log_loss": 1.1299,
+              "accuracy": 0.5547,
+              "brier": 0.6446,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.7299,
+              "accuracy": 0.7569,
+              "brier": 0.4123,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 1.1497,
+              "accuracy": 0.447,
+              "brier": 0.7946,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 3.2013,
+              "accuracy": 0.1546,
+              "brier": 0.9661,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 1.0978,
+              "accuracy": 0.4863,
+              "brier": 0.6664,
+              "studies": 4
+            }
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 1.2121,
+          "accuracy": 0.5037,
+          "brier": 0.6968,
+          "ece": 0.1967,
+          "studies": 32,
+          "log_loss_floor": 1.2121,
+          "brier_floor": 0.6968,
+          "accuracy_floor": 0.5037,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 2,
+          "wins_accuracy": 8,
+          "wins_brier": 3,
+          "by_source": {
+            "polis": {
+              "log_loss": 1.2074,
+              "accuracy": 0.5164,
+              "brier": 0.7013,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.8518,
+              "accuracy": 0.6562,
+              "brier": 0.5093,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 1.0002,
+              "accuracy": 0.5608,
+              "brier": 0.675,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 2.1035,
+              "accuracy": 0.155,
+              "brier": 0.9143,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 1.2186,
+              "accuracy": 0.4576,
+              "brier": 0.7228,
+              "studies": 4
+            }
+          }
+        }
+      },
+      "requests": 2259,
+      "result_provenance": {
+        "run_tag": "vllm-qwen3-next-80b-a3b-instruct-v1",
+        "artifacts": {
+          "scores": "d230408df92793f1a116332e9316f6541550db8329689e8933d63708040c19e2",
+          "aggregate": "5a821dab1d176ec55593dd574b69ec4464c156aabfd2158156463486330e1ef8",
+          "floor": "9fe5f5c50dfb1bb280a3af416a3d49490bc6a4dfdf60edb8fa6d2fdb568ca123",
+          "review": "ef54f4a382e061987e7caf9f53a197a58676e193616137c0cd2304202681d637"
+        }
+      }
     },
     {
       "id": "qwen3-30b-a3b",
@@ -1110,5 +1214,10 @@
         }
       }
     }
-  ]
+  ],
+  "crosscheck": {
+    "values_checked": 87,
+    "mismatches": 0,
+    "against": "pipeline_v2 aggregate tables (models) and collector printed tables (baselines)"
+  }
 }

@@ -241,6 +241,12 @@ export default function LeaderboardPage() {
               context, which for large studies is a random sample of participants (always including the person being
               predicted). “—” in a task’s columns means the method does not apply to that task.
             </p>
+            {data.models.some((m) => m.output_validation_amendment) && (
+              <p>
+                Qwen3-30B includes one recorded syntax-only repair.{' '}
+                <a href="#output-validation-amendment" className="underline underline-offset-2">See the output-validation amendment</a>.
+              </p>
+            )}
             <p>
               Cost is the list-price API spend for the full batch of {data.benchmark.cells.toLocaleString('en-US')} predictions,
               including retried requests. Open-weight models run on a university cluster and baselines on CPUs, so
@@ -388,6 +394,18 @@ export default function LeaderboardPage() {
               A reply with no usable probabilities is re-sampled up to three times. A model is scored only when every one of
               its {data.benchmark.cells.toLocaleString('en-US')} predictions is valid.
             </p>
+
+            {data.models.filter((m) => m.output_validation_amendment).map((m) => (
+              <p key={m.id} id="output-validation-amendment">
+                <span className="font-semibold text-ink">Output-validation amendment.</span>{' '}
+                {m.name} had {m.output_validation_amendment.syntax_repaired_requests} of{' '}
+                {m.output_validation_amendment.total_requests.toLocaleString('en-US')} requests rejected for an extra
+                closing brace after all permitted retries. After observing this failure, we adopted a syntax-only
+                recovery rule for all models: remove exactly one extra trailing closing brace from the retained final
+                response, then apply every existing probability check. No probability value is changed by this repair.
+                Original responses and failure records are retained; the downloadable data records the amendment.
+              </p>
+            ))}
 
             <h3 className="pt-2 text-[15px] font-semibold text-ink">Baselines</h3>
             <p>
