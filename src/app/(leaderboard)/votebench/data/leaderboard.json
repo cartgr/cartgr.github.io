@@ -1,6 +1,6 @@
 {
   "schema": "deliberation-benchmark-leaderboard-v1",
-  "generated_at_utc": "2026-09-25T02:20:09+00:00",
+  "generated_at_utc": "2026-09-25T02:34:55+00:00",
   "status": "preliminary",
   "benchmark": {
     "studies": 32,
@@ -519,7 +519,124 @@
       "kind": "open",
       "params": "30B (3B active)",
       "condition": "calibrated-v1",
-      "status": "running"
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 2.1219,
+          "accuracy": 0.4139,
+          "brier": 0.7616,
+          "ece": 0.2064,
+          "studies": 32,
+          "log_loss_floor": 1.3406,
+          "brier_floor": 0.7601,
+          "accuracy_floor": 0.4139,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 0,
+          "wins_accuracy": 0,
+          "wins_brier": 0,
+          "by_source": {
+            "polis": {
+              "log_loss": 1.8877,
+              "accuracy": 0.4753,
+              "brier": 0.7048,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 4.4894,
+              "accuracy": 0.1875,
+              "brier": 1.0558,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.8707,
+              "accuracy": 0.6146,
+              "brier": 0.5032,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 2.2341,
+              "accuracy": 0.1732,
+              "brier": 0.9153,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 2.4,
+              "accuracy": 0.2468,
+              "brier": 0.9416,
+              "studies": 4
+            }
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 2.2056,
+          "accuracy": 0.4059,
+          "brier": 0.7741,
+          "ece": 0.2171,
+          "studies": 32,
+          "log_loss_floor": 1.3666,
+          "brier_floor": 0.7725,
+          "accuracy_floor": 0.4059,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 3,
+          "wins_accuracy": 5,
+          "wins_brier": 3,
+          "by_source": {
+            "polis": {
+              "log_loss": 2.1189,
+              "accuracy": 0.46,
+              "brier": 0.7372,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 3.8976,
+              "accuracy": 0.217,
+              "brier": 0.9701,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.7599,
+              "accuracy": 0.5903,
+              "brier": 0.5252,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.9931,
+              "accuracy": 0.1725,
+              "brier": 0.88,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 2.5606,
+              "accuracy": 0.2558,
+              "brier": 0.945,
+              "studies": 4
+            }
+          }
+        }
+      },
+      "requests": 2259,
+      "output_validation_amendment": {
+        "policy": "joint-one-trailing-brace-v1",
+        "adopted_after_observed_failure": true,
+        "original_strict_failed_requests": 1,
+        "syntax_repaired_requests": 1,
+        "total_requests": 2259,
+        "rule": "Remove exactly one extra trailing closing brace from the retained final response; all existing strict probability checks still apply.",
+        "probability_values_edited_by_syntax_repair": false,
+        "original_run_tag": "vllm-qwen3-30b-a3b-instruct-2507-v1",
+        "derived_run_tag": "vllm-qwen3-30b-a3b-instruct-2507-v1-brace-v1",
+        "audit_sha256": "f7c034336973b1000f16ab4d3020a5fa997c289612c614a24b78418024b5fce9"
+      },
+      "result_provenance": {
+        "run_tag": "vllm-qwen3-30b-a3b-instruct-2507-v1-brace-v1",
+        "artifacts": {
+          "scores": "65456e25ae445da9a57bf49cda646c29ee9a267d4dea9ee286a2db02047a71c1",
+          "aggregate": "a72bac709142401623e84e00c9f9e12b46f3040fb37e42d46a159124f8e7a2cd",
+          "floor": "997f3072cb75441408487a4c42a45e13efea87eee3c405bb0b6ffbcc3169ee30",
+          "review": "131d3d123f94c3134876c4799dfdfc0b901cc4309d8c74d93f37570c11be117f",
+          "repair_audit": "f7c034336973b1000f16ab4d3020a5fa997c289612c614a24b78418024b5fce9"
+        }
+      }
     },
     {
       "id": "llama-4-maverick",
@@ -1216,7 +1333,7 @@
     }
   ],
   "crosscheck": {
-    "values_checked": 87,
+    "values_checked": 95,
     "mismatches": 0,
     "against": "pipeline_v2 aggregate tables (models) and collector printed tables (baselines)"
   }
