@@ -1,6 +1,6 @@
 {
   "schema": "deliberation-benchmark-leaderboard-v1",
-  "generated_at_utc": "2026-09-25T02:34:55+00:00",
+  "generated_at_utc": "2026-09-25T06:08:52+00:00",
   "status": "preliminary",
   "benchmark": {
     "studies": 32,
@@ -41,32 +41,41 @@
           "ece": 0.0788,
           "studies": 32,
           "log_loss_floor": 0.6731,
+          "brier_floor": 0.3827,
+          "accuracy_floor": 0.7219,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 23,
           "wins_accuracy": 21,
+          "wins_brier": 25,
           "by_source": {
             "polis": {
               "log_loss": 0.665,
               "accuracy": 0.7258,
+              "brier": 0.3781,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.3832,
               "accuracy": 0.8733,
+              "brier": 0.2233,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.4274,
               "accuracy": 0.8116,
+              "brier": 0.2788,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.3615,
               "accuracy": 0.4007,
+              "brier": 0.6942,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.7696,
               "accuracy": 0.682,
+              "brier": 0.4477,
               "studies": 4
             }
           }
@@ -78,32 +87,41 @@
           "ece": 0.071,
           "studies": 32,
           "log_loss_floor": 0.6932,
+          "brier_floor": 0.3913,
+          "accuracy_floor": 0.7097,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 32,
           "wins_accuracy": 30,
+          "wins_brier": 32,
           "by_source": {
             "polis": {
               "log_loss": 0.6891,
               "accuracy": 0.7124,
+              "brier": 0.3922,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.4875,
               "accuracy": 0.8142,
+              "brier": 0.2895,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.369,
               "accuracy": 0.8264,
+              "brier": 0.2296,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.4381,
               "accuracy": 0.375,
+              "brier": 0.723,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.7382,
               "accuracy": 0.6976,
+              "brier": 0.4185,
               "studies": 4
             }
           }
@@ -132,32 +150,41 @@
           "ece": 0.0862,
           "studies": 32,
           "log_loss_floor": 0.7343,
+          "brier_floor": 0.4124,
+          "accuracy_floor": 0.7064,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 10,
           "wins_accuracy": 17,
+          "wins_brier": 17,
           "by_source": {
             "polis": {
               "log_loss": 0.859,
               "accuracy": 0.716,
+              "brier": 0.409,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.4802,
               "accuracy": 0.8299,
+              "brier": 0.2578,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.817,
               "accuracy": 0.8125,
+              "brier": 0.2953,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.4127,
               "accuracy": 0.3644,
+              "brier": 0.73,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8781,
               "accuracy": 0.6571,
+              "brier": 0.477,
               "studies": 4
             }
           }
@@ -169,32 +196,41 @@
           "ece": 0.0849,
           "studies": 32,
           "log_loss_floor": 0.7424,
+          "brier_floor": 0.4135,
+          "accuracy_floor": 0.7026,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 24,
           "wins_accuracy": 27,
+          "wins_brier": 28,
           "by_source": {
             "polis": {
               "log_loss": 0.7173,
               "accuracy": 0.7054,
+              "brier": 0.4109,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.5935,
               "accuracy": 0.8385,
+              "brier": 0.2925,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.4612,
               "accuracy": 0.7743,
+              "brier": 0.3012,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.6153,
               "accuracy": 0.36,
+              "brier": 0.7622,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.7635,
               "accuracy": 0.704,
+              "brier": 0.4277,
               "studies": 4
             }
           }
@@ -223,32 +259,41 @@
           "ece": 0.0834,
           "studies": 32,
           "log_loss_floor": 0.7615,
+          "brier_floor": 0.4275,
+          "accuracy_floor": 0.6946,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 7,
           "wins_accuracy": 13,
+          "wins_brier": 10,
           "by_source": {
             "polis": {
               "log_loss": 0.8581,
               "accuracy": 0.7056,
+              "brier": 0.4256,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.5183,
               "accuracy": 0.809,
+              "brier": 0.2709,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.4547,
               "accuracy": 0.8038,
+              "brier": 0.2908,
               "studies": 3
             },
             "gsc": {
               "log_loss": 2.2967,
               "accuracy": 0.3682,
+              "brier": 0.7669,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8353,
               "accuracy": 0.6348,
+              "brier": 0.4911,
               "studies": 4
             }
           }
@@ -260,32 +305,41 @@
           "ece": 0.0813,
           "studies": 32,
           "log_loss_floor": 0.7642,
+          "brier_floor": 0.4273,
+          "accuracy_floor": 0.6884,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 21,
           "wins_accuracy": 25,
+          "wins_brier": 27,
           "by_source": {
             "polis": {
               "log_loss": 0.7729,
               "accuracy": 0.6893,
+              "brier": 0.4242,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.6418,
               "accuracy": 0.7917,
+              "brier": 0.3299,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.4762,
               "accuracy": 0.7899,
+              "brier": 0.3064,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.7007,
               "accuracy": 0.34,
+              "brier": 0.7523,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8373,
               "accuracy": 0.705,
+              "brier": 0.4448,
               "studies": 4
             }
           }
@@ -314,32 +368,41 @@
           "ece": 0.1033,
           "studies": 32,
           "log_loss_floor": 0.873,
+          "brier_floor": 0.485,
+          "accuracy_floor": 0.6581,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 1,
           "wins_accuracy": 9,
+          "wins_brier": 6,
           "by_source": {
             "polis": {
               "log_loss": 1.1916,
               "accuracy": 0.6612,
+              "brier": 0.4847,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.7335,
               "accuracy": 0.783,
+              "brier": 0.3789,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.6052,
               "accuracy": 0.7448,
+              "brier": 0.3864,
               "studies": 3
             },
             "gsc": {
               "log_loss": 2.4858,
               "accuracy": 0.3698,
+              "brier": 0.7537,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.877,
               "accuracy": 0.6278,
+              "brier": 0.5141,
               "studies": 4
             }
           }
@@ -351,32 +414,41 @@
           "ece": 0.0954,
           "studies": 32,
           "log_loss_floor": 0.8348,
+          "brier_floor": 0.4718,
+          "accuracy_floor": 0.6555,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 16,
           "wins_accuracy": 22,
+          "wins_brier": 21,
           "by_source": {
             "polis": {
               "log_loss": 0.8384,
               "accuracy": 0.6615,
+              "brier": 0.4676,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.7663,
               "accuracy": 0.7344,
+              "brier": 0.4137,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.545,
               "accuracy": 0.7292,
+              "brier": 0.3761,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.8837,
               "accuracy": 0.3,
+              "brier": 0.8065,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8064,
               "accuracy": 0.689,
+              "brier": 0.4429,
               "studies": 4
             }
           }
@@ -673,32 +745,41 @@
           "ece": 0.1071,
           "studies": 32,
           "log_loss_floor": 0.8861,
+          "brier_floor": 0.4863,
+          "accuracy_floor": 0.667,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 4,
           "wins_accuracy": 11,
+          "wins_brier": 5,
           "by_source": {
             "polis": {
               "log_loss": 1.5755,
               "accuracy": 0.6592,
+              "brier": 0.4997,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.6236,
               "accuracy": 0.8142,
+              "brier": 0.3332,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5406,
               "accuracy": 0.7613,
+              "brier": 0.3457,
               "studies": 3
             },
             "gsc": {
               "log_loss": 3.7893,
               "accuracy": 0.3758,
+              "brier": 0.8169,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 1.2607,
               "accuracy": 0.6704,
+              "brier": 0.486,
               "studies": 4
             }
           }
@@ -710,32 +791,41 @@
           "ece": 0.0998,
           "studies": 32,
           "log_loss_floor": 0.8669,
+          "brier_floor": 0.4798,
+          "accuracy_floor": 0.6625,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 16,
           "wins_accuracy": 23,
+          "wins_brier": 21,
           "by_source": {
             "polis": {
               "log_loss": 0.9083,
               "accuracy": 0.6736,
+              "brier": 0.4713,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.9102,
               "accuracy": 0.7205,
+              "brier": 0.4554,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5697,
               "accuracy": 0.7257,
+              "brier": 0.3628,
               "studies": 3
             },
             "gsc": {
               "log_loss": 2.3071,
               "accuracy": 0.2975,
+              "brier": 0.8295,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8059,
               "accuracy": 0.6987,
+              "brier": 0.4572,
               "studies": 4
             }
           }
@@ -766,34 +856,56 @@
           "ece": 0.0762,
           "studies": 32,
           "log_loss_floor": 0.7175,
+          "brier_floor": 0.4104,
+          "accuracy_floor": 0.6997,
+          "floor_changes_accuracy": false,
           "by_source": {
             "polis": {
               "log_loss": 0.6816,
               "accuracy": 0.7139,
+              "brier": 0.3928,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.4753,
               "accuracy": 0.7899,
+              "brier": 0.3033,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5198,
               "accuracy": 0.7682,
+              "brier": 0.3438,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.6011,
               "accuracy": 0.3504,
+              "brier": 0.7696,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.7763,
               "accuracy": 0.6841,
+              "brier": 0.4488,
               "studies": 4
             }
           },
           "is_reference": true
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 0,
+          "of": 32,
+          "missing_reasons": {
+            "task_not_supported": 32
+          }
         }
       }
     },
@@ -812,36 +924,59 @@
           "ece": 0.0734,
           "studies": 32,
           "log_loss_floor": 0.7555,
+          "brier_floor": 0.4366,
+          "accuracy_floor": 0.6733,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 10,
           "wins_accuracy": 8,
+          "wins_brier": 9,
           "by_source": {
             "polis": {
               "log_loss": 0.7409,
               "accuracy": 0.683,
+              "brier": 0.4338,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.4234,
               "accuracy": 0.8021,
+              "brier": 0.2697,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5336,
               "accuracy": 0.7578,
+              "brier": 0.3566,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.691,
               "accuracy": 0.2761,
+              "brier": 0.7989,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.7686,
               "accuracy": 0.6631,
+              "brier": 0.4541,
               "studies": 4
             }
           },
           "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 0,
+          "of": 32,
+          "missing_reasons": {
+            "task_not_supported": 32
+          }
         }
       }
     },
@@ -860,36 +995,59 @@
           "ece": 0.0775,
           "studies": 32,
           "log_loss_floor": 0.765,
+          "brier_floor": 0.436,
+          "accuracy_floor": 0.6802,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 8,
           "wins_accuracy": 11,
+          "wins_brier": 8,
           "by_source": {
             "polis": {
               "log_loss": 0.7554,
               "accuracy": 0.6971,
+              "brier": 0.4268,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.4563,
               "accuracy": 0.7847,
+              "brier": 0.2933,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.544,
               "accuracy": 0.7205,
+              "brier": 0.3644,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.593,
               "accuracy": 0.3291,
+              "brier": 0.7607,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8363,
               "accuracy": 0.663,
+              "brier": 0.4805,
               "studies": 4
             }
           },
           "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 0,
+          "of": 32,
+          "missing_reasons": {
+            "task_not_supported": 32
+          }
         }
       }
     },
@@ -908,120 +1066,316 @@
           "ece": 0.0816,
           "studies": 32,
           "log_loss_floor": 0.7812,
+          "brier_floor": 0.4508,
+          "accuracy_floor": 0.6588,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 6,
           "wins_accuracy": 8,
+          "wins_brier": 6,
           "by_source": {
             "polis": {
               "log_loss": 0.7743,
               "accuracy": 0.6641,
+              "brier": 0.4493,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.4682,
               "accuracy": 0.7847,
+              "brier": 0.3022,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5264,
               "accuracy": 0.7552,
+              "brier": 0.3491,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.5791,
               "accuracy": 0.3304,
+              "brier": 0.7608,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8386,
               "accuracy": 0.6301,
+              "brier": 0.4904,
               "studies": 4
             }
           },
           "is_reference": false
         }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 0,
+          "of": 32,
+          "missing_reasons": {
+            "task_not_supported": 32
+          }
+        }
       }
     },
     {
-      "id": "selected_prior",
-      "name": "Response prior",
+      "id": "ordinal_factor",
+      "name": "Ordinal factor model",
       "org": "Baseline",
       "kind": "baseline",
-      "description": "Response-class frequencies for the question",
+      "description": "Low-rank model with ordered thresholds (ordinal scales only)",
+      "status": "complete",
+      "results": {},
+      "coverage": {
+        "matrix_completion": {
+          "studies": 2,
+          "of": 32,
+          "missing_reasons": {
+            "inapplicable": 30
+          }
+        },
+        "new_statement_prediction": {
+          "studies": 0,
+          "of": 32,
+          "missing_reasons": {
+            "task_not_supported": 32
+          }
+        }
+      },
+      "partial": {
+        "matrix_completion": {
+          "log_loss": 1.4482,
+          "accuracy": 0.345,
+          "brier": 0.7265,
+          "ece": 0.0682,
+          "studies": 2,
+          "log_loss_floor": 1.4492,
+          "brier_floor": 0.7266,
+          "accuracy_floor": 0.345,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 2,
+          "wins_accuracy": 1,
+          "wins_brier": 2,
+          "by_source": {
+            "gsc": {
+              "log_loss": 1.4482,
+              "accuracy": 0.345,
+              "brier": 0.7265,
+              "studies": 2
+            }
+          },
+          "is_reference": false,
+          "reference_on_same_studies": {
+            "log_loss": 1.6011,
+            "accuracy": 0.3504,
+            "brier": 0.7696,
+            "studies": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "stump_native_categorical_v2",
+      "name": "STUMP",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Semantic Transfer Utility Model of Participants (Remesh), native categorical head",
       "status": "complete",
       "results": {
         "matrix_completion": {
-          "log_loss": 0.8066,
-          "accuracy": 0.6485,
-          "brier": 0.4634,
-          "ece": 0.0724,
+          "log_loss": 0.8485,
+          "accuracy": 0.6637,
+          "brier": 0.4667,
+          "ece": 0.1038,
           "studies": 32,
-          "log_loss_floor": 0.8075,
+          "log_loss_floor": 0.8354,
+          "brier_floor": 0.466,
+          "accuracy_floor": 0.6637,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 6,
-          "wins_accuracy": 8,
+          "wins_accuracy": 6,
+          "wins_brier": 5,
           "by_source": {
             "polis": {
-              "log_loss": 0.8011,
-              "accuracy": 0.6599,
+              "log_loss": 0.7848,
+              "accuracy": 0.6769,
+              "brier": 0.443,
               "studies": 20
             },
             "global_dialogues": {
-              "log_loss": 0.4659,
-              "accuracy": 0.7847,
+              "log_loss": 0.4392,
+              "accuracy": 0.816,
+              "brier": 0.2796,
               "studies": 3
             },
             "remesh": {
-              "log_loss": 0.5299,
-              "accuracy": 0.75,
+              "log_loss": 0.7234,
+              "accuracy": 0.6623,
+              "brier": 0.4626,
               "studies": 3
             },
             "gsc": {
-              "log_loss": 1.7563,
-              "accuracy": 0.2205,
+              "log_loss": 2.4016,
+              "accuracy": 0.2939,
+              "brier": 0.9995,
               "studies": 2
             },
             "makeorg": {
-              "log_loss": 0.8225,
-              "accuracy": 0.6269,
+              "log_loss": 0.7915,
+              "accuracy": 0.6694,
+              "brier": 0.4619,
               "studies": 4
             }
           },
           "is_reference": false
         },
         "new_statement_prediction": {
-          "log_loss": 0.8608,
-          "accuracy": 0.602,
-          "brier": 0.5088,
-          "ece": 0.0734,
+          "log_loss": 1.0127,
+          "accuracy": 0.6033,
+          "brier": 0.5476,
+          "ece": 0.1191,
           "studies": 32,
-          "log_loss_floor": 0.8617,
+          "log_loss_floor": 0.9918,
+          "brier_floor": 0.5465,
+          "accuracy_floor": 0.6033,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 14,
+          "wins_accuracy": 18,
+          "wins_brier": 18,
           "by_source": {
             "polis": {
-              "log_loss": 0.8705,
-              "accuracy": 0.5905,
+              "log_loss": 0.9729,
+              "accuracy": 0.6038,
+              "brier": 0.5512,
               "studies": 20
             },
             "global_dialogues": {
-              "log_loss": 0.62,
-              "accuracy": 0.7049,
+              "log_loss": 0.6323,
+              "accuracy": 0.7222,
+              "brier": 0.38,
               "studies": 3
             },
             "remesh": {
-              "log_loss": 0.5497,
-              "accuracy": 0.7066,
+              "log_loss": 0.655,
+              "accuracy": 0.6997,
+              "brier": 0.4108,
               "studies": 3
             },
             "gsc": {
-              "log_loss": 1.7404,
-              "accuracy": 0.2525,
+              "log_loss": 2.8651,
+              "accuracy": 0.215,
+              "brier": 1.0886,
               "studies": 2
             },
             "makeorg": {
-              "log_loss": 0.7863,
-              "accuracy": 0.6789,
+              "log_loss": 0.8391,
+              "accuracy": 0.6333,
+              "brier": 0.4875,
               "studies": 4
             }
           },
-          "is_reference": true
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "stump_native_ordinal_v2",
+      "name": "STUMP (ordinal)",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "STUMP with ordered cumulative-logit thresholds (ordinal scales only)",
+      "status": "complete",
+      "results": {},
+      "coverage": {
+        "matrix_completion": {
+          "studies": 2,
+          "of": 32,
+          "missing_reasons": {
+            "inapplicable": 30
+          }
+        },
+        "new_statement_prediction": {
+          "studies": 2,
+          "of": 32,
+          "missing_reasons": {
+            "inapplicable": 30
+          }
+        }
+      },
+      "partial": {
+        "matrix_completion": {
+          "log_loss": 1.5796,
+          "accuracy": 0.3275,
+          "brier": 0.7492,
+          "ece": 0.1038,
+          "studies": 2,
+          "log_loss_floor": 1.5808,
+          "brier_floor": 0.7477,
+          "accuracy_floor": 0.3275,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 1,
+          "wins_accuracy": 0,
+          "wins_brier": 2,
+          "by_source": {
+            "gsc": {
+              "log_loss": 1.5796,
+              "accuracy": 0.3275,
+              "brier": 0.7492,
+              "studies": 2
+            }
+          },
+          "is_reference": false,
+          "reference_on_same_studies": {
+            "log_loss": 1.6011,
+            "accuracy": 0.3504,
+            "brier": 0.7696,
+            "studies": 2
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 2.3046,
+          "accuracy": 0.225,
+          "brier": 0.9298,
+          "ece": 0.1206,
+          "studies": 2,
+          "log_loss_floor": 2.2113,
+          "brier_floor": 0.9258,
+          "accuracy_floor": 0.225,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 0,
+          "wins_accuracy": 1,
+          "wins_brier": 0,
+          "by_source": {
+            "gsc": {
+              "log_loss": 2.3046,
+              "accuracy": 0.225,
+              "brier": 0.9298,
+              "studies": 2
+            }
+          },
+          "is_reference": false,
+          "reference_on_same_studies": {
+            "log_loss": 1.7404,
+            "accuracy": 0.2525,
+            "brier": 0.8109,
+            "studies": 2
+          }
         }
       }
     },
@@ -1040,32 +1394,41 @@
           "ece": 0.0889,
           "studies": 32,
           "log_loss_floor": 0.8104,
+          "brier_floor": 0.4731,
+          "accuracy_floor": 0.6353,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 4,
           "wins_accuracy": 4,
+          "wins_brier": 4,
           "by_source": {
             "polis": {
               "log_loss": 0.7916,
               "accuracy": 0.6412,
+              "brier": 0.4658,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.5085,
               "accuracy": 0.7674,
+              "brier": 0.3319,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5999,
               "accuracy": 0.697,
+              "brier": 0.4109,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.724,
               "accuracy": 0.2836,
+              "brier": 0.8157,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8486,
               "accuracy": 0.6366,
+              "brier": 0.4921,
               "studies": 4
             }
           },
@@ -1078,36 +1441,1070 @@
           "ece": 0.1108,
           "studies": 32,
           "log_loss_floor": 0.9017,
+          "brier_floor": 0.523,
+          "accuracy_floor": 0.6035,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 11,
           "wins_accuracy": 16,
+          "wins_brier": 12,
           "by_source": {
             "polis": {
               "log_loss": 0.8947,
               "accuracy": 0.5993,
+              "brier": 0.5322,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.6508,
               "accuracy": 0.724,
+              "brier": 0.3927,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5752,
               "accuracy": 0.7257,
+              "brier": 0.3809,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.8417,
               "accuracy": 0.2375,
+              "brier": 0.8448,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.9817,
               "accuracy": 0.6255,
+              "brier": 0.5235,
               "studies": 4
             }
           },
           "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "ordinal_text_ideal_point",
+      "name": "Text ideal point (ordinal)",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Text ideal point with ordered thresholds (ordinal scales only)",
+      "status": "complete",
+      "results": {},
+      "coverage": {
+        "matrix_completion": {
+          "studies": 2,
+          "of": 32,
+          "missing_reasons": {
+            "inapplicable": 30
+          }
+        },
+        "new_statement_prediction": {
+          "studies": 2,
+          "of": 32,
+          "missing_reasons": {
+            "inapplicable": 30
+          }
+        }
+      },
+      "partial": {
+        "matrix_completion": {
+          "log_loss": 1.5446,
+          "accuracy": 0.2986,
+          "brier": 0.7445,
+          "ece": 0.0598,
+          "studies": 2,
+          "log_loss_floor": 1.5448,
+          "brier_floor": 0.7445,
+          "accuracy_floor": 0.2986,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 2,
+          "wins_accuracy": 0,
+          "wins_brier": 2,
+          "by_source": {
+            "gsc": {
+              "log_loss": 1.5446,
+              "accuracy": 0.2986,
+              "brier": 0.7445,
+              "studies": 2
+            }
+          },
+          "is_reference": false,
+          "reference_on_same_studies": {
+            "log_loss": 1.6011,
+            "accuracy": 0.3504,
+            "brier": 0.7696,
+            "studies": 2
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 1.7831,
+          "accuracy": 0.215,
+          "brier": 0.825,
+          "ece": 0.0687,
+          "studies": 2,
+          "log_loss_floor": 1.7831,
+          "brier_floor": 0.825,
+          "accuracy_floor": 0.215,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 0,
+          "wins_accuracy": 0,
+          "wins_brier": 0,
+          "by_source": {
+            "gsc": {
+              "log_loss": 1.7831,
+              "accuracy": 0.215,
+              "brier": 0.825,
+              "studies": 2
+            }
+          },
+          "is_reference": false,
+          "reference_on_same_studies": {
+            "log_loss": 1.7404,
+            "accuracy": 0.2525,
+            "brier": 0.8109,
+            "studies": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "tfidf_conditional_logistic",
+      "name": "TF-IDF logistic",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Conditional logistic regression on TF-IDF profile features",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.7582,
+          "accuracy": 0.674,
+          "brier": 0.4402,
+          "ece": 0.0705,
+          "studies": 32,
+          "log_loss_floor": 0.759,
+          "brier_floor": 0.4403,
+          "accuracy_floor": 0.674,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 8,
+          "wins_accuracy": 11,
+          "wins_brier": 8,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.753,
+              "accuracy": 0.6753,
+              "brier": 0.4417,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4573,
+              "accuracy": 0.809,
+              "brier": 0.2927,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5146,
+              "accuracy": 0.7543,
+              "brier": 0.3436,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6087,
+              "accuracy": 0.3214,
+              "brier": 0.7683,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7677,
+              "accuracy": 0.6823,
+              "brier": 0.4521,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8609,
+          "accuracy": 0.6154,
+          "brier": 0.5025,
+          "ece": 0.0862,
+          "studies": 32,
+          "log_loss_floor": 0.8605,
+          "brier_floor": 0.5024,
+          "accuracy_floor": 0.6154,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 15,
+          "wins_accuracy": 16,
+          "wins_brier": 16,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8608,
+              "accuracy": 0.6084,
+              "brier": 0.5148,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.61,
+              "accuracy": 0.7361,
+              "brier": 0.3845,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5312,
+              "accuracy": 0.7205,
+              "brier": 0.3574,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.8549,
+              "accuracy": 0.2275,
+              "brier": 0.8446,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7996,
+              "accuracy": 0.6748,
+              "brier": 0.4666,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "embedding_conditional_logistic",
+      "name": "Embedding logistic",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Conditional logistic regression on sentence-embedding features",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.7546,
+          "accuracy": 0.6757,
+          "brier": 0.4381,
+          "ece": 0.069,
+          "studies": 32,
+          "log_loss_floor": 0.7554,
+          "brier_floor": 0.4381,
+          "accuracy_floor": 0.6757,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 9,
+          "wins_accuracy": 12,
+          "wins_brier": 8,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.748,
+              "accuracy": 0.6762,
+              "brier": 0.4392,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4519,
+              "accuracy": 0.7917,
+              "brier": 0.2905,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5134,
+              "accuracy": 0.7595,
+              "brier": 0.3417,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6239,
+              "accuracy": 0.3533,
+              "brier": 0.7738,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7611,
+              "accuracy": 0.6843,
+              "brier": 0.4477,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8467,
+          "accuracy": 0.6165,
+          "brier": 0.4957,
+          "ece": 0.087,
+          "studies": 32,
+          "log_loss_floor": 0.8462,
+          "brier_floor": 0.4957,
+          "accuracy_floor": 0.6165,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 21,
+          "wins_accuracy": 18,
+          "wins_brier": 21,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8507,
+              "accuracy": 0.6101,
+              "brier": 0.5094,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6058,
+              "accuracy": 0.7274,
+              "brier": 0.3802,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5261,
+              "accuracy": 0.7205,
+              "brier": 0.3543,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7648,
+              "accuracy": 0.24,
+              "brier": 0.8164,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7885,
+              "accuracy": 0.6752,
+              "brier": 0.4597,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "histogram_gbdt_lexical",
+      "name": "GBDT (lexical)",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Histogram gradient-boosted trees on lexical profile features",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8086,
+          "accuracy": 0.6799,
+          "brier": 0.4545,
+          "ece": 0.1062,
+          "studies": 32,
+          "log_loss_floor": 0.806,
+          "brier_floor": 0.4542,
+          "accuracy_floor": 0.6799,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 4,
+          "wins_accuracy": 10,
+          "wins_brier": 5,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8047,
+              "accuracy": 0.6891,
+              "brier": 0.4506,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.495,
+              "accuracy": 0.7917,
+              "brier": 0.3176,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.6398,
+              "accuracy": 0.7153,
+              "brier": 0.404,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.5376,
+              "accuracy": 0.3898,
+              "brier": 0.7367,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8249,
+              "accuracy": 0.669,
+              "brier": 0.4735,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.9429,
+          "accuracy": 0.6148,
+          "brier": 0.5362,
+          "ece": 0.1262,
+          "studies": 32,
+          "log_loss_floor": 0.9402,
+          "brier_floor": 0.5359,
+          "accuracy_floor": 0.6148,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 7,
+          "wins_accuracy": 14,
+          "wins_brier": 7,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9627,
+              "accuracy": 0.6071,
+              "brier": 0.5561,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.7018,
+              "accuracy": 0.7205,
+              "brier": 0.4156,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5611,
+              "accuracy": 0.724,
+              "brier": 0.3786,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.8355,
+              "accuracy": 0.265,
+              "brier": 0.8529,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8647,
+              "accuracy": 0.6675,
+              "brier": 0.487,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "histogram_gbdt_embedding",
+      "name": "GBDT (embedding)",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Histogram gradient-boosted trees on sentence-embedding features",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.805,
+          "accuracy": 0.6832,
+          "brier": 0.4504,
+          "ece": 0.102,
+          "studies": 32,
+          "log_loss_floor": 0.8026,
+          "brier_floor": 0.4501,
+          "accuracy_floor": 0.6832,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 6,
+          "wins_accuracy": 13,
+          "wins_brier": 7,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8088,
+              "accuracy": 0.6891,
+              "brier": 0.4524,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4639,
+              "accuracy": 0.8247,
+              "brier": 0.2813,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.6308,
+              "accuracy": 0.7509,
+              "brier": 0.3826,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.539,
+              "accuracy": 0.3007,
+              "brier": 0.7572,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8053,
+              "accuracy": 0.6883,
+              "brier": 0.4645,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.9196,
+          "accuracy": 0.6168,
+          "brier": 0.5241,
+          "ece": 0.1212,
+          "studies": 32,
+          "log_loss_floor": 0.9164,
+          "brier_floor": 0.5238,
+          "accuracy_floor": 0.6168,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 10,
+          "wins_accuracy": 15,
+          "wins_brier": 12,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9196,
+              "accuracy": 0.6107,
+              "brier": 0.5373,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6802,
+              "accuracy": 0.7326,
+              "brier": 0.4001,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5697,
+              "accuracy": 0.7135,
+              "brier": 0.3873,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.9924,
+              "accuracy": 0.2375,
+              "brier": 0.8799,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8251,
+              "accuracy": 0.6777,
+              "brier": 0.4756,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "feature_factorization_machine",
+      "name": "Factorization machine",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Factorization machine over profile features",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.7594,
+          "accuracy": 0.6754,
+          "brier": 0.4402,
+          "ece": 0.0726,
+          "studies": 32,
+          "log_loss_floor": 0.7601,
+          "brier_floor": 0.4403,
+          "accuracy_floor": 0.6754,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 9,
+          "wins_accuracy": 10,
+          "wins_brier": 9,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.7596,
+              "accuracy": 0.6753,
+              "brier": 0.4438,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4515,
+              "accuracy": 0.7986,
+              "brier": 0.2882,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5202,
+              "accuracy": 0.7613,
+              "brier": 0.3448,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.5499,
+              "accuracy": 0.3686,
+              "brier": 0.7481,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7731,
+              "accuracy": 0.6726,
+              "brier": 0.454,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8818,
+          "accuracy": 0.6046,
+          "brier": 0.5143,
+          "ece": 0.0942,
+          "studies": 32,
+          "log_loss_floor": 0.8811,
+          "brier_floor": 0.5143,
+          "accuracy_floor": 0.6046,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 14,
+          "wins_accuracy": 13,
+          "wins_brier": 15,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8939,
+              "accuracy": 0.5996,
+              "brier": 0.5341,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6131,
+              "accuracy": 0.717,
+              "brier": 0.3876,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5272,
+              "accuracy": 0.7083,
+              "brier": 0.3567,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.8641,
+              "accuracy": 0.2225,
+              "brier": 0.8394,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7977,
+              "accuracy": 0.6583,
+              "brier": 0.4661,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "ordinal_cumulative_regression",
+      "name": "Cumulative regression",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Cumulative-logit regression with a shared nominal head",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.7878,
+          "accuracy": 0.6709,
+          "brier": 0.4427,
+          "ece": 0.0716,
+          "studies": 32,
+          "log_loss_floor": 0.767,
+          "brier_floor": 0.4427,
+          "accuracy_floor": 0.6709,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 7,
+          "wins_accuracy": 10,
+          "wins_brier": 7,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.753,
+              "accuracy": 0.6753,
+              "brier": 0.4417,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4573,
+              "accuracy": 0.809,
+              "brier": 0.2927,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5146,
+              "accuracy": 0.7543,
+              "brier": 0.3436,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 2.0826,
+              "accuracy": 0.272,
+              "brier": 0.8075,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7677,
+              "accuracy": 0.6823,
+              "brier": 0.4521,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8966,
+          "accuracy": 0.6157,
+          "brier": 0.5032,
+          "ece": 0.0863,
+          "studies": 32,
+          "log_loss_floor": 0.8635,
+          "brier_floor": 0.5031,
+          "accuracy_floor": 0.6157,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 14,
+          "wins_accuracy": 16,
+          "wins_brier": 16,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8608,
+              "accuracy": 0.6084,
+              "brier": 0.5148,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.61,
+              "accuracy": 0.7361,
+              "brier": 0.3845,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5312,
+              "accuracy": 0.7205,
+              "brier": 0.3574,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 2.4267,
+              "accuracy": 0.2325,
+              "brier": 0.8557,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7996,
+              "accuracy": 0.6748,
+              "brier": 0.4666,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "shared_profile_bilinear_v2",
+      "name": "Shared profile (bilinear)",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Bilinear profile-statement model shared across participants",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.7591,
+          "accuracy": 0.6748,
+          "brier": 0.4406,
+          "ece": 0.0703,
+          "studies": 32,
+          "log_loss_floor": 0.7599,
+          "brier_floor": 0.4407,
+          "accuracy_floor": 0.6748,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 8,
+          "wins_accuracy": 11,
+          "wins_brier": 8,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.753,
+              "accuracy": 0.6753,
+              "brier": 0.4417,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4573,
+              "accuracy": 0.809,
+              "brier": 0.2927,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5146,
+              "accuracy": 0.7543,
+              "brier": 0.3436,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6229,
+              "accuracy": 0.3347,
+              "brier": 0.7739,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7677,
+              "accuracy": 0.6823,
+              "brier": 0.4521,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8597,
+          "accuracy": 0.6171,
+          "brier": 0.5015,
+          "ece": 0.0855,
+          "studies": 32,
+          "log_loss_floor": 0.8593,
+          "brier_floor": 0.5015,
+          "accuracy_floor": 0.6171,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 15,
+          "wins_accuracy": 17,
+          "wins_brier": 17,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8607,
+              "accuracy": 0.6084,
+              "brier": 0.5148,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6099,
+              "accuracy": 0.7361,
+              "brier": 0.3845,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5312,
+              "accuracy": 0.7205,
+              "brier": 0.3574,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.8371,
+              "accuracy": 0.255,
+              "brier": 0.8298,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7996,
+              "accuracy": 0.6748,
+              "brier": 0.4666,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "shared_profile_tanh_v2",
+      "name": "Shared profile (tanh)",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "STUMP-inspired amortized tanh profile model",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.7592,
+          "accuracy": 0.675,
+          "brier": 0.4406,
+          "ece": 0.07,
+          "studies": 32,
+          "log_loss_floor": 0.7599,
+          "brier_floor": 0.4407,
+          "accuracy_floor": 0.675,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 8,
+          "wins_accuracy": 11,
+          "wins_brier": 8,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.753,
+              "accuracy": 0.6753,
+              "brier": 0.4417,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4573,
+              "accuracy": 0.809,
+              "brier": 0.2927,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5146,
+              "accuracy": 0.7543,
+              "brier": 0.3436,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6237,
+              "accuracy": 0.3378,
+              "brier": 0.7742,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7677,
+              "accuracy": 0.6823,
+              "brier": 0.4521,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8591,
+          "accuracy": 0.6166,
+          "brier": 0.5014,
+          "ece": 0.0856,
+          "studies": 32,
+          "log_loss_floor": 0.8587,
+          "brier_floor": 0.5014,
+          "accuracy_floor": 0.6166,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 15,
+          "wins_accuracy": 17,
+          "wins_brier": 17,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8607,
+              "accuracy": 0.6084,
+              "brier": 0.5148,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6099,
+              "accuracy": 0.7361,
+              "brier": 0.3845,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5312,
+              "accuracy": 0.7205,
+              "brier": 0.3574,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.8272,
+              "accuracy": 0.2475,
+              "brier": 0.8285,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7996,
+              "accuracy": 0.6748,
+              "brier": 0.4666,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
         }
       }
     },
@@ -1126,32 +2523,41 @@
           "ece": 0.0748,
           "studies": 32,
           "log_loss_floor": 0.8341,
+          "brier_floor": 0.4849,
+          "accuracy_floor": 0.6272,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 4,
           "wins_accuracy": 4,
+          "wins_brier": 4,
           "by_source": {
             "polis": {
               "log_loss": 0.8455,
               "accuracy": 0.6198,
+              "brier": 0.4976,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.4597,
               "accuracy": 0.7951,
+              "brier": 0.2966,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5264,
               "accuracy": 0.7604,
+              "brier": 0.35,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.6531,
               "accuracy": 0.2969,
+              "brier": 0.7873,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8721,
               "accuracy": 0.6036,
+              "brier": 0.5123,
               "studies": 4
             }
           },
@@ -1164,84 +2570,402 @@
           "ece": 0.0796,
           "studies": 32,
           "log_loss_floor": 0.9142,
+          "brier_floor": 0.5383,
+          "accuracy_floor": 0.582,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 9,
           "wins_accuracy": 12,
+          "wins_brier": 11,
           "by_source": {
             "polis": {
               "log_loss": 0.9351,
               "accuracy": 0.5634,
+              "brier": 0.5604,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.6508,
               "accuracy": 0.7153,
+              "brier": 0.4084,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5631,
               "accuracy": 0.7205,
+              "brier": 0.3814,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.7317,
               "accuracy": 0.2475,
+              "brier": 0.8061,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.8719,
               "accuracy": 0.6385,
+              "brier": 0.5093,
               "studies": 4
             }
           },
           "is_reference": false
         }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
       }
     },
     {
-      "id": "item_prior",
-      "name": "Statement prior",
+      "id": "lexical_weighted_history",
+      "name": "Lexical weighted history",
       "org": "Baseline",
       "kind": "baseline",
-      "description": "Response-class frequencies for the statement",
+      "description": "History responses weighted by lexical similarity",
       "status": "complete",
       "results": {
         "matrix_completion": {
-          "log_loss": 0.8464,
-          "accuracy": 0.6251,
-          "brier": 0.4888,
-          "ece": 0.0726,
+          "log_loss": 0.8817,
+          "accuracy": 0.6343,
+          "brier": 0.5084,
+          "ece": 0.1169,
           "studies": 32,
-          "log_loss_floor": 0.8473,
-          "wins_log_loss": 4,
-          "wins_accuracy": 5,
+          "log_loss_floor": 0.8817,
+          "brier_floor": 0.5084,
+          "accuracy_floor": 0.6343,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 1,
+          "wins_accuracy": 4,
+          "wins_brier": 1,
           "by_source": {
             "polis": {
-              "log_loss": 0.8626,
-              "accuracy": 0.6248,
+              "log_loss": 0.8712,
+              "accuracy": 0.6323,
+              "brier": 0.5098,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.7301,
+              "accuracy": 0.7569,
+              "brier": 0.4205,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5733,
+              "accuracy": 0.7569,
+              "brier": 0.3856,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6784,
+              "accuracy": 0.3098,
+              "brier": 0.7938,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8808,
+              "accuracy": 0.6225,
+              "brier": 0.5164,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.948,
+          "accuracy": 0.5844,
+          "brier": 0.5553,
+          "ece": 0.1063,
+          "studies": 32,
+          "log_loss_floor": 0.9464,
+          "brier_floor": 0.5552,
+          "accuracy_floor": 0.5844,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 5,
+          "wins_accuracy": 11,
+          "wins_brier": 6,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9597,
+              "accuracy": 0.5613,
+              "brier": 0.5744,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.7763,
+              "accuracy": 0.7153,
+              "brier": 0.455,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5799,
+              "accuracy": 0.7205,
+              "brier": 0.3921,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7433,
+              "accuracy": 0.265,
+              "brier": 0.8155,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8968,
+              "accuracy": 0.6593,
+              "brier": 0.5271,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "semantic_weighted_history",
+      "name": "Semantic weighted history",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "History responses weighted by sentence-embedding similarity",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8526,
+          "accuracy": 0.6449,
+          "brier": 0.4899,
+          "ece": 0.1127,
+          "studies": 32,
+          "log_loss_floor": 0.8526,
+          "brier_floor": 0.4899,
+          "accuracy_floor": 0.6449,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 2,
+          "wins_accuracy": 3,
+          "wins_brier": 2,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8364,
+              "accuracy": 0.6524,
+              "brier": 0.4885,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.7068,
+              "accuracy": 0.7517,
+              "brier": 0.4049,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5487,
+              "accuracy": 0.7257,
+              "brier": 0.3662,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6806,
+              "accuracy": 0.2909,
+              "brier": 0.7939,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8566,
+              "accuracy": 0.6431,
+              "brier": 0.5014,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.9228,
+          "accuracy": 0.5894,
+          "brier": 0.5392,
+          "ece": 0.0962,
+          "studies": 32,
+          "log_loss_floor": 0.9211,
+          "brier_floor": 0.5392,
+          "accuracy_floor": 0.5894,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 7,
+          "wins_accuracy": 11,
+          "wins_brier": 9,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9298,
+              "accuracy": 0.5707,
+              "brier": 0.556,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.7596,
+              "accuracy": 0.7153,
+              "brier": 0.4453,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5536,
+              "accuracy": 0.7205,
+              "brier": 0.3708,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7389,
+              "accuracy": 0.26,
+              "brier": 0.8131,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8789,
+              "accuracy": 0.6546,
+              "brier": 0.515,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "selected_prior",
+      "name": "Response prior",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Response-class frequencies for the question",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8066,
+          "accuracy": 0.6485,
+          "brier": 0.4634,
+          "ece": 0.0724,
+          "studies": 32,
+          "log_loss_floor": 0.8075,
+          "brier_floor": 0.4634,
+          "accuracy_floor": 0.6485,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 6,
+          "wins_accuracy": 8,
+          "wins_brier": 5,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8011,
+              "accuracy": 0.6599,
+              "brier": 0.4639,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.4659,
               "accuracy": 0.7847,
+              "brier": 0.3006,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5299,
               "accuracy": 0.75,
+              "brier": 0.3525,
               "studies": 3
             },
             "gsc": {
-              "log_loss": 1.6573,
-              "accuracy": 0.2719,
+              "log_loss": 1.7563,
+              "accuracy": 0.2205,
+              "brier": 0.8268,
               "studies": 2
             },
             "makeorg": {
-              "log_loss": 0.8832,
-              "accuracy": 0.5904,
+              "log_loss": 0.8225,
+              "accuracy": 0.6269,
+              "brier": 0.4845,
               "studies": 4
             }
           },
           "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8608,
+          "accuracy": 0.602,
+          "brier": 0.5088,
+          "ece": 0.0734,
+          "studies": 32,
+          "log_loss_floor": 0.8617,
+          "brier_floor": 0.5088,
+          "accuracy_floor": 0.602,
+          "floor_changes_accuracy": false,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8705,
+              "accuracy": 0.5905,
+              "brier": 0.5235,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.62,
+              "accuracy": 0.7049,
+              "brier": 0.4093,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5497,
+              "accuracy": 0.7066,
+              "brier": 0.3705,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7404,
+              "accuracy": 0.2525,
+              "brier": 0.8109,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7863,
+              "accuracy": 0.6789,
+              "brier": 0.4626,
+              "studies": 4
+            }
+          },
+          "is_reference": true
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
         }
       }
     },
@@ -1260,32 +2984,41 @@
           "ece": 0.0717,
           "studies": 32,
           "log_loss_floor": 0.8517,
+          "brier_floor": 0.5023,
+          "accuracy_floor": 0.6091,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 5,
           "wins_accuracy": 4,
+          "wins_brier": 3,
           "by_source": {
             "polis": {
               "log_loss": 0.8621,
               "accuracy": 0.5967,
+              "brier": 0.5189,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.4816,
               "accuracy": 0.783,
+              "brier": 0.3135,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5639,
               "accuracy": 0.7318,
+              "brier": 0.3851,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.818,
               "accuracy": 0.2242,
+              "brier": 0.8446,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.803,
               "accuracy": 0.6413,
+              "brier": 0.477,
               "studies": 4
             }
           },
@@ -1298,43 +3031,600 @@
           "ece": 0.0746,
           "studies": 32,
           "log_loss_floor": 0.8626,
+          "brier_floor": 0.5084,
+          "accuracy_floor": 0.6003,
+          "floor_changes_accuracy": false,
           "wins_log_loss": 2,
           "wins_accuracy": 0,
+          "wins_brier": 2,
           "by_source": {
             "polis": {
               "log_loss": 0.872,
               "accuracy": 0.5878,
+              "brier": 0.5246,
               "studies": 20
             },
             "global_dialogues": {
               "log_loss": 0.605,
               "accuracy": 0.7049,
+              "brier": 0.3967,
               "studies": 3
             },
             "remesh": {
               "log_loss": 0.5356,
               "accuracy": 0.7066,
+              "brier": 0.3623,
               "studies": 3
             },
             "gsc": {
               "log_loss": 1.7837,
               "accuracy": 0.2525,
+              "brier": 0.8246,
               "studies": 2
             },
             "makeorg": {
               "log_loss": 0.7863,
               "accuracy": 0.6789,
+              "brier": 0.4626,
               "studies": 4
             }
           },
           "is_reference": false
         }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "row_prior",
+      "name": "Participant prior (suite)",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Suite variant of the participant's response-class frequencies",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8508,
+          "accuracy": 0.6091,
+          "brier": 0.5022,
+          "ece": 0.0717,
+          "studies": 32,
+          "log_loss_floor": 0.8517,
+          "brier_floor": 0.5023,
+          "accuracy_floor": 0.6091,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 5,
+          "wins_accuracy": 4,
+          "wins_brier": 3,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8621,
+              "accuracy": 0.5967,
+              "brier": 0.5189,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4816,
+              "accuracy": 0.783,
+              "brier": 0.3135,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5639,
+              "accuracy": 0.7318,
+              "brier": 0.3851,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.818,
+              "accuracy": 0.2242,
+              "brier": 0.8446,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.803,
+              "accuracy": 0.6413,
+              "brier": 0.477,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8617,
+          "accuracy": 0.6003,
+          "brier": 0.5084,
+          "ece": 0.0746,
+          "studies": 32,
+          "log_loss_floor": 0.8626,
+          "brier_floor": 0.5084,
+          "accuracy_floor": 0.6003,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 2,
+          "wins_accuracy": 0,
+          "wins_brier": 2,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.872,
+              "accuracy": 0.5878,
+              "brier": 0.5246,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.605,
+              "accuracy": 0.7049,
+              "brier": 0.3967,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5356,
+              "accuracy": 0.7066,
+              "brier": 0.3623,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7837,
+              "accuracy": 0.2525,
+              "brier": 0.8246,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.7863,
+              "accuracy": 0.6789,
+              "brier": 0.4626,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "item_prior",
+      "name": "Statement prior",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Response-class frequencies for the statement",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8464,
+          "accuracy": 0.6251,
+          "brier": 0.4888,
+          "ece": 0.0726,
+          "studies": 32,
+          "log_loss_floor": 0.8473,
+          "brier_floor": 0.4888,
+          "accuracy_floor": 0.6251,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 4,
+          "wins_accuracy": 5,
+          "wins_brier": 4,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8626,
+              "accuracy": 0.6248,
+              "brier": 0.5015,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.4659,
+              "accuracy": 0.7847,
+              "brier": 0.3006,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5299,
+              "accuracy": 0.75,
+              "brier": 0.3525,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6573,
+              "accuracy": 0.2719,
+              "brier": 0.7903,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8832,
+              "accuracy": 0.5904,
+              "brier": 0.5178,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 0,
+          "of": 32,
+          "missing_reasons": {
+            "task_not_supported": 32
+          }
+        }
+      }
+    },
+    {
+      "id": "context_prior",
+      "name": "Question prior",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Response-class frequencies for the question context",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.9326,
+          "accuracy": 0.5729,
+          "brier": 0.5491,
+          "ece": 0.0387,
+          "studies": 32,
+          "log_loss_floor": 0.9335,
+          "brier_floor": 0.5491,
+          "accuracy_floor": 0.5729,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 2,
+          "wins_accuracy": 1,
+          "wins_brier": 2,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9774,
+              "accuracy": 0.5497,
+              "brier": 0.5851,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.5118,
+              "accuracy": 0.783,
+              "brier": 0.3322,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5496,
+              "accuracy": 0.7318,
+              "brier": 0.369,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7365,
+              "accuracy": 0.2234,
+              "brier": 0.8171,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.9094,
+              "accuracy": 0.5864,
+              "brier": 0.5329,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.9492,
+          "accuracy": 0.5693,
+          "brier": 0.5578,
+          "ece": 0.0494,
+          "studies": 32,
+          "log_loss_floor": 0.9481,
+          "brier_floor": 0.5578,
+          "accuracy_floor": 0.5693,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 3,
+          "wins_accuracy": 7,
+          "wins_brier": 4,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9805,
+              "accuracy": 0.5517,
+              "brier": 0.5862,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6528,
+              "accuracy": 0.7153,
+              "brier": 0.4118,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5737,
+              "accuracy": 0.7205,
+              "brier": 0.3887,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7601,
+              "accuracy": 0.1975,
+              "brier": 0.8209,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8911,
+              "accuracy": 0.6202,
+              "brier": 0.5207,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "global_prior",
+      "name": "Global prior",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Response-class frequencies over the whole study",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.9375,
+          "accuracy": 0.5729,
+          "brier": 0.5526,
+          "ece": 0.0338,
+          "studies": 32,
+          "log_loss_floor": 0.9384,
+          "brier_floor": 0.5527,
+          "accuracy_floor": 0.5729,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 1,
+          "wins_accuracy": 1,
+          "wins_brier": 1,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9774,
+              "accuracy": 0.5497,
+              "brier": 0.5851,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.5346,
+              "accuracy": 0.783,
+              "brier": 0.3481,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5793,
+              "accuracy": 0.7318,
+              "brier": 0.3909,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7366,
+              "accuracy": 0.2234,
+              "brier": 0.8171,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.9094,
+              "accuracy": 0.5864,
+              "brier": 0.5329,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.9488,
+          "accuracy": 0.5693,
+          "brier": 0.5579,
+          "ece": 0.043,
+          "studies": 32,
+          "log_loss_floor": 0.9482,
+          "brier_floor": 0.5579,
+          "accuracy_floor": 0.5693,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 6,
+          "wins_accuracy": 7,
+          "wins_brier": 7,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9805,
+              "accuracy": 0.5517,
+              "brier": 0.5862,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6496,
+              "accuracy": 0.7153,
+              "brier": 0.4138,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5738,
+              "accuracy": 0.7205,
+              "brier": 0.3884,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7591,
+              "accuracy": 0.1975,
+              "brier": 0.8207,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8911,
+              "accuracy": 0.6202,
+              "brier": 0.5207,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
+      }
+    },
+    {
+      "id": "matched_input_prior",
+      "name": "Matched-input prior",
+      "org": "Baseline",
+      "kind": "baseline",
+      "description": "Smoothed own votes mixed with one peer tier, from the serialized prompt",
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 0.8241,
+          "accuracy": 0.6521,
+          "brier": 0.474,
+          "ece": 0.1023,
+          "studies": 32,
+          "log_loss_floor": 0.8241,
+          "brier_floor": 0.474,
+          "accuracy_floor": 0.6521,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 4,
+          "wins_accuracy": 3,
+          "wins_brier": 4,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.8105,
+              "accuracy": 0.66,
+              "brier": 0.4743,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.6511,
+              "accuracy": 0.7413,
+              "brier": 0.3739,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.5413,
+              "accuracy": 0.7622,
+              "brier": 0.3615,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.6844,
+              "accuracy": 0.2648,
+              "brier": 0.7954,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8041,
+              "accuracy": 0.657,
+              "brier": 0.4717,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        },
+        "new_statement_prediction": {
+          "log_loss": 0.8943,
+          "accuracy": 0.598,
+          "brier": 0.5236,
+          "ece": 0.0877,
+          "studies": 32,
+          "log_loss_floor": 0.8926,
+          "brier_floor": 0.5236,
+          "accuracy_floor": 0.598,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 7,
+          "wins_accuracy": 12,
+          "wins_brier": 8,
+          "by_source": {
+            "polis": {
+              "log_loss": 0.9037,
+              "accuracy": 0.5804,
+              "brier": 0.5417,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.7115,
+              "accuracy": 0.7153,
+              "brier": 0.4256,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 0.544,
+              "accuracy": 0.7205,
+              "brier": 0.365,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 1.7351,
+              "accuracy": 0.2625,
+              "brier": 0.8111,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 0.8267,
+              "accuracy": 0.6737,
+              "brier": 0.4823,
+              "studies": 4
+            }
+          },
+          "is_reference": false
+        }
+      },
+      "coverage": {
+        "matrix_completion": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        },
+        "new_statement_prediction": {
+          "studies": 32,
+          "of": 32,
+          "missing_reasons": {}
+        }
       }
     }
   ],
   "crosscheck": {
-    "values_checked": 95,
+    "values_checked": 87,
     "mismatches": 0,
     "against": "pipeline_v2 aggregate tables (models) and collector printed tables (baselines)"
-  }
+  },
+  "openweight_overlay_sha256": "15289a7da0138676e6eb26481d6a01cbb5193eb0adf1458f3ddb28ea8124500c"
 }
