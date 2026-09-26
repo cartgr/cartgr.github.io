@@ -1,6 +1,6 @@
 {
   "schema": "deliberation-benchmark-leaderboard-v1",
-  "generated_at_utc": "2026-09-25T06:08:52+00:00",
+  "generated_at_utc": "2026-09-26T11:27:23+00:00",
   "status": "preliminary",
   "benchmark": {
     "studies": 32,
@@ -469,7 +469,111 @@
       "kind": "open",
       "params": "235B (22B active)",
       "condition": "calibrated-v1",
-      "status": "running"
+      "status": "complete",
+      "results": {
+        "matrix_completion": {
+          "log_loss": 1.4047,
+          "accuracy": 0.5431,
+          "brier": 0.7105,
+          "ece": 0.2095,
+          "studies": 32,
+          "log_loss_floor": 1.3239,
+          "brier_floor": 0.7097,
+          "accuracy_floor": 0.5431,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 0,
+          "wins_accuracy": 1,
+          "wins_brier": 0,
+          "by_source": {
+            "polis": {
+              "log_loss": 1.4256,
+              "accuracy": 0.5546,
+              "brier": 0.7068,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 0.9476,
+              "accuracy": 0.6441,
+              "brier": 0.5524,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 1.3816,
+              "accuracy": 0.52,
+              "brier": 0.7878,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 2.1401,
+              "accuracy": 0.299,
+              "brier": 0.8842,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 1.2927,
+              "accuracy": 0.5496,
+              "brier": 0.703,
+              "studies": 4
+            }
+          }
+        },
+        "new_statement_prediction": {
+          "log_loss": 1.5792,
+          "accuracy": 0.5005,
+          "brier": 0.765,
+          "ece": 0.2291,
+          "studies": 32,
+          "log_loss_floor": 1.4175,
+          "brier_floor": 0.7638,
+          "accuracy_floor": 0.5005,
+          "floor_changes_accuracy": false,
+          "wins_log_loss": 1,
+          "wins_accuracy": 9,
+          "wins_brier": 2,
+          "by_source": {
+            "polis": {
+              "log_loss": 1.6225,
+              "accuracy": 0.5199,
+              "brier": 0.7481,
+              "studies": 20
+            },
+            "global_dialogues": {
+              "log_loss": 1.2411,
+              "accuracy": 0.533,
+              "brier": 0.7199,
+              "studies": 3
+            },
+            "remesh": {
+              "log_loss": 1.4415,
+              "accuracy": 0.5208,
+              "brier": 0.8185,
+              "studies": 3
+            },
+            "gsc": {
+              "log_loss": 2.229,
+              "accuracy": 0.19,
+              "brier": 0.9651,
+              "studies": 2
+            },
+            "makeorg": {
+              "log_loss": 1.395,
+              "accuracy": 0.5189,
+              "brier": 0.7429,
+              "studies": 4
+            }
+          }
+        }
+      },
+      "requests": 2259,
+      "result_provenance": {
+        "run_tag": "vllm-qwen3-235b-a22b-instruct-2507-v1",
+        "artifacts": {
+          "scores": "d1d1460706c66d877b6e5485daebbca13688269d172e0cd7f2612f6e31c66c2f",
+          "aggregate": "b29b0208c16971359d11335d7ba3270ab9bb6479480149975cdf1c76ba2107e5",
+          "floor": "b2f3aefdd291f648c5e729023e8195a8a73ee86a357b54fa709ddc68c9fa23b1",
+          "review": "ed40d70ae7dccc9605cd613c68e1837bba4582ff6206fbe240a35cfe960e2768"
+        }
+      }
     },
     {
       "id": "qwen3-next-80b-a3b",
@@ -3622,9 +3726,9 @@
     }
   ],
   "crosscheck": {
-    "values_checked": 87,
+    "values_checked": 103,
     "mismatches": 0,
     "against": "pipeline_v2 aggregate tables (models) and collector printed tables (baselines)"
   },
-  "openweight_overlay_sha256": "15289a7da0138676e6eb26481d6a01cbb5193eb0adf1458f3ddb28ea8124500c"
+  "openweight_overlay_sha256": "47bcee7b3d8f7086f00045fab07880e1dfd475c5a1c7cb7d6f5dd6f53dce6d0c"
 }
