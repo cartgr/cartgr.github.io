@@ -8,6 +8,13 @@ import { anchorFor } from '../lib/baselines';
 const DIR = Object.fromEntries(METRICS.map((m) => [m.key, m.better]));
 DIR.cost = 'lower';
 
+const FEATURED_BASELINES = new Set([
+  'selected_prior',
+  'categorical_mf',
+  'embedding_conditional_logistic',
+  'stump_native_categorical_v2',
+]);
+
 function sortRows(list, sort, rank) {
   const read = (r) => (sort.key === 'cost' ? r.cost : value(r, sort.task, sort.key));
   const ascending = (DIR[sort.key] === 'lower') === (sort.dir === 'best');
@@ -90,6 +97,7 @@ function ModelCell({ row, sticky, rowBg, activeTask }) {
 }
 
 export default function LeaderboardTable({ rows }) {
+  const [showAllBaselines, setShowAllBaselines] = useState(false);
   const [rankTask, setRankTask] = useState(TASKS[0].id);
   const [sort, setSort] = useState({ key: 'log_loss', task: TASKS[0].id, dir: 'best' });
 
@@ -99,7 +107,8 @@ export default function LeaderboardTable({ rows }) {
   const best = useMemo(() => bests(done), [done]);
   const ranked = done.filter((r) => TASKS.some((t) => r.coverage[t.id] === 'full'));
   const partialOnly = done.filter((r) => !TASKS.some((t) => r.coverage[t.id] === 'full'));
-  const ordered = sortRows(ranked, sort, rank);
+  const visible = ranked.filter((r) => showAllBaselines || r.kind !== 'baseline' || FEATURED_BASELINES.has(r.id));
+  const ordered = sortRows(visible, sort, rank);
 
   const onSort = (task, key) => {
     const same = sort.key === key && sort.task === task;
@@ -116,7 +125,7 @@ export default function LeaderboardTable({ rows }) {
     return ascending ? 'ascending' : 'descending';
   };
   const hideTask = (task) => task !== rankTask;
-  const captionText = `Equal-study mean over the 32 studies of each task. ↓ lower is better, ↑ higher is better. Won counts studies where a system’s log loss is below the task’s reference. Rank orders systems by log loss on ${TASKS.find((t) => t.id === rankTask).label.toLowerCase()}; select any header to sort.`;
+  const captionText = `Equal-study mean over the 32 studies of each task. ↓ lower is better, ↑ higher is better. Won counts studies where a system’s log loss is below the task’s reference. Rank orders systems by log loss on ${TASKS.find((t) => t.id === rankTask).label.toLowerCase()}; select any header to sort. Ranks and bold values use all eligible systems, including hidden baselines.`;
   const colCount = 3 + TASKS.length * METRICS.length;
 
   const header = (task, m, i) => (
@@ -146,7 +155,7 @@ export default function LeaderboardTable({ rows }) {
     const rowBg = tinted ? 'bg-tint' : 'bg-paper';
     const rk = group === 'ranked' ? rank[r.id] : null;
     return (
-      <tr key={r.id} className={`border-b border-rule text-[15px] transition-colors duration-100 hover:bg-tint ${tinted ? 'bg-tint' : ''}`}>
+      <tr key={r.id} data-system-id={r.id} className={`border-b border-rule text-[15px] transition-colors duration-100 hover:bg-tint ${tinted ? 'bg-tint' : ''}`}>
         <td className={`num sticky left-0 w-12 px-3 py-2.5 text-right align-top text-ink3 md:static ${rowBg}`}>
           {rk || '—'}
         </td>
@@ -204,8 +213,25 @@ export default function LeaderboardTable({ rows }) {
       <p className="pb-3 text-[13px] leading-relaxed text-ink2" aria-hidden="true">
         <span className="font-semibold text-ink">Table 1.</span> {captionText}
       </p>
+      <div className="mb-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="max-w-3xl text-[13px] leading-relaxed text-ink2">
+          Featured baselines: response prior, matrix factorization, embedding logistic, and STUMP.
+          Matrix factorization and embedding logistic were selected for their observed performance on the two tasks;
+          response prior is a simple reference, and STUMP is a published-method comparison.
+          All baselines remain in the breakdowns and downloads; partial-coverage methods appear separately below.
+        </p>
+        <button
+          type="button"
+          aria-expanded={showAllBaselines}
+          aria-controls="leaderboard-table"
+          onClick={() => setShowAllBaselines((show) => !show)}
+          className="focus-ring shrink-0 rounded-sm border border-rule px-3 py-2 text-[13px] text-ink hover:bg-tint"
+        >
+          {showAllBaselines ? 'Show featured baselines' : 'Show all baselines'}
+        </button>
+      </div>
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse border-y-[1.5px] border-ink text-left">
+        <table id="leaderboard-table" className="w-full border-collapse border-y-[1.5px] border-ink text-left">
           <caption className="sr-only">Table 1. {captionText}</caption>
           <thead>
             <tr>
