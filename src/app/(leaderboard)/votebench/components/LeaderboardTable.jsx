@@ -106,7 +106,6 @@ export default function LeaderboardTable({ rows }) {
   const rank = useMemo(() => ranks(done, rankTask), [done, rankTask]);
   const best = useMemo(() => bests(done), [done]);
   const ranked = done.filter((r) => TASKS.some((t) => r.coverage[t.id] === 'full'));
-  const partialOnly = done.filter((r) => !TASKS.some((t) => r.coverage[t.id] === 'full'));
   const visible = ranked.filter((r) => showAllBaselines || r.kind !== 'baseline' || FEATURED_BASELINES.has(r.id));
   const ordered = sortRows(visible, sort, rank);
 
@@ -218,7 +217,7 @@ export default function LeaderboardTable({ rows }) {
           Featured baselines: response prior, matrix factorization, embedding logistic, and STUMP.
           Matrix factorization and embedding logistic were selected for their observed performance on the two tasks;
           response prior is a simple reference, and STUMP is a published-method comparison.
-          All baselines remain in the breakdowns and downloads; partial-coverage methods appear separately below.
+          The breakdown figures include all full-coverage baselines; downloads also include partial-coverage results.
         </p>
         <button
           type="button"
@@ -271,8 +270,6 @@ export default function LeaderboardTable({ rows }) {
           </thead>
           <tbody>
             {ordered.map((r) => row(r, 'ranked'))}
-            {partialOnly.length > 0 && groupHeader('Partial coverage', 'evaluated on fewer than 32 studies; not ranked')}
-            {partialOnly.map((r) => row(r, 'partial'))}
             {pending.length > 0 && groupHeader('In progress', `${pending.length} model${pending.length === 1 ? '' : 's'}`)}
             {pending.map((r) => row(r, 'pending'))}
           </tbody>
